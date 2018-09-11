@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">Адресна книга DAVdroid</string>
   <string name="address_books_authority_title">Адресні книги</string>
   <string name="help">Допомога</string>
@@ -15,7 +15,7 @@
   <string name="notification_channel_sync_io_errors">Помилка мережі та вводу/виводу</string>
   <string name="notification_channel_sync_status">Повідомлення про стан</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">Вимкнути для DAVdroid</string>
+  <string name="startup_battery_optimization_disable">Вимкнути для Infomaniak Sync</string>
   <string name="startup_dont_show_again">Не показувати знову</string>
   <string name="startup_donate">Інформація Open-Source</string>
   <string name="startup_donate_message">Ми раді, що Ви використовуєте DAVdroid, який є програмним засобом з відкритим джерельним кодом (GPLv3). Розробка DAVdroid є досить складним завданням і потребує від нас тисячі годин роботи. Будь ласка, розгляньте можливість підтримати проект.</string>

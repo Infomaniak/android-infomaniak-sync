@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">DAVdroid-Adressbuch</string>
   <string name="address_books_authority_title">Adressbücher</string>
   <string name="help">Hilfe</string>
@@ -19,7 +19,7 @@
   <string name="startup_autostart_permission_message">%s-Firmware verhindert oftmals das automatische Synchronisieren. In diesem Fall müssen Sie das automatische Synchronisieren in den Android-Einstellung erlauben.</string>
   <string name="startup_battery_optimization">Geplante Synchronisierung</string>
   <string name="startup_battery_optimization_message">Ihr Gerät wird die DAVdroid- Synchronisierung einschränken. Damit regelmäßig synchronisiert werden kann, muss die »Akku-Leistungsoptimierung« deaktiviert werden.</string>
-  <string name="startup_battery_optimization_disable">Für DAVdroid deaktivieren</string>
+  <string name="startup_battery_optimization_disable">Für Infomaniak Sync deaktivieren</string>
   <string name="startup_dont_show_again">Nicht mehr anzeigen</string>
   <string name="startup_not_now">Später</string>
   <string name="startup_donate">Open-Source-Information</string>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">Rubrica DAVdroid</string>
   <string name="address_books_authority_title">Rubriche</string>
   <string name="help">Aiuto</string>
@@ -14,7 +14,7 @@
   <string name="notification_channel_sync_io_errors">Errori di Rete e di I/O</string>
   <string name="notification_channel_sync_status">Messaggi di stato</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">Disabilita per DAVdroid</string>
+  <string name="startup_battery_optimization_disable">Disabilita per Infomaniak Sync</string>
   <string name="startup_dont_show_again">Non mostrare più</string>
   <string name="startup_donate">Informazioni sull\'Open-Source</string>
   <string name="startup_donate_message">Siamo soddisfatti del tuo uso di DAVdroid, programma Open-Source (GPLv3). Poiché lo sviluppo è un\'iniziativa complessa che comporta molte ore di lavoro ti invitiamo a fare una donazione.</string>

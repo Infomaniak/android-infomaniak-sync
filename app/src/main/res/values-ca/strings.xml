@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">DAVdroid Llibreta d’Adreces</string>
   <string name="address_books_authority_title">Llibreta d’adreces</string>
   <string name="help">Ajuda</string>
@@ -14,7 +14,7 @@
   <string name="notification_channel_sync_io_errors">Xarxa i errors E/S</string>
   <string name="notification_channel_sync_status">Estat dels misatges</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">Desactiva per DAVdroid</string>
+  <string name="startup_battery_optimization_disable">Desactiva per Infomaniak Sync</string>
   <string name="startup_dont_show_again">No mostrar de nou</string>
   <string name="startup_donate">Informació de Codi Obert</string>
   <string name="startup_donate_message">Som feliços de que utilitzis DAVdroid, el qual és programari lliure (GPLv3). Desenvolupar DAVdroid ens porte moltes hores i molta feina, si us plau, considera fer una donació.</string>

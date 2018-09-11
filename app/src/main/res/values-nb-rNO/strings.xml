@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">DAVdroid-adressebok</string>
   <string name="address_books_authority_title">Adressebøker</string>
   <string name="help">Hjelp</string>
@@ -9,7 +9,7 @@
   <string name="please_wait">Vent…</string>
   <string name="send">Send</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">Skru av for DAVdroid</string>
+  <string name="startup_battery_optimization_disable">Skru av for Infomaniak Sync</string>
   <string name="startup_dont_show_again">Ikke vis igjen</string>
   <string name="startup_donate">Friprog-informasjon</string>
   <string name="startup_donate_message">Vi er glade for at du bruker DAVdroid, som er fri programvare (GPLv3). Siden utvikling av DAVdroid er hardt arbeid og har tatt tusenvis av arbeidstimer, bes du overveie en donasjon.</string>

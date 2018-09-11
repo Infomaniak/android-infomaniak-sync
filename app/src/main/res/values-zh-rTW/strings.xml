@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">DAVdroid 通訊錄</string>
   <string name="address_books_authority_title">通訊錄</string>
   <string name="help">幫助</string>
@@ -9,7 +9,7 @@
   <string name="please_wait">請稍待 …</string>
   <string name="send">送出</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">關閉 DAVdroid 的電池最佳化</string>
+  <string name="startup_battery_optimization_disable">關閉 Infomaniak Sync 的電池最佳化</string>
   <string name="startup_dont_show_again">不要再顯示此訊息</string>
   <string name="startup_donate">開源資訊</string>
   <string name="startup_donate_message">很高興您使用 DAVdroid，這是個開源軟體 (GPLv3授權)。因為開發 DAVdroid 是艱難的工作，需要上千個小時，請考慮捐款支持我們。</string>

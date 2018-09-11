@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">DAVdroid címjegyzék</string>
   <string name="address_books_authority_title">Címjegyzékek</string>
   <string name="help">Súgó</string>
@@ -19,7 +19,7 @@
   <string name="startup_autostart_permission_message">A(z) %s gyári szoftvere gyakran blokkolja az automatikus szinkronizálást. Ebben az esetben engedélyezze a szinkronizálást az Android beállítások között.</string>
   <string name="startup_battery_optimization">Időzített szinkronizálás</string>
   <string name="startup_battery_optimization_message">Az eszköz korlátozni fogja a DAVdroid szinkronizálást.  A szokásos DAVadroid szinkronizációs ciklus biztosítása érdekében vonja ki a DAVdroid-ot az „akkumulátorfigyelés” alól.</string>
-  <string name="startup_battery_optimization_disable">Kikapcsolás a DAVdroid kapcsán</string>
+  <string name="startup_battery_optimization_disable">Kikapcsolás a Infomaniak Sync kapcsán</string>
   <string name="startup_dont_show_again">Ne jelenjen meg többet</string>
   <string name="startup_not_now">Ne most</string>
   <string name="startup_donate">A forrás nyíltságával kapcsolatos információk</string>

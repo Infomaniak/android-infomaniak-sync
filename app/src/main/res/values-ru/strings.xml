@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">Адресная книга DAVdroid</string>
   <string name="address_books_authority_title">Адресные книги</string>
   <string name="help">Помощь</string>
@@ -19,7 +19,7 @@
   <string name="startup_autostart_permission_message">%s ПО устройства часто блокирует автоматическую синхронизацию. В этом случае разрешите автоматическую синхронизацию в настройках Android.</string>
   <string name="startup_battery_optimization">Синхронизация по расписанию</string>
   <string name="startup_battery_optimization_message">Ваше устройство будет блокировать синхронизацию DAVdroid. Чтобы обеспечить регулярные интервалы синхронизации DAVdroid, отключите оптимизацию энергопотребления.</string>
-  <string name="startup_battery_optimization_disable">Отключить для DAVdroid</string>
+  <string name="startup_battery_optimization_disable">Отключить для Infomaniak Sync</string>
   <string name="startup_dont_show_again">Не показывать снова</string>
   <string name="startup_not_now">Не сейчас</string>
   <string name="startup_donate">Open-Source информация</string>

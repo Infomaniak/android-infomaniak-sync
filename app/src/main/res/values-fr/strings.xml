@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">Carnet d\'adresses DAVdroid</string>
   <string name="address_books_authority_title">Carnets d\'adresses</string>
   <string name="help">Aide</string>
@@ -9,8 +9,11 @@
   <string name="please_wait">patientez …</string>
   <string name="send">Envoyer</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">Désactiver pour DAVdroid</string>
+  <string name="startup_battery_optimization_disable">Désactiver pour Infomaniak Sync</string>
   <string name="startup_dont_show_again">Ne plus afficher</string>
+  <string name="startup_battery_optimization">Synchronisation programmée</string>
+  <string name="startup_battery_optimization_message">Votre appareil empêchera la synchronisation Infomaniak Sync. Pour appliquer des intervalles de synchronisation Infomaniak Sync réguliers, désactivez \"optimisation de la batterie\".</string>
+  <string name="startup_not_now">Pas maintenant</string>
   <string name="startup_donate">Open-Source Information</string>
   <string name="startup_donate_message">Nous sommes heureux que vous utilisez DAVdroid, qui est un logiciel open-source (GPLv3). Parce que développer DAVdroid est un travail difficile et nous a pris de nombreuses heures, s\'il vous plaît envisager de faire un don.</string>
   <string name="startup_donate_now">Faire un don</string>

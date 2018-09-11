@@ -10,7 +10,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- common strings -->
-    <string name="app_name">DAVdroid</string>
+    <string name="app_name">Infomaniak Sync</string>
     <string name="account_type" translatable="false">bitfire.at.davdroid</string>
     <string name="account_type_address_book" translatable="false">at.bitfire.davdroid.address_book</string>
     <string name="account_title_address_book">DAVdroid Address book</string>
@@ -35,7 +35,7 @@
     <string name="startup_autostart_permission_message">%s firmware often blocks automatic synchronization. In this case, allow automatic synchronization in your Android settings.</string>
     <string name="startup_battery_optimization">Scheduled synchronization</string>
     <string name="startup_battery_optimization_message">Your device will restrain DAVdroid synchronization. To enforce regular DAVdroid sync intervals, turn off \"battery optimization\".</string>
-    <string name="startup_battery_optimization_disable">Turn off for DAVdroid</string>
+    <string name="startup_battery_optimization_disable">Turn off for Infomaniak Sync</string>
     <string name="startup_dont_show_again">Don\'t show again</string>
     <string name="startup_not_now">Not now</string>
     <string name="startup_donate">Open-Source Information</string>

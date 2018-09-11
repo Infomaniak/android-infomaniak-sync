@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">Livro de endereços DAVdroid</string>
   <string name="address_books_authority_title">Livros de endereços</string>
   <string name="help">Ajuda</string>
@@ -19,7 +19,7 @@
   <string name="startup_autostart_permission_message">O firmware%s frequentemente bloqueia a sincronização automática. Nesse caso, ative a sincronização automática nas configurações do seu Android.</string>
   <string name="startup_battery_optimization">Sincronização agendada</string>
   <string name="startup_battery_optimization_message">Seu aparelho irá restringir a sincronização do DAVdroid. Para forçar a sincronização do DAVdroid em intervalos regulares, desligue a \"otimização da bateria\".</string>
-  <string name="startup_battery_optimization_disable">Desligar para o DAVdroid</string>
+  <string name="startup_battery_optimization_disable">Desligar para o Infomaniak Sync</string>
   <string name="startup_dont_show_again">Não mostrar novamente</string>
   <string name="startup_not_now">Não agora</string>
   <string name="startup_donate">Informação sobre Código Aberto</string>

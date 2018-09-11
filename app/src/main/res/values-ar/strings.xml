@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVdroid</string>
+  <string name="app_name">Infomaniak Sync</string>
   <string name="account_title_address_book">DAVdroid دفتر عناوين</string>
   <string name="address_books_authority_title">دفاتر العناوين</string>
   <string name="help">مساعدة</string>
@@ -19,7 +19,7 @@
   <string name="startup_autostart_permission_message">%s البرنامج الثابت للجهاز قد يمنع المزامنة التلقائية.  في هذه الحالة أعط الإذن بالمزامنة التلقائية في إعدادات النظام لديك.</string>
   <string name="startup_battery_optimization">مزامنة مجدولة</string>
   <string name="startup_battery_optimization_message">سيقوم جهازك بتقييد مزامنة DAVdroid .  قم بإطفاء \"تحسين البطارية\" لإجبار مدد منتظمة لمزامنة DAVdroid .</string>
-  <string name="startup_battery_optimization_disable">التعطيل لـ DAVdroid</string>
+  <string name="startup_battery_optimization_disable">التعطيل لـ Infomaniak Sync</string>
   <string name="startup_dont_show_again">لاتعرضه مرة أخرى</string>
   <string name="startup_not_now">ليس الآن</string>
   <string name="startup_donate">معلومات المصدر المفتوح</string>

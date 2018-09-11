@@ -14,9 +14,9 @@
     <color name="grey500">#9E9E9E</color>
     <color name="grey700">#616161</color>
 
-    <color name="primaryColor">#7cb342</color>
+    <color name="primaryColor">#FF0098FF</color>
     <color name="primaryLightColor">#aee571</color>
-    <color name="primaryDarkColor">#4b830d</color>
+    <color name="primaryDarkColor">#FF0079CC</color>
     <color name="secondaryColor">#ff6d00</color>
     <color name="secondaryLightColor">#ff9e40</color>
     <color name="secondaryDarkColor">#c43c00</color>
