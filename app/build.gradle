@@ -22,7 +22,7 @@ android {
         buildConfigField "long", "buildTime", System.currentTimeMillis() + "L"
         buildConfigField "boolean", "customCerts", "true"
 
-        minSdkVersion 19        // Android 4.4
+        minSdkVersion 21        // Android 5.0
         targetSdkVersion 27     // Android 8.1
 
         // when using this, make sure that notification icons are real bitmaps
@@ -67,6 +67,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 dependencies {
     implementation project(':cert4android')
     implementation project(':dav4android')
@@ -97,4 +103,12 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.11.0'
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
+    implementation 'com.github.ozodrukh.CircularReveal:circualreveal:2.1.0'
 }

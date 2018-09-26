@@ -60,13 +60,19 @@
         <service android:name=".settings.Settings"/>
 
         <activity
-            android:name=".ui.AccountsActivity"
+            android:name="com.infomaniak.sync.InfomaniakLogin"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.AccountsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity

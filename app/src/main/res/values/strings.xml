@@ -291,4 +291,20 @@
     <string name="certificate_notification_connection_security">DAVdroid: Connection security</string>
     <string name="trust_certificate_unknown_certificate_found">DAVdroid has encountered an unknown certificate. Do you want to trust it?</string>
 
+    <!-- InfomaniakLogin -->
+    <string name="login">Identifiant</string>
+    <string name="sign_in">Connexion</string>
+    <string name="login_loading">Connexion en cours &#8230;</string>
+    <string name="login_success">Connecté</string>
+    <string name="error_login">Mauvais identifiant</string>
+    <string name="password">Mot de passe</string>
+    <string name="login_empty">Identifiant vide</string>
+    <string name="password_empty">Mot de passe vide</string>
+    <string name="bad_login">Vérifier vos identifiants</string>
+    <string name="otp_message_required">Veuillez saisir votre code d\'authentification pour vous connecter.</string>
+    <string name="code_otp">Code d\'authentification</string>
+    <string name="mandatoryField">Champs obligatoire</string>
+    <string name="no_internet_connection">Aucune connexion à Internet</string>
+    <string name="error_title">Une erreur est survenue</string>
+
 </resources>
