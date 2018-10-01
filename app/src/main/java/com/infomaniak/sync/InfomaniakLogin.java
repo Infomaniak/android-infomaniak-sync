@@ -3,6 +3,8 @@ package com.infomaniak.sync;
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -23,15 +25,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import java.net.URI;
 import java.util.Date;
 
 import at.bitfire.davdroid.R;
 import at.bitfire.davdroid.ui.AccountsActivity;
+import at.bitfire.davdroid.ui.setup.DavResourceFinder;
+import at.bitfire.davdroid.ui.setup.LoginInfo;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -44,9 +50,8 @@ public class InfomaniakLogin extends Activity {
     private OkHttpClient okHttpClient;
     public static String URL_SERVER_LOGIN = "https://login.infomaniak.com/token";
     private final static String URL_API_PROFIL = "https://api.infomaniak.com/1/profile";
+    private final static String URL_API_PROFIL_PASSWORD = "https://api.infomaniak.com/1/profile/password";
 
-    public static String client_id = "client_id";
-    public static String client_secret = "client_secret";
 
     private EditText login;
     private EditText password;
@@ -57,6 +62,7 @@ public class InfomaniakLogin extends Activity {
     private TextInputLayout passwordWrapper;
     private TextInputLayout editOtpWrapper;
     private CardView loginCard;
+    private View loadingView;
 
     private String userLogin;
     private String userPassword;
@@ -69,11 +75,15 @@ public class InfomaniakLogin extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Stetho.initializeWithDefaults(this);
+
         okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new StethoInterceptor())
                 .build();
 
         setContentView(R.layout.infomaniak_login);
+
+        loadingView = findViewById(R.id.loading_view);
 
         loginCard = findViewById(R.id.login_card);
         loginWrapper = findViewById(R.id.edit_login_wrapper);
@@ -123,10 +133,7 @@ public class InfomaniakLogin extends Activity {
             }
         });
 
-//        Credential credential = mainActivity.getCredential();
-        Credential credential = null;
-        if (credential != null) {
-//            Bugsnag.setUser(String.valueOf(credential.getId()), credential.getEmail(), credential.getFirstname() + " " + credential.getLastname());
+        if (false) {
             launchApp();
         } else {
             networkChangeReceiver = new NetworkChangeReceiver(new HandlerNetworkStatus());
@@ -134,6 +141,33 @@ public class InfomaniakLogin extends Activity {
 
             SharedPreferences sharedPref = getSharedPreferences("lastUser", Context.MODE_PRIVATE);
             login.setText(sharedPref.getString("email", ""));
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (layoutOtp.getVisibility() == View.VISIBLE) {
+            try {
+                ClipboardManager clipBoard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                if (clipBoard != null) {
+                    ClipData clipData = clipBoard.getPrimaryClip();
+                    ClipData.Item item = clipData.getItemAt(0);
+                    String code = item.getText().toString();
+                    try {
+                        Integer.valueOf(code);
+                        editOtp.setText(code);
+                        if (btnSignIn.isClickable()) {
+                            btnSignIn.callOnClick();
+                        }
+                    } catch (NumberFormatException ignored) {
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -180,10 +214,10 @@ public class InfomaniakLogin extends Activity {
         }
     }
 
-    private class LoginTask extends AsyncTask<String, Void, Credential> {
+    private class LoginTask extends AsyncTask<String, Void, ApiToken> {
 
         @Override
-        protected Credential doInBackground(String... params) {
+        protected ApiToken doInBackground(String... params) {
             try {
 
                 Gson gson = new Gson();
@@ -227,7 +261,7 @@ public class InfomaniakLogin extends Activity {
                     } else {
                         if (!jsonResult.isJsonNull() && jsonResult.isJsonObject()) {
                             ErrorAPI error = gson.fromJson(jsonResult.getAsJsonObject(), ErrorAPI.class);
-                            return new Credential(error);
+                            return new ApiToken(error);
                         } else {
                             return null;
                         }
@@ -255,9 +289,32 @@ public class InfomaniakLogin extends Activity {
                     JsonElement jsonResult = new JsonParser().parse(bodyResult);
                     InfomaniakUser infomaniakUser = gson.fromJson(jsonResult.getAsJsonObject().getAsJsonObject("data"), InfomaniakUser.class);
 
-                    return new Credential(apiToken.getUser_id(), apiToken.getAccess_token(), apiToken.getRefresh_token(),
-                            infomaniakUser.getFirstname(), infomaniakUser.getLastname(),
-                            infomaniakUser.getEmail(), infomaniakUser.getAvatar(), new Date().getTime());
+                    builder = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("name", "InfomaniakSync_" + new Date());
+
+                    request = new Request.Builder()
+                            .url(URL_API_PROFIL_PASSWORD)
+                            .header("Authorization", "Bearer " + apiToken.getAccess_token())
+                            .post(builder.build())
+                            .build();
+
+                    response = okHttpClient.newCall(request).execute();
+
+                    responseBody = response.body();
+
+                    if (responseBody == null) {
+                        return null;
+                    }
+
+                    bodyResult = responseBody.string();
+                    if (response.isSuccessful() && bodyResult != null) {
+                        jsonResult = new JsonParser().parse(bodyResult);
+                        InfomaniakPassword infomaniakPassword = gson.fromJson(jsonResult.getAsJsonObject().getAsJsonObject("data"), InfomaniakPassword.class);
+
+                        LoginInfo loginInfo = new LoginInfo(new URI("https://sync.infomaniak.com"), infomaniakUser.getLogin(), infomaniakPassword.getPassword(), null);
+                        DavResourceFinder.Configuration configuration = new DavResourceFinder(InfomaniakLogin.this, loginInfo).findInitialConfiguration();
+                    }
                 }
                 return null;
             } catch (Exception exception) {
@@ -266,13 +323,13 @@ public class InfomaniakLogin extends Activity {
         }
 
         @Override
-        protected void onPostExecute(Credential credential) {
+        protected void onPostExecute(ApiToken apiToken) {
             try {
-                if (credential != null) {
-                    ErrorAPI errorAPI = credential.getErrorAPI();
+                if (apiToken != null) {
+                    ErrorAPI errorAPI = apiToken.getErrorAPI();
                     if (errorAPI == null) {
 
-//                        mainActivity.addCredential(credential);
+//                        mainActivity.addCredential(apiToken);
 
 
                         btnSignIn.setProgress(100);
@@ -312,6 +369,7 @@ public class InfomaniakLogin extends Activity {
                                 btnSignIn.setEnabled(true);
                                 editOtp.setEnabled(true);
                                 layoutOtp.setVisibility(View.VISIBLE);
+                                loadingView.setVisibility(View.GONE);
                                 break;
                             case "otp_failed":
                                 editOtpWrapper.setError(getString(R.string.bad_login));
@@ -347,10 +405,12 @@ public class InfomaniakLogin extends Activity {
             login.setEnabled(true);
             password.setEnabled(true);
             editOtp.setEnabled(true);
+            loadingView.setVisibility(View.GONE);
         }
 
         @Override
         protected void onPreExecute() {
+            loadingView.setVisibility(View.VISIBLE);
             loginWrapper.setErrorEnabled(false);
             passwordWrapper.setErrorEnabled(false);
             editOtpWrapper.setErrorEnabled(false);

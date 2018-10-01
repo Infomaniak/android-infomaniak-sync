@@ -7,6 +7,11 @@ public class ApiToken {
     private int expires_in;
     private int user_id;
     private String scope;
+    private ErrorAPI errorAPI;
+
+    public ApiToken(ErrorAPI errorAPI) {
+        this.errorAPI = errorAPI;
+    }
 
     public String getAccess_token() {
         return access_token;
@@ -30,5 +35,9 @@ public class ApiToken {
 
     public String getScope() {
         return scope;
+    }
+
+    public ErrorAPI getErrorAPI() {
+        return errorAPI;
     }
 }
