@@ -8,20 +8,42 @@
 
 package at.bitfire.davdroid.ui.setup
 
+import android.content.ComponentName
 import android.content.Intent
+import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
+import android.support.customtabs.CustomTabsClient
+import android.support.customtabs.CustomTabsIntent
+import android.support.customtabs.CustomTabsServiceConnection
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import at.bitfire.davdroid.App
 import at.bitfire.davdroid.R
+import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.google.gson.Gson
+import com.google.gson.JsonParser
+import com.infomaniak.sync.ApiToken
+import com.infomaniak.sync.ErrorAPI
+import com.infomaniak.sync.InfomaniakPassword
+import com.infomaniak.sync.InfomaniakUser
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.ResponseBody
 import java.util.*
+
 
 /**
  * Activity to initially connect to a server and create an account.
  * Fields for server/user data can be pre-filled with extras in the Intent.
  */
-class LoginActivity: AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
+
+    private var connection: CustomTabsServiceConnection? = null
 
     companion object {
         /**
@@ -40,17 +62,66 @@ class LoginActivity: AppCompatActivity() {
          * When set, the password field will be set to this value.
          */
         const val EXTRA_PASSWORD = "password"
+
+        private const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
+        private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
+
+        private const val REDIRECT_URI_ROOT = "com.infomaniak.sync"
+
+        private const val CLIENT_ID = "CE011334-F75A-4263-9F9F-45FC5A142F59"
+        private const val CLIENT_SECRET = "eYzvxFTDCJCr4zhqNp44sSLR"
+
+        private const val URL_API_PROFIL = "https://api.infomaniak.com/1/profile";
+        private const val URL_API_PROFIL_PASSWORD = "https://api.infomaniak.com/1/profile/password"
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState == null)
-            // first call, add first login fragment
-            supportFragmentManager.beginTransaction()
-                    .replace(android.R.id.content, DefaultLoginCredentialsFragment())
-                    .commit()
+//        if (savedInstanceState == null)
+//            // first call, add first login fragment
+//            supportFragmentManager.beginTransaction()
+//                    .replace(android.R.id.content, DefaultLoginCredentialsFragment())
+//                    .commit()
+        val data = intent.data
+        if (data != null) {
+            if (REDIRECT_URI_ROOT == data.scheme) {
+                val code = data.getQueryParameter("code")
+                val error = data.getQueryParameter("error")
+                if (!TextUtils.isEmpty(code)) {
+                    GetPasswordTask(code).execute()
+                }
+                if (!TextUtils.isEmpty(error)) {
+                    if (error == "access_denied") {
+
+                    }
+                }
+            }
+        } else {
+            connection = object : CustomTabsServiceConnection() {
+                override fun onCustomTabsServiceConnected(componentName: ComponentName, client: CustomTabsClient) {
+                    val customTabsIntentBulder = CustomTabsIntent.Builder()
+                    customTabsIntentBulder.setToolbarColor(ContextCompat.getColor(this@LoginActivity, R.color.colorPrimary))
+                    val customTabsIntent = customTabsIntentBulder.build()
+                    client.warmup(0L) // This prevents backgrounding after redirection
+                    customTabsIntent.launchUrl(this@LoginActivity, Uri.parse("$LOGIN_URL_AUTHORIZE?client_id=$CLIENT_ID&response_type=code&redirect_uri=$REDIRECT_URI_ROOT:/oauth2redirect"))
+                }
+
+                override fun onServiceDisconnected(name: ComponentName) {
+
+                }
+            }
+            CustomTabsClient.bindCustomTabsService(this, "com.android.chrome", connection)//mention package name which can handle the CCT their many browser present.
+        }
+    }
+
+    public override fun onDestroy() {
+        super.onDestroy()
+
+        if (connection != null) {
+            unbindService(connection)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,6 +134,116 @@ class LoginActivity: AppCompatActivity() {
         startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(this).buildUpon()
                 .appendEncodedPath("tested-with/")
                 .build()))
+    }
+
+
+    class GetPasswordTask(private val code: String) : AsyncTask<String, Void, ApiToken>() {
+
+        override fun doInBackground(vararg params: String): ApiToken? {
+            try {
+
+                val okHttpClient = OkHttpClient.Builder()
+                        .addNetworkInterceptor(StethoInterceptor())
+                        .build()
+
+                val gson = Gson()
+
+
+                var formBuilder: MultipartBody.Builder = MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("grant_type", "authorization_code")
+                        .addFormDataPart("client_id", CLIENT_ID)
+                        .addFormDataPart("client_secret", CLIENT_SECRET)
+                        .addFormDataPart("code", code)
+                        .addFormDataPart("redirect_uri", "$REDIRECT_URI_ROOT:/oauth2redirect")
+
+                var request = Request.Builder()
+                        .url(LOGIN_URL_TOKEN)
+                        .post(formBuilder.build())
+                        .build()
+
+                var response = okHttpClient.newCall(request).execute()
+
+                var responseBody: ResponseBody? = response.body() ?: return null
+
+                var bodyResult: String? = responseBody!!.string()
+
+                val apiToken: ApiToken
+                if (bodyResult != null) {
+                    val jsonResult = JsonParser().parse(bodyResult)
+                    if (response.isSuccessful) {
+                        apiToken = gson.fromJson(jsonResult.asJsonObject, ApiToken::class.java)
+                    } else {
+                        if (!jsonResult.isJsonNull && jsonResult.isJsonObject) {
+                            val error = gson.fromJson(jsonResult.asJsonObject, ErrorAPI::class.java)
+                            return ApiToken(error)
+                        } else {
+                            return null
+                        }
+                    }
+                } else {
+                    return null
+                }
+
+                request = Request.Builder()
+                        .url(URL_API_PROFIL)
+                        .header("Authorization", "Bearer " + apiToken.access_token)
+                        .get()
+                        .build()
+
+                response = okHttpClient.newCall(request).execute()
+
+                responseBody = response.body()
+
+                if (responseBody == null) {
+                    return null
+                }
+
+                bodyResult = responseBody.string()
+
+                if (response.isSuccessful && bodyResult != null) {
+                    var jsonResult = JsonParser().parse(bodyResult)
+                    val infomaniakUser = gson.fromJson(jsonResult.asJsonObject.getAsJsonObject("data"), InfomaniakUser::class.java)
+
+                    formBuilder = MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("name", "InfomaniakSync_" + Date())
+
+                    request = Request.Builder()
+                            .url(URL_API_PROFIL_PASSWORD)
+                            .header("Authorization", "Bearer " + apiToken.access_token)
+                            .post(formBuilder.build())
+                            .build()
+
+                    response = okHttpClient.newCall(request).execute()
+
+                    responseBody = response.body()
+
+                    if (responseBody == null) {
+                        return null
+                    }
+
+                    bodyResult = responseBody.string()
+                    if (response.isSuccessful && bodyResult != null) {
+                        jsonResult = JsonParser().parse(bodyResult)
+                        val infomaniakPassword = gson.fromJson(jsonResult.asJsonObject.getAsJsonObject("data"), InfomaniakPassword::class.java)
+
+//                            val loginInfo = LoginInfo(URI("https://sync.infomaniak.com"), infomaniakUser.login, infomaniakPassword.password, null)
+//                            val configuration = DavResourceFinder(this@LoginActivity, loginInfo).findInitialConfiguration()
+                    }
+                }
+                return null
+            } catch (exception: Exception) {
+                return null
+            }
+
+        }
+
+        override fun onPostExecute(apiToken: ApiToken?) {
+
+        }
+
+        override fun onProgressUpdate(vararg values: Void) {}
     }
 
 }

@@ -22,11 +22,10 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.view.View
-import at.bitfire.davdroid.App
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.davdroid.ui.setup.LoginActivity
+import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.accounts_content.*
 import kotlinx.android.synthetic.main.activity_accounts.*
 
@@ -47,6 +46,8 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         setContentView(R.layout.activity_accounts)
 
         setSupportActionBar(toolbar)
+
+        Stetho.initializeWithDefaults(this)
 
         fab.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
