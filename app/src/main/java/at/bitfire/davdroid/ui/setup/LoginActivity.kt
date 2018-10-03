@@ -8,19 +8,15 @@
 
 package at.bitfire.davdroid.ui.setup
 
-import android.content.ComponentName
 import android.content.Intent
-import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.customtabs.CustomTabsClient
-import android.support.customtabs.CustomTabsIntent
-import android.support.customtabs.CustomTabsServiceConnection
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
+import android.widget.Toast
 import at.bitfire.davdroid.App
 import at.bitfire.davdroid.R
 import com.facebook.stetho.okhttp3.StethoInterceptor
@@ -34,6 +30,8 @@ import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.ResponseBody
+import java.lang.ref.WeakReference
+import java.net.URI
 import java.util.*
 
 
@@ -42,8 +40,6 @@ import java.util.*
  * Fields for server/user data can be pre-filled with extras in the Intent.
  */
 class LoginActivity : AppCompatActivity() {
-
-    private var connection: CustomTabsServiceConnection? = null
 
     companion object {
         /**
@@ -63,12 +59,12 @@ class LoginActivity : AppCompatActivity() {
          */
         const val EXTRA_PASSWORD = "password"
 
-        private const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
+        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
         private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
 
-        private const val REDIRECT_URI_ROOT = "com.infomaniak.sync"
+        internal const val REDIRECT_URI_ROOT = "com.infomaniak.sync"
 
-        private const val CLIENT_ID = "CE011334-F75A-4263-9F9F-45FC5A142F59"
+        internal const val CLIENT_ID = "CE011334-F75A-4263-9F9F-45FC5A142F59"
         private const val CLIENT_SECRET = "eYzvxFTDCJCr4zhqNp44sSLR"
 
         private const val URL_API_PROFIL = "https://api.infomaniak.com/1/profile";
@@ -78,49 +74,27 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.infomaniak_loading_view)
 
-//        if (savedInstanceState == null)
-//            // first call, add first login fragment
-//            supportFragmentManager.beginTransaction()
-//                    .replace(android.R.id.content, DefaultLoginCredentialsFragment())
-//                    .commit()
         val data = intent.data
         if (data != null) {
             if (REDIRECT_URI_ROOT == data.scheme) {
                 val code = data.getQueryParameter("code")
                 val error = data.getQueryParameter("error")
                 if (!TextUtils.isEmpty(code)) {
-                    GetPasswordTask(code).execute()
+                    GetPasswordTask(this, code).execute()
                 }
                 if (!TextUtils.isEmpty(error)) {
                     if (error == "access_denied") {
 
                     }
+                    Toast.makeText(this, "Une erreur est survenu", Toast.LENGTH_LONG).show()
+                    onBackPressed()
                 }
             }
         } else {
-            connection = object : CustomTabsServiceConnection() {
-                override fun onCustomTabsServiceConnected(componentName: ComponentName, client: CustomTabsClient) {
-                    val customTabsIntentBulder = CustomTabsIntent.Builder()
-                    customTabsIntentBulder.setToolbarColor(ContextCompat.getColor(this@LoginActivity, R.color.colorPrimary))
-                    val customTabsIntent = customTabsIntentBulder.build()
-                    client.warmup(0L) // This prevents backgrounding after redirection
-                    customTabsIntent.launchUrl(this@LoginActivity, Uri.parse("$LOGIN_URL_AUTHORIZE?client_id=$CLIENT_ID&response_type=code&redirect_uri=$REDIRECT_URI_ROOT:/oauth2redirect"))
-                }
-
-                override fun onServiceDisconnected(name: ComponentName) {
-
-                }
-            }
-            CustomTabsClient.bindCustomTabsService(this, "com.android.chrome", connection)//mention package name which can handle the CCT their many browser present.
-        }
-    }
-
-    public override fun onDestroy() {
-        super.onDestroy()
-
-        if (connection != null) {
-            unbindService(connection)
+            Toast.makeText(this, "Une erreur est survenu", Toast.LENGTH_LONG).show()
+            onBackPressed()
         }
     }
 
@@ -136,8 +110,9 @@ class LoginActivity : AppCompatActivity() {
                 .build()))
     }
 
+    class GetPasswordTask internal constructor(context: LoginActivity, private val code: String) : AsyncTask<String, Void, ApiToken>() {
 
-    class GetPasswordTask(private val code: String) : AsyncTask<String, Void, ApiToken>() {
+        private val activityReference: WeakReference<LoginActivity> = WeakReference(context)
 
         override fun doInBackground(vararg params: String): ApiToken? {
             try {
@@ -228,8 +203,9 @@ class LoginActivity : AppCompatActivity() {
                         jsonResult = JsonParser().parse(bodyResult)
                         val infomaniakPassword = gson.fromJson(jsonResult.asJsonObject.getAsJsonObject("data"), InfomaniakPassword::class.java)
 
-//                            val loginInfo = LoginInfo(URI("https://sync.infomaniak.com"), infomaniakUser.login, infomaniakPassword.password, null)
-//                            val configuration = DavResourceFinder(this@LoginActivity, loginInfo).findInitialConfiguration()
+                        val loginInfo = LoginInfo(URI("https://sync.infomaniak.com"), infomaniakUser.login, infomaniakPassword.password, null)
+                        DetectConfigurationFragment.newInstance(loginInfo).show(activityReference.get()?.supportFragmentManager, null)
+                        return apiToken
                     }
                 }
                 return null
@@ -240,7 +216,17 @@ class LoginActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(apiToken: ApiToken?) {
-
+            val loginActivity = activityReference.get()
+            if (apiToken == null) {
+                if (loginActivity != null) {
+                    Toast.makeText(loginActivity, "Une erreur est survenu", Toast.LENGTH_LONG).show()
+                    loginActivity.onBackPressed()
+                }
+            } else {
+                val tv = TextView(loginActivity)
+                tv.text = ""
+                loginActivity?.setContentView(tv)
+            }
         }
 
         override fun onProgressUpdate(vararg values: Void) {}

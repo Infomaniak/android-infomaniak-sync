@@ -9,14 +9,16 @@
 package at.bitfire.davdroid.ui
 
 import android.accounts.AccountManager
-import android.content.ContentResolver
-import android.content.Context
-import android.content.Intent
-import android.content.SyncStatusObserver
+import android.content.*
+import android.net.Uri
 import android.os.Bundle
+import android.support.customtabs.CustomTabsClient
+import android.support.customtabs.CustomTabsIntent
+import android.support.customtabs.CustomTabsServiceConnection
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.LoaderManager
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.Loader
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -29,7 +31,7 @@ import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.accounts_content.*
 import kotlinx.android.synthetic.main.activity_accounts.*
 
-class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<AccountsActivity.Settings>, SyncStatusObserver {
+class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<AccountsActivity.Settings>, SyncStatusObserver {
 
     companion object {
         val accountsDrawerHandler = DefaultAccountsDrawerHandler()
@@ -39,6 +41,8 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     private var syncStatusSnackbar: Snackbar? = null
     private var syncStatusObserver: Any? = null
+
+    private var connection: CustomTabsServiceConnection? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +54,24 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         Stetho.initializeWithDefaults(this)
 
         fab.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            connection = object : CustomTabsServiceConnection() {
+                override fun onCustomTabsServiceConnected(componentName: ComponentName, client: CustomTabsClient) {
+                    val customTabsIntentBulder = CustomTabsIntent.Builder()
+                    customTabsIntentBulder.setToolbarColor(ContextCompat.getColor(this@AccountsActivity, R.color.colorPrimary))
+                    val customTabsIntent = customTabsIntentBulder.build()
+                    client.warmup(0L) // This prevents backgrounding after redirection
+                    customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                    customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    customTabsIntent.launchUrl(this@AccountsActivity, Uri.parse("${LoginActivity.LOGIN_URL_AUTHORIZE}?client_id=${LoginActivity.CLIENT_ID}&response_type=code&redirect_uri=${LoginActivity.REDIRECT_URI_ROOT}:/oauth2redirect"))
+                }
+
+                override fun onServiceDisconnected(name: ComponentName) {
+
+                }
+            }
+            CustomTabsClient.bindCustomTabsService(this, "com.android.chrome", connection)//mention package name which can handle the CCT their many browser present.
+
+            //startActivity(Intent(this, LoginActivity::class.java))
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -109,6 +130,14 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         }
     }
 
+    public override fun onDestroy() {
+        super.onDestroy()
+
+        if (connection != null) {
+            unbindService(connection)
+        }
+    }
+
     override fun onStatusChanged(which: Int) {
         syncStatusSnackbar?.let {
             it.dismiss()
@@ -147,7 +176,7 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     class SettingsLoader(
             context: Context
-    ): at.bitfire.davdroid.ui.SettingsLoader<Settings>(context) {
+    ) : at.bitfire.davdroid.ui.SettingsLoader<Settings>(context) {
 
         override fun loadInBackground(): Settings? {
             settings?.let {
