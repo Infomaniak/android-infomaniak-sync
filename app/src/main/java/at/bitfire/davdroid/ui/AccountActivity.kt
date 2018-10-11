@@ -31,6 +31,7 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.SwitchCompat
 import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.*
@@ -50,7 +51,7 @@ import java.lang.ref.WeakReference
 import java.util.*
 import java.util.logging.Level
 
-class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, PopupMenu.OnMenuItemClickListener, LoaderManager.LoaderCallbacks<AccountActivity.AccountInfo> {
+class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, PopupMenu.OnMenuItemClickListener, LoaderManager.LoaderCallbacks<AccountActivity.AccountInfo> {
 
     companion object {
         const val EXTRA_ACCOUNT = "account"
@@ -86,23 +87,18 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
 
         setContentView(R.layout.activity_account)
 
-        val icMenu = if (Build.VERSION.SDK_INT >= 21)
-            getDrawable(R.drawable.ic_menu_light)
-        else
-            resources.getDrawable(R.drawable.ic_menu_light)
+        setSupportActionBar(toolbar_account)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         // CardDAV toolbar
-        carddav_menu.overflowIcon = icMenu
         carddav_menu.inflateMenu(R.menu.carddav_actions)
         carddav_menu.setOnMenuItemClickListener(this)
 
         // CalDAV toolbar
-        caldav_menu.overflowIcon = icMenu
         caldav_menu.inflateMenu(R.menu.caldav_actions)
         caldav_menu.setOnMenuItemClickListener(this)
 
         // Webcal toolbar
-        webcal_menu.overflowIcon = icMenu
         webcal_menu.inflateMenu(R.menu.webcal_actions)
         webcal_menu.setOnMenuItemClickListener(this)
 
@@ -112,7 +108,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (grantResults.any { it == PackageManager.PERMISSION_GRANTED })
-            // we've got additional permissions; try to load everything again
+        // we've got additional permissions; try to load everything again
             reload()
     }
 
@@ -199,38 +195,6 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
         SelectCollectionTask(applicationContext, info, nowChecked, WeakReference(adapter), WeakReference(view)).execute()
     }
 
-    private val onActionOverflowListener = { anchor: View, info: CollectionInfo ->
-        val popup = PopupMenu(this, anchor, Gravity.RIGHT)
-        popup.inflate(R.menu.account_collection_operations)
-
-        with(popup.menu.findItem(R.id.force_read_only)) {
-            if (info.privWriteContent)
-                isChecked = info.forceReadOnly
-            else
-                isVisible = false
-        }
-
-        popup.menu.findItem(R.id.delete_collection).isVisible = info.privUnbind
-
-        popup.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.force_read_only -> {
-                    val nowChecked = !item.isChecked
-                    SetReadOnlyTask(WeakReference(this), info.id!!, nowChecked).execute()
-                }
-                R.id.delete_collection ->
-                    DeleteCollectionFragment.ConfirmDeleteCollectionFragment.newInstance(account, info).show(supportFragmentManager, null)
-                R.id.properties ->
-                    CollectionInfoFragment.newInstance(info).show(supportFragmentManager, null)
-            }
-            true
-        }
-        popup.show()
-
-        // long click was handled
-        true
-    }
-
     private val webcalOnItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
         val info = parent.getItemAtPosition(position) as CollectionInfo
         var uri = Uri.parse(info.source)
@@ -284,7 +248,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
             val nowChecked: Boolean,
             val adapter: WeakReference<ArrayAdapter<*>>,
             val view: WeakReference<View>
-    ): AsyncTask<Void, Void, Void>() {
+    ) : AsyncTask<Void, Void, Void>() {
 
         override fun onPreExecute() {
             view.get()?.isEnabled = false
@@ -306,31 +270,6 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
             info.selected = nowChecked
             adapter.get()?.notifyDataSetChanged()
             view.get()?.isEnabled = true
-        }
-
-    }
-
-    class SetReadOnlyTask(
-            val activity: WeakReference<AccountActivity>,
-            val id: Long,
-            val nowChecked: Boolean
-    ): AsyncTask<Void, Void, Void>() {
-
-        override fun doInBackground(vararg params: Void?): Void? {
-            activity.get()?.let { context ->
-                OpenHelper(context).use { dbHelper ->
-                    val values = ContentValues(1)
-                    values.put(Collections.FORCE_READ_ONLY, nowChecked)
-
-                    val db = dbHelper.writableDatabase
-                    db.update(Collections._TABLE, values, "${Collections.ID}=?", arrayOf(id.toString()))
-                }
-            }
-            return null
-        }
-
-        override fun onPostExecute(result: Void?) {
-            activity.get()?.reload()
         }
 
     }
@@ -362,7 +301,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
         accountInfo = info
 
         if (info?.caldav?.collections?.any { it.selected } != true &&
-            info?.carddav?.collections?.any { it.selected} != true)
+                info?.carddav?.collections?.any { it.selected } != true)
             select_collections_hint.visibility = View.VISIBLE
 
         carddav.visibility = info?.carddav?.let { carddav ->
@@ -448,7 +387,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
     class AccountLoader(
             context: Context,
             val account: Account
-    ): AsyncTaskLoader<AccountInfo>(context), DavService.RefreshingStatusListener, SyncStatusObserver {
+    ) : AsyncTaskLoader<AccountInfo>(context), DavService.RefreshingStatusListener, SyncStatusObserver {
 
         private var syncStatusListener: Any? = null
 
@@ -462,7 +401,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
 
             // bind to DavService to get notified when it's running
             if (davServiceConn == null) {
-                davServiceConn = object: ServiceConnection {
+                davServiceConn = object : ServiceConnection {
                     override fun onServiceConnected(name: ComponentName, service: IBinder) {
                         // get notified when DavService is running
                         davService = service as DavService.InfoBinder
@@ -523,7 +462,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
                                     try {
                                         if (account == addressBook.mainAccount)
                                             carddav.refreshing = carddav.refreshing || ContentResolver.isSyncActive(addrBookAccount, ContactsContract.AUTHORITY)
-                                    } catch(e: Exception) {
+                                    } catch (e: Exception) {
                                     }
                                 }
 
@@ -557,7 +496,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
             return false
         }
 
-        private fun readCollections(db: SQLiteDatabase, service: Long): List<CollectionInfo>  {
+        private fun readCollections(db: SQLiteDatabase, service: Long): List<CollectionInfo> {
             val collections = LinkedList<CollectionInfo>()
             db.query(Collections._TABLE, null, Collections.SERVICE_ID + "=?", arrayOf(service.toString()),
                     null, null, "${Collections.SUPPORTS_VEVENT} DESC,${Collections.DISPLAY_NAME}").use { cursor ->
@@ -596,12 +535,13 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
 
     class AddressBookAdapter(
             context: Context
-    ): ArrayAdapter<CollectionInfo>(context, R.layout.account_carddav_item) {
+    ) : ArrayAdapter<CollectionInfo>(context, R.layout.account_carddav_item) {
         override fun getView(position: Int, v: View?, parent: ViewGroup?): View {
-            val v = v ?: LayoutInflater.from(context).inflate(R.layout.account_carddav_item, parent, false)
+            val v = v
+                    ?: LayoutInflater.from(context).inflate(R.layout.account_carddav_item, parent, false)
             val info = getItem(position)
 
-            val checked: CheckBox = v.findViewById(R.id.checked)
+            val checked: SwitchCompat = v.findViewById(R.id.checked)
             checked.isChecked = info.selected
 
             var tv: TextView = v.findViewById(R.id.title)
@@ -618,29 +558,23 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
             v.findViewById<ImageView>(R.id.read_only).visibility =
                     if (!info.privWriteContent || info.forceReadOnly) View.VISIBLE else View.GONE
 
-            v.findViewById<ImageView>(R.id.action_overflow).setOnClickListener { view ->
-                @Suppress("ReplaceSingleLineLet")
-                (context as? AccountActivity)?.let {
-                    it.onActionOverflowListener(view, info)
-                }
-            }
-
             return v
         }
     }
 
     class CalendarAdapter(
             context: Context
-    ): ArrayAdapter<CollectionInfo>(context, R.layout.account_caldav_item) {
+    ) : ArrayAdapter<CollectionInfo>(context, R.layout.account_caldav_item) {
         override fun getView(position: Int, v: View?, parent: ViewGroup?): View {
-            val v = v ?: LayoutInflater.from(context).inflate(R.layout.account_caldav_item, parent, false)
+            val v = v
+                    ?: LayoutInflater.from(context).inflate(R.layout.account_caldav_item, parent, false)
             val info = getItem(position)
 
             val enabled = info.selected || info.supportsVEVENT || info.supportsVTODO
             v.isEnabled = enabled
             v.checked.isEnabled = enabled
 
-            val checked: CheckBox = v.findViewById(R.id.checked)
+            val checked: SwitchCompat = v.findViewById(R.id.checked)
             checked.isChecked = info.selected
 
             val vColor: View = v.findViewById(R.id.color)
@@ -663,22 +597,6 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
             v.findViewById<ImageView>(R.id.read_only).visibility =
                     if (!info.privWriteContent || info.forceReadOnly) View.VISIBLE else View.GONE
 
-            v.findViewById<ImageView>(R.id.events).visibility =
-                    if (info.supportsVEVENT) View.VISIBLE else View.GONE
-
-            v.findViewById<ImageView>(R.id.tasks).visibility =
-                    if (info.supportsVTODO) View.VISIBLE else View.GONE
-
-            val overflow = v.findViewById<ImageView>(R.id.action_overflow)
-            if (info.type == CollectionInfo.Type.WEBCAL)
-                overflow.visibility = View.GONE
-            else
-                overflow.setOnClickListener { view ->
-                    (context as? AccountActivity)?.let {
-                        it.onActionOverflowListener(view, info)
-                    }
-                }
-
             return v
         }
     }
@@ -686,7 +604,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
 
     /* DIALOG FRAGMENTS */
 
-    class RenameAccountFragment: DialogFragment() {
+    class RenameAccountFragment : DialogFragment() {
 
         companion object {
 
@@ -749,7 +667,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
                                                         provider.release()
                                                 }
                                         }
-                                    } catch(e: Exception) {
+                                    } catch (e: Exception) {
                                         Logger.log.log(Level.SEVERE, "Couldn't update address book accounts", e)
                                     }
 
@@ -759,7 +677,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
                                 // update account_name of local tasks
                                 try {
                                     LocalTaskList.onRenameAccount(activity!!.contentResolver, oldAccount.name, newName)
-                                } catch(e: Exception) {
+                                } catch (e: Exception) {
                                     Logger.log.log(Level.SEVERE, "Couldn't propagate new account name to tasks provider", e)
                                 }
 
@@ -784,7 +702,7 @@ class AccountActivity: AppCompatActivity(), Toolbar.OnMenuItemClickListener, Pop
                 try {
                     if (future.result.getBoolean(AccountManager.KEY_BOOLEAN_RESULT))
                         finish()
-                } catch(e: Exception) {
+                } catch (e: Exception) {
                     Logger.log.log(Level.SEVERE, "Couldn't remove account", e)
                 }
             }, null)

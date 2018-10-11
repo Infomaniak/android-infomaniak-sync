@@ -41,8 +41,6 @@ class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
                 if (activity.packageManager.resolveActivity(intent, 0) != null)
                     activity.startActivity(intent)
             }
-            R.id.nav_twitter ->
-                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/davdroidapp")))
             R.id.nav_website ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)))
             R.id.nav_manual ->
@@ -54,9 +52,6 @@ class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
             R.id.nav_forums ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
                         .buildUpon().appendEncodedPath("forums/").build()))
-            R.id.nav_donate ->
-                    activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
-                            .buildUpon().appendEncodedPath("donate/").build()))
             else ->
                 return false
         }

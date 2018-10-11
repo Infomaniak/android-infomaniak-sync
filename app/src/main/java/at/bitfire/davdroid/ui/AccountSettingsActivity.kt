@@ -15,6 +15,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SyncStatusObserver
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -63,6 +64,9 @@ class AccountSettingsActivity: AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                     .replace(android.R.id.content, DialogFragment.instantiate(this, AccountSettingsFragment::class.java.name, intent.extras))
                     .commit()
+
+        val upArrow: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_back_material_white)
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =

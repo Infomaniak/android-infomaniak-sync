@@ -14,22 +14,15 @@
               android:layout_height="wrap_content"
               android:paddingTop="4dp"
               android:paddingBottom="4dp"
-              android:paddingLeft="8dp"
+              android:paddingLeft="16dp"
               android:paddingRight="8dp"
               android:gravity="center_vertical">
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:clickable="false"
-        android:id="@+id/checked"/>
 
     <LinearLayout android:layout_width="0dp"
                   android:layout_weight="1"
                   android:layout_height="wrap_content"
+                  android:paddingTop="6dp"
+                  android:paddingBottom="6dp"
                   android:orientation="vertical">
 
         <TextView
@@ -37,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/primaryTextColor"
+            android:textColor="@color/grey_text"
             tools:text="My Address Book"/>
 
         <TextView
@@ -45,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/grey_text"
             tools:text="Address Book Description"/>
 
     </LinearLayout>
@@ -56,11 +50,14 @@
         android:contentDescription="@string/account_read_only"
         app:srcCompat="@drawable/ic_remove_circle_dark"/>
 
-    <ImageView
-        android:id="@+id/action_overflow"
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="0dp"
-        style="@style/Widget.AppCompat.ActionButton.Overflow"/>
+        android:layout_marginRight="4dp"
+        android:clickable="false"
+        android:contentDescription="@string/account_synchronize_this_collection"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
 </LinearLayout>

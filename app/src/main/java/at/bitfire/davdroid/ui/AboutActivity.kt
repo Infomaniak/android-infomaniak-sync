@@ -30,7 +30,6 @@ import kotlinx.android.synthetic.main.about_davdroid.*
 import kotlinx.android.synthetic.main.activity_about.*
 import org.apache.commons.io.IOUtils
 import java.text.SimpleDateFormat
-import java.util.*
 
 class AboutActivity: AppCompatActivity() {
 
@@ -48,7 +47,7 @@ class AboutActivity: AppCompatActivity() {
 
         setContentView(R.layout.activity_about)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar_about)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewpager.adapter = TabsAdapter(supportFragmentManager)

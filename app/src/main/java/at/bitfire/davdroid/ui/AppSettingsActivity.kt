@@ -13,10 +13,12 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.IBinder
 import android.os.Process
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.EditTextPreference
 import android.support.v7.preference.Preference
@@ -49,6 +51,9 @@ class AppSettingsActivity: AppCompatActivity() {
                     .replace(android.R.id.content, fragment)
                     .commit()
         }
+
+        val upArrow: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_back_material_white)
+        supportActionBar?.setHomeAsUpIndicator(upArrow)
     }
 
 

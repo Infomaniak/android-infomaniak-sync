@@ -99,6 +99,7 @@
 
         <activity
             android:name=".ui.AccountActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".ui.AccountsActivity">
         </activity>
         <activity android:name=".ui.AccountSettingsActivity"/>

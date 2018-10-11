@@ -83,8 +83,9 @@
   <string name="account_delete">Supprimer le compte</string>
   <string name="account_delete_confirmation_title">Voulez-vous vraiment supprimer le compte?</string>
   <string name="account_delete_confirmation_text">Toutes les copies locales des carnets d\'adresses, des calendriers et des listes de tâches seront supprimées.</string>
-  <string name="account_carddav">CardDAV (les carnets d\'adresse) </string>
-  <string name="account_caldav">CalDAV (les agendas) </string>
+  <string name="account_select_collections_hint">Sélectionnez les collections à synchroniser</string>
+  <string name="account_carddav">Carnets d\'adresse</string>
+  <string name="account_caldav">Agendas</string>
   <string name="account_webcal">WebCal (les anciens agenda)</string>
   <string name="account_calendar">calendrier</string>
   <string name="account_task_list">liste de tâche</string>

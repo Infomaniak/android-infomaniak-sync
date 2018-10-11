@@ -47,7 +47,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
 
         <item name="android:textColorPrimary">@drawable/text_color</item>
         <item name="android:textColorSecondary">@color/secondaryTextColor</item>
@@ -56,10 +56,10 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
-    <color name="actionBarButton">#8a000000</color>
+    <color name="actionBarButton">@color/white</color>
 
     <style name="AppTheme.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -67,10 +67,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
     <style name="AppThemeExt" parent="AppTheme" />
 
     <!-- preference-v14 uses this color for categories text on API <21 -->
-    <color name="preference_fallback_accent_color" tools:override="true">@color/secondaryColor
+    <color name="preference_fallback_accent_color" tools:override="true">@color/primaryColor
     </color>
 
 
@@ -107,19 +108,21 @@
 
     <!-- widgets -->
 
-    <color name="cardview_background">@color/secondaryLightColor</color>
+    <color name="cardview_background">@color/hover</color>
 
     <style name="tablayout" parent="Widget.Design.TabLayout">
         <item name="android:background">@color/primaryColor</item>
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
     <style name="toolbar_theme">
-        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:textColorSecondary">@color/grey_title</item>
     </style>
 
     <style name="toolbar_style" parent="Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/primaryDarkColor</item>
-        <item name="titleTextColor">@android:color/white</item>
+        <item name="android:background">@color/hover</item>
+        <item name="titleTextColor">@color/grey_title</item>
     </style>
 
     <style name="progressbar_white" parent="@style/Widget.AppCompat.ProgressBar">
@@ -131,7 +134,7 @@
 
     <style name="TextView.Heading" parent="AppTheme">
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/secondaryColor</item>
+        <item name="android:textColor">@color/primaryColor</item>
     </style>
 
 </resources>

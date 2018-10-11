@@ -17,9 +17,11 @@ import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.ServiceDB
 import at.bitfire.davdroid.resource.LocalAddressBook
-import at.bitfire.davdroid.ui.setup.LoginActivity
+import at.bitfire.davdroid.ui.AccountsActivity
 import java.util.*
 import java.util.logging.Level
+
+
 
 
 /**
@@ -98,7 +100,7 @@ class AccountAuthenticatorService: Service(), OnAccountsUpdateListener {
     ): AbstractAccountAuthenticator(context) {
 
         override fun addAccount(response: AccountAuthenticatorResponse?, accountType: String?, authTokenType: String?, requiredFeatures: Array<String>?, options: Bundle?): Bundle {
-            val intent = Intent(context, LoginActivity::class.java)
+            val intent = Intent(context, AccountsActivity::class.java)
             intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response)
             val bundle = Bundle(1)
             bundle.putParcelable(AccountManager.KEY_INTENT, intent)
