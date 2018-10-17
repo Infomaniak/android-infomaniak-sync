@@ -74,6 +74,7 @@
   <string name="app_settings_show_debug_info">Afficher les infos de débogage</string>
   <string name="app_settings_show_debug_info_details">Voir/partager l\'application et les détails de configuration</string>
   <!--AccountActivity-->
+  <string name="account_sync_all_calendars">Synchroniser tous les calendriers</string>
   <string name="account_synchronize_now">Synchroniser maintenant</string>
   <string name="account_synchronizing_now">Synchronisation en cours</string>
   <string name="account_settings">Paramètres du compte</string>
@@ -84,11 +85,12 @@
   <string name="account_delete_confirmation_title">Voulez-vous vraiment supprimer le compte?</string>
   <string name="account_delete_confirmation_text">Toutes les copies locales des carnets d\'adresses, des calendriers et des listes de tâches seront supprimées.</string>
   <string name="account_select_collections_hint">Sélectionnez les collections à synchroniser</string>
-  <string name="account_carddav">Carnets d\'adresse</string>
-  <string name="account_caldav">Agendas</string>
+  <string name="account_carddav">Carnets d\'adresses</string>
+  <string name="account_caldav">Calendriers</string>
   <string name="account_webcal">WebCal (les anciens agenda)</string>
   <string name="account_calendar">calendrier</string>
   <string name="account_task_list">liste de tâche</string>
+  <string name="account_sync_all_books">Synchroniser tous les carnets d\'adresses</string>
   <string name="account_refresh_address_book_list">Actualiser le carnet d\'adresses</string>
   <string name="account_create_new_address_book">Créer un nouveau carnet d\'adresses</string>
   <string name="account_refresh_calendar_list">Actualiser le calendrier</string>

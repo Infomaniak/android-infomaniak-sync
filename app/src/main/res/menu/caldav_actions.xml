@@ -9,6 +9,9 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/sync_all_calendars"
+          android:title="@string/account_sync_all_calendars"/>
+
     <item android:id="@+id/refresh_calendars"
           android:title="@string/account_refresh_calendar_list"/>
 

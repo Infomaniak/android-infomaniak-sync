@@ -44,6 +44,7 @@ import at.bitfire.davdroid.model.ServiceDB.*
 import at.bitfire.davdroid.model.ServiceDB.Collections
 import at.bitfire.davdroid.resource.LocalAddressBook
 import at.bitfire.davdroid.resource.LocalTaskList
+import at.bitfire.davdroid.ui.widget.MaximizedListView
 import at.bitfire.ical4android.TaskProvider
 import kotlinx.android.synthetic.main.account_caldav_item.view.*
 import kotlinx.android.synthetic.main.activity_account.*
@@ -154,24 +155,28 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.sync_all_books ->
+                accountInfo?.carddav?.let { carddav ->
+                    selectAll(address_books)
+                    launchSync(carddav)
+                }
             R.id.refresh_address_books ->
                 accountInfo?.carddav?.let { carddav ->
-                    val intent = Intent(this, DavService::class.java)
-                    intent.action = DavService.ACTION_REFRESH_COLLECTIONS
-                    intent.putExtra(DavService.EXTRA_DAV_SERVICE_ID, carddav.id)
-                    startService(intent)
+                    launchSync(carddav)
                 }
             R.id.create_address_book -> {
                 val intent = Intent(this, CreateAddressBookActivity::class.java)
                 intent.putExtra(CreateAddressBookActivity.EXTRA_ACCOUNT, account)
                 startActivity(intent)
             }
+            R.id.sync_all_calendars ->
+                accountInfo?.caldav?.let { caldav ->
+                    selectAll(calendars)
+                    launchSync(caldav)
+                }
             R.id.refresh_calendars ->
                 accountInfo?.caldav?.let { caldav ->
-                    val intent = Intent(this, DavService::class.java)
-                    intent.action = DavService.ACTION_REFRESH_COLLECTIONS
-                    intent.putExtra(DavService.EXTRA_DAV_SERVICE_ID, caldav.id)
-                    startService(intent)
+                    launchSync(caldav)
                 }
             R.id.create_calendar -> {
                 val intent = Intent(this, CreateCalendarActivity::class.java)
@@ -182,6 +187,35 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
         return false
     }
 
+    private fun selectAll(listView: MaximizedListView) {
+        val adapter = listView.adapter as ArrayAdapter<CollectionInfo>
+        for (i in 0 until calendars.count) {
+            val view = getViewByPosition(i, listView)
+            val info = adapter.getItem(i)
+            val nowChecked = true
+
+            SelectCollectionTask(applicationContext, info, nowChecked, WeakReference(adapter), WeakReference(view)).execute()
+        }
+    }
+
+    private fun launchSync(dav: AccountInfo.ServiceInfo): ComponentName? {
+        val intent = Intent(this, DavService::class.java)
+        intent.action = DavService.ACTION_REFRESH_COLLECTIONS
+        intent.putExtra(DavService.EXTRA_DAV_SERVICE_ID, dav.id)
+        return startService(intent)
+    }
+
+    private fun getViewByPosition(pos: Int, listView: ListView): View {
+        val firstListItemPosition: Int = listView.firstVisiblePosition
+        val lastListItemPosition: Int = firstListItemPosition + listView.childCount - 1
+
+        return if (pos < firstListItemPosition || pos > lastListItemPosition) {
+            listView.adapter.getView(pos, null, listView)
+        } else {
+            val childIndex: Int = pos - firstListItemPosition
+            listView.getChildAt(childIndex)
+        }
+    }
 
     private val onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, _ ->
         if (!view.isEnabled)

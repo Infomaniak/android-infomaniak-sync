@@ -59,13 +59,14 @@ class LoginActivity : AppCompatActivity() {
          */
         const val EXTRA_PASSWORD = "password"
 
-        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
-        private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
+//        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
+//        private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
+        internal const val LOGIN_URL_AUTHORIZE = "https://login.beta.sharedbox.com/authorize"
+        private const val LOGIN_URL_TOKEN = "https://login.beta.sharedbox.com/token"
 
         internal const val REDIRECT_URI_ROOT = "com.infomaniak.sync"
 
         internal const val CLIENT_ID = "CE011334-F75A-4263-9F9F-45FC5A142F59"
-        private const val CLIENT_SECRET = "eYzvxFTDCJCr4zhqNp44sSLR"
 
         private const val URL_API_PROFIL = "https://api.infomaniak.com/1/profile";
         private const val URL_API_PROFIL_PASSWORD = "https://api.infomaniak.com/1/profile/password"
@@ -128,7 +129,6 @@ class LoginActivity : AppCompatActivity() {
                         .setType(MultipartBody.FORM)
                         .addFormDataPart("grant_type", "authorization_code")
                         .addFormDataPart("client_id", CLIENT_ID)
-                        .addFormDataPart("client_secret", CLIENT_SECRET)
                         .addFormDataPart("code", code)
                         .addFormDataPart("redirect_uri", "$REDIRECT_URI_ROOT:/oauth2redirect")
 

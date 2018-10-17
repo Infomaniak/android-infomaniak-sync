@@ -114,6 +114,7 @@
     <string name="app_settings_show_debug_info_details">View/share software and configuration details</string>
 
     <!-- AccountActivity -->
+    <string name="account_sync_all_calendars">Synchronize all calendars</string>
     <string name="account_synchronize_now">Synchronize now</string>
     <string name="account_synchronizing_now">Synchronizing now</string>
     <string name="account_settings">Account settings</string>
@@ -131,6 +132,7 @@
     <string name="account_read_only">read-only</string>
     <string name="account_calendar">calendar</string>
     <string name="account_task_list">task list</string>
+    <string name="account_sync_all_books">Synchronize all address books</string>
     <string name="account_refresh_address_book_list">Refresh address book list</string>
     <string name="account_create_new_address_book">Create new address book</string>
     <string name="account_refresh_calendar_list">Refresh calendar list</string>

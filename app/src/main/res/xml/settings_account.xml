@@ -75,7 +75,7 @@
 
     <PreferenceCategory
         android:key="carddav"
-        android:title="@string/settings_carddav">
+        android:title="@string/account_carddav">
 
         <ListPreference
             android:key="contact_group_method"
@@ -88,7 +88,7 @@
 
     <PreferenceCategory
         android:key="caldav"
-        android:title="@string/settings_caldav">
+        android:title="@string/account_caldav">
 
         <EditTextPreference
             android:key="time_range_past_days"

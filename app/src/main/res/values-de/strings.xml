@@ -90,6 +90,7 @@
   <string name="app_settings_show_debug_info">Informationen zur Fehlersuche</string>
   <string name="app_settings_show_debug_info_details">Software- und Konfigurationsdetails anzeigen und teilen</string>
   <!--AccountActivity-->
+  <string name="account_sync_all_calendars">Alle Kalender Synchronisieren</string>
   <string name="account_synchronize_now">Jetzt synchronisieren</string>
   <string name="account_synchronizing_now">Synchronisation gestartet</string>
   <string name="account_settings">Konto-Einstellungen</string>
@@ -107,6 +108,7 @@
   <string name="account_read_only">schreibgeschützt</string>
   <string name="account_calendar">Kalender</string>
   <string name="account_task_list">Aufgabenliste</string>
+  <string name="account_sync_all_books">Alle Kontakte Synchronisieren</string>
   <string name="account_refresh_address_book_list">Adressbücher neu erkennen</string>
   <string name="account_create_new_address_book">Neues Adressbuch erstellen</string>
   <string name="account_refresh_calendar_list">Kalender neu erkennen</string>
