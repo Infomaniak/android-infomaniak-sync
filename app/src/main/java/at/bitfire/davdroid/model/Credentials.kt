@@ -13,8 +13,12 @@ import java.io.Serializable
 class Credentials(
         val userName: String? = null,
         val password: String? = null,
-        val certificateAlias: String? = null
+        val certificateAlias: String? = null,
+        val accountName: String?
 ): Serializable {
+
+    constructor(userName: String? = null, password: String? = null, certificateAlias: String? = null) :
+            this(userName, password, certificateAlias, null)
 
     enum class Type {
         UsernamePassword,

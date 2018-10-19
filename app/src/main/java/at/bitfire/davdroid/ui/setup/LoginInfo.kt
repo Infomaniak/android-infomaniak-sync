@@ -18,8 +18,11 @@ data class LoginInfo(
         val credentials: Credentials
 ): Parcelable {
 
-    constructor(uri: URI, userName: String? = null, password: String? = null, certificateAlias: String? = null):
-        this(uri, Credentials(userName, password, certificateAlias))
+    constructor(uri: URI, userName: String? = null, password: String? = null, certificateAlias: String? = null) :
+            this(uri, Credentials(userName, password, certificateAlias, null))
+
+    constructor(uri: URI, userName: String? = null, password: String? = null, certificateAlias: String? = null, accountName: String? = null) :
+            this(uri, Credentials(userName, password, certificateAlias, accountName))
 
     override fun describeContents() = 0
 

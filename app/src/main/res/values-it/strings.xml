@@ -13,6 +13,7 @@
   <string name="notification_channel_sync_errors">Errori di sincronizzazione</string>
   <string name="notification_channel_sync_io_errors">Errori di Rete e di I/O</string>
   <string name="notification_channel_sync_status">Messaggi di stato</string>
+  <string name="an_error_has_occurred">C\'è stato un errore</string>
   <!--startup dialogs-->
   <string name="startup_battery_optimization_disable">Disabilita per Infomaniak Sync</string>
   <string name="startup_dont_show_again">Non mostrare più</string>
@@ -47,7 +48,7 @@
   <string name="navigation_drawer_faq">Domande Frequenti</string>
   <string name="navigation_drawer_forums">Aiuto / Forum</string>
   <string name="navigation_drawer_donate">Donazione</string>
-  <string name="account_list_empty">Benvenuto a DAVdroid!\n\nÈ ora possibile aggiungere account CalDAV/CardDAV.</string>
+  <string name="account_list_empty">Benvenuto a Infomaniak Sync!\n\nÈ ora possibile aggiungere account Infomaniak.</string>
   <string name="accounts_global_sync_disabled">La sincronizzazione automatica dell\'intero sistema è disabilitata</string>
   <string name="accounts_global_sync_enable">Attiva</string>
   <!--DavService-->
@@ -210,7 +211,7 @@
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Informazioni di debug</string>
   <string name="sync_contacts_read_only_address_book">Rubrica in sola lettura</string>
-  <string name="sync_error_permissions">Autorizzazioni DAVdroid</string>
+  <string name="sync_error_permissions">Autorizzazioni Infomaniak Sync</string>
   <string name="sync_error_permissions_text">Autorizzazioni addizionali richieste</string>
   <string name="sync_error_opentasks_too_old">OpenTasks troppo vecchia</string>
   <string name="sync_error_opentasks_required_version">Versione richiesta: %1$s (attualmente %2$s)</string>

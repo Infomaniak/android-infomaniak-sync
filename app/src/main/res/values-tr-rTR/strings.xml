@@ -35,7 +35,7 @@
   <string name="navigation_drawer_website">Web sitesi</string>
   <string name="navigation_drawer_faq">SSS</string>
   <string name="navigation_drawer_donate">Bağış yap</string>
-  <string name="account_list_empty">DAVdroid\'e hoşgeldin!\n\nŞimdi bir CalDAV/CardDAV hesabı ekleyebilirsin.</string>
+  <string name="account_list_empty">Infomaniak Sync\'e hoşgeldin!\n\nŞimdi bir Infomaniak hesabı ekleyebilirsin.</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">Servis keşfi başarısız</string>
   <string name="dav_service_refresh_couldnt_refresh">Kolleksiyon listesi yenilenemedi</string>
@@ -143,7 +143,7 @@
   <string name="exception_show_details">Detayları göster</string>
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Hata ayıklama bilgisi</string>
-  <string name="sync_error_permissions">DAVdroid izinleri</string>
+  <string name="sync_error_permissions">Infomaniak Sync izinleri</string>
   <string name="sync_error_permissions_text">Ek izinler zorunludur</string>
   <!--cert4android-->
 </resources>

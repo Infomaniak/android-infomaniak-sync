@@ -41,7 +41,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">Help / Forums</string>
   <string name="navigation_drawer_donate">Doneren</string>
-  <string name="account_list_empty">Welkom bij DAVdroid!\n\nJe kunt nu een CalDAV/CardDAv account toevoegen.</string>
+  <string name="account_list_empty">Welkom bij Infomaniak Sync!\n\nJe kunt nu een Infomaniak account toevoegen.</string>
   <string name="accounts_global_sync_disabled">Systeembrede automatische synchronisatie is uitgeschakeld</string>
   <string name="accounts_global_sync_enable">Inschakelen</string>
   <!--DavService-->
@@ -191,7 +191,7 @@
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Debug informatie</string>
   <string name="sync_contacts_read_only_address_book">Alleen-lezen adresboek</string>
-  <string name="sync_error_permissions">DAVdroid rechten</string>
+  <string name="sync_error_permissions">Infomaniak Sync rechten</string>
   <string name="sync_error_permissions_text">Aanvullende rechten vereist</string>
   <string name="sync_error_retry">Opnieuw</string>
   <string name="sync_error_view_item">Bekijk item</string>

@@ -30,6 +30,8 @@
     <string name="notification_channel_sync_io_errors">Network and I/O errors</string>
     <string name="notification_channel_sync_status">Status messages</string>
 
+    <string name="an_error_has_occurred">An error has occurred</string>
+
     <!-- startup dialogs -->
     <string name="startup_autostart_permission">Automatic synchronization</string>
     <string name="startup_autostart_permission_message">%s firmware often blocks automatic synchronization. In this case, allow automatic synchronization in your Android settings.</string>
@@ -79,7 +81,7 @@
     <string name="navigation_drawer_forums">Help / Forums</string>
     <string name="navigation_drawer_donate">Donate</string>
 
-    <string name="account_list_empty">Welcome to DAVdroid!\n\nYou can add a CalDAV/CardDAV account now.</string>
+    <string name="account_list_empty">Welcome to Infomaniak Sync!\n\nYou can add a Infomaniak account now.</string>
     <string name="accounts_global_sync_disabled">System-wide automatic synchronization is disabled</string>
     <string name="accounts_global_sync_enable">Enable</string>
 
@@ -278,7 +280,7 @@
         <item quantity="one">Local contact change discarded</item>
         <item quantity="other">%d local contact changes discarded</item>
     </plurals>
-    <string name="sync_error_permissions">DAVdroid permissions</string>
+    <string name="sync_error_permissions">Infomaniak Sync permissions</string>
     <string name="sync_error_permissions_text">Additional permissions required</string>
     <string name="sync_error_opentasks_too_old">OpenTasks too old</string>
     <string name="sync_error_opentasks_required_version">Required version: %1$s (currently %2$s)</string>

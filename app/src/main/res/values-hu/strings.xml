@@ -58,7 +58,7 @@
   <string name="navigation_drawer_faq">GYIK</string>
   <string name="navigation_drawer_forums">Segítség / Fórumok</string>
   <string name="navigation_drawer_donate">Támogatás</string>
-  <string name="account_list_empty">Üdvözöljük a DAVdroid felhasználók között!\n\nMost már felvehet CalDAV/CardDav fiókokat.</string>
+  <string name="account_list_empty">Üdvözöljük a Infomaniak Sync felhasználók között!\n\nMost már felvehet Infomaniak fiókokat.</string>
   <string name="accounts_global_sync_disabled">A rendszerszintű automatikus szinkronizálás ki van kapcsolva</string>
   <string name="accounts_global_sync_enable">Bekapcsolás</string>
   <!--DavService-->
@@ -236,7 +236,7 @@
     <item quantity="one">Helyi névjegyváltozás elvetve</item>
     <item quantity="other">%d helyi névjegyváltozás elvetve</item>
   </plurals>
-  <string name="sync_error_permissions">DAVdroid engedélyek </string>
+  <string name="sync_error_permissions">Infomaniak Sync engedélyek </string>
   <string name="sync_error_permissions_text">További engedélyek szükségesek</string>
   <string name="sync_error_opentasks_too_old">Az OpenTask verzió nem megfelelő</string>
   <string name="sync_error_opentasks_required_version">Szükséges verzió: %1$s (jelenlegi verzió: %2$s)</string>

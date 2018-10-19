@@ -49,7 +49,7 @@
   <string name="navigation_drawer_faq">OSS</string>
   <string name="navigation_drawer_forums">Hjælp / fora</string>
   <string name="navigation_drawer_donate">Donation</string>
-  <string name="account_list_empty">Velkommen til DAVdroid!\n\nDu kan nu tilføje en CalDAV/CardDAV konto.</string>
+  <string name="account_list_empty">Velkommen til Infomaniak Sync!\n\nDu kan nu tilføje en Infomaniak konto.</string>
   <string name="accounts_global_sync_disabled">Automatisk synkronisering på tværs af systemet er deaktiveret</string>
   <string name="accounts_global_sync_enable">Aktivere</string>
   <!--DavService-->
@@ -222,7 +222,7 @@
     <item quantity="one">Lokal ændring slettet</item>
     <item quantity="other">%d lokale ændringer slettet</item>
   </plurals>
-  <string name="sync_error_permissions">DAVdroid-rettigheder</string>
+  <string name="sync_error_permissions">Infomaniak Sync-rettigheder</string>
   <string name="sync_error_permissions_text">Yderligere adgang påkrævet</string>
   <string name="sync_error_opentasks_too_old">OpenTasks-version for gammel</string>
   <string name="sync_error_opentasks_required_version">Påkrævet version: %1$s (aktuelt%2$s)</string>

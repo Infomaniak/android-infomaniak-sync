@@ -36,7 +36,7 @@
   <string name="navigation_drawer_website">Webová stránka</string>
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_donate">Obdarovat</string>
-  <string name="account_list_empty">Vítejte v aplikaci DAVdroid!\n\nNyní můžete přidat CalDAV/CardDAV účet.</string>
+  <string name="account_list_empty">Vítejte v aplikaci Infomaniak Sync!\n\nNyní můžete přidat Infomaniak účet.</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">Vyhledání služby selhalo</string>
   <string name="dav_service_refresh_couldnt_refresh">Nelze obnovit seznam sbírky</string>
@@ -171,7 +171,7 @@
   <string name="exception_show_details">Zobrazit detaily</string>
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Ladící informace</string>
-  <string name="sync_error_permissions">DAVdroid oprávnění</string>
+  <string name="sync_error_permissions">Infomaniak Sync oprávnění</string>
   <string name="sync_error_permissions_text">Vyžadována dodatečná oprávnění</string>
   <!--cert4android-->
   <string name="certificate_notification_connection_security">DAVdroid: Zabezpečení připojení</string>

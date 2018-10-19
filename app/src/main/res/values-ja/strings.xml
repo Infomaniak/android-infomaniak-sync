@@ -58,7 +58,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">ヘルプ / フォーラム</string>
   <string name="navigation_drawer_donate">寄付</string>
-  <string name="account_list_empty">DAVdroid にようこそ!\n\nCalDAV/CardDAV アカウントを追加できるようになりました。</string>
+  <string name="account_list_empty">Infomaniak Sync にようこそ!\n\nInfomaniak アカウントを追加できるようになりました。</string>
   <string name="accounts_global_sync_disabled">システム全体の自動同期が無効です</string>
   <string name="accounts_global_sync_enable">有効</string>
   <!--DavService-->
@@ -234,7 +234,7 @@
   <plurals name="sync_contacts_local_contact_changes_discarded">
     <item quantity="other">%d ローカル連絡先の変更が破棄されました</item>
   </plurals>
-  <string name="sync_error_permissions">DAVdroid アクセス許可</string>
+  <string name="sync_error_permissions">Infomaniak Sync アクセス許可</string>
   <string name="sync_error_permissions_text">追加のアクセス許可が必要です</string>
   <string name="sync_error_opentasks_too_old">OpenTasks が古すぎます</string>
   <string name="sync_error_opentasks_required_version">必要なバージョン: %1$s (現在 %2$s)</string>

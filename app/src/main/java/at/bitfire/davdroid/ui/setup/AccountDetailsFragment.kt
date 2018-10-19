@@ -69,7 +69,8 @@ class AccountDetailsFragment: Fragment(), LoaderManager.LoaderCallbacks<CreateSe
         val args = requireNotNull(arguments)
         val config = args.getParcelable(KEY_CONFIG) as DavResourceFinder.Configuration
 
-        v.account_name.setText(config.calDAV?.email ?:
+        v.account_name.setText(config.credentials.accountName ?:
+                config.calDAV?.email ?:
                 config.credentials.userName ?:
                 config.credentials.certificateAlias)
 
@@ -124,6 +125,8 @@ class AccountDetailsFragment: Fragment(), LoaderManager.LoaderCallbacks<CreateSe
                 view.contact_group_method.isEnabled = true
 
             view.create_account.isEnabled = true
+
+            view.create_account.callOnClick()
         }
     }
 

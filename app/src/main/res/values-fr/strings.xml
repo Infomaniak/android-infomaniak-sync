@@ -8,6 +8,7 @@
   <string name="manage_accounts">Gestion des comptes</string>
   <string name="please_wait">patientez …</string>
   <string name="send">Envoyer</string>
+  <string name="an_error_has_occurred">Une erreur est survenu</string>
   <!--startup dialogs-->
   <string name="startup_battery_optimization_disable">Désactiver pour Infomaniak Sync</string>
   <string name="startup_dont_show_again">Ne plus afficher</string>
@@ -42,7 +43,7 @@
   <string name="navigation_drawer_faq">Foire aux questions</string>
   <string name="navigation_drawer_forums">Aide/Forum</string>
   <string name="navigation_drawer_donate">Faire un don</string>
-  <string name="account_list_empty">Bienvenue sur DAVdroid!\n\nVous pouvez maintenant ajouter un compte CalDAV ou CardDAV.</string>
+  <string name="account_list_empty">Bienvenue sur Infomaniak Sync !\n\nVous pouvez maintenant ajouter un compte Infomaniak.</string>
   <string name="accounts_global_sync_disabled">La synchronisation automatique globale est désactivée</string>
   <string name="accounts_global_sync_enable">Activer</string>
   <!--DavService-->
@@ -204,7 +205,7 @@
   <string name="exception_show_details">Voir détails</string>
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Infos de débogage</string>
-  <string name="sync_error_permissions">Autorisations DAVdroid</string>
+  <string name="sync_error_permissions">Autorisations Infomaniak Sync</string>
   <string name="sync_error_permissions_text">Autorisations supplémentaires demandées</string>
   <!--cert4android-->
   <string name="certificate_notification_connection_security">DAVdroid : Sécurité de la connexion</string>

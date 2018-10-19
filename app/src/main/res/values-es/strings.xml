@@ -49,7 +49,7 @@
   <string name="navigation_drawer_faq">Preguntas frequentes</string>
   <string name="navigation_drawer_forums">Ayuda / Foros</string>
   <string name="navigation_drawer_donate">Donar</string>
-  <string name="account_list_empty">Bienvenido a DAVdroid!\n\nAhora puedes añadir una cuenta CalDAV/CardDAV.</string>
+  <string name="account_list_empty">Bienvenido a Infomaniak Sync!\n\nAhora puedes añadir una cuenta Infomaniak.</string>
   <string name="accounts_global_sync_disabled">Sincronización automática del sistema completo está deshabilitada</string>
   <string name="accounts_global_sync_enable">Activar</string>
   <!--DavService-->
@@ -213,7 +213,7 @@
     <item quantity="one">Cambio de contacto local descartado</item>
     <item quantity="other">%d cambios de contactos locales descartados</item>
   </plurals>
-  <string name="sync_error_permissions">Permisos de DAVdroid</string>
+  <string name="sync_error_permissions">Permisos de Infomaniak Sync</string>
   <string name="sync_error_permissions_text">Permisos adicionales requeridos</string>
   <string name="sync_error_opentasks_too_old">OpenTasks muy viejo</string>
   <string name="sync_error_opentasks_required_version">Versión requerida: %1$s (actual %2$s)</string>

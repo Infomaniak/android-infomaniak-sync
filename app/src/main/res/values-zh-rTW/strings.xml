@@ -38,7 +38,7 @@
   <string name="navigation_drawer_website">我們的網站</string>
   <string name="navigation_drawer_faq">常見問答</string>
   <string name="navigation_drawer_donate">贊助我們</string>
-  <string name="account_list_empty">歡迎使用 DAVdroid!\n\n您現在可以新增 CalDAV/CardDAV 帳號</string>
+  <string name="account_list_empty">歡迎使用 Infomaniak Sync!\n\n您現在可以新增 Infomaniak 帳號</string>
   <string name="accounts_global_sync_enable">啟用</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">未發現遠端服務</string>
@@ -171,7 +171,7 @@
   <string name="exception_show_details">顯示細節</string>
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">除錯訊息</string>
-  <string name="sync_error_permissions">DAVdroid 權限</string>
+  <string name="sync_error_permissions">Infomaniak Sync 權限</string>
   <string name="sync_error_permissions_text">需要額外的權限</string>
   <!--cert4android-->
   <string name="certificate_notification_connection_security">DAVdroid: 連線安全性</string>

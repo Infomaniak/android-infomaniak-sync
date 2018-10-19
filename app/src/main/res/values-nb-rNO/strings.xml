@@ -40,7 +40,7 @@
   <string name="navigation_drawer_faq">O-S-S</string>
   <string name="navigation_drawer_forums">Hjelp / Forum</string>
   <string name="navigation_drawer_donate">Doner</string>
-  <string name="account_list_empty">Velkommen til DAVdroid.\n\nDu kan legge til en CalDAV/CardDAV-konto nå.</string>
+  <string name="account_list_empty">Velkommen til Infomaniak Sync.\n\nDu kan legge til en Infomaniak-konto nå.</string>
   <string name="accounts_global_sync_disabled">Systemomspennende automatisk synkronisering avskrudd</string>
   <string name="accounts_global_sync_enable">Skru på</string>
   <!--DavService-->
@@ -209,7 +209,7 @@
     <item quantity="one">Lokal kontaktendring forkastet</item>
     <item quantity="other">%d lokale kontaktendringer forkastet</item>
   </plurals>
-  <string name="sync_error_permissions">DAVdroid-tilganger</string>
+  <string name="sync_error_permissions">Infomaniak Sync-tilganger</string>
   <string name="sync_error_permissions_text">Ytterligere tilganger kreves</string>
   <!--cert4android-->
   <string name="certificate_notification_connection_security">DAVdroid: Tilkoblingssikkerhet</string>

@@ -83,6 +83,7 @@
         <activity
             android:name=".ui.setup.LoginActivity"
             android:label="@string/login_title"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".ui.AccountsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

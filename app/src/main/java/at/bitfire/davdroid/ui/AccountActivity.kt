@@ -156,13 +156,13 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.sync_all_books ->
-                accountInfo?.carddav?.let { carddav ->
+                address_books?.let { address_books ->
                     selectAll(address_books)
-                    launchSync(carddav)
+                    requestSync()
                 }
             R.id.refresh_address_books ->
                 accountInfo?.carddav?.let { carddav ->
-                    launchSync(carddav)
+                    launchRefresh(carddav)
                 }
             R.id.create_address_book -> {
                 val intent = Intent(this, CreateAddressBookActivity::class.java)
@@ -170,13 +170,13 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
                 startActivity(intent)
             }
             R.id.sync_all_calendars ->
-                accountInfo?.caldav?.let { caldav ->
+                calendars?.let { calendars ->
                     selectAll(calendars)
-                    launchSync(caldav)
+                    requestSync()
                 }
             R.id.refresh_calendars ->
                 accountInfo?.caldav?.let { caldav ->
-                    launchSync(caldav)
+                    launchRefresh(caldav)
                 }
             R.id.create_calendar -> {
                 val intent = Intent(this, CreateCalendarActivity::class.java)
@@ -189,7 +189,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
     private fun selectAll(listView: MaximizedListView) {
         val adapter = listView.adapter as ArrayAdapter<CollectionInfo>
-        for (i in 0 until calendars.count) {
+        for (i in 0 until listView.count) {
             val view = getViewByPosition(i, listView)
             val info = adapter.getItem(i)
             val nowChecked = true
@@ -198,7 +198,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
         }
     }
 
-    private fun launchSync(dav: AccountInfo.ServiceInfo): ComponentName? {
+    private fun launchRefresh(dav: AccountInfo.ServiceInfo): ComponentName? {
         val intent = Intent(this, DavService::class.java)
         intent.action = DavService.ACTION_REFRESH_COLLECTIONS
         intent.putExtra(DavService.EXTRA_DAV_SERVICE_ID, dav.id)
