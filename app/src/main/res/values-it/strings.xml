@@ -13,7 +13,7 @@
   <string name="notification_channel_sync_errors">Errori di sincronizzazione</string>
   <string name="notification_channel_sync_io_errors">Errori di Rete e di I/O</string>
   <string name="notification_channel_sync_status">Messaggi di stato</string>
-  <string name="an_error_has_occurred">C\'è stato un errore</string>
+  <string name="an_error_has_occurred">Si è verificato un errore</string>
   <!--startup dialogs-->
   <string name="startup_battery_optimization_disable">Disabilita per Infomaniak Sync</string>
   <string name="startup_dont_show_again">Non mostrare più</string>
@@ -80,7 +80,7 @@
   <string name="app_settings_show_debug_info">Mostra informazioni di debug</string>
   <string name="app_settings_show_debug_info_details">Mostra e condividi i dettagli del programma e della configurazione</string>
   <!--AccountActivity-->
-  <string name="account_sync_all_calendars">Sincronizza tutti i calendari</string>
+  <string name="account_sync_all_calendars">Sincronizzare tutti i calendari</string>
   <string name="account_synchronize_now">Sincronizza adesso</string>
   <string name="account_synchronizing_now">Sincronizzazione in corso</string>
   <string name="account_settings">Impostazioni account</string>
@@ -96,7 +96,7 @@
   <string name="account_read_only">sola lettura</string>
   <string name="account_calendar">calendario</string>
   <string name="account_task_list">elenco attività</string>
-  <string name="account_sync_all_books">Sincronizza tutte le indirizzari</string>
+  <string name="account_sync_all_books">Sincronizzare tutte le rubriche</string>
   <string name="account_refresh_address_book_list">Aggiorna elenco degli indirizzari</string>
   <string name="account_create_new_address_book">Crea un nuovo indirizzario</string>
   <string name="account_refresh_calendar_list">Aggiorna lista calendari</string>

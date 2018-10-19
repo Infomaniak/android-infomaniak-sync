@@ -189,7 +189,7 @@ class LoginActivity : AppCompatActivity() {
                             .post(formBuilder.build())
                             .build()
 
-                    publishProgress("Génération d'un mots de passe d'application ...")
+                    publishProgress("Génération d'un mot de passe d'application ...")
 
                     response = okHttpClient.newCall(request).execute()
 

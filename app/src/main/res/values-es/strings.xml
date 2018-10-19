@@ -14,6 +14,7 @@
   <string name="notification_channel_sync_errors">Errores de sincronización</string>
   <string name="notification_channel_sync_io_errors">Errores de Red y E/S</string>
   <string name="notification_channel_sync_status">Mensajes de estado</string>
+  <string name="an_error_has_occurred">Se produjo un error</string>
   <!--startup dialogs-->
   <string name="startup_battery_optimization_disable">Apagar para Infomaniak Sync</string>
   <string name="startup_dont_show_again">No mostrar de nuevo</string>
@@ -81,6 +82,7 @@
   <string name="app_settings_show_debug_info">Mostrar la información de depuración</string>
   <string name="app_settings_show_debug_info_details">Ver/compartir detalles de software y configuración</string>
   <!--AccountActivity-->
+  <string name="account_sync_all_calendars">Sincronizar todos los calendarios</string>
   <string name="account_synchronize_now">Sincronizar ahora</string>
   <string name="account_synchronizing_now">Sincronizando…</string>
   <string name="account_settings">Ajustes de cuenta</string>
@@ -97,6 +99,7 @@
   <string name="account_read_only">solo lectura</string>
   <string name="account_calendar">calendario</string>
   <string name="account_task_list">lista de tareas</string>
+  <string name="account_sync_all_books">Sincronizar todas las libretas de direcciones</string>
   <string name="account_refresh_address_book_list">Refrescar contactos</string>
   <string name="account_create_new_address_book">Crear nueva agenda</string>
   <string name="account_refresh_calendar_list">Refrescar calendario</string>
