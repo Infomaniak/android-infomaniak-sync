@@ -42,16 +42,13 @@ class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
                     activity.startActivity(intent)
             }
             R.id.nav_website ->
-                activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)))
-            R.id.nav_manual ->
-                activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
-                        .buildUpon().appendEncodedPath("manual/").build()))
+                activity.startActivity(Intent(Intent.ACTION_VIEW,  Uri.parse("https://www.infomaniak.com")))
             R.id.nav_faq ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
                         .buildUpon().appendEncodedPath("faq/").build()))
-            R.id.nav_forums ->
+            R.id.nav_manual ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
-                        .buildUpon().appendEncodedPath("forums/").build()))
+                        .buildUpon().appendEncodedPath("manual/").build()))
             else ->
                 return false
         }

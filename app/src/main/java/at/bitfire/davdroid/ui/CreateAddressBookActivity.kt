@@ -28,7 +28,7 @@ import okhttp3.HttpUrl
 import org.apache.commons.lang3.StringUtils
 import java.util.*
 
-class CreateAddressBookActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<CreateAddressBookActivity.AccountInfo> {
+class CreateAddressBookActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<CreateAddressBookActivity.AccountInfo> {
 
     companion object {
         const val EXTRA_ACCOUNT = "account"
@@ -42,8 +42,10 @@ class CreateAddressBookActivity: AppCompatActivity(), LoaderManager.LoaderCallba
 
         account = intent.getParcelableExtra(EXTRA_ACCOUNT)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_create_address_book)
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         loaderManager.initLoader(0, intent.extras, this)
     }
@@ -102,7 +104,7 @@ class CreateAddressBookActivity: AppCompatActivity(), LoaderManager.LoaderCallba
     class AccountInfoLoader(
             context: Context,
             val account: Account
-    ): AsyncTaskLoader<AccountInfo>(context) {
+    ) : AsyncTaskLoader<AccountInfo>(context) {
 
         override fun onStartLoading() = forceLoad()
 

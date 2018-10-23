@@ -44,7 +44,7 @@
   <string name="navigation_drawer_news_updates">Notizie &amp; aggiornamenti</string>
   <string name="navigation_drawer_external_links">Link esterni</string>
   <string name="navigation_drawer_website">Sito web</string>
-  <string name="navigation_drawer_manual">Manuale</string>
+  <string name="navigation_drawer_manual">Manuale (Originale)</string>
   <string name="navigation_drawer_faq">Domande Frequenti</string>
   <string name="navigation_drawer_forums">Aiuto / Forum</string>
   <string name="navigation_drawer_donate">Donazione</string>
@@ -129,6 +129,10 @@
   <string name="login_configuration_detection">Rilevazione configurazione</string>
   <string name="login_querying_server">Attendere, invio richiesta al server…</string>
   <string name="login_no_caldav_carddav">Impossibile trovare servizi CalDAV o CardDAV.</string>
+  <string name="login_initialization">Inizializzazione …</string>
+  <string name="login_retrieving_account_information">Recupero delle informazioni del conto …</string>
+  <string name="login_generating_an_application_password">Generazione di una password dell\'applicazione …</string>
+  <string name="login_finalising">Finalizzazione …</string>
   <!--AccountSettingsActivity-->
   <string name="settings_title">Impostazioni: %s</string>
   <string name="settings_authentication">Autenticazione</string>

@@ -45,9 +45,11 @@ class CreateCalendarActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks
 
         account = intent.extras.getParcelable(EXTRA_ACCOUNT)
 
+        setContentView(R.layout.activity_create_calendar)
+        setSupportActionBar(toolbar)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        setContentView(R.layout.activity_create_calendar)
         color.setOnClickListener { _ ->
             AmbilWarnaDialog(this, (color.background as ColorDrawable).color, true, object: AmbilWarnaDialog.OnAmbilWarnaListener {
                 override fun onCancel(dialog: AmbilWarnaDialog) {}

@@ -40,12 +40,17 @@
   <string name="navigation_drawer_news_updates">Actualités &amp; mises à jour</string>
   <string name="navigation_drawer_external_links">Liens externes</string>
   <string name="navigation_drawer_website">Site Web</string>
+  <string name="navigation_drawer_manual">Manuel (Original)</string>
   <string name="navigation_drawer_faq">Foire aux questions</string>
   <string name="navigation_drawer_forums">Aide/Forum</string>
   <string name="navigation_drawer_donate">Faire un don</string>
   <string name="account_list_empty">Bienvenue sur Infomaniak Sync !\n\nVous pouvez maintenant ajouter un compte Infomaniak.</string>
   <string name="accounts_global_sync_disabled">La synchronisation automatique globale est désactivée</string>
   <string name="accounts_global_sync_enable">Activer</string>
+  <string name="login_initialization">Initialisation …</string>
+  <string name="login_retrieving_account_information">Récupération des informations du compte …</string>
+  <string name="login_generating_an_application_password">Génération d\'un mot de passe d\'application …</string>
+  <string name="login_finalising">Finalisation …</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">La détection du service a échoué</string>
   <string name="dav_service_refresh_couldnt_refresh">Impossible d\'actualiser la liste de collection</string>
@@ -180,7 +185,7 @@
   <!--collection management-->
   <string name="create_addressbook">Créer un carnet d\'adresses</string>
   <string name="create_addressbook_display_name_hint">Mon carnet d\'adresses</string>
-  <string name="create_calendar">Créer une collection CalDAV</string>
+  <string name="create_calendar">Créer un calendrier</string>
   <string name="create_calendar_display_name_hint">Mon calendrier</string>
   <string name="create_calendar_time_zone">Fuseau horaire:</string>
   <string name="create_calendar_type">Type de collection:</string>

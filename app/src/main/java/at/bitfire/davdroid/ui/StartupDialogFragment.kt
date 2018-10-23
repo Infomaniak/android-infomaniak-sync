@@ -61,8 +61,8 @@ class StartupDialogFragment: DialogFragment(), LoaderManager.LoaderCallbacks<ISe
         fun getStartupDialogs(context: Context, settings: ISettings): List<StartupDialogFragment> {
             val dialogs = LinkedList<StartupDialogFragment>()
 
-            if (System.currentTimeMillis() > settings.getLong(SETTING_NEXT_DONATION_POPUP, 0))
-                dialogs += StartupDialogFragment.instantiate(Mode.OSE_DONATE)
+//            if (System.currentTimeMillis() > settings.getLong(SETTING_NEXT_DONATION_POPUP, 0))
+//                dialogs += StartupDialogFragment.instantiate(Mode.OSE_DONATE)
 
             // store-specific information
             /*if (BuildConfig.FLAVOR == App.FLAVOR_GOOGLE_PLAY) {

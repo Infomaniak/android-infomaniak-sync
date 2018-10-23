@@ -28,7 +28,9 @@ import okhttp3.Request
 import okhttp3.ResponseBody
 import java.lang.ref.WeakReference
 import java.net.URI
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.locks.ReentrantLock
 
 
 /**
@@ -55,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
          */
         const val EXTRA_PASSWORD = "password"
 
-//        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
+        //        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
 //        private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
         internal const val LOGIN_URL_AUTHORIZE = "https://login.beta.sharedbox.com/authorize"
         private const val LOGIN_URL_TOKEN = "https://login.beta.sharedbox.com/token"
@@ -70,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
         private const val URL_SYNC_INFOMANIAK = "https://sync.infomaniak.com"
 
         private var connection: GenerateInfomaniakAccountTask? = null
+        private val mutex = ReentrantLock(true)
     }
 
 
@@ -105,6 +108,18 @@ class LoginActivity : AppCompatActivity() {
 
     private fun backPressed() {
         super.onBackPressed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (mutex.isLocked) {
+            mutex.unlock()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mutex.tryLock()
     }
 
     public override fun onDestroy() {
@@ -163,7 +178,9 @@ class LoginActivity : AppCompatActivity() {
                         .get()
                         .build()
 
-                publishProgress("Récupération des informations du compte ...")
+                var loginActivity: LoginActivity = activityReference.get() ?: return null
+
+                publishProgress(loginActivity.getString(R.string.login_retrieving_account_information))
 
                 response = okHttpClient.newCall(request).execute()
 
@@ -179,9 +196,11 @@ class LoginActivity : AppCompatActivity() {
                     var jsonResult = JsonParser().parse(bodyResult)
                     val infomaniakUser = gson.fromJson(jsonResult.asJsonObject.getAsJsonObject("data"), InfomaniakUser::class.java)
 
+                    val formater = SimpleDateFormat("EEEE MMM d yyyy HH:mm", Locale.getDefault())
+
                     formBuilder = MultipartBody.Builder()
                             .setType(MultipartBody.FORM)
-                            .addFormDataPart("name", "InfomaniakSync_" + Date())
+                            .addFormDataPart("name", "Infomaniak Sync - " + formater.format(Date()))
 
                     request = Request.Builder()
                             .url(URL_API_PROFIL_PASSWORD)
@@ -189,7 +208,7 @@ class LoginActivity : AppCompatActivity() {
                             .post(formBuilder.build())
                             .build()
 
-                    publishProgress("Génération d'un mot de passe d'application ...")
+                    publishProgress(loginActivity.getString(R.string.login_generating_an_application_password))
 
                     response = okHttpClient.newCall(request).execute()
 
@@ -204,18 +223,16 @@ class LoginActivity : AppCompatActivity() {
                         jsonResult = JsonParser().parse(bodyResult)
                         val infomaniakPassword = gson.fromJson(jsonResult.asJsonObject.getAsJsonObject("data"), InfomaniakPassword::class.java)
 
-                        val loginActivity = activityReference.get()
-                        if (loginActivity != null) {
+                        publishProgress(loginActivity.getText(R.string.login_querying_server))
 
-                            publishProgress(loginActivity.getText(R.string.login_querying_server))
+                        loginActivity = activityReference.get()!!
+                        val loginInfo = LoginInfo(URI(URL_SYNC_INFOMANIAK), infomaniakUser.login, infomaniakPassword.password, null, infomaniakUser.display_name)
+                        val configuration: DavResourceFinder.Configuration = DavResourceFinder(loginActivity.baseContext, loginInfo).findInitialConfiguration()
 
-                            val loginInfo = LoginInfo(URI(URL_SYNC_INFOMANIAK), infomaniakUser.login, infomaniakPassword.password, null, infomaniakUser.display_name)
-                            val configuration: DavResourceFinder.Configuration = DavResourceFinder(loginActivity.baseContext, loginInfo).findInitialConfiguration()
+                        publishProgress(loginActivity.getString(R.string.login_finalising))
 
-                            publishProgress("Finalisation ...")
-
-                            return configuration
-                        }
+                        mutex.lock()
+                        return configuration
                     }
                 }
                 return null
