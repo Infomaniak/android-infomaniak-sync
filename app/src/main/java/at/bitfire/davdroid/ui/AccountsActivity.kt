@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.support.customtabs.CustomTabsClient
 import android.support.customtabs.CustomTabsIntent
 import android.support.customtabs.CustomTabsServiceConnection
+import android.support.customtabs.CustomTabsSession
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.LoaderManager
@@ -23,13 +24,15 @@ import android.support.v4.content.Loader
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.MenuItem
+import android.widget.Toast
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.davdroid.ui.setup.LoginActivity
-import com.facebook.stetho.Stetho
 import kotlinx.android.synthetic.main.accounts_content.*
 import kotlinx.android.synthetic.main.activity_accounts.*
+
 
 class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<AccountsActivity.Settings>, SyncStatusObserver {
 
@@ -37,13 +40,15 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val accountsDrawerHandler = DefaultAccountsDrawerHandler()
 
         private const val fragTagStartup = "startup"
+        private const val CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome"
     }
 
     private var syncStatusSnackbar: Snackbar? = null
     private var syncStatusObserver: Any? = null
 
-    private var connection: CustomTabsServiceConnection? = null
-
+    private var mClient: CustomTabsClient? = null
+    private var mCustomTabsSession: CustomTabsSession? = null
+    private var mCustomTabsServiceConnection: CustomTabsServiceConnection? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,27 +56,39 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         setSupportActionBar(toolbar)
 
-        Stetho.initializeWithDefaults(this)
+        val data = intent.data
+        if (data != null && LoginActivity.REDIRECT_URI_ROOT == data.scheme) {
+            val code = data.getQueryParameter("code")
+            val error = data.getQueryParameter("error")
+            if (!TextUtils.isEmpty(code)) {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("code", code)
+                startActivity(intent)
+            }
+            if (!TextUtils.isEmpty(error)) {
+                Toast.makeText(this, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
+            }
+        }
+
+        mCustomTabsServiceConnection = object : CustomTabsServiceConnection() {
+            override fun onCustomTabsServiceConnected(componentName: ComponentName, customTabsClient: CustomTabsClient) {
+                mClient = customTabsClient
+                mClient!!.warmup(0L)
+                mCustomTabsSession = mClient!!.newSession(null)
+            }
+
+            override fun onServiceDisconnected(name: ComponentName) {
+                mClient = null
+            }
+        }
+        CustomTabsClient.bindCustomTabsService(this@AccountsActivity, CUSTOM_TAB_PACKAGE_NAME, mCustomTabsServiceConnection)
+        val customTabsIntent = CustomTabsIntent.Builder(mCustomTabsSession)
+                .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                .setShowTitle(true)
+                .build()
 
         fab.setOnClickListener {
-            connection = object : CustomTabsServiceConnection() {
-                override fun onCustomTabsServiceConnected(componentName: ComponentName, client: CustomTabsClient) {
-                    val customTabsIntentBulder = CustomTabsIntent.Builder()
-                    customTabsIntentBulder.setToolbarColor(ContextCompat.getColor(this@AccountsActivity, R.color.colorPrimary))
-                    val customTabsIntent = customTabsIntentBulder.build()
-                    client.warmup(0L) // This prevents backgrounding after redirection
-                    customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
-                    customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    customTabsIntent.launchUrl(this@AccountsActivity, Uri.parse("${LoginActivity.LOGIN_URL_AUTHORIZE}?client_id=${LoginActivity.CLIENT_ID}&response_type=code&redirect_uri=${LoginActivity.REDIRECT_URI_ROOT}:/oauth2redirect"))
-                }
-
-                override fun onServiceDisconnected(name: ComponentName) {
-
-                }
-            }
-            CustomTabsClient.bindCustomTabsService(this, "com.android.chrome", connection)//mention package name which can handle the CCT their many browser present.
-
-            //startActivity(Intent(this, LoginActivity::class.java))
+            customTabsIntent.launchUrl(this@AccountsActivity, Uri.parse("${LoginActivity.LOGIN_URL_AUTHORIZE}?client_id=${LoginActivity.CLIENT_ID}&response_type=code&redirect_uri=${LoginActivity.REDIRECT_URI_ROOT}:/oauth2redirect"))
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -133,8 +150,12 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     public override fun onDestroy() {
         super.onDestroy()
 
-        if (connection != null) {
-            unbindService(connection)
+        closeCustomTabs()
+    }
+
+    fun closeCustomTabs() {
+        if (mCustomTabsServiceConnection != null) {
+            unbindService(mCustomTabsServiceConnection)
         }
     }
 

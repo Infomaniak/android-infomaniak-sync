@@ -36,7 +36,6 @@ import at.bitfire.davdroid.ui.SettingsLoader
 import at.bitfire.davdroid.ui.setup.AccountDetailsFragment.CreateSettings
 import at.bitfire.ical4android.TaskProvider
 import at.bitfire.vcard4android.GroupMethod
-import kotlinx.android.synthetic.main.login_account_details.*
 import kotlinx.android.synthetic.main.login_account_details.view.*
 import java.lang.ref.WeakReference
 import java.util.logging.Level
@@ -220,9 +219,8 @@ class AccountDetailsFragment: Fragment(), LoaderManager.LoaderCallbacks<CreateSe
                     activity.finish()
                 } else {
                     Snackbar.make(activity.findViewById(android.R.id.content), R.string.login_account_not_created, Snackbar.LENGTH_LONG).show()
-
-                    activity.create_account.visibility = View.VISIBLE
-                    activity.create_account_progress.visibility = View.GONE
+                    activity.setResult(Activity.RESULT_CANCELED)
+                    activity.finish()
                 }
             }
         }

@@ -15,7 +15,6 @@ import android.text.TextUtils
 import android.widget.TextView
 import android.widget.Toast
 import at.bitfire.davdroid.R
-import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.infomaniak.sync.ApiToken
@@ -80,22 +79,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.infomaniak_loading_view)
 
-        val data = intent.data
-        if (data != null) {
-            if (REDIRECT_URI_ROOT == data.scheme) {
-                val code = data.getQueryParameter("code")
-                val error = data.getQueryParameter("error")
-                if (!TextUtils.isEmpty(code)) {
-                    connection = GenerateInfomaniakAccountTask(this, code)
-                    connection!!.execute()
-                }
-                if (!TextUtils.isEmpty(error)) {
-                    if (error == "access_denied") {
-
-                    }
-                    Toast.makeText(this, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
-                    backPressed()
-                }
+        if (intent != null) {
+            val code = intent.getStringExtra("code")
+            if (TextUtils.isEmpty(code)) {
+                Toast.makeText(this, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
+                backPressed()
+            } else {
+                connection = GenerateInfomaniakAccountTask(this, code)
+                connection!!.execute()
             }
         } else {
             Toast.makeText(this, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
@@ -112,8 +103,11 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (mutex.isLocked) {
-            mutex.unlock()
+        try {
+            if (mutex.isLocked) {
+                mutex.unlock()
+            }
+        } catch (e: IllegalMonitorStateException) {
         }
     }
 
@@ -125,7 +119,9 @@ class LoginActivity : AppCompatActivity() {
     public override fun onDestroy() {
         super.onDestroy()
 
-        connection!!.cancel(true)
+        if (connection != null) {
+            connection!!.cancel(true)
+        }
     }
 
     class GenerateInfomaniakAccountTask internal constructor(context: LoginActivity, private val code: String) : AsyncTask<String, CharSequence, DavResourceFinder.Configuration>() {
@@ -136,7 +132,6 @@ class LoginActivity : AppCompatActivity() {
             try {
 
                 val okHttpClient = OkHttpClient.Builder()
-                        .addNetworkInterceptor(StethoInterceptor())
                         .build()
 
                 val gson = Gson()

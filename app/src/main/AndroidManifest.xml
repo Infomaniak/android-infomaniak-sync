@@ -67,6 +67,14 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="com.infomaniak.sync" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -85,17 +93,6 @@
             android:label="@string/login_title"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".ui.AccountsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="com.infomaniak.sync" />
-            </intent-filter>
         </activity>
 
         <activity
