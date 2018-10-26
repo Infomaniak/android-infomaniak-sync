@@ -64,13 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"/>
 
-        <TextView
-            android:id="@+id/pixels"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:textAlignment="center" />
-
         <FrameLayout
             android:id="@+id/license_fragment"
             android:layout_width="match_parent"

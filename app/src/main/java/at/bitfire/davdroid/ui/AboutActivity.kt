@@ -33,15 +33,6 @@ import java.text.SimpleDateFormat
 
 class AboutActivity: AppCompatActivity() {
 
-    companion object {
-
-        const val pixelsHtml = "<font color=\"#fff433\">■</font>" +
-                "<font color=\"#ffffff\">■</font>" +
-                "<font color=\"#9b59d0\">■</font>" +
-                "<font color=\"#000000\">■</font>"
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -99,8 +90,6 @@ class AboutActivity: AppCompatActivity() {
             app_name.text = getString(R.string.app_name)
             app_version.text = getString(R.string.about_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
             build_time.text = getString(R.string.about_build_date, SimpleDateFormat.getDateInstance().format(BuildConfig.buildTime))
-
-            pixels.text = Html.fromHtml(pixelsHtml)
 
             if (true /* open-source version */) {
                 warranty.text = Html.fromHtml(getString(R.string.about_license_info_no_warranty))

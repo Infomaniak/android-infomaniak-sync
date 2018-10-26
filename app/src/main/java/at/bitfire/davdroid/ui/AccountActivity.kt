@@ -91,10 +91,6 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
         setSupportActionBar(toolbar_account)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        // CardDAV toolbar
-        carddav_menu.inflateMenu(R.menu.carddav_actions)
-        carddav_menu.setOnMenuItemClickListener(this)
-
         // CalDAV toolbar
         caldav_menu.inflateMenu(R.menu.caldav_actions)
         caldav_menu.setOnMenuItemClickListener(this)
@@ -155,20 +151,6 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.sync_all_books ->
-                address_books?.let { address_books ->
-                    selectAll(address_books)
-                    requestSync()
-                }
-            R.id.refresh_address_books ->
-                accountInfo?.carddav?.let { carddav ->
-                    launchRefresh(carddav)
-                }
-            R.id.create_address_book -> {
-                val intent = Intent(this, CreateAddressBookActivity::class.java)
-                intent.putExtra(CreateAddressBookActivity.EXTRA_ACCOUNT, account)
-                startActivity(intent)
-            }
             R.id.sync_all_calendars ->
                 calendars?.let { calendars ->
                     selectAll(calendars)
@@ -343,8 +325,6 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
             address_books.isEnabled = !carddav.refreshing
             address_books.alpha = if (carddav.refreshing) 0.5f else 1f
-
-            carddav_menu.menu.findItem(R.id.create_address_book).isEnabled = carddav.hasHomeSets
 
             val adapter = AddressBookAdapter(this)
             adapter.addAll(carddav.collections)
@@ -658,12 +638,25 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
             val oldAccount: Account = arguments!!.getParcelable(ARG_ACCOUNT)
 
             val editText = EditText(activity)
+            val linearLayout = LinearLayout(activity)
+
+            linearLayout.orientation = LinearLayout.VERTICAL
+            val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+            )
+            params.setMargins(50, 0, 50, 0)
+            linearLayout.layoutParams = params
+
             editText.setText(oldAccount.name)
+            editText.layoutParams = params
+
+            linearLayout.addView(editText)
 
             return AlertDialog.Builder(activity!!)
                     .setTitle(R.string.account_rename)
                     .setMessage(R.string.account_rename_new_name)
-                    .setView(editText)
+                    .setView(linearLayout)
                     .setPositiveButton(R.string.account_rename_rename, DialogInterface.OnClickListener { _, _ ->
                         val newName = editText.text.toString()
 

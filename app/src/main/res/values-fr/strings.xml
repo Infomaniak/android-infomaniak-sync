@@ -97,9 +97,9 @@
   <string name="account_calendar">calendrier</string>
   <string name="account_task_list">liste de tâche</string>
   <string name="account_sync_all_books">Synchroniser tous les carnets d\'adresses</string>
-  <string name="account_refresh_address_book_list">Actualiser le carnet d\'adresses</string>
+  <string name="account_refresh_address_book_list">Actualiser la liste de carnet d\'adresses</string>
   <string name="account_create_new_address_book">Créer un nouveau carnet d\'adresses</string>
-  <string name="account_refresh_calendar_list">Actualiser le calendrier</string>
+  <string name="account_refresh_calendar_list">Actualiser la liste de calendrier</string>
   <string name="account_create_new_calendar">Créer un nouveau calendrier</string>
   <string name="account_no_webcal_handler_found">Aucune application compatible WebCal</string>
   <string name="account_install_icsdroid">Installer ICSdroid</string>

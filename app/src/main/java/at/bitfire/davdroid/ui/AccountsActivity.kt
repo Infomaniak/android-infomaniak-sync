@@ -26,7 +26,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
-import android.widget.Toast
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.davdroid.ui.setup.LoginActivity
@@ -65,9 +64,6 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.putExtra("code", code)
                 startActivity(intent)
-            }
-            if (!TextUtils.isEmpty(error)) {
-                Toast.makeText(this, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
             }
         }
 
