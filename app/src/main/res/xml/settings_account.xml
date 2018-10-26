@@ -9,28 +9,26 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/settings_authentication">
+    <EditTextPreference
+        android:dialogTitle="@string/settings_enter_username"
+        android:enabled="false"
+        android:key="username"
+        android:persistent="false"
+        android:title="@string/settings_username" />
 
-        <EditTextPreference
-            android:key="username"
-            android:title="@string/settings_username"
-            android:persistent="false"
-            android:dialogTitle="@string/settings_enter_username"/>
+    <EditTextPreference
+        android:dialogTitle="@string/settings_enter_password"
+        android:enabled="false"
+        android:inputType="textPassword"
+        android:key="password"
+        android:persistent="false"
+        android:summary="@string/settings_password_summary"
+        android:title="@string/settings_password" />
 
-        <EditTextPreference
-            android:key="password"
-            android:title="@string/settings_password"
-            android:persistent="false"
-            android:inputType="textPassword"
-            android:summary="@string/settings_password_summary"
-            android:dialogTitle="@string/settings_enter_password"/>
-
-        <Preference
-            android:key="certificate_alias"
-            android:title="@string/settings_certificate_alias"
-            android:persistent="false"/>
-
-    </PreferenceCategory>
+    <Preference
+        android:key="certificate_alias"
+        android:persistent="false"
+        android:title="@string/settings_certificate_alias" />
 
     <PreferenceCategory
         android:key="sync"

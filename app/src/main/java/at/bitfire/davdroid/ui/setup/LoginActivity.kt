@@ -12,7 +12,6 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
-import android.widget.TextView
 import android.widget.Toast
 import at.bitfire.davdroid.R
 import com.google.gson.Gson
@@ -252,13 +251,8 @@ class LoginActivity : AppCompatActivity() {
                 } else {
 
                     if (configuration.calDAV == null && configuration.cardDAV == null) {
-                        val tv = TextView(activity)
-                        tv.text = ""
-                        activity.setContentView(tv)
-                        // no service found: show error message
-                        activity.supportFragmentManager.beginTransaction()
-                                .add(DetectConfigurationFragment.NothingDetectedFragment.newInstance(configuration.logs), null)
-                                .commit()
+                        Toast.makeText(activity, activity.getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
+                        activity.backPressed()
                     } else {
                         // service found: continue
                         activity.supportFragmentManager.beginTransaction()
@@ -267,6 +261,13 @@ class LoginActivity : AppCompatActivity() {
                                 .commit()
                     }
                 }
+            }
+        }
+
+        override fun onCancelled() {
+            activityReference.get()?.let { activity ->
+                Toast.makeText(activity, activity.getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
+                activity.backPressed()
             }
         }
     }

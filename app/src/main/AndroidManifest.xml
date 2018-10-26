@@ -62,6 +62,7 @@
         <activity
             android:name=".ui.AccountsActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -91,6 +92,7 @@
         <activity
             android:name=".ui.setup.LoginActivity"
             android:label="@string/login_title"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".ui.AccountsActivity">
         </activity>

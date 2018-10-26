@@ -58,6 +58,7 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         val data = intent.data
         if (data != null && LoginActivity.REDIRECT_URI_ROOT == data.scheme) {
+            intent.data = null
             val code = data.getQueryParameter("code")
             val error = data.getQueryParameter("error")
             if (!TextUtils.isEmpty(code)) {

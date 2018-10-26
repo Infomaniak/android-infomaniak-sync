@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
   <string name="app_name">Infomaniak Sync</string>
-  <string name="account_title_address_book">Carnet d\'adresses DAVdroid</string>
+  <string name="account_title_address_book">Carnet d\'adresses Infomaniak Sync</string>
   <string name="address_books_authority_title">Carnets d\'adresses</string>
   <string name="help">Aide</string>
   <string name="manage_accounts">Gestion des comptes</string>
