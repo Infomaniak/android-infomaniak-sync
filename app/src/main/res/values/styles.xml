@@ -7,28 +7,12 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- colors -->
-
-    <color name="grey200">#eeeeee</color>
-    <color name="grey500">#9E9E9E</color>
-    <color name="grey700">#616161</color>
-
-    <color name="primaryColor">#FF0098FF</color>
-    <color name="primaryLightColor">#aee571</color>
-    <color name="primaryDarkColor">#FF0079CC</color>
-    <color name="secondaryColor">#ff6d00</color>
-    <color name="secondaryLightColor">#ff9e40</color>
-    <color name="secondaryDarkColor">#c43c00</color>
-    <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">@color/grey500</color>
-
-
     <!-- app theme -->
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <item name="actionBarStyle">@style/MyActionBar</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:colorBackground">@color/grey_background</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">

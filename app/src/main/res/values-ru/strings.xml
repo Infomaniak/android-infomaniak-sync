@@ -31,7 +31,7 @@
   <string name="startup_more_info">Дополнительная информация</string>
   <string name="startup_opentasks_not_installed">OpenTasks не установлен</string>
   <string name="startup_opentasks_not_installed_message">Для синхронизации задач требуется бесплатное приложение OpenTasks. (Не требуется для контактов/событий.)</string>
-  <string name="startup_opentasks_reinstall_davdroid">После установки OpenTasks необходимо ПЕРЕУСТАНОВИТЬ DAVdroid и повторно добавить ваши аккаунты (проблема Android).</string>
+ <string name="startup_opentasks_reinstall_davdroid">После установки OpenTasks необходимо ПЕРЕУСТАНОВИТЬ Infomaniak Sync и повторно добавить ваши аккаунты (проблема Android).</string>
   <string name="startup_opentasks_not_installed_install">Установить OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Библиотеки</string>
@@ -195,8 +195,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">События старше указанного количества дней будут игнорироваться (может быть 0). Оставьте пустым для синхронизации всех событий.</string>
   <string name="settings_manage_calendar_colors">Управление цветами календаря</string>
-  <string name="settings_manage_calendar_colors_on">Цвета календаря устанавливаются DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">Цвета календаря не устанавливаются DAVdroid</string>
+  <string name="settings_manage_calendar_colors_on">Цвета календаря устанавливаются Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">Цвета календаря не устанавливаются Infomaniak Sync</string>
   <string name="settings_event_colors">Поддержка цвета событий</string>
   <string name="settings_event_colors_on">Синхронизация цветов событий</string>
   <string name="settings_event_colors_off">Не синхронизировать цвета событий</string>
@@ -251,6 +251,6 @@
   <string name="sync_error_retry">Повторить</string>
   <string name="sync_error_view_item">Просмотр элемента</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: безопасность подключения</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid обнаружил неизвестный сертификат. Вы хотите доверять ему?</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: безопасность подключения</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync обнаружил неизвестный сертификат. Вы хотите доверять ему?</string>
 </resources>

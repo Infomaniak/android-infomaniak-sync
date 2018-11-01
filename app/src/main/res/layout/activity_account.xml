@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -69,7 +69,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/toolbar_theme"
-                        app:navigationIcon="@drawable/ic_people_grey"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetStart="0dp"
+                        app:contentInsetStartWithNavigation="0dp"
+                        app:navigationIcon="@drawable/ic_baseline_contacts"
                         app:title="@string/account_carddav"
                         tools:ignore="UnusedAttribute" />
 
@@ -96,7 +99,7 @@
                 android:id="@+id/caldav"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -110,6 +113,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/toolbar_theme"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetStart="0dp"
+                        app:contentInsetStartWithNavigation="0dp"
                         app:navigationIcon="@drawable/ic_event_grey"
                         app:title="@string/account_caldav"
                         tools:ignore="UnusedAttribute" />
@@ -138,7 +144,7 @@
                 android:id="@+id/webcal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout

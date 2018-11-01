@@ -16,7 +16,7 @@
   <string name="startup_google_play_accounts_removed">Informace o chybě DRM Obchodu Play</string>
   <string name="startup_google_play_accounts_removed_message">Za určitých podmínek může dojít po restartu nebo aktualizaci aplikace DAVdroid k vymazání účtů kvůli chybě DRM Obchodu Play. Pokud jste postiženi touto chybou (ale pouze v tomto případě), nainstalujte prosím z Obchodu Play aplikaci \"DAVdroid JB Workaround\".</string>
   <string name="startup_opentasks_not_installed">OpenTasks není nainstalován</string>
-  <string name="startup_opentasks_reinstall_davdroid">Po instalaci OpenTasks musíte PŘEINSTALOVAT DAVdroid a přidat znovu své účty (Android chyba).</string>
+ <string name="startup_opentasks_reinstall_davdroid">Po instalaci OpenTasks musíte PŘEINSTALOVAT Infomaniak Sync a přidat znovu své účty (Android chyba).</string>
   <string name="startup_opentasks_not_installed_install">Nainstalovat OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Tento program je distribuován BEZ JAKÉKOLIV ZÁRUKY. Je to volně dostupný software a lze jej za určitých podmínek dále distribuovat.</string>
@@ -141,8 +141,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Události z minulosti starší než vyznačený počet dnů budou ignorovány (lze zadat 0). Ponechte prázdné pro synchronizaci všech událostí.</string>
   <string name="settings_manage_calendar_colors">Spravovat barvy kalendářů</string>
-  <string name="settings_manage_calendar_colors_on">Barvy kalendářů spravuje DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">Barvy kalendářů nespravuje DAVdroid</string>
+  <string name="settings_manage_calendar_colors_on">Barvy kalendářů spravuje Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">Barvy kalendářů nespravuje Infomaniak Sync</string>
   <!--collection management-->
   <string name="create_addressbook">Vytvořit adresář</string>
   <string name="create_addressbook_display_name_hint">Můj adresář</string>
@@ -174,6 +174,6 @@
   <string name="sync_error_permissions">Infomaniak Sync oprávnění</string>
   <string name="sync_error_permissions_text">Vyžadována dodatečná oprávnění</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: Zabezpečení připojení</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid nalezl neznámý certifikát. Chcete mu důvěřovat?</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: Zabezpečení připojení</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync nalezl neznámý certifikát. Chcete mu důvěřovat?</string>
 </resources>

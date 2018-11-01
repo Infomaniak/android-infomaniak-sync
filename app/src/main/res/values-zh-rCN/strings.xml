@@ -31,7 +31,7 @@
   <string name="startup_more_info">更多信息</string>
   <string name="startup_opentasks_not_installed">OpenTasks 未安装</string>
   <string name="startup_opentasks_not_installed_message">同步任务需安装 OpenTasks 免费应用。（如只需同步通讯录、事件，则不用安装）</string>
-  <string name="startup_opentasks_reinstall_davdroid">安装 OpenTasks 后，由于 Android 的限制，请重新安装 DAVdroid 并重新创建账户。</string>
+ <string name="startup_opentasks_reinstall_davdroid">安装 OpenTasks 后，由于 Android 的限制，请重新安装 Infomaniak Sync 并重新创建账户。</string>
   <string name="startup_opentasks_not_installed_install">安装 OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">程序库</string>
@@ -192,8 +192,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">超过这个数字的天数的旧日程将会被忽略（可以为 0）。留空则同步所有日程。</string>
   <string name="settings_manage_calendar_colors">管理日历颜色</string>
-  <string name="settings_manage_calendar_colors_on">日历颜色由 DAVdroid 设置</string>
-  <string name="settings_manage_calendar_colors_off">日历颜色不由 DAVdroid 设置</string>
+  <string name="settings_manage_calendar_colors_on">日历颜色由 Infomaniak Sync 设置</string>
+  <string name="settings_manage_calendar_colors_off">日历颜色不由 Infomaniak Sync 设置</string>
   <string name="settings_event_colors">事件日历颜色支持</string>
   <string name="settings_event_colors_on">同步日历事件颜色</string>
   <string name="settings_event_colors_off">不同步日历事件颜色</string>
@@ -245,6 +245,6 @@
   <string name="sync_error_retry">重试</string>
   <string name="sync_error_view_item">显示项目</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: 连接安全性</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid 遇到了未知证书。你是否要信任该证书？</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: 连接安全性</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync 遇到了未知证书。你是否要信任该证书？</string>
 </resources>

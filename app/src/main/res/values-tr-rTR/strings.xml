@@ -15,7 +15,7 @@
   <string name="startup_google_play_accounts_removed">Play Store DRM hata bilgisi</string>
   <string name="startup_google_play_accounts_removed_message">Bazı durumlarda Play Store DRM\'i, cihazı yeniden başlatınca veya DAVdroid\'i yükseltince DAVdroid hesaplarının yokolmasına sebep olabiliyor. Bu sorundan etkileniyorsan (ve sadece bu durumda), lütfen Play Store\'daki \"DAVdroid JB Workaround\" uygulamasını kur.</string>
   <string name="startup_opentasks_not_installed">OpenTasks kurulu değil</string>
-  <string name="startup_opentasks_reinstall_davdroid">OpenTasks\'i kurduktan sonra, DAVdroid\'i YENİDEN KURMAN ve hesaplarını yeniden eklemen gerek. (Android hatası).</string>
+ <string name="startup_opentasks_reinstall_davdroid">OpenTasks\'i kurduktan sonra, Infomaniak Sync\'i YENİDEN KURMAN ve hesaplarını yeniden eklemen gerek. (Android hatası).</string>
   <string name="startup_opentasks_not_installed_install">OpenTasks kur</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Bu uygulama HİÇ BİR GARANTİ ile gelmemektedir. Bedava bir yazılımdır ve belli koşullar altında dağıtabilirsiniz.</string>
@@ -112,8 +112,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Bu sayıdan daha eski olan olaylar yok sayılacaktır (0 olabilir). Tüm olayları senkronize etmek için boş bırak.</string>
   <string name="settings_manage_calendar_colors">Takvim renklerini yönet</string>
-  <string name="settings_manage_calendar_colors_on">Takvim renkleri DAVdroid tarafından yönetilmekte</string>
-  <string name="settings_manage_calendar_colors_off">Takvim renkleri DAVdroid tarafından ayarlanmadı</string>
+  <string name="settings_manage_calendar_colors_on">Takvim renkleri Infomaniak Sync tarafından yönetilmekte</string>
+  <string name="settings_manage_calendar_colors_off">Takvim renkleri Infomaniak Sync tarafından ayarlanmadı</string>
   <!--collection management-->
   <string name="create_addressbook">Rehber yarat</string>
   <string name="create_addressbook_display_name_hint">Benim Rehberim</string>

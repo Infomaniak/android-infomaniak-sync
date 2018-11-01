@@ -19,7 +19,7 @@
   <string name="startup_google_play_accounts_removed">Informacje o błędzie DRM Sklepu Play</string>
   <string name="startup_google_play_accounts_removed_message">Pod pewnymi warunkami, DRM Sklepu Play może powodować, że wszystkie konta DAVdroid mogą zostać usunięte po uruchomieniu lub po uaktualnieniu DAVdroid. Jeśli jesteś dotknięty tym problemem (i tylko wtedy) należy zainstalować \"DAVdroid JB Obejście\" ze Sklepu Play.</string>
   <string name="startup_opentasks_not_installed">OpenTasks nie jest zainstalowany</string>
-  <string name="startup_opentasks_reinstall_davdroid">Po zainstalowaniu OpenTasks konieczne jest PRZEINSTALOWANIE DAVdroid i ponowne dodanie twoich kont (błąd Androida).</string>
+ <string name="startup_opentasks_reinstall_davdroid">Po zainstalowaniu OpenTasks konieczne jest PRZEINSTALOWANIE Infomaniak Sync i ponowne dodanie twoich kont (błąd Androida).</string>
   <string name="startup_opentasks_not_installed_install">Zainstaluj OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Ten program jest ABSOLUTNIE BEZ GWARANCJI. To jest wolne oprogramowanie i mile widziane jest dalsze rozpowszechnianie go pod pewnymi warunkami.</string>
@@ -173,8 +173,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Wydarzenia, które są starsze niż podana liczba dni zostaną zignorowane (może być 0). Zostaw puste, aby synchronizować wszystkie wydarzenia.</string>
   <string name="settings_manage_calendar_colors">Zarządzaj kolorami kalendarza</string>
-  <string name="settings_manage_calendar_colors_on">Kolory kalendarza są zarządzane przez DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">Kolory kalendarze nie są ustawiane przez DAVdroid</string>
+  <string name="settings_manage_calendar_colors_on">Kolory kalendarza są zarządzane przez Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">Kolory kalendarze nie są ustawiane przez Infomaniak Sync</string>
   <string name="settings_event_colors">Obsługa kolorów wydarzeń</string>
   <string name="settings_event_colors_on">Synchronizuj kolory zdarzeń</string>
   <string name="settings_event_colors_off">Nie synchronizuj kolorów zdarzeń</string>
@@ -220,6 +220,6 @@
   <string name="sync_error_opentasks_too_old">OpenTask jest niekompatybilny</string>
   <string name="sync_error_opentasks_required_version">Wymagana wersja: %1$s (obecna %2$s)</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: Bezpieczeństwo połączenia</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid napotkał nieznany certyfikat. Czy chcesz go dodać?</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: Bezpieczeństwo połączenia</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync napotkał nieznany certyfikat. Czy chcesz go dodać?</string>
 </resources>

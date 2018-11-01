@@ -15,7 +15,12 @@
   <string name="notification_channel_sync_status">Messaggi di stato</string>
   <string name="an_error_has_occurred">Si è verificato un errore</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">Disabilita per Infomaniak Sync</string>
+  <string name="startup_autostart_permission">Sincronizzazione in background</string>
+  <string name="startup_autostart_permission_message">%s blocca per impostazione predefinita le sincronizzazioni in background per aumentare l\'autonomia della batteria. Autorizza la sincronizzazione automatica nelle impostazioni di Android.</string>
+  <string name="startup_battery_optimization_disable">Autorizzare l\'esecuzione in background</string>
+  <string name="startup_battery_optimization">Sincronizzazione in background</string>
+  <string name="startup_battery_optimization_message">Per sincronizzare automaticamente i tuoi contatti e agende in background, è necessario disattivare l\'opzione \"Ottimizzazione della batteria\" di Android per Infomaniak Sync.</string>
+  <string name="startup_not_now">In un secondo momento</string>
   <string name="startup_dont_show_again">Non mostrare più</string>
   <string name="startup_donate">Informazioni sull\'Open-Source</string>
   <string name="startup_donate_message">Siamo soddisfatti del tuo uso di DAVdroid, programma Open-Source (GPLv3). Poiché lo sviluppo è un\'iniziativa complessa che comporta molte ore di lavoro ti invitiamo a fare una donazione.</string>
@@ -26,9 +31,10 @@
   <string name="startup_more_info">Più informazioni</string>
   <string name="startup_opentasks_not_installed">OpenTasks non installata</string>
   <string name="startup_opentasks_not_installed_message">Per sincronizzare le attività è richiesta l\'app gratuita OpenTasks. (Non richiesta per contatti/eventi.)</string>
-  <string name="startup_opentasks_reinstall_davdroid">Dopo l\'installazione di OpenTasks è necessario INSTALLARE NUOVAMENTE DAVdroid e aggiungere ancora gli account (per un bug di Android).</string>
+  <string name="startup_opentasks_reinstall_davdroid">Dopo l\'installazione di OpenTasks è necessario INSTALLARE NUOVAMENTE Infomaniak Sync e aggiungere ancora gli account (per un bug di Android).</string>
   <string name="startup_opentasks_not_installed_install">Installa OpenTasks</string>
   <!--AboutActivity-->
+  <string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync consente di sincronizzare i contatti e i calendari del WorkSpace, la webmail dell\'host Infomaniak.<br>Questa applicazione è un fork della soluzione OpenSource <a href=\'https://www.davdroid.com/\'>DAVDroid</a>.]]></string>
   <string name="about_license_info_no_warranty">Il programma è distribuito SENZA ALCUNA GARANZIA. È software libero e può essere redistribuito sotto alcune condizioni.</string>
   <!--global settings-->
   <string name="logging_davdroid_file_logging">Invio del log di DAVdroid su file</string>
@@ -38,7 +44,7 @@
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Apri barra di navigazione</string>
   <string name="navigation_drawer_close">Chiudi barra di navigazione</string>
-  <string name="navigation_drawer_subtitle">CalDAV/CardDAV adattatore di sincronizzazione</string>
+  <string name="navigation_drawer_subtitle">Strumento di sincronizzazione CalDAV/CardDAV</string>
   <string name="navigation_drawer_about">Informazioni / Licenza</string>
   <string name="navigation_drawer_settings">Impostazioni</string>
   <string name="navigation_drawer_news_updates">Notizie &amp; aggiornamenti</string>
@@ -48,6 +54,8 @@
   <string name="navigation_drawer_faq">Domande Frequenti</string>
   <string name="navigation_drawer_forums">Aiuto / Forum</string>
   <string name="navigation_drawer_donate">Donazione</string>
+
+  <string name="account_welcome_add_first_account">Premi su + per aggiungere un account WorkSpace.</string>
   <string name="account_list_empty">Benvenuto a Infomaniak Sync!\n\nÈ ora possibile aggiungere account Infomaniak.</string>
   <string name="accounts_global_sync_disabled">La sincronizzazione automatica dell\'intero sistema è disabilitata</string>
   <string name="accounts_global_sync_enable">Attiva</string>
@@ -180,8 +188,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Eventi più vecchi di questo numero di giorni verranno ignorati(può anche essere 0). Lasciare in bianco per sincronizzare tutti gli eventi.</string>
   <string name="settings_manage_calendar_colors">Cambia il colore del calendario</string>
-  <string name="settings_manage_calendar_colors_on">I colori dei calendari sono gestiti da DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">I colori dei calendari non sono gestiti da DAVdroid</string>
+  <string name="settings_manage_calendar_colors_on">I colori dei calendari sono gestiti da Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">I colori dei calendari non sono gestiti da Infomaniak Sync</string>
   <string name="settings_event_colors">Supporto colore dell\'evento</string>
   <string name="settings_event_colors_on">Sincronizza colori eventi</string>
   <string name="settings_event_colors_off">Non sincronizza colori eventi</string>
@@ -221,6 +229,6 @@
   <string name="sync_error_opentasks_required_version">Versione richiesta: %1$s (attualmente %2$s)</string>
   <string name="sync_error_authentication_failed">Autenticazione fallita (controlla credenziali login)</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: sicurezza della connessione</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid ha trovato un certificato sconosciuto. Ritenerlo affidabile?</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: sicurezza della connessione</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync ha trovato un certificato sconosciuto. Ritenerlo affidabile?</string>
 </resources>

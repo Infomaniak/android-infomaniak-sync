@@ -26,7 +26,7 @@
   <string name="startup_more_info">Mere information</string>
   <string name="startup_opentasks_not_installed">OpenTasks ikke installeret</string>
   <string name="startup_opentasks_not_installed_message">Du er nødt til at have den gratis app OpenTasks for at kunne synkronisere opgaver. (Ikke påkrævet for kontakter/begivenheder.)</string>
-  <string name="startup_opentasks_reinstall_davdroid">Efter at have installeret OpenTasks, vil du være nødt til at GENINSTALLERE DAVdroid og dine konti igen (en fejl i Android).</string>
+ <string name="startup_opentasks_reinstall_davdroid">Efter at have installeret OpenTasks, vil du være nødt til at GENINSTALLERE Infomaniak Sync og dine konti igen (en fejl i Android).</string>
   <string name="startup_opentasks_not_installed_install">Installere OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Dette program leveres ABSOLUT UDEN GARANTI. Det er fri software, og du er velkommen til at videredistribuere det under visse betingelse.</string>
@@ -182,8 +182,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Begivenheder, som er mere end dette antal dage gamle vil blive ignoreret (kan også være 0). Hvis feltet ikke er udfyldt, vil alle begivenheder blive synkroniseret.</string>
   <string name="settings_manage_calendar_colors">Administrer farver for kalender</string>
-  <string name="settings_manage_calendar_colors_on">Kalenderfarver administreres af DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">Kalenderfarver sættes ikke fra DAVdroid</string>
+  <string name="settings_manage_calendar_colors_on">Kalenderfarver administreres af Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">Kalenderfarver sættes ikke fra Infomaniak Sync</string>
   <string name="settings_event_colors">Farver for begivenheder</string>
   <string name="settings_event_colors_on">Synkroniser farver for begivenheder</string>
   <string name="settings_event_colors_off">Synkroniser ikke farver for begivenheder</string>
@@ -233,6 +233,6 @@
   <string name="sync_error_retry">Gentag</string>
   <string name="sync_error_view_item">Vis element</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: Forbindelsessikkerhed</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid er stødt på et ukendt certifikat. Vil du stole på det? </string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: Forbindelsessikkerhed</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync er stødt på et ukendt certifikat. Vil du stole på det? </string>
 </resources>

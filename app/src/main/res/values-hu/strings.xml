@@ -193,8 +193,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Az ennyi napnál (lehet 0) régebbi események figyelmen kívül lesznek hagyva.  Hagyja üresen, ha minden múltbéli eseményt szinkronizálni akar.</string>
   <string name="settings_manage_calendar_colors">Naptárszínek kezelése</string>
-  <string name="settings_manage_calendar_colors_on">A naptárszíneket a DAVdroid kezeli</string>
-  <string name="settings_manage_calendar_colors_off">A naptárszíneket nem a DAVdroid kezeli</string>
+  <string name="settings_manage_calendar_colors_on">A naptárszíneket a Infomaniak Sync kezeli</string>
+  <string name="settings_manage_calendar_colors_off">A naptárszíneket nem a Infomaniak Sync kezeli</string>
   <string name="settings_event_colors">Eseményszínek támogatása</string>
   <string name="settings_event_colors_on">Eseményszínek szinkronlzálása</string>
   <string name="settings_event_colors_off">Az eseményszínek szinkronizálásának elhagyása</string>
@@ -247,6 +247,6 @@
   <string name="sync_error_retry">Újbóli próbálkozás</string>
   <string name="sync_error_view_item">Elem megtekintése</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: kapcsolatbiztonság</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: kapcsolatbiztonság</string>
   <string name="trust_certificate_unknown_certificate_found">Egy eddig ismeretlen tanúsítvány érkezett.  Megbízhatónak kívánja elfogadni?</string>
 </resources>

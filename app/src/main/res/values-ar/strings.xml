@@ -31,7 +31,7 @@
   <string name="startup_more_info">المزيد من المعلومات</string>
   <string name="startup_opentasks_not_installed">OpenTasks غير مثبت</string>
   <string name="startup_opentasks_not_installed_message">تطبيق OpenTasks المجاني مطلوب لمزامنة المهام.  (غير مطلوب لمزامنة جهات الاتصال أو الأحداث)</string>
-  <string name="startup_opentasks_reinstall_davdroid">بعد تثبيت OpenTasks، لابد لك من إعادة تثبيت DAVdroid وإضافة حساباتك مجدداً (علة في آندرويد).</string>
+ <string name="startup_opentasks_reinstall_davdroid">بعد تثبيت OpenTasks، لابد لك من إعادة تثبيت Infomaniak Sync وإضافة حساباتك مجدداً (علة في آندرويد).</string>
   <string name="startup_opentasks_not_installed_install">تثبيت OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">المكتبات</string>
@@ -197,8 +197,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">الأحداث التي جرت بعد عدد الأيام هذا في الماضي سيتم تجاهلها (يمكن أن يكون 0).  أتركه فارغاً لمزامنة جميع الأحداث.</string>
   <string name="settings_manage_calendar_colors">إدارة ألوان التقاويم</string>
-  <string name="settings_manage_calendar_colors_on">ألوان التقاويم يديرها DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">ألوان التقاويم لا يقوم DAVdroid بضبطها</string>
+  <string name="settings_manage_calendar_colors_on">ألوان التقاويم يديرها Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">ألوان التقاويم لا يقوم Infomaniak Sync بضبطها</string>
   <string name="settings_event_colors">دعم ألوان الأحداث</string>
   <string name="settings_event_colors_on">زامن ألوان الأحداث</string>
   <string name="settings_event_colors_off">لا تزامن ألوان الأحداث</string>
@@ -255,6 +255,6 @@
   <string name="sync_error_retry">إعادة المحاولة</string>
   <string name="sync_error_view_item">عرض العنصر</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: أمن الاتصال</string>
-  <string name="trust_certificate_unknown_certificate_found">عثر DAVdroid على شهادة غير معروفة. هل تريد الوثوق بها؟</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: أمن الاتصال</string>
+  <string name="trust_certificate_unknown_certificate_found">عثر Infomaniak Sync على شهادة غير معروفة. هل تريد الوثوق بها؟</string>
 </resources>

@@ -31,7 +31,7 @@
   <string name="startup_more_info">Mais informações</string>
   <string name="startup_opentasks_not_installed">O OpenTasks não está instalado</string>
   <string name="startup_opentasks_not_installed_message">Para sincronizar tarefas é necessário instalar o aplicativo livre OpenTasks. (Não é necessário para contatos/eventos)</string>
-  <string name="startup_opentasks_reinstall_davdroid">Depois da instalação do OpenTasks, torna-se necessário REINSTALAR o DAVdroid e adicionar suas contas novamente (erro do Android).</string>
+ <string name="startup_opentasks_reinstall_davdroid">Depois da instalação do OpenTasks, torna-se necessário REINSTALAR o Infomaniak Sync e adicionar suas contas novamente (erro do Android).</string>
   <string name="startup_opentasks_not_installed_install">Instalar o OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Bibliotecas</string>
@@ -193,8 +193,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Os eventos que ocorreram antes desse número de dias serão ignorados (pode ser 0). Deixe em branco para sincronizar todos os eventos.</string>
   <string name="settings_manage_calendar_colors">Gerenciar cores dos calendários</string>
-  <string name="settings_manage_calendar_colors_on">Cores dos calendários definidas pelo DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">Cores dos calendários não definidas pelo DAVdroid</string>
+  <string name="settings_manage_calendar_colors_on">Cores dos calendários definidas pelo Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">Cores dos calendários não definidas pelo Infomaniak Sync</string>
   <string name="settings_event_colors">Suporte para cor de evento</string>
   <string name="settings_event_colors_on">Sincronizar cores de eventos</string>
   <string name="settings_event_colors_off">Não sincronizar cores de eventos</string>
@@ -247,6 +247,6 @@
   <string name="sync_error_retry">Repetir</string>
   <string name="sync_error_view_item">Ver item</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: Segurança da conexão</string>
-  <string name="trust_certificate_unknown_certificate_found">O DAVdroid encontrou um certificado desconhecido. Deseja torná-lo confiável?</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: Segurança da conexão</string>
+  <string name="trust_certificate_unknown_certificate_found">O Infomaniak Sync encontrou um certificado desconhecido. Deseja torná-lo confiável?</string>
 </resources>

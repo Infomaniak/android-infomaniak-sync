@@ -26,7 +26,7 @@
   <string name="startup_more_info">Додаткова інформація</string>
   <string name="startup_opentasks_not_installed">OpenTasks не встановлено</string>
   <string name="startup_opentasks_not_installed_message">Для синхронізації завдань необхідно встановити додаток OpenTasks. (Не має потреби для контактів/подій.)</string>
-  <string name="startup_opentasks_reinstall_davdroid">Після встановлення OpenTasks, необхідно перевстановити DAVdroid та додати облікові записи знову (Вада системи Android).</string>
+ <string name="startup_opentasks_reinstall_davdroid">Після встановлення OpenTasks, необхідно перевстановити Infomaniak Sync та додати облікові записи знову (Вада системи Android).</string>
   <string name="startup_opentasks_not_installed_install">Встановити OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Цей програмний засіб постачається АБСОЛЮТНО БЕЗ БУДЬ-ЯКИХ ГАРАНТІЙ. Це вільне програмне забезпечення, і ви можете поширювати її, за деякими умовами.</string>
@@ -184,8 +184,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Події старші вказаного часу будуть проігноровані (може бути 0). Залиште порожнім, аби синхронізувати всі події.</string>
   <string name="settings_manage_calendar_colors">Керування кольорами календаря</string>
-  <string name="settings_manage_calendar_colors_on">Кольори календаря керуються DAVdroid</string>
-  <string name="settings_manage_calendar_colors_off">Кольори календаря не керуються DAVdroid</string>
+  <string name="settings_manage_calendar_colors_on">Кольори календаря керуються Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_off">Кольори календаря не керуються Infomaniak Sync</string>
   <string name="settings_event_colors">Підтримка кольорів подій</string>
   <string name="settings_event_colors_on">Синхронізувати кольори подій</string>
   <string name="settings_event_colors_off">Не синхронізувати кольори подій</string>
@@ -237,6 +237,6 @@
   <string name="sync_error_retry">Повторити</string>
   <string name="sync_error_view_item">Перегляд елементу</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: Безпека з\'єднання</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid зіткнувся з невідомим сертифікатом. Чи довіряти йому?</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: Безпека з\'єднання</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync зіткнувся з невідомим сертифікатом. Чи довіряти йому?</string>
 </resources>

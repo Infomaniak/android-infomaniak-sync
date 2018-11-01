@@ -55,10 +55,8 @@ class LoginActivity : AppCompatActivity() {
          */
         const val EXTRA_PASSWORD = "password"
 
-        //        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
-//        private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
-        internal const val LOGIN_URL_AUTHORIZE = "https://login.beta.sharedbox.com/authorize"
-        private const val LOGIN_URL_TOKEN = "https://login.beta.sharedbox.com/token"
+        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
+        private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
 
         internal const val REDIRECT_URI_ROOT = "com.infomaniak.sync"
 

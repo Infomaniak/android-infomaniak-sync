@@ -10,6 +10,7 @@ package at.bitfire.davdroid.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -20,6 +21,7 @@ import android.support.v4.content.Loader
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.text.Spanned
+import android.text.method.LinkMovementMethod
 import android.view.*
 import at.bitfire.davdroid.App
 import at.bitfire.davdroid.BuildConfig
@@ -29,9 +31,20 @@ import com.mikepenz.aboutlibraries.LibsBuilder
 import kotlinx.android.synthetic.main.about_davdroid.*
 import kotlinx.android.synthetic.main.activity_about.*
 import org.apache.commons.io.IOUtils
-import java.text.SimpleDateFormat
+
+
 
 class AboutActivity: AppCompatActivity() {
+
+    companion object {
+        fun fromHtml(html: String): Spanned {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                Html.fromHtml(html)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,12 +100,14 @@ class AboutActivity: AppCompatActivity() {
                 inflater.inflate(R.layout.about_davdroid, container, false)!!
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            app_name.text = getString(R.string.app_name)
             app_version.text = getString(R.string.about_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
-            build_time.text = getString(R.string.about_build_date, SimpleDateFormat.getDateInstance().format(BuildConfig.buildTime))
+
+            infomaniak_copyright.isClickable = true
+            infomaniak_copyright.movementMethod = LinkMovementMethod.getInstance()
+            infomaniak_copyright.text = fromHtml(getString(R.string.about_infomaniak_copyright))
 
             if (true /* open-source version */) {
-                warranty.text = Html.fromHtml(getString(R.string.about_license_info_no_warranty))
+                warranty.text = fromHtml(getString(R.string.about_license_info_no_warranty))
                 loaderManager.initLoader(0, null, this)
             }
         }
@@ -121,7 +136,7 @@ class AboutActivity: AppCompatActivity() {
 
         override fun loadInBackground(): Spanned =
                 context.resources.assets.open(fileName).use {
-                    Html.fromHtml(IOUtils.toString(it, Charsets.UTF_8))
+                    fromHtml(IOUtils.toString(it, Charsets.UTF_8))
                 }
 
     }

@@ -18,7 +18,7 @@
   <string name="startup_google_play_accounts_removed">Play商店數位權利管理錯誤訊息</string>
   <string name="startup_google_play_accounts_removed_message">在某些情況下，Play商店 的數位權利管理可能導致在重開機後或更新 DAVdroid 後，DAVdroid 全部帳號消失。如果您遇到此問題 (且只有在遇到此問題時)，請到 Play商店 安裝 \"DAVdroid JB Workaround\"。</string>
   <string name="startup_opentasks_not_installed">OpenTasks 未安裝</string>
-  <string name="startup_opentasks_reinstall_davdroid">安裝 OpenTasks 後，您必須｢重新安裝｣ DAVdroid 並且重新加入要同步的帳號 (這是 Android 的設計問題)</string>
+ <string name="startup_opentasks_reinstall_davdroid">安裝 OpenTasks 後，您必須｢重新安裝｣ Infomaniak Sync 並且重新加入要同步的帳號 (這是 Android 的設計問題)</string>
   <string name="startup_opentasks_not_installed_install">安裝 OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">我們｢完全不保證｣本程式無瑕疵。這是個自由軟體，歡迎您在符合公用授權條款的情況下任意散布它。</string>
@@ -141,8 +141,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">這個天數之前的項目將被忽略 (可設為0)。留白，則所有項目都會同步。</string>
   <string name="settings_manage_calendar_colors">管理行事曆的顏色</string>
-  <string name="settings_manage_calendar_colors_on">行事曆顏色由 DAVdroid 管理</string>
-  <string name="settings_manage_calendar_colors_off">行事曆顏色不由 DAVdroid 管理</string>
+  <string name="settings_manage_calendar_colors_on">行事曆顏色由 Infomaniak Sync 管理</string>
+  <string name="settings_manage_calendar_colors_off">行事曆顏色不由 Infomaniak Sync 管理</string>
   <!--collection management-->
   <string name="create_addressbook">建立通訊錄</string>
   <string name="create_addressbook_display_name_hint">我的通訊錄</string>
@@ -174,6 +174,6 @@
   <string name="sync_error_permissions">Infomaniak Sync 權限</string>
   <string name="sync_error_permissions_text">需要額外的權限</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVdroid: 連線安全性</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVdroid 發現未知的憑證，您要信任它嗎?</string>
+  <string name="certificate_notification_connection_security">Infomaniak Sync: 連線安全性</string>
+  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync 發現未知的憑證，您要信任它嗎?</string>
 </resources>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright © Ricki Hirner (bitfire web engineering).
   ~ All rights reserved. This program and the accompanying materials
   ~ are made available under the terms of the GNU Public License v3.0
@@ -7,23 +6,20 @@
   ~ http://www.gnu.org/licenses/gpl.html
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:descendantFocusability="blocksDescendants">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-            style="@style/account_list_card"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/cardview_background"
-            app:contentPadding="16dp"
-            app:cardElevation="5dp">
+        style="@style/account_list_card"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/cardview_background"
+        app:cardElevation="3dp"
+        app:contentPadding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +30,7 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                app:srcCompat="@drawable/ic_account_circle_grey"/>
+                app:srcCompat="@drawable/ic_account_circle_grey" />
 
             <TextView
                 android:id="@+id/account_name"
@@ -43,7 +39,7 @@
                 android:layout_marginTop="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/grey_text"
-                tools:text="Account Name"/>
+                tools:text="Account Name" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
