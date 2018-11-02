@@ -44,8 +44,7 @@ class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
             R.id.nav_website ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW,  Uri.parse("https://www.infomaniak.com")))
             R.id.nav_faq ->
-                activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
-                        .buildUpon().appendEncodedPath("faq/").build()))
+                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://faq.infomaniak.com/2302")))
             R.id.nav_manual ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
                         .buildUpon().appendEncodedPath("manual/").build()))

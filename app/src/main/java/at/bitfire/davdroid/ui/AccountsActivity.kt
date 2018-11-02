@@ -29,6 +29,7 @@ import android.view.MenuItem
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.davdroid.ui.setup.LoginActivity
+import com.bugsnag.android.Bugsnag
 import kotlinx.android.synthetic.main.accounts_content.*
 import kotlinx.android.synthetic.main.activity_accounts.*
 
@@ -52,6 +53,8 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_accounts)
+        Bugsnag.init(this)
+        Bugsnag.setNotifyReleaseStages("production")
 
         setSupportActionBar(toolbar)
 

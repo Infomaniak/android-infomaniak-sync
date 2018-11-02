@@ -8,6 +8,8 @@
 
 package at.bitfire.davdroid.ui.setup
 
+import android.accounts.Account
+import android.accounts.AccountManager
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -68,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
         private const val URL_SYNC_INFOMANIAK = "https://sync.infomaniak.com"
 
         private var connection: GenerateInfomaniakAccountTask? = null
-        private val mutex = ReentrantLock(true)
+        private var mutex = ReentrantLock(true)
     }
 
 
@@ -101,10 +103,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         try {
-            if (mutex.isLocked) {
-                mutex.unlock()
-            }
+            mutex.unlock()
         } catch (e: IllegalMonitorStateException) {
+            mutex = ReentrantLock (true)
         }
     }
 
@@ -188,7 +189,15 @@ class LoginActivity : AppCompatActivity() {
                     var jsonResult = JsonParser().parse(bodyResult)
                     val infomaniakUser = gson.fromJson(jsonResult.asJsonObject.getAsJsonObject("data"), InfomaniakUser::class.java)
 
-                    val formater = SimpleDateFormat("EEEE MMM d yyyy HH:mm", Locale.getDefault())
+                    val accounts: Array<Account> = AccountManager.get(loginActivity).getAccountsByType(loginActivity.getString(R.string.account_type))
+
+                    for (account in accounts) {
+                        if (account.name == infomaniakUser.display_name) {
+                            return null
+                        }
+                    }
+
+                    val formater = SimpleDateFormat("EEEE MMM d yyyy HH:mm:ss", Locale.getDefault())
 
                     formBuilder = MultipartBody.Builder()
                             .setType(MultipartBody.FORM)

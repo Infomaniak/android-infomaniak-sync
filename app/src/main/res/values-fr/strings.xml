@@ -8,7 +8,7 @@
   <string name="manage_accounts">Gestion des comptes</string>
   <string name="please_wait">patientez …</string>
   <string name="send">Envoyer</string>
-  <string name="an_error_has_occurred">Une erreur est survenu</string>
+  <string name="an_error_has_occurred">Une erreur est survenue</string>
   <!--startup dialogs-->
   <string name="startup_autostart_permission">Synchronisation en arrière-plan</string>
   <string name="startup_autostart_permission_message">%s bloque souvent par défaut les synchronisations d\'arrière-plan afin d\'augmenter l\'autonomie de la batterie. Veuillez autoriser la synchronisation automatique dans les paramètres d\'Android.</string>
