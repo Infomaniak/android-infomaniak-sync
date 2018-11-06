@@ -9,7 +9,6 @@
 package at.bitfire.davdroid.ui
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -33,8 +32,7 @@ import kotlinx.android.synthetic.main.activity_about.*
 import org.apache.commons.io.IOUtils
 
 
-
-class AboutActivity: AppCompatActivity() {
+class AboutActivity : AppCompatActivity() {
 
     companion object {
         fun fromHtml(html: String): Spanned {
@@ -64,15 +62,13 @@ class AboutActivity: AppCompatActivity() {
     }
 
     fun showWebsite(item: MenuItem) {
-        val intent = Intent(Intent.ACTION_VIEW, App.homepageUrl(this))
-        if (intent.resolveActivity(packageManager) != null)
-            startActivity(intent)
+        UiUtils.launchUri(this, App.homepageUrl(this))
     }
 
 
     private inner class TabsAdapter(
             fm: FragmentManager
-    ): FragmentPagerAdapter(fm) {
+    ) : FragmentPagerAdapter(fm) {
 
         override fun getCount() = 2
 
@@ -94,7 +90,7 @@ class AboutActivity: AppCompatActivity() {
     }
 
 
-    class DavdroidFragment: Fragment(), LoaderManager.LoaderCallbacks<Spanned> {
+    class DavdroidFragment : Fragment(), LoaderManager.LoaderCallbacks<Spanned> {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
                 inflater.inflate(R.layout.about_davdroid, container, false)!!
@@ -128,7 +124,7 @@ class AboutActivity: AppCompatActivity() {
     class HtmlAssetLoader(
             context: Context,
             val fileName: String
-    ): AsyncTaskLoader<Spanned>(context) {
+    ) : AsyncTaskLoader<Spanned>(context) {
 
         override fun onStartLoading() {
             forceLoad()
