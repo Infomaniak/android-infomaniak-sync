@@ -90,3 +90,6 @@ gradle-app.setting
 
 # Javadoc
 javadoc/
+
+# Security bababasic
+.env
