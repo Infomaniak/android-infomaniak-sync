@@ -24,7 +24,7 @@
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Ten program jest ABSOLUTNIE BEZ GWARANCJI. To jest wolne oprogramowanie i mile widziane jest dalsze rozpowszechnianie go pod pewnymi warunkami.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Plik logów DAVdroid</string>
+  <string name="logging_davdroid_file_logging">Plik logów Infomaniak Sync</string>
   <string name="logging_to_external_storage">Logowanie do zewnątrznej pamięci: %s</string>
   <string name="logging_couldnt_create_file">Nie można stworzyć zewnętrznego pliku logów: %s</string>
   <string name="logging_no_external_storage">Zewnętrzna pamięci nie została naleziona</string>

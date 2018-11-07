@@ -41,17 +41,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/create_calendar"
+                android:visibility="invisible"
                 android:textAppearance="@style/TextView.Heading" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:text="@string/create_collection_home_set" />
 
             <Spinner
                 android:id="@+id/home_sets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginBottom="16dp" />
 
             <TextView

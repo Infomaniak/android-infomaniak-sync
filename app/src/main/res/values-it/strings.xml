@@ -37,7 +37,7 @@
   <string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync consente di sincronizzare i contatti e i calendari del WorkSpace, la webmail dell\'host Infomaniak.<br>Questa applicazione è un fork della soluzione OpenSource <a href=\'https://www.davdroid.com/\'>DAVDroid</a>.]]></string>
   <string name="about_license_info_no_warranty">Il programma è distribuito SENZA ALCUNA GARANZIA. È software libero e può essere redistribuito sotto alcune condizioni.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Invio del log di DAVdroid su file</string>
+  <string name="logging_davdroid_file_logging">Invio del log di Infomaniak Sync su file</string>
   <string name="logging_to_external_storage">Log su dispositivo esterno: %s</string>
   <string name="logging_couldnt_create_file">Non riesco a creare il file di log esterno: %s</string>
   <string name="logging_no_external_storage">Dispositivo esterno non disponibile</string>
@@ -228,6 +228,10 @@
   <string name="sync_error_opentasks_too_old">OpenTasks troppo vecchia</string>
   <string name="sync_error_opentasks_required_version">Versione richiesta: %1$s (attualmente %2$s)</string>
   <string name="sync_error_authentication_failed">Autenticazione fallita (controlla credenziali login)</string>
+  <string name="sync_error_io">Errore di rete o di I/O</string>
+  <string name="sync_error_http_dav">HTTP errore server</string>
+  <string name="sync_error_local_storage">Errore di memorizzazione locale</string>
+  <string name="sync_error_retry">Riprovare </string>
   <!--cert4android-->
   <string name="certificate_notification_connection_security">Infomaniak Sync: sicurezza della connessione</string>
   <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync ha trovato un certificato sconosciuto. Ritenerlo affidabile?</string>

@@ -243,9 +243,9 @@
   <string name="sync_error_opentasks_too_old">Отворени задаци застарели</string>
   <string name="sync_error_opentasks_required_version">Потребно издање: %1$s (текуће %2$s)</string>
   <string name="sync_error_authentication_failed">Аутентификација није успела (проверите акредитиве за пријаву)</string>
-  <string name="sync_error_io">Мрежна или У/И грешка – %s</string>
-  <string name="sync_error_http_dav">Грешка ХТТП сервера – %s</string>
-  <string name="sync_error_local_storage">Грешка локалног складишта – %s</string>
+  <string name="sync_error_io">Мрежна или У/И грешка</string>
+  <string name="sync_error_http_dav">Грешка ХТТП сервера</string>
+  <string name="sync_error_local_storage">Грешка локалног складишта</string>
   <string name="sync_error_retry">Покушај поново</string>
   <string name="sync_error_view_item">Прикажи ставку</string>
   <!--cert4android-->

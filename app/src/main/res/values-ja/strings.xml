@@ -40,7 +40,7 @@
   <string name="about_flavor_info">このバージョンは Google Play での配信にのみ対応です。</string>
   <string name="about_license_info_no_warranty">このプログラムは完全に無保証で提供されます。これはフリーソフトウェアで、特定の条件下での再頒布を歓迎します。</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">DAVdroid ファイルログ</string>
+  <string name="logging_davdroid_file_logging">Infomaniak Sync ファイルログ</string>
   <string name="logging_to_external_storage">外部ストレージにログ: %s</string>
   <string name="logging_couldnt_create_file">外部ログファイルを作成できませんでした: %s</string>
   <string name="logging_no_external_storage">外部ストレージが見つかりません</string>
@@ -239,9 +239,9 @@
   <string name="sync_error_opentasks_too_old">OpenTasks が古すぎます</string>
   <string name="sync_error_opentasks_required_version">必要なバージョン: %1$s (現在 %2$s)</string>
   <string name="sync_error_authentication_failed">認証に失敗しました (ログイン情報を確認してください)</string>
-  <string name="sync_error_io">ネットワークまたは I/O エラー – %s</string>
-  <string name="sync_error_http_dav">HTTP サーバーエラー – %s</string>
-  <string name="sync_error_local_storage">内蔵ストレージエラー – %s</string>
+  <string name="sync_error_io">ネットワークまたは I/O エラー</string>
+  <string name="sync_error_http_dav">HTTP サーバーエラー</string>
+  <string name="sync_error_local_storage">内蔵ストレージエラー</string>
   <string name="sync_error_retry">再試行</string>
   <string name="sync_error_view_item">アイテムを表示</string>
   <!--cert4android-->

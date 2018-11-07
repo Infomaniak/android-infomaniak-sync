@@ -21,7 +21,7 @@
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Tento program je distribuován BEZ JAKÉKOLIV ZÁRUKY. Je to volně dostupný software a lze jej za určitých podmínek dále distribuovat.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">DAVdroid logování do souboru</string>
+  <string name="logging_davdroid_file_logging">Infomaniak Sync logování do souboru</string>
   <string name="logging_to_external_storage">Logování do externího úložiště: %s</string>
   <string name="logging_couldnt_create_file">Nelze vytvořit externí soubor logu: %s</string>
   <string name="logging_no_external_storage">Externí úložiště nenalezeno</string>

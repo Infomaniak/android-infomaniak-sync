@@ -615,7 +615,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
             is IOException,
             is InterruptedIOException -> {
                 Logger.log.log(Level.WARNING, "I/O error", e)
-                message = context.getString(R.string.sync_error_io, e.localizedMessage)
+                message = context.getString(R.string.sync_error_io)
                 syncResult.stats.numIoExceptions++
             }
             is UnauthorizedException -> {
@@ -625,12 +625,12 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
             }
             is HttpException, is DavException -> {
                 Logger.log.log(Level.SEVERE, "HTTP/DAV exception", e)
-                message = context.getString(R.string.sync_error_http_dav, e.localizedMessage)
+                message = context.getString(R.string.sync_error_http_dav)
                 syncResult.stats.numParseExceptions++       // numIoExceptions would indicate a soft error
             }
             is CalendarStorageException, is ContactsStorageException, is RemoteException -> {
                 Logger.log.log(Level.SEVERE, "Couldn't access local storage", e)
-                message = context.getString(R.string.sync_error_local_storage, e.localizedMessage)
+                message = context.getString(R.string.sync_error_local_storage)
                 syncResult.databaseError = true
             }
             else -> {

@@ -40,7 +40,7 @@
   <string name="about_flavor_info">Esta versão está disponível apenas para distribuição na Google Play.</string>
   <string name="about_license_info_no_warranty">Este programa é distribuído SEM NENHUMA GARANTIA. Ele é software livre e pode ser redistribuído sob algumas condições.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Registro do arquivo do DAVdroid</string>
+  <string name="logging_davdroid_file_logging">Registro do arquivo do Infomaniak Sync</string>
   <string name="logging_to_external_storage">Registrando no arquivo externo: %s</string>
   <string name="logging_couldnt_create_file">Não foi possível criar o arquivo de registro externo: %s</string>
   <string name="logging_no_external_storage">Armazenamento externo não encontrado</string>
@@ -241,9 +241,9 @@
   <string name="sync_error_opentasks_too_old">A versão do OpenTasks é muito antiga</string>
   <string name="sync_error_opentasks_required_version">Versão necessária: %1$s (atual %2$s)</string>
   <string name="sync_error_authentication_failed">Falha de autenticação (verifique as credenciais)</string>
-  <string name="sync_error_io">Erro de rede ou E/S – %s</string>
-  <string name="sync_error_http_dav">Erro no servidor HTTP – %s</string>
-  <string name="sync_error_local_storage">Erro de armazenamento local – %s</string>
+  <string name="sync_error_io">Erro de rede ou E/S</string>
+  <string name="sync_error_http_dav">Erro no servidor HTTP</string>
+  <string name="sync_error_local_storage">Erro de armazenamento local</string>
   <string name="sync_error_retry">Repetir</string>
   <string name="sync_error_view_item">Ver item</string>
   <!--cert4android-->

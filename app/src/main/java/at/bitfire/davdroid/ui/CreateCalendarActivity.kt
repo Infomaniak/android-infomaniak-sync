@@ -152,18 +152,13 @@ class CreateCalendarActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks
             val info = AccountInfo()
             ServiceDB.OpenHelper(context).use { dbHelper ->
                 val db = dbHelper.readableDatabase
-                db.query(ServiceDB.Services._TABLE, arrayOf(ServiceDB.Services.ID),
+                db.query(ServiceDB.Services._TABLE, arrayOf(ServiceDB.Services.PRINCIPAL),
                         "${ServiceDB.Services.ACCOUNT_NAME}=? AND ${ServiceDB.Services.SERVICE}=?",
                         arrayOf(account.name, ServiceDB.Services.SERVICE_CALDAV), null, null, null).use { cursor ->
                     if (!cursor.moveToNext())
                         return null
-                    val strServiceID = cursor.getString(0)
-
-                    db.query(ServiceDB.HomeSets._TABLE, arrayOf(ServiceDB.HomeSets.URL),
-                            "${ServiceDB.HomeSets.SERVICE_ID}=?", arrayOf(strServiceID), null, null, null).use { c ->
-                        while (c.moveToNext())
-                            info.homeSets += c.getString(0)
-                    }
+                    val principal = cursor.getString(0)
+                    info.homeSets += principal.replace("principals", "calendars")
                 }
             }
             return info

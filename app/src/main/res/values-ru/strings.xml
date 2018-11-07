@@ -40,7 +40,7 @@
   <string name="about_flavor_info">Эта версия распространяется только через Google Play.</string>
   <string name="about_license_info_no_warranty">Эта программа поставляется БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ. Это свободное программное обеспечение и вы можете распространять его при соблюдении определенных условий.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Файл журнала DAVdroid</string>
+  <string name="logging_davdroid_file_logging">Файл журнала Infomaniak Sync</string>
   <string name="logging_to_external_storage">Сохранение логов во внешнем хранилище: %s</string>
   <string name="logging_couldnt_create_file">Не удалось создать внешний файл журнала: %s</string>
   <string name="logging_no_external_storage">Внешнее хранилище не найдено</string>
@@ -245,9 +245,9 @@
   <string name="sync_error_opentasks_too_old">OpenTasks устарел</string>
   <string name="sync_error_opentasks_required_version">Требуется версия: %1$s (текущая %2$s)</string>
   <string name="sync_error_authentication_failed">Ошибка аутентификации (проверьте учетные данные)</string>
-  <string name="sync_error_io">Ошибка сети или ввода/вывода – %s</string>
-  <string name="sync_error_http_dav">Ошибка HTTP-сервера – %s</string>
-  <string name="sync_error_local_storage">Ошибка локального хранилища – %s</string>
+  <string name="sync_error_io">Ошибка сети или ввода/вывода</string>
+  <string name="sync_error_http_dav">Ошибка HTTP-сервера</string>
+  <string name="sync_error_local_storage">Ошибка локального хранилища</string>
   <string name="sync_error_retry">Повторить</string>
   <string name="sync_error_view_item">Просмотр элемента</string>
   <!--cert4android-->

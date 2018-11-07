@@ -32,7 +32,7 @@
   <string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync permet de synchroniser les contacts et les calendriers du WorkSpace, le webmail de l\'hébergeur Infomaniak.<br>Cette application est un fork de la solution OpenSource <a href=\'https://www.davdroid.com/\'>DAVDroid</a>.]]></string>
   <string name="about_license_info_no_warranty">Ce programme est fourni sans AUCUNE GARANTIE. C\'est un logiciel libre, et vous êtes en droit de le redistribuer sous certaines conditions.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">DAVdroid fichier de journalisation</string>
+  <string name="logging_davdroid_file_logging">Infomaniak Sync fichier de journalisation</string>
   <string name="logging_to_external_storage">Se connecter au stockage externe: %s</string>
   <string name="logging_couldnt_create_file">Impossible de créer le fichier journal externe: %s</string>
   <string name="logging_no_external_storage">Stockage externe introuvable</string>
@@ -220,6 +220,10 @@
   <string name="sync_error_permissions">Autorisations Infomaniak Sync</string>
   <string name="sync_error_permissions_text">Autorisations supplémentaires demandées</string>
   <string name="sync_error_authentication_failed">Erreur de connexion (veuillez vérifiez vos identifiants)</string>
+  <string name="sync_error_io">Erreur réseau</string>
+  <string name="sync_error_http_dav">Erreur serveur HTTP</string>
+  <string name="sync_error_local_storage">Erreur stockage local</string>
+  <string name="sync_error_retry">Recommencer</string>
   <!--cert4android-->
   <string name="certificate_notification_connection_security">Infomaniak Sync : Sécurité de la connexion</string>
   <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync a rencontré un certificat inconnu. Voulez-vous lui faire confiance?</string>

@@ -40,7 +40,7 @@
   <string name="about_flavor_info">هذا الإصدار صالح للتوزيع عبر Google Play فقط.</string>
   <string name="about_license_info_no_warranty">يقدَّم هذا البرنامج دون أدنى مسؤولية.  إنه برنامج حر، وندعوك لإعادة توزيعه حسب أحكام محددة.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">تسجيل ملفات DAVdroid</string>
+  <string name="logging_davdroid_file_logging">تسجيل ملفات Infomaniak Sync</string>
   <string name="logging_to_external_storage">التسجيل في التخزين الخارجي: %s</string>
   <string name="logging_couldnt_create_file">لا يمكن إنشاء ملف سجل خارجي: %s</string>
   <string name="logging_no_external_storage">لم نجِد أي تخزين خارجي</string>

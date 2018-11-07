@@ -40,7 +40,7 @@
   <string name="about_flavor_info">Ennek a verziónak a terjesztése csak a Play Áruházon keresztül engedélyezett.</string>
   <string name="about_license_info_no_warranty">Ehhez a program SEMMIFÉLE GARANCIA NEM JÁR.   Ez a program szabad szoftver, ami a bizonyos feltételek mellett szabadon terjeszthető.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">DAVdroid fájlalapú naplózás</string>
+  <string name="logging_davdroid_file_logging">Infomaniak Sync fájlalapú naplózás</string>
   <string name="logging_to_external_storage">Naplózás külső tárhelyre: %s</string>
   <string name="logging_couldnt_create_file">Külső naplófájl létrehozása sikertelen: %s</string>
   <string name="logging_no_external_storage">A külső tárhely nem érhető el</string>
@@ -241,7 +241,7 @@
   <string name="sync_error_opentasks_too_old">Az OpenTask verzió nem megfelelő</string>
   <string name="sync_error_opentasks_required_version">Szükséges verzió: %1$s (jelenlegi verzió: %2$s)</string>
   <string name="sync_error_authentication_failed">Authentikáció nem sikerült (ellenőrizze a hitelesítéshez megadott adatokat)</string>
-  <string name="sync_error_io">Hálózati vagy I/O hiba – %s</string>
+  <string name="sync_error_io">Hálózati vagy I/O hiba</string>
   <string name="sync_error_http_dav">HTTP szerver oldali hiba - %s</string>
   <string name="sync_error_local_storage">Tárhelyhiba - %s</string>
   <string name="sync_error_retry">Újbóli próbálkozás</string>

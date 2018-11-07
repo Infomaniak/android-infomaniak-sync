@@ -40,7 +40,7 @@
   <string name="about_flavor_info">此版本只允许在 Google Play 上发行。</string>
   <string name="about_license_info_no_warranty">本程序不附带任何担保。这是一款自由软件，你可以有条件地传播它。</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">DAVdroid 文件日志</string>
+  <string name="logging_davdroid_file_logging">Infomaniak Sync 文件日志</string>
   <string name="logging_to_external_storage">记录日志到外部存储 %s</string>
   <string name="logging_couldnt_create_file">无法创建外部日志文件 %s</string>
   <string name="logging_no_external_storage">找不到外部存储</string>
@@ -239,9 +239,9 @@
   <string name="sync_error_opentasks_too_old">OpenTasks 版本太旧</string>
   <string name="sync_error_opentasks_required_version">最低版本 %1$s （当前 %2$s）</string>
   <string name="sync_error_authentication_failed">认证失败（请检查登录凭据，如用户名密码）</string>
-  <string name="sync_error_io">网络或 I/O 错误 – %s</string>
-  <string name="sync_error_http_dav">HTTP 服务器错误 – %s</string>
-  <string name="sync_error_local_storage">本地存储错误 – %s</string>
+  <string name="sync_error_io">网络或 I/O 错误</string>
+  <string name="sync_error_http_dav">HTTP 服务器错误</string>
+  <string name="sync_error_local_storage">本地存储错误</string>
   <string name="sync_error_retry">重试</string>
   <string name="sync_error_view_item">显示项目</string>
   <!--cert4android-->

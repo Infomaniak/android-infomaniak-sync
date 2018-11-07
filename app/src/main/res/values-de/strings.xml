@@ -42,7 +42,7 @@
   <string name="about_flavor_info">Diese Version ist nur zur Verteilung über Google Play bestimmt.</string>
   <string name="about_license_info_no_warranty">Dieses Programm wird OHNE JEDE GEWÄHRLEISTUNG bereitgestellt. Es ist freie Software – Sie können es also unter bestimmten Bedingungen weiterverbreiten.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">DAVdroid Datei-Protokollierung</string>
+  <string name="logging_davdroid_file_logging">Infomaniak Sync Datei-Protokollierung</string>
   <string name="logging_to_external_storage">Protokollierung auf externen Speicher: %s</string>
   <string name="logging_couldnt_create_file">Protokoll konnte nicht angelegt werden: %s</string>
   <string name="logging_no_external_storage">Kein externer Speicher gefunden</string>
@@ -251,9 +251,9 @@
   <string name="sync_error_opentasks_too_old">OpenTasks zu alt</string>
   <string name="sync_error_opentasks_required_version">Version %1$s benötigt (derzeit %2$s)</string>
   <string name="sync_error_authentication_failed">Anmeldungsfehler (Login-Daten überprüfen)</string>
-  <string name="sync_error_io">Netzwerk- oder E/A-Fehler – %s</string>
-  <string name="sync_error_http_dav">HTTP-Serverfehler – %s</string>
-  <string name="sync_error_local_storage">Lokaler Speicherfehler – %s</string>
+  <string name="sync_error_io">Netzwerk- oder E/A-Fehler</string>
+  <string name="sync_error_http_dav">HTTP-Serverfehler</string>
+  <string name="sync_error_local_storage">Lokaler Speicherfehler</string>
   <string name="sync_error_retry">Wiederholen</string>
   <string name="sync_error_view_item">Untersuchen</string>
   <!--cert4android-->

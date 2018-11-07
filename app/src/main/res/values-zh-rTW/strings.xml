@@ -23,7 +23,7 @@
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">我們｢完全不保證｣本程式無瑕疵。這是個自由軟體，歡迎您在符合公用授權條款的情況下任意散布它。</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">DAVdroid 正在記錄除錯訊息</string>
+  <string name="logging_davdroid_file_logging">Infomaniak Sync 正在記錄除錯訊息</string>
   <string name="logging_to_external_storage">正在將除錯訊息存到外部檔案: %s</string>
   <string name="logging_couldnt_create_file">無法新增除錯訊息檔案: %s</string>
   <string name="logging_no_external_storage">找不到外部儲存空間</string>
