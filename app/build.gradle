@@ -18,8 +18,9 @@ android {
 
     defaultConfig {
         applicationId "com.infomaniak.sync"
+        resValue 'string', 'application_id', applicationId
 
-        versionCode 7
+        versionCode 8
         buildConfigField "long", "buildTime", System.currentTimeMillis() + "L"
         buildConfigField "boolean", "customCerts", "true"
 
@@ -33,7 +34,7 @@ android {
     flavorDimensions "type"
     productFlavors {
         standard {
-            versionName "1.0 (2.0.5)"
+            versionName "1.0.1 (2.0.5)"
 
             buildConfigField "boolean", "customCerts", "true"
         }
