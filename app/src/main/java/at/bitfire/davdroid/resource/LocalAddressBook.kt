@@ -18,14 +18,11 @@ import android.provider.ContactsContract
 import android.provider.ContactsContract.CommonDataKinds.GroupMembership
 import android.provider.ContactsContract.Groups
 import android.provider.ContactsContract.RawContacts
-import android.util.Base64
-import at.bitfire.davdroid.DavUtils
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.CollectionInfo
 import at.bitfire.davdroid.model.SyncState
 import at.bitfire.vcard4android.*
-import java.io.ByteArrayOutputStream
 import java.util.*
 import java.util.logging.Level
 
@@ -74,13 +71,7 @@ class LocalAddressBook(
                 .toList()
 
         fun accountName(mainAccount: Account, info: CollectionInfo): String {
-            val baos = ByteArrayOutputStream()
-            baos.write(info.url.hashCode())
-            val hash = Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP or Base64.NO_PADDING)
-
-            val sb = StringBuilder(if (info.displayName.isNullOrEmpty()) DavUtils.lastSegmentOfUrl(info.url) else info.displayName)
-            sb.append(" (${mainAccount.name} $hash)")
-            return sb.toString()
+            return mainAccount.name.replace("'"," ")
         }
 
         fun initialUserData(mainAccount: Account, url: String): Bundle {

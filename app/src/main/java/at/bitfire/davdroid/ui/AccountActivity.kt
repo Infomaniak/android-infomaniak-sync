@@ -76,6 +76,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
     lateinit var account: Account
     private var accountInfo: AccountInfo? = null
+    private var isFirst: Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,6 +99,8 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
         // Webcal toolbar
         webcal_menu.inflateMenu(R.menu.webcal_actions)
         webcal_menu.setOnMenuItemClickListener(this)
+
+        isFirst = true
 
         // load CardDAV/CalDAV collections
         loaderManager.initLoader(0, null, this)
@@ -388,8 +391,14 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
         }
 
         val askPermissions = requiredPermissions.filter { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
-        if (askPermissions.isNotEmpty())
+        if (askPermissions.isNotEmpty()) {
             ActivityCompat.requestPermissions(this, askPermissions.toTypedArray(), 0)
+        } else if (isFirst) {
+            isFirst = false
+            accountInfo?.caldav?.let { caldav ->
+                launchRefresh(caldav)
+            }
+        }
     }
 
     override fun onLoaderReset(loader: Loader<AccountInfo>) {

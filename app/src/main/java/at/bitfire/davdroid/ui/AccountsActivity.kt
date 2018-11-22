@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.support.customtabs.CustomTabsClient
 import android.support.customtabs.CustomTabsIntent
 import android.support.customtabs.CustomTabsServiceConnection
+import android.support.customtabs.CustomTabsSession
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.LoaderManager
@@ -47,8 +48,8 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private var syncStatusObserver: Any? = null
 
     private var mClient: CustomTabsClient? = null
+    private var mCustomTabsSession: CustomTabsSession? = null
     private var mCustomTabsServiceConnection: CustomTabsServiceConnection? = null
-    private var mCustomTabsIntent: CustomTabsIntent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,22 +75,23 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             override fun onCustomTabsServiceConnected(componentName: ComponentName, customTabsClient: CustomTabsClient) {
                 mClient = customTabsClient
                 mClient!!.warmup(0L)
-                val customTabsSession = mClient!!.newSession(null)
-                mCustomTabsIntent = CustomTabsIntent.Builder(customTabsSession)
-                        .setToolbarColor(ContextCompat.getColor(this@AccountsActivity, R.color.colorPrimary))
-                        .setShowTitle(true)
-                        .build()
+                mCustomTabsSession = mClient!!.newSession(null)
             }
 
             override fun onServiceDisconnected(name: ComponentName) {
                 mClient = null
             }
         }
+
         CustomTabsClient.bindCustomTabsService(this@AccountsActivity, CUSTOM_TAB_PACKAGE_NAME, mCustomTabsServiceConnection)
+        val customTabsIntent = CustomTabsIntent.Builder(mCustomTabsSession)
+                .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                .setShowTitle(true)
+                .build()
 
         fab.setOnClickListener {
             try {
-                mCustomTabsIntent?.launchUrl(this@AccountsActivity, Uri.parse("${LoginActivity.LOGIN_URL_AUTHORIZE}?client_id=${LoginActivity.CLIENT_ID}&response_type=code&redirect_uri=${LoginActivity.REDIRECT_URI_ROOT}:/oauth2redirect"))
+                customTabsIntent.launchUrl(this@AccountsActivity, Uri.parse("${LoginActivity.LOGIN_URL_AUTHORIZE}?client_id=${LoginActivity.CLIENT_ID}&response_type=code&redirect_uri=${LoginActivity.REDIRECT_URI_ROOT}:/oauth2redirect"))
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(this@AccountsActivity, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
             }

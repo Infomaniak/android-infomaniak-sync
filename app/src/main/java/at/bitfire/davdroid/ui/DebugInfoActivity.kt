@@ -80,6 +80,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND
             sendIntent.type = "text/plain"
+            sendIntent.putExtra(Intent.EXTRA_EMAIL, Array(1) { "support@infomaniak.com" })
             sendIntent.putExtra(Intent.EXTRA_SUBJECT, "${getString(R.string.app_name)} ${BuildConfig.VERSION_NAME} debug info")
 
             try {
