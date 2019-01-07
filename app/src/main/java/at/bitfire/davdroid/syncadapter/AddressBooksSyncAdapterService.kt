@@ -15,14 +15,13 @@ import android.database.DatabaseUtils
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.support.v4.content.ContextCompat
-import at.bitfire.davdroid.AccountSettings
+import androidx.core.content.ContextCompat
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.CollectionInfo
 import at.bitfire.davdroid.model.ServiceDB
 import at.bitfire.davdroid.model.ServiceDB.Collections
 import at.bitfire.davdroid.resource.LocalAddressBook
-import at.bitfire.davdroid.settings.ISettings
+import at.bitfire.davdroid.settings.AccountSettings
 import at.bitfire.davdroid.ui.AccountActivity
 import okhttp3.HttpUrl
 import java.util.logging.Level
@@ -36,9 +35,9 @@ class AddressBooksSyncAdapterService : SyncAdapterService() {
             context: Context
     ) : SyncAdapter(context) {
 
-        override fun sync(settings: ISettings, account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
+        override fun sync(account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
             try {
-                val accountSettings = AccountSettings(context, settings, account)
+                val accountSettings = AccountSettings(context, account)
 
                 /* don't run sync if
                    - sync conditions (e.g. "sync only in WiFi") are not met AND
@@ -145,6 +144,7 @@ class AddressBooksSyncAdapterService : SyncAdapterService() {
                         LocalAddressBook.create(context, contactsProvider, account, info)
                     }
                 } finally {
+                    @Suppress("DEPRECATION")
                     if (Build.VERSION.SDK_INT >= 24)
                         contactsProvider?.close()
                     else

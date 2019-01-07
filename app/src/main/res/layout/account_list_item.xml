@@ -12,9 +12,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         style="@style/account_list_card"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/cardview_background"
@@ -42,5 +42,5 @@
                 tools:text="Account Name" />
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

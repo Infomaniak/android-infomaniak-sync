@@ -11,17 +11,17 @@ package at.bitfire.davdroid.ui
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
-import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import at.bitfire.davdroid.App
 import at.bitfire.davdroid.BuildConfig
 import at.bitfire.davdroid.R
@@ -49,7 +49,7 @@ class AboutActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_about)
 
-        setSupportActionBar(toolbar_about)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewpager.adapter = TabsAdapter(supportFragmentManager)
@@ -72,11 +72,11 @@ class AboutActivity : AppCompatActivity() {
 
         override fun getCount() = 2
 
-        override fun getPageTitle(position: Int) =
+        override fun getPageTitle(position: Int): String =
                 when (position) {
                     1 -> getString(R.string.about_libraries)
                     else -> getString(R.string.app_name)
-                }!!
+                }
 
         override fun getItem(position: Int) =
                 when (position) {
@@ -104,7 +104,7 @@ class AboutActivity : AppCompatActivity() {
 
             if (true /* open-source version */) {
                 warranty.text = fromHtml(getString(R.string.about_license_info_no_warranty))
-                loaderManager.initLoader(0, null, this)
+                LoaderManager.getInstance(this).initLoader(0, null, this)
             }
         }
 

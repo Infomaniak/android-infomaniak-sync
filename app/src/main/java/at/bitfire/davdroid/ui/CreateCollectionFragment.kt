@@ -13,25 +13,23 @@ import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
+import androidx.fragment.app.DialogFragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import at.bitfire.dav4android.DavResource
 import at.bitfire.dav4android.XmlUtils
-import at.bitfire.davdroid.AccountSettings
 import at.bitfire.davdroid.DavUtils
 import at.bitfire.davdroid.HttpClient
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.CollectionInfo
 import at.bitfire.davdroid.model.ServiceDB
-import at.bitfire.davdroid.settings.Settings
+import at.bitfire.davdroid.settings.AccountSettings
 import java.io.IOException
 import java.io.StringWriter
 import java.util.logging.Level
 
-@Suppress("DEPRECATION")
 class CreateCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<Exception> {
 
     companion object {
@@ -57,12 +55,13 @@ class CreateCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<
         super.onCreate(savedInstanceState)
 
         val args = requireNotNull(arguments)
-        account = args.getParcelable(ARG_ACCOUNT)
-        info = args.getParcelable(ARG_COLLECTION_INFO)
+        account = args.getParcelable(ARG_ACCOUNT)!!
+        info = args.getParcelable(ARG_COLLECTION_INFO)!!
 
-        loaderManager.initLoader(0, null, this)
+        LoaderManager.getInstance(this).initLoader(0, null, this)
     }
 
+    @Suppress("DEPRECATION")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val progress = ProgressDialog(context)
         progress.setTitle(R.string.create_collection_creating)
@@ -184,42 +183,40 @@ class CreateCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<
                 Logger.log.log(Level.SEVERE, "Couldn't assemble Extended MKCOL request", e)
             }
 
-            Settings.getInstance(context)?.use { settings ->
-                HttpClient.Builder(context, settings, AccountSettings(context, settings, account))
-                        .setForeground(true)
-                        .build().use { httpClient ->
-                    try {
-                        val collection = DavResource(httpClient.okHttpClient, info.url)
+            HttpClient.Builder(context, AccountSettings(context, account))
+                    .setForeground(true)
+                    .build().use { httpClient ->
+                try {
+                    val collection = DavResource(httpClient.okHttpClient, info.url)
 
-                        // create collection on remote server
-                        collection.mkCol(writer.toString()) {}
+                    // create collection on remote server
+                    collection.mkCol(writer.toString()) {}
 
-                        // now insert collection into database:
-                        ServiceDB.OpenHelper(context).use { dbHelper ->
-                            val db = dbHelper.writableDatabase
+                    // now insert collection into database:
+                    ServiceDB.OpenHelper(context).use { dbHelper ->
+                        val db = dbHelper.writableDatabase
 
-                            // 1. find service ID
-                            val serviceType = when (info.type) {
-                                CollectionInfo.Type.ADDRESS_BOOK -> ServiceDB.Services.SERVICE_CARDDAV
-                                CollectionInfo.Type.CALENDAR     -> ServiceDB.Services.SERVICE_CALDAV
-                                else -> throw IllegalArgumentException("Collection must be an address book or calendar")
-                            }
-                            db.query(ServiceDB.Services._TABLE, arrayOf(ServiceDB.Services.ID),
-                                    "${ServiceDB.Services.ACCOUNT_NAME}=? AND ${ServiceDB.Services.SERVICE}=?",
-                                    arrayOf(account.name, serviceType), null, null, null).use { c ->
-
-                                assert(c.moveToNext())
-                                val serviceID = c.getLong(0)
-
-                                // 2. add collection to service
-                                val values = info.toDB()
-                                values.put(ServiceDB.Collections.SERVICE_ID, serviceID)
-                                db.insert(ServiceDB.Collections._TABLE, null, values)
-                            }
+                        // 1. find service ID
+                        val serviceType = when (info.type) {
+                            CollectionInfo.Type.ADDRESS_BOOK -> ServiceDB.Services.SERVICE_CARDDAV
+                            CollectionInfo.Type.CALENDAR     -> ServiceDB.Services.SERVICE_CALDAV
+                            else -> throw IllegalArgumentException("Collection must be an address book or calendar")
                         }
-                    } catch(e: Exception) {
-                        return e
+                        db.query(ServiceDB.Services._TABLE, arrayOf(ServiceDB.Services.ID),
+                                "${ServiceDB.Services.ACCOUNT_NAME}=? AND ${ServiceDB.Services.SERVICE}=?",
+                                arrayOf(account.name, serviceType), null, null, null).use { c ->
+
+                            assert(c.moveToNext())
+                            val serviceID = c.getLong(0)
+
+                            // 2. add collection to service
+                            val values = info.toDB()
+                            values.put(ServiceDB.Collections.SERVICE_ID, serviceID)
+                            db.insert(ServiceDB.Collections._TABLE, null, values)
+                        }
                     }
+                } catch(e: Exception) {
+                    return e
                 }
             }
             return null

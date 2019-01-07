@@ -8,34 +8,32 @@
 
 package at.bitfire.davdroid.ui
 
-import android.accounts.AccountManager
 import android.content.*
 import android.net.Uri
 import android.os.Bundle
-import android.support.customtabs.CustomTabsClient
-import android.support.customtabs.CustomTabsIntent
-import android.support.customtabs.CustomTabsServiceConnection
-import android.support.customtabs.CustomTabsSession
-import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.Loader
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsClient
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsServiceConnection
+import androidx.browser.customtabs.CustomTabsSession
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import at.bitfire.davdroid.R
-import at.bitfire.davdroid.settings.ISettings
+import at.bitfire.davdroid.settings.Settings
 import at.bitfire.davdroid.ui.setup.LoginActivity
 import com.bugsnag.android.Bugsnag
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.accounts_content.*
 import kotlinx.android.synthetic.main.activity_accounts.*
+import kotlinx.android.synthetic.main.activity_accounts.view.*
 
 
-class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, LoaderManager.LoaderCallbacks<AccountsActivity.Settings>, SyncStatusObserver {
+class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, SyncStatusObserver {
 
     companion object {
         val accountsDrawerHandler = DefaultAccountsDrawerHandler()
@@ -43,6 +41,8 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         private const val fragTagStartup = "startup"
         private const val CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome"
     }
+
+    private lateinit var settings: Settings
 
     private var syncStatusSnackbar: Snackbar? = null
     private var syncStatusObserver: Any? = null
@@ -56,6 +56,7 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         setContentView(R.layout.activity_accounts)
         Bugsnag.init(this)
         Bugsnag.setNotifyReleaseStages("production")
+        settings = Settings.getInstance(this)
 
         setSupportActionBar(toolbar)
 
@@ -89,6 +90,12 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 .setShowTitle(true)
                 .build()
 
+        if (supportFragmentManager.findFragmentByTag(fragTagStartup) == null) {
+            val ft = supportFragmentManager.beginTransaction()
+            StartupDialogFragment.getStartupDialogs(this).forEach { ft.add(it, fragTagStartup) }
+            ft.commit()
+        }
+
         fab.setOnClickListener {
             try {
                 customTabsIntent.launchUrl(this@AccountsActivity, Uri.parse("${LoginActivity.LOGIN_URL_AUTHORIZE}?client_id=${LoginActivity.CLIENT_ID}&response_type=code&redirect_uri=${LoginActivity.REDIRECT_URI_ROOT}:/oauth2redirect"))
@@ -96,45 +103,16 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 Toast.makeText(this@AccountsActivity, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
             }
         }
+        fab.show()
 
+        accountsDrawerHandler.initMenu(this, drawer_layout.nav_view.menu)
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.setDrawerListener(toggle)
+        drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.itemIconTintList = null
-
-        /* When the DAVdroid main activity is started, start a Settings service that stays in memory
-        for better performance. The service stops itself when memory is trimmed. */
-        val settingsIntent = Intent(this, Settings::class.java)
-        startService(settingsIntent)
-
-        val args = Bundle(1)
-        supportLoaderManager.initLoader(0, args, this)
-    }
-
-    override fun onCreateLoader(code: Int, args: Bundle?) =
-            SettingsLoader(this)
-
-    override fun onLoadFinished(loader: Loader<Settings>, result: Settings?) {
-        val result = result ?: return
-
-        if (supportFragmentManager.findFragmentByTag(fragTagStartup) == null) {
-            val ft = supportFragmentManager.beginTransaction()
-            StartupDialogFragment.getStartupDialogs(this, result.settings).forEach { ft.add(it, fragTagStartup) }
-            ft.commit()
-        }
-
-        nav_view?.menu?.let {
-            accountsDrawerHandler.onSettingsChanged(result.settings, it)
-        }
-    }
-
-    override fun onLoaderReset(loader: Loader<Settings>) {
-        nav_view?.menu?.let {
-            accountsDrawerHandler.onSettingsChanged(null, it)
-        }
     }
 
     override fun onResume() {
@@ -194,29 +172,6 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val processed = accountsDrawerHandler.onNavigationItemSelected(this, item)
         drawer_layout.closeDrawer(GravityCompat.START)
         return processed
-    }
-
-
-    class Settings(
-            val settings: ISettings
-    )
-
-    class SettingsLoader(
-            context: Context
-    ) : at.bitfire.davdroid.ui.SettingsLoader<Settings>(context) {
-
-        override fun loadInBackground(): Settings? {
-            settings?.let {
-                val accountManager = AccountManager.get(context)
-                val accounts = accountManager.getAccountsByType(context.getString(R.string.account_type))
-
-                return Settings(
-                        it
-                )
-            }
-            return null
-        }
-
     }
 
 }

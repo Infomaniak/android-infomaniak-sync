@@ -9,30 +9,31 @@
 package at.bitfire.davdroid.ui
 
 import android.accounts.Account
-import android.app.LoaderManager
-import android.content.AsyncTaskLoader
 import android.content.Context
 import android.content.Intent
-import android.content.Loader
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.app.NavUtils
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.model.CollectionInfo
 import at.bitfire.davdroid.model.ServiceDB
 import at.bitfire.ical4android.DateUtils
+import com.jaredrummler.android.colorpicker.ColorPickerDialog
+import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 import kotlinx.android.synthetic.main.activity_create_calendar.*
 import net.fortuna.ical4j.model.Calendar
 import okhttp3.HttpUrl
 import org.apache.commons.lang3.StringUtils
-import yuku.ambilwarna.AmbilWarnaDialog
 import java.util.*
 
-class CreateCalendarActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<CreateCalendarActivity.AccountInfo> {
+class CreateCalendarActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<CreateCalendarActivity.AccountInfo>, ColorPickerDialogListener {
 
     companion object {
         const val EXTRA_ACCOUNT = "account"
@@ -43,7 +44,7 @@ class CreateCalendarActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        account = intent.extras.getParcelable(EXTRA_ACCOUNT)
+        account = intent.extras.getParcelable(EXTRA_ACCOUNT)!!
 
         setContentView(R.layout.activity_create_calendar)
         setSupportActionBar(toolbar)
@@ -51,14 +52,21 @@ class CreateCalendarActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         color.setOnClickListener { _ ->
-            AmbilWarnaDialog(this, (color.background as ColorDrawable).color, true, object: AmbilWarnaDialog.OnAmbilWarnaListener {
-                override fun onCancel(dialog: AmbilWarnaDialog) {}
-                override fun onOk(dialog: AmbilWarnaDialog, rgb: Int) =
-                        color.setBackgroundColor(rgb)
-            }).show()
+            ColorPickerDialog.newBuilder()
+                    .setShowAlphaSlider(false)
+                    .setColor((color.background as ColorDrawable).color)
+                    .show(this)
         }
 
-        loaderManager.initLoader(0, null, this)
+        LoaderManager.getInstance(this).initLoader(0, null, this)
+    }
+
+    override fun onColorSelected(dialogId: Int, rgb: Int) {
+        color.setBackgroundColor(rgb)
+    }
+
+    override fun onDialogDismissed(dialogId: Int) {
+        // color selection dismissed
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

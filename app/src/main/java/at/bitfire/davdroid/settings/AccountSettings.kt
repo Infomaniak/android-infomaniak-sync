@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/gpl.html
  */
-package at.bitfire.davdroid
+package at.bitfire.davdroid.settings
 
 import android.accounts.Account
 import android.accounts.AccountManager
@@ -17,6 +17,7 @@ import android.os.Parcel
 import android.os.RemoteException
 import android.provider.CalendarContract
 import android.provider.ContactsContract
+import at.bitfire.davdroid.*
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.CollectionInfo
 import at.bitfire.davdroid.model.Credentials
@@ -27,7 +28,6 @@ import at.bitfire.davdroid.model.SyncState
 import at.bitfire.davdroid.resource.LocalAddressBook
 import at.bitfire.davdroid.resource.LocalCalendar
 import at.bitfire.davdroid.resource.LocalTaskList
-import at.bitfire.davdroid.settings.ISettings
 import at.bitfire.ical4android.AndroidCalendar
 import at.bitfire.ical4android.AndroidTaskList
 import at.bitfire.ical4android.CalendarStorageException
@@ -47,7 +47,6 @@ import java.util.logging.Level
  */
 class AccountSettings(
         val context: Context,
-        val settings: ISettings,
         val account: Account
 ) {
 
@@ -60,6 +59,7 @@ class AccountSettings(
         const val KEY_CERTIFICATE_ALIAS = "certificate_alias"
 
         const val KEY_WIFI_ONLY = "wifi_only"               // sync on WiFi only (default: false)
+        const val WIFI_ONLY_DEFAULT = false
         const val KEY_WIFI_ONLY_SSIDS = "wifi_only_ssids"   // restrict sync to specific WiFi SSIDs
 
         /** Time range limitation to the past [in days]
@@ -70,12 +70,12 @@ class AccountSettings(
         const val KEY_TIME_RANGE_PAST_DAYS = "time_range_past_days"
         const val DEFAULT_TIME_RANGE_PAST_DAYS = 90
 
-        /* Whether DAVdroid sets the local calendar color to the value from service DB at every sync
+        /* Whether DAVx5 sets the local calendar color to the value from service DB at every sync
            value = null (not existing)     true (default)
                    "0"                     false */
         const val KEY_MANAGE_CALENDAR_COLORS = "manage_calendar_colors"
 
-        /* Whether DAVdroid populates and uses CalendarContract.Colors
+        /* Whether DAVx5 populates and uses CalendarContract.Colors
            value = null (not existing)     false (default)
                    "1"                     true */
         const val KEY_EVENT_COLORS = "event_colors"
@@ -103,9 +103,10 @@ class AccountSettings(
         }
 
     }
-
-
+    
+    
     val accountManager: AccountManager = AccountManager.get(context)
+    val settings = Settings.getInstance(context)
 
     init {
         synchronized(AccountSettings::class.java) {
@@ -160,14 +161,14 @@ class AccountSettings(
     }
 
     fun getSyncWifiOnly() = if (settings.has(KEY_WIFI_ONLY))
-            settings.getBoolean(KEY_WIFI_ONLY, false)
+            settings.getBoolean(KEY_WIFI_ONLY) ?: WIFI_ONLY_DEFAULT
                 else
             accountManager.getUserData(account, KEY_WIFI_ONLY) != null
     fun setSyncWiFiOnly(wiFiOnly: Boolean) =
             accountManager.setUserData(account, KEY_WIFI_ONLY, if (wiFiOnly) "1" else null)
 
     fun getSyncWifiOnlySSIDs(): List<String>? = (if (settings.has(KEY_WIFI_ONLY_SSIDS))
-                settings.getString(KEY_WIFI_ONLY_SSIDS, null)
+                settings.getString(KEY_WIFI_ONLY_SSIDS)
             else
                 accountManager.getUserData(account, KEY_WIFI_ONLY_SSIDS))?.split(',')
     fun setSyncWifiOnlySSIDs(ssids: List<String>?) =
@@ -189,14 +190,14 @@ class AccountSettings(
             accountManager.setUserData(account, KEY_TIME_RANGE_PAST_DAYS, (days ?: -1).toString())
 
     fun getManageCalendarColors() = if (settings.has(KEY_MANAGE_CALENDAR_COLORS))
-        settings.getBoolean(KEY_MANAGE_CALENDAR_COLORS, false)
+        settings.getBoolean(KEY_MANAGE_CALENDAR_COLORS) ?: false
     else
         accountManager.getUserData(account, KEY_MANAGE_CALENDAR_COLORS) == null
     fun setManageCalendarColors(manage: Boolean) =
             accountManager.setUserData(account, KEY_MANAGE_CALENDAR_COLORS, if (manage) null else "0")
 
     fun getEventColors() = if (settings.has(KEY_EVENT_COLORS))
-            settings.getBoolean(KEY_EVENT_COLORS, false)
+            settings.getBoolean(KEY_EVENT_COLORS) ?: false
                 else
             accountManager.getUserData(account, KEY_EVENT_COLORS) != null
     fun setEventColors(useColors: Boolean) =
@@ -205,7 +206,7 @@ class AccountSettings(
     // CardDAV settings
 
     fun getGroupMethod(): GroupMethod {
-        val name = settings.getString(KEY_CONTACT_GROUP_METHOD, null) ?:
+        val name = settings.getString(KEY_CONTACT_GROUP_METHOD) ?:
                 accountManager.getUserData(account, KEY_CONTACT_GROUP_METHOD)
         if (name != null)
             try {
@@ -224,7 +225,7 @@ class AccountSettings(
     // update from previous account settings
 
     private fun update(baseVersion: Int) {
-        for (toVersion in baseVersion+1 .. CURRENT_VERSION) {
+        for (toVersion in baseVersion+1 ..CURRENT_VERSION) {
             val fromVersion = toVersion-1
             Logger.log.info("Updating account ${account.name} from version $fromVersion to $toVersion")
             try {
@@ -240,6 +241,7 @@ class AccountSettings(
     }
 
     @Suppress("unused")
+    @SuppressLint("Recycle")
     /**
      * There is a mistake in this method. [TaskContract.Tasks.SYNC_VERSION] is used to store the
      * SEQUENCE and should not be used for the eTag.
@@ -251,7 +253,7 @@ class AccountSettings(
             provider.client.query(TaskProvider.syncAdapterUri(provider.tasksUri(), account),
                     arrayOf(TaskContract.Tasks._ID, TaskContract.Tasks.SYNC1, TaskContract.Tasks.SYNC2),
                     "${TaskContract.Tasks.ACCOUNT_TYPE}=? AND ${TaskContract.Tasks.ACCOUNT_NAME}=?",
-                    arrayOf(account.type, account.name), null).use { cursor ->
+                    arrayOf(account.type, account.name), null)!!.use { cursor ->
                 while (cursor.moveToNext()) {
                     val id = cursor.getLong(0)
                     val eTag = cursor.getString(1)
@@ -271,12 +273,14 @@ class AccountSettings(
     }
 
     @Suppress("unused")
+    @SuppressLint("Recycle")
     private fun update_6_7() {
         // add calendar colors
         context.contentResolver.acquireContentProviderClient(CalendarContract.AUTHORITY)?.let { provider ->
             try {
                 AndroidCalendar.insertColors(provider, account)
             } finally {
+                @Suppress("DEPRECATION")
                 if (Build.VERSION.SDK_INT >= 24)
                     provider.close()
                 else
@@ -291,7 +295,7 @@ class AccountSettings(
     }
 
     @Suppress("unused")
-    @SuppressLint("ParcelClassLoader")
+    @SuppressLint("Recycle", "ParcelClassLoader")
     private fun update_5_6() {
         context.contentResolver.acquireContentProviderClient(ContactsContract.AUTHORITY)?.let { provider ->
             val parcel = Parcel.obtain()
@@ -308,7 +312,7 @@ class AccountSettings(
                 else {
                     parcel.unmarshall(raw, 0, raw.size)
                     parcel.setDataPosition(0)
-                    val params = parcel.readBundle()
+                    val params = parcel.readBundle()!!
                     val url = params.getString("url")?.let { HttpUrl.parse(it) }
                     if (url == null)
                         Logger.log.info("No address book URL, ignoring account")
@@ -343,6 +347,7 @@ class AccountSettings(
                 throw ContactsStorageException("Couldn't migrate contacts to new address book", e)
             } finally {
                 parcel.recycle()
+                @Suppress("DEPRECATION")
                 if (Build.VERSION.SDK_INT >= 24)
                     provider.close()
                 else
@@ -371,6 +376,7 @@ class AccountSettings(
     }
 
     @Suppress("unused")
+    @SuppressLint("Recycle")
     private fun update_2_3() {
         // Don't show a warning for Android updates anymore
         accountManager.setUserData(account, "last_android_version", null)
@@ -514,7 +520,7 @@ class AccountSettings(
         try {
             val addr = LocalAddressBook(context, account, provider)
 
-            // until now, ContactsContract.Settings.UNGROUPED_VISIBLE was not set explicitly
+            // until now, ContactsContract.settings.UNGROUPED_VISIBLE was not set explicitly
             val values = ContentValues()
             values.put(ContactsContract.Settings.UNGROUPED_VISIBLE, 1)
             addr.settings = values

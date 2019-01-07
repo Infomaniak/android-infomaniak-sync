@@ -13,7 +13,6 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.LoaderManager
 import android.content.*
 import android.content.pm.PackageManager
 import android.database.DatabaseUtils
@@ -25,16 +24,18 @@ import android.os.Bundle
 import android.os.IBinder
 import android.provider.CalendarContract
 import android.provider.ContactsContract
-import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.DialogFragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.SwitchCompat
-import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import at.bitfire.davdroid.DavService
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
@@ -44,8 +45,10 @@ import at.bitfire.davdroid.model.ServiceDB.*
 import at.bitfire.davdroid.model.ServiceDB.Collections
 import at.bitfire.davdroid.resource.LocalAddressBook
 import at.bitfire.davdroid.resource.LocalTaskList
+import at.bitfire.davdroid.settings.AccountSettings
 import at.bitfire.davdroid.ui.widget.MaximizedListView
 import at.bitfire.ical4android.TaskProvider
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.account_caldav_item.view.*
 import kotlinx.android.synthetic.main.activity_account.*
 import java.lang.ref.WeakReference
@@ -82,7 +85,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // account may be a DAVdroid address book account -> use main account in this case
+        // account may be a DAVx5 address book account -> use main account in this case
         account = LocalAddressBook.mainAccount(this,
                 requireNotNull(intent.getParcelableExtra(EXTRA_ACCOUNT)))
         title = account.name
@@ -103,7 +106,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
         isFirst = true
 
         // load CardDAV/CalDAV collections
-        loaderManager.initLoader(0, null, this)
+        LoaderManager.getInstance(this).initLoader(0, null, this)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -208,7 +211,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
         val list = parent as ListView
         val adapter = list.adapter as ArrayAdapter<CollectionInfo>
-        val info = adapter.getItem(position)
+        val info = adapter.getItem(position)!!
         val nowChecked = !info.selected
 
         SelectCollectionTask(applicationContext, info, nowChecked, WeakReference(adapter), WeakReference(view)).execute()
@@ -236,7 +239,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
                 val installIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=at.bitfire.icsdroid"))
                 if (packageManager.resolveActivity(installIntent, 0) != null)
-                    snack.setAction(R.string.account_install_icsdroid) {
+                    snack.setAction(R.string.account_install_icsx5) {
                         startActivity(installIntent)
                     }
 
@@ -250,7 +253,11 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
                         provider.delete(CalendarContract.Calendars.CONTENT_URI, "${CalendarContract.Calendars.NAME}=?", arrayOf(info.source))
                         reload()
                     } finally {
-                        provider.release()
+                        @Suppress("DEPRECATION")
+                        if (Build.VERSION.SDK_INT >= 24)
+                            provider.close()
+                        else
+                            provider.release()
                     }
                 }
         }
@@ -313,7 +320,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
             AccountLoader(this, account)
 
     fun reload() {
-        loaderManager.restartLoader(0, null, this)
+        LoaderManager.getInstance(this).restartLoader(0, null, this)
     }
 
     override fun onLoadFinished(loader: Loader<AccountInfo>, info: AccountInfo?) {
@@ -369,25 +376,21 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
         // ask for permissions
         val requiredPermissions = mutableSetOf<String>()
-        info?.carddav?.let { carddav ->
-            if (carddav.collections.any { it.type == CollectionInfo.Type.ADDRESS_BOOK }) {
-                requiredPermissions += Manifest.permission.READ_CONTACTS
-                requiredPermissions += Manifest.permission.WRITE_CONTACTS
-            }
+        if (info?.carddav != null) {
+            // if there is a CardDAV service, ask for contacts permissions
+            requiredPermissions += Manifest.permission.READ_CONTACTS
+            requiredPermissions += Manifest.permission.WRITE_CONTACTS
         }
 
-        info?.caldav?.let { caldav ->
-            if (caldav.collections.any { it.type == CollectionInfo.Type.CALENDAR }) {
-                requiredPermissions += Manifest.permission.READ_CALENDAR
-                requiredPermissions += Manifest.permission.WRITE_CALENDAR
+        if (info?.caldav != null) {
+            // if there is a CalDAV service, ask for calendar and tasks permissions
+            requiredPermissions += Manifest.permission.READ_CALENDAR
+            requiredPermissions += Manifest.permission.WRITE_CALENDAR
 
-                if (LocalTaskList.tasksProviderAvailable(this)) {
-                    requiredPermissions += TaskProvider.PERMISSION_READ_TASKS
-                    requiredPermissions += TaskProvider.PERMISSION_WRITE_TASKS
-                }
+            if (LocalTaskList.tasksProviderAvailable(this)) {
+                requiredPermissions += TaskProvider.PERMISSION_READ_TASKS
+                requiredPermissions += TaskProvider.PERMISSION_WRITE_TASKS
             }
-            if (caldav.collections.any { it.type == CollectionInfo.Type.WEBCAL })
-                requiredPermissions += Manifest.permission.READ_CALENDAR
         }
 
         val askPermissions = requiredPermissions.filter { ActivityCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
@@ -424,7 +427,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
             // bind to DavService to get notified when it's running
             if (davServiceConn == null) {
-                davServiceConn = object : ServiceConnection {
+                val serviceConn = object : ServiceConnection {
                     override fun onServiceConnected(name: ComponentName, service: IBinder) {
                         // get notified when DavService is running
                         davService = service as DavService.InfoBinder
@@ -437,13 +440,17 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
                         davService = null
                     }
                 }
-                context.bindService(Intent(context, DavService::class.java), davServiceConn, Context.BIND_AUTO_CREATE)
+                if (context.bindService(Intent(context, DavService::class.java), serviceConn, Context.BIND_AUTO_CREATE))
+                    davServiceConn = serviceConn
             } else
                 forceLoad()
         }
 
         override fun onReset() {
-            ContentResolver.removeStatusChangeListener(syncStatusListener)
+            syncStatusListener?.let {
+                ContentResolver.removeStatusChangeListener(it)
+                syncStatusListener = null
+            }
 
             davService?.removeRefreshingStatusListener(this)
             davServiceConn?.let {
@@ -519,6 +526,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
             return false
         }
 
+        @SuppressLint("Recycle")
         private fun readCollections(db: SQLiteDatabase, service: Long): List<CollectionInfo> {
             val collections = LinkedList<CollectionInfo>()
             db.query(Collections._TABLE, null, Collections.SERVICE_ID + "=?", arrayOf(service.toString()),
@@ -544,7 +552,11 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
                             }
                         }
                     } finally {
-                        provider.release()
+                        @Suppress("DEPRECATION")
+                        if (Build.VERSION.SDK_INT >= 24)
+                            provider.close()
+                        else
+                            provider.release()
                     }
                 }
 
@@ -559,10 +571,10 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
     class AddressBookAdapter(
             context: Context
     ) : ArrayAdapter<CollectionInfo>(context, R.layout.account_carddav_item) {
-        override fun getView(position: Int, v: View?, parent: ViewGroup?): View {
-            val v = v
+        override fun getView(position: Int, _v: View?, parent: ViewGroup?): View {
+            val v = _v
                     ?: LayoutInflater.from(context).inflate(R.layout.account_carddav_item, parent, false)
-            val info = getItem(position)
+            val info = getItem(position)!!
 
             val checked: SwitchCompat = v.findViewById(R.id.checked)
             checked.isChecked = info.selected
@@ -588,10 +600,10 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
     class CalendarAdapter(
             context: Context
     ) : ArrayAdapter<CollectionInfo>(context, R.layout.account_caldav_item) {
-        override fun getView(position: Int, v: View?, parent: ViewGroup?): View {
-            val v = v
+        override fun getView(position: Int, _v: View?, parent: ViewGroup?): View {
+            val v = _v
                     ?: LayoutInflater.from(context).inflate(R.layout.account_caldav_item, parent, false)
-            val info = getItem(position)
+            val info = getItem(position)!!
 
             val enabled = info.selected || info.supportsVEVENT || info.supportsVTODO
             v.isEnabled = enabled
@@ -643,8 +655,9 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
 
         }
 
+        @SuppressLint("Recycle")
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            val oldAccount: Account = arguments!!.getParcelable(ARG_ACCOUNT)
+            val oldAccount: Account = arguments!!.getParcelable(ARG_ACCOUNT)!!
 
             val editText = EditText(activity)
             val linearLayout = LinearLayout(activity)
@@ -672,9 +685,19 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
                         if (newName == oldAccount.name)
                             return@OnClickListener
 
+                        // remember sync intervals
+                        val oldSettings = AccountSettings(requireActivity(), oldAccount)
+                        val authorities = arrayOf(
+                                getString(R.string.address_books_authority),
+                                CalendarContract.AUTHORITY,
+                                TaskProvider.ProviderName.OpenTasks.authority
+                        )
+                        val syncIntervals = authorities.map { Pair(it, oldSettings.getSyncInterval(it)) }
+
                         val accountManager = AccountManager.get(activity)
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-                            accountManager.renameAccount(oldAccount, newName, { _ ->
+                            accountManager.renameAccount(oldAccount, newName, {
+                                // account has now been renamed
                                 Logger.log.info("Updating account name references")
 
                                 // cancel maybe running synchronization
@@ -697,6 +720,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
                                                     if (oldAccount == addressBook.mainAccount)
                                                         addressBook.mainAccount = Account(newName, oldAccount.type)
                                                 } finally {
+                                                    @Suppress("DEPRECATION")
                                                     if (Build.VERSION.SDK_INT >= 24)
                                                         provider.close()
                                                     else
@@ -717,8 +741,20 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
                                     Logger.log.log(Level.SEVERE, "Couldn't propagate new account name to tasks provider", e)
                                 }
 
+                                // retain sync intervals
+                                val newAccount = Account(newName, oldAccount.type)
+                                val newSettings = AccountSettings(requireActivity(), newAccount)
+                                for ((authority, interval) in syncIntervals) {
+                                    if (interval == null)
+                                        ContentResolver.setIsSyncable(newAccount, authority, 0)
+                                    else {
+                                        ContentResolver.setIsSyncable(newAccount, authority, 1)
+                                        newSettings.setSyncInterval(authority, interval)
+                                    }
+                                }
+
                                 // synchronize again
-                                requestSync(activity!!, Account(newName, oldAccount.type))
+                                requestSync(activity!!, newAccount)
                             }, null)
                         activity!!.finish()
                     })

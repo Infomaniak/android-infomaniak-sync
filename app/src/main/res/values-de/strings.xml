@@ -24,15 +24,13 @@
   <string name="startup_dont_show_again">Nicht mehr anzeigen</string>
   <string name="startup_not_now">Später</string>
   <string name="startup_donate">Open-Source-Information</string>
-  <string name="startup_donate_message">Es freut uns, dass Sie DAVdroid und damit Open-Source-Software (GPLv3) verwenden. Da in DAVdroid tausende Stunden harter Arbeit stecken und es immer noch weiter entwickelt wird, gibt es die Möglichkeit, uns zu spenden.</string>
+  <string name="startup_donate_message">Es freut uns, dass Sie DAVx⁵ und damit Open-Source-Software (GPLv3) verwenden. Da in DAVx⁵ tausende Stunden harter Arbeit stecken und es immer noch weiter entwickelt wird, gibt es die Möglichkeit, uns zu spenden.</string>
   <string name="startup_donate_now">Spendenseite anzeigen</string>
   <string name="startup_donate_later">Vielleicht später</string>
-  <string name="startup_google_play_accounts_removed">Möglicher Play Store DRM-Fehler</string>
-  <string name="startup_google_play_accounts_removed_message">Unter bestimmten Umständen verursacht die zwangsweise Play Store-Verschlüsselung, dass Accounts nach einem Neustart oder einem DAVdroid-Update verschwinden. Installieren Sie \"DAVdroid JB Workaround\", falls Sie von dem Problem betroffen sind.</string>
   <string name="startup_more_info">Mehr Infos</string>
   <string name="startup_opentasks_not_installed">OpenTasks nicht installiert</string>
   <string name="startup_opentasks_not_installed_message">Für die Synchronisierung von Aufgaben wird die freie App OpenTasks benötigt. (Nicht benötigt für Kontakte/Termine.)</string>
- <string name="startup_opentasks_reinstall_davdroid">Nach der Installation von OpenTasks muss Infomaniak Sync NEU INSTALLIERT und die Konten neu hinzugefügt werden (Android-Bug).</string>
+  <string name="startup_opentasks_reinstall_davx5">Nach der Installation von OpenTasks muss DAVx⁵ NEU INSTALLIERT und die Konten neu hinzugefügt werden (Android-Bug).</string>
   <string name="startup_opentasks_not_installed_install">OpenTasks installieren</string>
   <!--AboutActivity-->
   <string name="about_libraries">Bibliotheken</string>
@@ -42,10 +40,10 @@
   <string name="about_flavor_info">Diese Version ist nur zur Verteilung über Google Play bestimmt.</string>
   <string name="about_license_info_no_warranty">Dieses Programm wird OHNE JEDE GEWÄHRLEISTUNG bereitgestellt. Es ist freie Software – Sie können es also unter bestimmten Bedingungen weiterverbreiten.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Infomaniak Sync Datei-Protokollierung</string>
-  <string name="logging_to_external_storage">Protokollierung auf externen Speicher: %s</string>
-  <string name="logging_couldnt_create_file">Protokoll konnte nicht angelegt werden: %s</string>
-  <string name="logging_no_external_storage">Kein externer Speicher gefunden</string>
+  <string name="logging_couldnt_create_file">Protokolldatei konnte nicht angelegt werden</string>
+  <string name="logging_notification_title">Infomaniak Sync-Protokollierung</string>
+  <string name="logging_notification_text">Alle Infomaniak Sync-Aktivitäten werden protokolliert</string>
+  <string name="logging_notification_send_log">Protokoll senden</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Hauptmenü anzeigen</string>
   <string name="navigation_drawer_close">Hauptmenü schließen</string>
@@ -70,10 +68,12 @@
   <string name="dav_service_refresh_couldnt_refresh">Ordnerliste konnte nicht aktualisiert werden</string>
   <!--AppSettingsActivity-->
   <string name="app_settings">Einstellungen</string>
-  <string name="app_settings_user_interface">Oberfläche</string>
-  <string name="app_settings_reset_hints">Hinweise zurücksetzen</string>
-  <string name="app_settings_reset_hints_summary">Hinweise, die deaktiviert wurden, wieder anzeigen</string>
-  <string name="app_settings_reset_hints_success">Alle Hinweise werden wieder angezeigt</string>
+  <string name="app_settings_debug">Fehlersuche</string>
+  <string name="app_settings_show_debug_info">Informationen zur Fehlersuche</string>
+  <string name="app_settings_show_debug_info_details">Software- und Konfigurationsdetails anzeigen und teilen</string>
+  <string name="app_settings_logging">Ausführliche Protokollierung</string>
+  <string name="app_settings_logging_on">Protokollierung läuft</string>
+  <string name="app_settings_logging_off">Keine Protokollierung</string>
   <string name="app_settings_connection">Verbindung</string>
   <string name="app_settings_override_proxy">Proxy-Einstellungen überschreiben</string>
   <string name="app_settings_override_proxy_on">Eigene Proxy-Einstellungen werden verwendet</string>
@@ -87,12 +87,10 @@
   <string name="app_settings_reset_certificates">Zertifikat-Vertrauen zurücksetzen</string>
   <string name="app_settings_reset_certificates_summary">Setzt angenommene/abgelehnte Zertifikate zurück</string>
   <string name="app_settings_reset_certificates_success">Alle Informationen über angenommene/abgelehnte Zertifikate wurden zurückgesetzt</string>
-  <string name="app_settings_debug">Fehlersuche</string>
-  <string name="app_settings_log_to_external_storage">Protokollierung in externe Datei</string>
-  <string name="app_settings_log_to_external_storage_on">Protokolliert auf externen Speicher, falls möglich</string>
-  <string name="app_settings_log_to_external_storage_off">Protokollierung auf externen Speicher deaktiviert</string>
-  <string name="app_settings_show_debug_info">Informationen zur Fehlersuche</string>
-  <string name="app_settings_show_debug_info_details">Software- und Konfigurationsdetails anzeigen und teilen</string>
+  <string name="app_settings_user_interface">Oberfläche</string>
+  <string name="app_settings_reset_hints">Hinweise zurücksetzen</string>
+  <string name="app_settings_reset_hints_summary">Hinweise, die deaktiviert wurden, wieder anzeigen</string>
+  <string name="app_settings_reset_hints_success">Alle Hinweise werden wieder angezeigt</string>
   <!--AccountActivity-->
   <string name="account_sync_all_calendars">Alle Kalender Synchronisieren</string>
   <string name="account_synchronize_now">Jetzt synchronisieren</string>
@@ -118,7 +116,7 @@
   <string name="account_refresh_calendar_list">Kalender neu erkennen</string>
   <string name="account_create_new_calendar">Neuen Kalender erstellen</string>
   <string name="account_no_webcal_handler_found">Keine Webcal-App gefunden</string>
-  <string name="account_install_icsdroid">ICSdroid installieren</string>
+  <string name="account_install_icsx5">ICSx⁵ installieren</string>
   <!--AddAccountActivity-->
   <string name="login_title">Konto hinzufügen</string>
   <string name="login_type_email">Mit Email-Adresse anmelden</string>
@@ -184,10 +182,6 @@
   <string name="settings_sync_wifi_only_ssids_message">Erlaubte WLAN-Namen (SSIDs, mit Beistrich getrennt, leer lassen für alle)</string>
   <string name="settings_carddav">CardDAV</string>
   <string name="settings_contact_group_method">Kontaktgruppen-Methode</string>
-  <string-array name="settings_contact_group_method_values">
-    <item>GROUP_VCARDS</item>
-    <item>CATEGORIES</item>
-  </string-array>
   <string-array name="settings_contact_group_method_entries">
     <item>Gruppen sind eigene VCards</item>
     <item>Gruppen sind Kategorien der Kontakte</item>

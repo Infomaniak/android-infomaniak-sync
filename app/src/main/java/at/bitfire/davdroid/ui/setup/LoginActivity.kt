@@ -12,9 +12,9 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import at.bitfire.davdroid.R
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -105,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
         try {
             mutex.unlock()
         } catch (e: IllegalMonitorStateException) {
-            mutex = ReentrantLock (true)
+            mutex = ReentrantLock(true)
         }
     }
 

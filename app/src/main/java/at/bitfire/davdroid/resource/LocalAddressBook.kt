@@ -28,9 +28,9 @@ import java.util.logging.Level
 
 /**
  * A local address book. Requires an own Android account, because Android manages contacts per
- * account and there is no such thing as "address books". So, DAVdroid creates a "DAVdroid
+ * account and there is no such thing as "address books". So, DAVx5 creates a "DAVx5
  * address book" account for every CardDAV address book. These accounts are bound to a
- * DAVdroid main account.
+ * DAVx5 main account.
  */
 class LocalAddressBook(
         private val context: Context,
@@ -191,6 +191,7 @@ class LocalAddressBook(
 
     fun delete() {
         val accountManager = AccountManager.get(context)
+        @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= 22)
             accountManager.removeAccount(account, null, null, null)
         else
@@ -234,14 +235,6 @@ class LocalAddressBook(
 
     fun findDirtyContacts() = queryContacts("${RawContacts.DIRTY}!=0", null)
     fun findDirtyGroups() = queryGroups("${Groups.DIRTY}!=0", null)
-
-    private fun queryContactsGroups(whereContacts: String?, whereArgsContacts: Array<String>?, whereGroups: String?, whereArgsGroups: Array<String>?): List<LocalAddress> {
-        val contacts = queryContacts(whereContacts, whereArgsContacts)
-        return if (includeGroups)
-            contacts + queryGroups(whereGroups, whereArgsGroups)
-        else
-            contacts
-    }
 
 
     /**

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">Infomaniak Sync</string>
+  <string name="app_name">DAVx⁵</string>
   <string name="help">Yardım</string>
   <string name="manage_accounts">Hesapları yönet</string>
   <string name="please_wait">Lütfen bekle …</string>
@@ -9,21 +9,15 @@
   <!--startup dialogs-->
   <string name="startup_dont_show_again">Bir daha gösterme</string>
   <string name="startup_donate">Açık-Kaynak Bilgisi</string>
-  <string name="startup_donate_message">Açık kaynaklı yazılım (GPLv3) olan DAVdroid\'i kullandığına çok mutluyuz. DAVdroid\'i geliştirmek zor bir iş ve üzerinde binlerce saat çalıştığımızdan, lütfen bir bağışta bulunmayı düşün.</string>
+  <string name="startup_donate_message">Açık kaynaklı yazılım (GPLv3) olan DAVx⁵\'i kullandığına çok mutluyuz. DAVx⁵\'i geliştirmek zor bir iş ve üzerinde binlerce saat çalıştığımızdan, lütfen bir bağışta bulunmayı düşün.</string>
   <string name="startup_donate_now">Bağış sayfasını göster</string>
   <string name="startup_donate_later">Belki sonra</string>
-  <string name="startup_google_play_accounts_removed">Play Store DRM hata bilgisi</string>
-  <string name="startup_google_play_accounts_removed_message">Bazı durumlarda Play Store DRM\'i, cihazı yeniden başlatınca veya DAVdroid\'i yükseltince DAVdroid hesaplarının yokolmasına sebep olabiliyor. Bu sorundan etkileniyorsan (ve sadece bu durumda), lütfen Play Store\'daki \"DAVdroid JB Workaround\" uygulamasını kur.</string>
   <string name="startup_opentasks_not_installed">OpenTasks kurulu değil</string>
- <string name="startup_opentasks_reinstall_davdroid">OpenTasks\'i kurduktan sonra, Infomaniak Sync\'i YENİDEN KURMAN ve hesaplarını yeniden eklemen gerek. (Android hatası).</string>
+  <string name="startup_opentasks_reinstall_davx5">OpenTasks\'i kurduktan sonra, DAVx⁵\'i YENİDEN KURMAN ve hesaplarını yeniden eklemen gerek. (Android hatası).</string>
   <string name="startup_opentasks_not_installed_install">OpenTasks kur</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Bu uygulama HİÇ BİR GARANTİ ile gelmemektedir. Bedava bir yazılımdır ve belli koşullar altında dağıtabilirsiniz.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Infomaniak Sync dosya jurnallemesi</string>
-  <string name="logging_to_external_storage">Harici depolamaya jurnalleniyor: %s</string>
-  <string name="logging_couldnt_create_file">Harici jurnal dosyası yaratılamadı: %s </string>
-  <string name="logging_no_external_storage">Harici depolama alanı bulunamadı</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Navigasyon çekmecesini aç</string>
   <string name="navigation_drawer_close">Navigasyon çekmecesini kapat</string>
@@ -35,23 +29,20 @@
   <string name="navigation_drawer_website">Web sitesi</string>
   <string name="navigation_drawer_faq">SSS</string>
   <string name="navigation_drawer_donate">Bağış yap</string>
-  <string name="account_list_empty">Infomaniak Sync\'e hoşgeldin!\n\nŞimdi bir Infomaniak hesabı ekleyebilirsin.</string>
+  <string name="account_list_empty">DAVx⁵\'e hoşgeldin!\n\nŞimdi bir CalDAV/CardDAV hesabı ekleyebilirsin.</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">Servis keşfi başarısız</string>
   <string name="dav_service_refresh_couldnt_refresh">Kolleksiyon listesi yenilenemedi</string>
   <!--AppSettingsActivity-->
   <string name="app_settings">Ayarlar</string>
+  <string name="app_settings_debug">Hata ayıklama</string>
+  <string name="app_settings_show_debug_info">Hata ayıklama bilgilerini göster</string>
+  <string name="app_settings_show_debug_info_details">Yazılım ve konfigürasyon detaylarına bak/paylaş</string>
+  <string name="app_settings_security">Güvenlik</string>
   <string name="app_settings_user_interface">Kullanıcı arayüzü</string>
   <string name="app_settings_reset_hints">İpuçlarını sıfırla</string>
   <string name="app_settings_reset_hints_summary">Daha önceden azat edilen ipuçlarını yeniden etkinleştirir</string>
   <string name="app_settings_reset_hints_success">Tüm ipuçları artık gösterilecek</string>
-  <string name="app_settings_security">Güvenlik</string>
-  <string name="app_settings_debug">Hata ayıklama</string>
-  <string name="app_settings_log_to_external_storage">Harici dosyaya jurnalle</string>
-  <string name="app_settings_log_to_external_storage_on">Harici depolamaya jurnalleniyor (eğer uygunsa)</string>
-  <string name="app_settings_log_to_external_storage_off">Harici depolama mevcut değil</string>
-  <string name="app_settings_show_debug_info">Hata ayıklama bilgilerini göster</string>
-  <string name="app_settings_show_debug_info_details">Yazılım ve konfigürasyon detaylarına bak/paylaş</string>
   <!--AccountActivity-->
   <string name="account_synchronize_now">Şimdi senkronize et</string>
   <string name="account_synchronizing_now">Senkronize ediyor</string>
@@ -112,8 +103,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Bu sayıdan daha eski olan olaylar yok sayılacaktır (0 olabilir). Tüm olayları senkronize etmek için boş bırak.</string>
   <string name="settings_manage_calendar_colors">Takvim renklerini yönet</string>
-  <string name="settings_manage_calendar_colors_on">Takvim renkleri Infomaniak Sync tarafından yönetilmekte</string>
-  <string name="settings_manage_calendar_colors_off">Takvim renkleri Infomaniak Sync tarafından ayarlanmadı</string>
+  <string name="settings_manage_calendar_colors_on">Takvim renkleri DAVx⁵ tarafından yönetilmekte</string>
+  <string name="settings_manage_calendar_colors_off">Takvim renkleri DAVx⁵ tarafından ayarlanmadı</string>
   <!--collection management-->
   <string name="create_addressbook">Rehber yarat</string>
   <string name="create_addressbook_display_name_hint">Benim Rehberim</string>
@@ -143,7 +134,7 @@
   <string name="exception_show_details">Detayları göster</string>
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Hata ayıklama bilgisi</string>
-  <string name="sync_error_permissions">Infomaniak Sync izinleri</string>
+  <string name="sync_error_permissions">DAVx⁵ izinleri</string>
   <string name="sync_error_permissions_text">Ek izinler zorunludur</string>
   <!--cert4android-->
 </resources>

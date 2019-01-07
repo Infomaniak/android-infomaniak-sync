@@ -13,21 +13,20 @@ import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract.Groups
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import at.bitfire.dav4android.DavAddressBook
 import at.bitfire.dav4android.DavResource
 import at.bitfire.dav4android.DavResponseCallback
 import at.bitfire.dav4android.Response
 import at.bitfire.dav4android.exception.DavException
 import at.bitfire.dav4android.property.*
-import at.bitfire.davdroid.AccountSettings
 import at.bitfire.davdroid.DavUtils
 import at.bitfire.davdroid.HttpClient
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.SyncState
 import at.bitfire.davdroid.resource.*
-import at.bitfire.davdroid.settings.ISettings
+import at.bitfire.davdroid.settings.AccountSettings
 import at.bitfire.davdroid.ui.NotificationUtils
 import at.bitfire.vcard4android.BatchOperation
 import at.bitfire.vcard4android.Contact
@@ -59,10 +58,10 @@ import java.util.logging.Level
  *   to be checked whether its group memberships have changed. In this case, the respective
  *   groups have to be set to dirty. For instance, if contact A is in group G and H, and then
  *   group membership of G is removed, the contact will be set to dirty because of the changed
- *   [android.provider.ContactsContract.CommonDataKinds.GroupMembership]. DAVdroid will
+ *   [android.provider.ContactsContract.CommonDataKinds.GroupMembership]. DAVx5 will
  *   then have to check whether the group memberships have actually changed, and if so,
  *   all affected groups have to be set to dirty. To detect changes in group memberships,
- *   DAVdroid always mirrors all [android.provider.ContactsContract.CommonDataKinds.GroupMembership]
+ *   DAVx5 always mirrors all [android.provider.ContactsContract.CommonDataKinds.GroupMembership]
  *   data rows in respective [at.bitfire.vcard4android.CachedGroupMembership] rows.
  *   If the cached group memberships are not the same as the current group member ships, the
  *   difference set (in our example G, because its in the cached memberships, but not in the
@@ -76,7 +75,6 @@ import java.util.logging.Level
  */
 class ContactsSyncManager(
         context: Context,
-        settings: ISettings,
         account: Account,
         accountSettings: AccountSettings,
         extras: Bundle,
@@ -84,7 +82,7 @@ class ContactsSyncManager(
         syncResult: SyncResult,
         val provider: ContentProviderClient,
         localAddressBook: LocalAddressBook
-): SyncManager<LocalAddress, LocalAddressBook, DavAddressBook>(context, settings, account, accountSettings, extras, authority, syncResult, localAddressBook) {
+): SyncManager<LocalAddress, LocalAddressBook, DavAddressBook>(context, account, accountSettings, extras, authority, syncResult, localAddressBook) {
 
     companion object {
         infix fun <T> Set<T>.disjunct(other: Set<T>) = (this - other) union (other - this)
@@ -130,12 +128,12 @@ class ContactsSyncManager(
             var syncState: SyncState? = null
             it.propfind(0, SupportedAddressData.NAME, SupportedReportSet.NAME, GetCTag.NAME, SyncToken.NAME) { response, relation ->
                 if (relation == Response.HrefRelation.SELF) {
-                    response[SupportedAddressData::class.java]?.let {
-                        hasVCard4 = it.hasVCard4()
+                    response[SupportedAddressData::class.java]?.let { supported ->
+                        hasVCard4 = supported.hasVCard4()
                     }
 
-                    response[SupportedReportSet::class.java]?.let {
-                        hasCollectionSync = it.reports.contains(SupportedReportSet.SYNC_COLLECTION)
+                    response[SupportedReportSet::class.java]?.let { supported ->
+                        hasCollectionSync = supported.reports.contains(SupportedReportSet.SYNC_COLLECTION)
                     }
 
                     syncState = syncState(response)
@@ -317,6 +315,11 @@ class ContactsSyncManager(
             useRemoteCollection {
                 it.multiget(bunch, hasVCard4) { response, _ ->
                     useRemote(response) {
+                        if (!response.isSuccess()) {
+                            Logger.log.warning("Received non-successful multiget response for ${response.href}")
+                            return@useRemote
+                        }
+
                         val eTag = response[GetETag::class.java]?.eTag
                                 ?: throw DavException("Received multi-get response without ETag")
 
@@ -397,15 +400,15 @@ class ContactsSyncManager(
             if (local == null) {
                 if (newData.group) {
                     Logger.log.log(Level.INFO, "Creating local group", newData)
-                    useLocal(LocalGroup(localCollection, newData, fileName, eTag, LocalResource.FLAG_REMOTELY_PRESENT)) {
-                        it.add()
-                        local = it
+                    useLocal(LocalGroup(localCollection, newData, fileName, eTag, LocalResource.FLAG_REMOTELY_PRESENT)) { group ->
+                        group.add()
+                        local = group
                     }
                 } else {
                     Logger.log.log(Level.INFO, "Creating local contact", newData)
-                    useLocal(LocalContact(localCollection, newData, fileName, eTag, LocalResource.FLAG_REMOTELY_PRESENT)) {
-                        it.add()
-                        local = it
+                    useLocal(LocalContact(localCollection, newData, fileName, eTag, LocalResource.FLAG_REMOTELY_PRESENT)) { contact ->
+                        contact.add()
+                        local = contact
                     }
                 }
                 syncResult.stats.numInserts++
@@ -444,12 +447,6 @@ class ContactsSyncManager(
             val httpUrl = HttpUrl.parse(url)
             if (httpUrl == null) {
                 Logger.log.log(Level.SEVERE, "Invalid external resource URL", url)
-                return null
-            }
-
-            val host = httpUrl.host()
-            if (host == null) {
-                Logger.log.log(Level.SEVERE, "External resource URL doesn't specify a host name", url)
                 return null
             }
 

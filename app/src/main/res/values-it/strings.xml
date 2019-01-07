@@ -23,24 +23,18 @@
   <string name="startup_not_now">In un secondo momento</string>
   <string name="startup_dont_show_again">Non mostrare più</string>
   <string name="startup_donate">Informazioni sull\'Open-Source</string>
-  <string name="startup_donate_message">Siamo soddisfatti del tuo uso di DAVdroid, programma Open-Source (GPLv3). Poiché lo sviluppo è un\'iniziativa complessa che comporta molte ore di lavoro ti invitiamo a fare una donazione.</string>
+  <string name="startup_donate_message">Siamo soddisfatti del tuo uso di DAVx⁵, programma Open-Source (GPLv3). Poiché lo sviluppo è un\'iniziativa complessa che comporta molte ore di lavoro ti invitiamo a fare una donazione.</string>
   <string name="startup_donate_now">Mostra pagina donazioni</string>
   <string name="startup_donate_later">Più tardi</string>
-  <string name="startup_google_play_accounts_removed">Informazioni sul bug del DRM di Play Store</string>
-  <string name="startup_google_play_accounts_removed_message">In alcune condizioni il DRM di Play Store può causare la perdita di tutti gli account DAVdroid dopo un riavvio o dopo un aggiornamento di DAVdroid. Se verificate questo problema installate successivamente \"DAVdroid JB Workaround\" da Play Store.</string>
   <string name="startup_more_info">Più informazioni</string>
   <string name="startup_opentasks_not_installed">OpenTasks non installata</string>
   <string name="startup_opentasks_not_installed_message">Per sincronizzare le attività è richiesta l\'app gratuita OpenTasks. (Non richiesta per contatti/eventi.)</string>
-  <string name="startup_opentasks_reinstall_davdroid">Dopo l\'installazione di OpenTasks è necessario INSTALLARE NUOVAMENTE Infomaniak Sync e aggiungere ancora gli account (per un bug di Android).</string>
+  <string name="startup_opentasks_reinstall_davx5">Dopo l\'installazione di OpenTasks è necessario INSTALLARE NUOVAMENTE Infomaniak Sync e aggiungere ancora gli account (per un bug di Android).</string>
   <string name="startup_opentasks_not_installed_install">Installa OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync consente di sincronizzare i contatti e i calendari del WorkSpace, la webmail dell\'host Infomaniak.<br>Questa applicazione è un fork della soluzione OpenSource <a href=\'https://www.davdroid.com/\'>DAVDroid</a>.]]></string>
   <string name="about_license_info_no_warranty">Il programma è distribuito SENZA ALCUNA GARANZIA. È software libero e può essere redistribuito sotto alcune condizioni.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Invio del log di Infomaniak Sync su file</string>
-  <string name="logging_to_external_storage">Log su dispositivo esterno: %s</string>
-  <string name="logging_couldnt_create_file">Non riesco a creare il file di log esterno: %s</string>
-  <string name="logging_no_external_storage">Dispositivo esterno non disponibile</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Apri barra di navigazione</string>
   <string name="navigation_drawer_close">Chiudi barra di navigazione</string>
@@ -64,10 +58,9 @@
   <string name="dav_service_refresh_couldnt_refresh">Impossibile aggiornare la lista delle raccolte</string>
   <!--AppSettingsActivity-->
   <string name="app_settings">Impostazioni</string>
-  <string name="app_settings_user_interface">Interfaccia utente</string>
-  <string name="app_settings_reset_hints">Reimposta i suggerimenti</string>
-  <string name="app_settings_reset_hints_summary">Riabilita i suggerimenti precedentemente disabilitati</string>
-  <string name="app_settings_reset_hints_success">I suggerimenti verranno mostrati</string>
+  <string name="app_settings_debug">Debug</string>
+  <string name="app_settings_show_debug_info">Mostra informazioni di debug</string>
+  <string name="app_settings_show_debug_info_details">Mostra e condividi i dettagli del programma e della configurazione</string>
   <string name="app_settings_connection">Connessione</string>
   <string name="app_settings_override_proxy">Non rispettare la impostazioni del proxy</string>
   <string name="app_settings_override_proxy_on">Impostazioni personalizzate del proxy</string>
@@ -81,12 +74,10 @@
   <string name="app_settings_reset_certificates">Reimposta la fiducia in tutti i certificati</string>
   <string name="app_settings_reset_certificates_summary">Reimposta la fiducia nei certificati aggiunti</string>
   <string name="app_settings_reset_certificates_success">Sono stati cancellati tutti i certificati aggiunti</string>
-  <string name="app_settings_debug">Debug</string>
-  <string name="app_settings_log_to_external_storage">Log su file esterno</string>
-  <string name="app_settings_log_to_external_storage_on">Log su dispositivo esterno (se disponibile)</string>
-  <string name="app_settings_log_to_external_storage_off">Log su file esterno disabilitato</string>
-  <string name="app_settings_show_debug_info">Mostra informazioni di debug</string>
-  <string name="app_settings_show_debug_info_details">Mostra e condividi i dettagli del programma e della configurazione</string>
+  <string name="app_settings_user_interface">Interfaccia utente</string>
+  <string name="app_settings_reset_hints">Reimposta i suggerimenti</string>
+  <string name="app_settings_reset_hints_summary">Riabilita i suggerimenti precedentemente disabilitati</string>
+  <string name="app_settings_reset_hints_success">I suggerimenti verranno mostrati</string>
   <!--AccountActivity-->
   <string name="account_sync_all_calendars">Sincronizzare tutti i calendari</string>
   <string name="account_synchronize_now">Sincronizza adesso</string>
@@ -109,7 +100,6 @@
   <string name="account_create_new_address_book">Crea un nuovo indirizzario</string>
   <string name="account_refresh_calendar_list">Aggiorna lista calendari</string>
   <string name="account_create_new_calendar">Crea nuovo calendario</string>
-  <string name="account_install_icsdroid">Installa ICSdroid</string>
   <!--AddAccountActivity-->
   <string name="login_title">Aggiungi account</string>
   <string name="login_type_email">Accedi con indirizzo email</string>
@@ -171,10 +161,6 @@
   <string name="settings_sync_wifi_only_ssids_message">Nomi (SSID) delle reti WiFi autorizzate separati da virgola (lascia vuoto per autorizzarle tutte)</string>
   <string name="settings_carddav">CardDAV</string>
   <string name="settings_contact_group_method">Organizzazione dei gruppi di contatto</string>
-  <string-array name="settings_contact_group_method_values">
-    <item>GROUP_VCARDS</item>
-    <item>CATEGORIES</item>
-  </string-array>
   <string-array name="settings_contact_group_method_entries">
     <item>I gruppi sono VCards separate</item>
     <item>I gruppi sono categorie per ogni contatto</item>

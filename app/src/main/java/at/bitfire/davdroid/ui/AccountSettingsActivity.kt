@@ -11,7 +11,6 @@ package at.bitfire.davdroid.ui
 import android.Manifest
 import android.accounts.Account
 import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.content.SyncStatusObserver
 import android.content.pm.PackageManager
@@ -22,22 +21,19 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.CalendarContract
 import android.security.KeyChain
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.app.NavUtils
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.Loader
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.preference.*
 import android.view.MenuItem
-import at.bitfire.davdroid.AccountSettings
-import at.bitfire.davdroid.InvalidAccountException
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NavUtils
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
+import androidx.preference.*
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.model.Credentials
 import at.bitfire.davdroid.resource.LocalCalendar
-import at.bitfire.davdroid.settings.ISettings
+import at.bitfire.davdroid.settings.AccountSettings
+import at.bitfire.davdroid.settings.Settings
 import at.bitfire.ical4android.AndroidCalendar
 import at.bitfire.ical4android.TaskProvider
 import at.bitfire.vcard4android.GroupMethod
@@ -79,25 +75,50 @@ class AccountSettingsActivity: AppCompatActivity() {
                 false
 
 
-    class AccountSettingsFragment: PreferenceFragmentCompat(), LoaderManager.LoaderCallbacks<Pair<ISettings, AccountSettings>> {
+    class AccountSettingsFragment: PreferenceFragmentCompat(), SyncStatusObserver, Settings.OnChangeListener {
+        private lateinit var settings: Settings
+
         lateinit var account: Account
+        private var statusChangeListener: Any? = null
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-
-            account = arguments!!.getParcelable(EXTRA_ACCOUNT)
-            loaderManager.initLoader(0, arguments, this)
+            settings = Settings.getInstance(requireActivity())
+            account = arguments!!.getParcelable(EXTRA_ACCOUNT)!!
         }
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             addPreferencesFromResource(R.xml.settings_account)
         }
 
-        override fun onCreateLoader(id: Int, args: Bundle?) =
-                AccountSettingsLoader(requireActivity(), args!!.getParcelable(EXTRA_ACCOUNT))
+        override fun onResume() {
+            super.onResume()
 
-        override fun onLoadFinished(loader: Loader<Pair<ISettings, AccountSettings>>, result: Pair<ISettings, AccountSettings>?) {
-            val (settings, accountSettings) = result ?: return
+            statusChangeListener = ContentResolver.addStatusChangeListener(ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS, this)
+            settings.addOnChangeListener(this)
+
+            reload()
+        }
+
+        override fun onPause() {
+            super.onPause()
+            statusChangeListener?.let {
+                ContentResolver.removeStatusChangeListener(it)
+                statusChangeListener = null
+            }
+            settings.removeOnChangeListener(this)
+        }
+
+        override fun onStatusChanged(which: Int) {
+            Handler(Looper.getMainLooper()).post {
+                reload()
+            }
+        }
+
+        override fun onSettingsChanged()  = reload()
+
+        fun reload() {
+            val accountSettings = AccountSettings(requireActivity(), account)
 
             // preference group: authentication
             val prefUserName = findPreference("username") as EditTextPreference
@@ -112,14 +133,14 @@ class AccountSettingsActivity: AppCompatActivity() {
                     prefUserName.text = credentials.userName
                     prefUserName.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         accountSettings.credentials(Credentials(newValue as String, credentials.password))
-                        loaderManager.restartLoader(0, arguments, this)
+                        reload()
                         false
                     }
 
                     prefPassword.isVisible = false
                     prefPassword.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         accountSettings.credentials(Credentials(credentials.userName, newValue as String))
-                        loaderManager.restartLoader(0, arguments, this)
+                        reload()
                         false
                     }
 
@@ -132,10 +153,10 @@ class AccountSettingsActivity: AppCompatActivity() {
                     prefCertAlias.isVisible = true
                     prefCertAlias.summary = credentials.certificateAlias
                     prefCertAlias.setOnPreferenceClickListener {
-                        KeyChain.choosePrivateKeyAlias(activity, { alias ->
+                        KeyChain.choosePrivateKeyAlias(requireActivity(), { alias ->
                             accountSettings.credentials(Credentials(certificateAlias = alias))
                             Handler(Looper.getMainLooper()).post {
-                                loaderManager.restartLoader(0, arguments, this)
+                                reload()
                             }
                         }, null, null, null, -1, credentials.certificateAlias)
                         true
@@ -159,7 +180,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                         it.summary = getString(R.string.settings_sync_summary_periodically, syncIntervalContacts / 60)
                     it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         accountSettings.setSyncInterval(getString(R.string.address_books_authority), (newValue as String).toLong())
-                        loaderManager.restartLoader(0, arguments, this)
+                        reload()
                         false
                     }
                 } else
@@ -176,7 +197,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                         it.summary = getString(R.string.settings_sync_summary_periodically, syncIntervalCalendars / 60)
                     it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         accountSettings.setSyncInterval(CalendarContract.AUTHORITY, (newValue as String).toLong())
-                        loaderManager.restartLoader(0, arguments, this)
+                        reload()
                         false
                     }
                 } else
@@ -193,7 +214,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                         it.summary = getString(R.string.settings_sync_summary_periodically, syncIntervalTasks / 60)
                     it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         accountSettings.setSyncInterval(TaskProvider.ProviderName.OpenTasks.authority, (newValue as String).toLong())
-                        loaderManager.restartLoader(0, arguments, this)
+                        reload()
                         false
                     }
                 } else
@@ -205,7 +226,7 @@ class AccountSettingsActivity: AppCompatActivity() {
             prefWifiOnly.isChecked = accountSettings.getSyncWifiOnly()
             prefWifiOnly.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, wifiOnly ->
                 accountSettings.setSyncWiFiOnly(wifiOnly as Boolean)
-                loaderManager.restartLoader(0, arguments, this)
+                reload()
                 false
             }
 
@@ -218,7 +239,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                 prefWifiOnlySSIDs.setSummary(R.string.settings_sync_wifi_only_ssids_off)
             prefWifiOnlySSIDs.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                 accountSettings.setSyncWifiOnlySSIDs((newValue as String).split(',').mapNotNull { StringUtils.trimToNull(it) }.distinct())
-                loaderManager.restartLoader(0, arguments, this)
+                reload()
                 false
             }
 
@@ -247,7 +268,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                                     .setPositiveButton(android.R.string.ok) { _, _ ->
                                         // change group method
                                         accountSettings.setGroupMethod(GroupMethod.valueOf(groupMethod as String))
-                                        loaderManager.restartLoader(0, arguments, this)
+                                        reload()
 
                                         // reload all contacts
                                         val args = Bundle(1)
@@ -291,6 +312,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                                         calendar.lastSyncState = null
                                     }
                                 } finally {
+                                    @Suppress("DEPRECATION")
                                     if (Build.VERSION.SDK_INT >= 24)
                                         provider.close()
                                     else
@@ -299,7 +321,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                             }
                         }
 
-                        loaderManager.restartLoader(0, arguments, this)
+                        reload()
                         false
                     }
                 } else
@@ -313,7 +335,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                     it.isChecked = accountSettings.getManageCalendarColors()
                     it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         accountSettings.setManageCalendarColors(newValue as Boolean)
-                        loaderManager.restartLoader(0, arguments, this)
+                        reload()
                         false
                     }
                 } else
@@ -328,7 +350,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                     it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         if (newValue as Boolean) {
                             accountSettings.setEventColors(true)
-                            loaderManager.restartLoader(0, arguments, this)
+                            reload()
                         } else
                             AlertDialog.Builder(requireActivity())
                                     .setIcon(R.drawable.ic_error_dark)
@@ -337,7 +359,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                                     .setNegativeButton(android.R.string.cancel, null)
                                     .setPositiveButton(android.R.string.ok) { _, _ ->
                                         accountSettings.setEventColors(false)
-                                        loaderManager.restartLoader(0, arguments, this)
+                                        reload()
                                     }
                                     .show()
                         false
@@ -345,52 +367,6 @@ class AccountSettingsActivity: AppCompatActivity() {
                 } else
                     it.isVisible = false
             }
-        }
-
-        override fun onLoaderReset(loader: Loader<Pair<ISettings, AccountSettings>>) {
-        }
-
-    }
-
-
-    class AccountSettingsLoader(
-            context: Context,
-            val account: Account
-    ): SettingsLoader<Pair<ISettings, AccountSettings>?>(context), SyncStatusObserver {
-
-        private var listenerHandle: Any? = null
-
-        override fun onStartLoading() {
-            super.onStartLoading()
-
-            if (listenerHandle == null)
-                listenerHandle = ContentResolver.addStatusChangeListener(ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS, this)
-        }
-
-        override fun onReset() {
-            super.onReset()
-
-            listenerHandle?.let {
-                ContentResolver.removeStatusChangeListener(it)
-                listenerHandle = null
-            }
-        }
-
-        override fun loadInBackground(): Pair<ISettings, AccountSettings>? {
-            settings?.let { settings ->
-                try {
-                    return Pair(
-                            settings,
-                            AccountSettings(context, settings, account)
-                    )
-                } catch (e: InvalidAccountException) {
-                }
-            }
-            return null
-        }
-
-        override fun onStatusChanged(which: Int) {
-            onContentChanged()
         }
 
     }

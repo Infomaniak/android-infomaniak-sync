@@ -15,6 +15,9 @@
 # Kotlin
 -dontwarn kotlin.**
 
+# Apache Commons
+-dontwarn javax.script.**
+
 # ez-vcard
 -dontwarn ezvcard.io.json.**            # JSON serializer (for jCards) not used
 -dontwarn freemarker.**                 # freemarker templating library (for creating hCards) not used
@@ -32,9 +35,9 @@
 -keep class org.threeten.bp.** { *; }     # keep ThreeTen (for time zone processing)
 
 # okhttp
+-dontwarn javax.annotation.**
 -dontwarn okio.**
--dontwarn javax.annotation.Nullable
--dontwarn javax.annotation.ParametersAreNonnullByDefault
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn org.conscrypt.**
 
 # dnsjava

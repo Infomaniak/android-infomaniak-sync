@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">Infomaniak Sync</string>
-  <string name="account_title_address_book">Адресная книга Infomaniak Sync</string>
+  <string name="app_name">DAVx⁵</string>
+  <string name="account_title_address_book">Адресная книга DAVx⁵</string>
   <string name="address_books_authority_title">Адресные книги</string>
   <string name="help">Помощь</string>
   <string name="manage_accounts">Управление аккаунтами</string>
@@ -18,32 +18,29 @@
   <string name="startup_autostart_permission">Автоматическая синхронизация</string>
   <string name="startup_autostart_permission_message">%s ПО устройства часто блокирует автоматическую синхронизацию. В этом случае разрешите автоматическую синхронизацию в настройках Android.</string>
   <string name="startup_battery_optimization">Синхронизация по расписанию</string>
-  <string name="startup_battery_optimization_message">Ваше устройство будет блокировать синхронизацию DAVdroid. Чтобы обеспечить регулярные интервалы синхронизации DAVdroid, отключите оптимизацию энергопотребления.</string>
-  <string name="startup_battery_optimization_disable">Отключить для Infomaniak Sync</string>
+  <string name="startup_battery_optimization_message">Ваше устройство будет блокировать синхронизацию DAVx⁵. Чтобы обеспечить регулярные интервалы синхронизации DAVx⁵, отключите оптимизацию энергопотребления.</string>
+  <string name="startup_battery_optimization_disable">Отключить для DAVx⁵</string>
   <string name="startup_dont_show_again">Не показывать снова</string>
   <string name="startup_not_now">Не сейчас</string>
   <string name="startup_donate">Open-Source информация</string>
-  <string name="startup_donate_message">Мы рады, что вы используете DAVdroid, который является программным обеспечением с открытым исходным кодом (GPLv3). Поскольку разработка DAVdroid - тяжелая работа и заняла у нас нас очень много времени, пожалуйста, рассмотрите возможность поддержать проект.</string>
+  <string name="startup_donate_message">Мы рады, что вы используете DAVx⁵, который является программным обеспечением с открытым исходным кодом (GPLv3). Поскольку разработка DAVx⁵ - тяжелая работа и заняла у нас нас очень много времени, пожалуйста, рассмотрите возможность поддержать проект.</string>
   <string name="startup_donate_now">Показать страницу пожертвований</string>
   <string name="startup_donate_later">Возможно, позже</string>
-  <string name="startup_google_play_accounts_removed">Информация об ошибке в Play Store DRM</string>
-  <string name="startup_google_play_accounts_removed_message">При определенных условиях Play Store DRM может стать причиной потери всех DAVdroid аккаунтов после перезагрузки устройства или после обновления DAVdroid. Если Вы столкнулись с этой проблемой (и только в этом случае), установите \"DAVdroid JB Workaround\" из Play Store.</string>
   <string name="startup_more_info">Дополнительная информация</string>
   <string name="startup_opentasks_not_installed">OpenTasks не установлен</string>
   <string name="startup_opentasks_not_installed_message">Для синхронизации задач требуется бесплатное приложение OpenTasks. (Не требуется для контактов/событий.)</string>
- <string name="startup_opentasks_reinstall_davdroid">После установки OpenTasks необходимо ПЕРЕУСТАНОВИТЬ Infomaniak Sync и повторно добавить ваши аккаунты (проблема Android).</string>
+  <string name="startup_opentasks_reinstall_davx5">После установки OpenTasks необходимо ПЕРЕУСТАНОВИТЬ DAVx⁵ и повторно добавить ваши аккаунты (проблема Android).</string>
   <string name="startup_opentasks_not_installed_install">Установить OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Библиотеки</string>
   <string name="about_version">Версия %1s (%2d)</string>
   <string name="about_build_date">Скомпилировано %s</string>
-  <string name="about_flavor_info">Эта версия распространяется только через Google Play.</string>
+  <string name="about_flavor_info">Эта версия может распространяться только через Google Play.</string>
   <string name="about_license_info_no_warranty">Эта программа поставляется БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ. Это свободное программное обеспечение и вы можете распространять его при соблюдении определенных условий.</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Файл журнала Infomaniak Sync</string>
-  <string name="logging_to_external_storage">Сохранение логов во внешнем хранилище: %s</string>
-  <string name="logging_couldnt_create_file">Не удалось создать внешний файл журнала: %s</string>
-  <string name="logging_no_external_storage">Внешнее хранилище не найдено</string>
+  <string name="logging_couldnt_create_file">Не удалось создать файл журнала</string>
+  <string name="logging_notification_title">Журналирование DAVx⁵</string>
+  <string name="logging_notification_text">Сейчас вся активность DAVx⁵ журналируется</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Открыть панель навигации</string>
   <string name="navigation_drawer_close">Закрыть панель навигации</string>
@@ -58,7 +55,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">Помощь / Форумы</string>
   <string name="navigation_drawer_donate">Пожертвовать</string>
-  <string name="account_list_empty">Добро пожаловать в Infomaniak Sync\n\nТеперь вы можете добавить аккаунт Infomaniak.</string>
+  <string name="account_list_empty">Добро пожаловать в DAVx⁵\n\nТеперь вы можете добавить аккаунт CalDAV/CardDAV.</string>
   <string name="accounts_global_sync_disabled">Синхронизация отключена на уровне устройства</string>
   <string name="accounts_global_sync_enable">Включить</string>
   <!--DavService-->
@@ -66,10 +63,12 @@
   <string name="dav_service_refresh_couldnt_refresh">Не удалось обновить список коллекций</string>
   <!--AppSettingsActivity-->
   <string name="app_settings">Настройки</string>
-  <string name="app_settings_user_interface">Интерфейс пользователя</string>
-  <string name="app_settings_reset_hints">Включить подсказки</string>
-  <string name="app_settings_reset_hints_summary">Включить подсказки, которые были отключены ранее</string>
-  <string name="app_settings_reset_hints_success">Все подсказки будут показаны снова</string>
+  <string name="app_settings_debug">Отладка</string>
+  <string name="app_settings_show_debug_info">Показать отладочную информацию</string>
+  <string name="app_settings_show_debug_info_details">Просмотреть/поделиться сведениями о ПО и конфигурации</string>
+  <string name="app_settings_logging">Детальное журналирование</string>
+  <string name="app_settings_logging_on">Журналирование активно</string>
+  <string name="app_settings_logging_off">Журналирование отключено</string>
   <string name="app_settings_connection">Подключение</string>
   <string name="app_settings_override_proxy">Переопределить настройки прокси-сервера</string>
   <string name="app_settings_override_proxy_on">Использовать пользовательские настройки прокси-сервера</string>
@@ -83,12 +82,10 @@
   <string name="app_settings_reset_certificates">Сброс (не)доверенных сертификатов</string>
   <string name="app_settings_reset_certificates_summary">Отменить доверие ко всем пользовательским сертификатам</string>
   <string name="app_settings_reset_certificates_success">Все пользовательские сертификаты были удалены</string>
-  <string name="app_settings_debug">Отладка</string>
-  <string name="app_settings_log_to_external_storage">Сохранять лог во внешний файл</string>
-  <string name="app_settings_log_to_external_storage_on">Сохранение логов во внешнем хранилище (если доступно)</string>
-  <string name="app_settings_log_to_external_storage_off">Сохранение логов во внешний файл отключено</string>
-  <string name="app_settings_show_debug_info">Показать отладочную информацию</string>
-  <string name="app_settings_show_debug_info_details">Просмотреть/поделиться сведениями о ПО и конфигурации</string>
+  <string name="app_settings_user_interface">Интерфейс пользователя</string>
+  <string name="app_settings_reset_hints">Включить подсказки</string>
+  <string name="app_settings_reset_hints_summary">Включить подсказки, которые были отключены ранее</string>
+  <string name="app_settings_reset_hints_success">Все подсказки будут показаны снова</string>
   <!--AccountActivity-->
   <string name="account_synchronize_now">Синхронизировать</string>
   <string name="account_synchronizing_now">Синхронизация</string>
@@ -112,7 +109,7 @@
   <string name="account_refresh_calendar_list">Обновить список календарей</string>
   <string name="account_create_new_calendar">Создать новый календарь</string>
   <string name="account_no_webcal_handler_found">Не найдено приложение, поддерживающее WebCal</string>
-  <string name="account_install_icsdroid">Установить ICSdroid</string>
+  <string name="account_install_icsx5">Установить ICSx⁵</string>
   <!--AddAccountActivity-->
   <string name="login_title">Добавить аккаунт</string>
   <string name="login_type_email">Вход с адресом электронной почты</string>
@@ -174,10 +171,6 @@
   <string name="settings_sync_wifi_only_ssids_message">Названия (SSID), разделенные запятыми разрешенных сетей Wi-Fi (оставьте пустым для всех)</string>
   <string name="settings_carddav">CardDAV</string>
   <string name="settings_contact_group_method">Метод группировки контактов</string>
-  <string-array name="settings_contact_group_method_values">
-    <item>GROUP_VCARDS</item>
-    <item>CATEGORIES</item>
-  </string-array>
   <string-array name="settings_contact_group_method_entries">
     <item>Группы являются отдельными vCards</item>
     <item>Группы являются категориями контактов</item>
@@ -195,8 +188,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">События старше указанного количества дней будут игнорироваться (может быть 0). Оставьте пустым для синхронизации всех событий.</string>
   <string name="settings_manage_calendar_colors">Управление цветами календаря</string>
-  <string name="settings_manage_calendar_colors_on">Цвета календаря устанавливаются Infomaniak Sync</string>
-  <string name="settings_manage_calendar_colors_off">Цвета календаря не устанавливаются Infomaniak Sync</string>
+  <string name="settings_manage_calendar_colors_on">Цвета календаря устанавливаются DAVx⁵</string>
+  <string name="settings_manage_calendar_colors_off">Цвета календаря не устанавливаются DAVx⁵</string>
   <string name="settings_event_colors">Поддержка цвета событий</string>
   <string name="settings_event_colors_on">Синхронизация цветов событий</string>
   <string name="settings_event_colors_off">Не синхронизировать цвета событий</string>
@@ -240,17 +233,17 @@
     <item quantity="many">%d локальных изменений контакта отменены</item>
     <item quantity="other">%d локальных изменений контакта отменены</item>
   </plurals>
-  <string name="sync_error_permissions">Разрешения Infomaniak Sync</string>
+  <string name="sync_error_permissions">Разрешения DAVx⁵</string>
   <string name="sync_error_permissions_text">Требуются дополнительные разрешения</string>
   <string name="sync_error_opentasks_too_old">OpenTasks устарел</string>
   <string name="sync_error_opentasks_required_version">Требуется версия: %1$s (текущая %2$s)</string>
   <string name="sync_error_authentication_failed">Ошибка аутентификации (проверьте учетные данные)</string>
-  <string name="sync_error_io">Ошибка сети или ввода/вывода</string>
-  <string name="sync_error_http_dav">Ошибка HTTP-сервера</string>
-  <string name="sync_error_local_storage">Ошибка локального хранилища</string>
+  <string name="sync_error_io">Ошибка сети или ввода/вывода – %s</string>
+  <string name="sync_error_http_dav">Ошибка HTTP-сервера – %s</string>
+  <string name="sync_error_local_storage">Ошибка локального хранилища – %s</string>
   <string name="sync_error_retry">Повторить</string>
   <string name="sync_error_view_item">Просмотр элемента</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">Infomaniak Sync: безопасность подключения</string>
-  <string name="trust_certificate_unknown_certificate_found">Infomaniak Sync обнаружил неизвестный сертификат. Вы хотите доверять ему?</string>
+  <string name="certificate_notification_connection_security">DAVx⁵: безопасность подключения</string>
+  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ обнаружил неизвестный сертификат. Вы хотите доверять ему?</string>
 </resources>

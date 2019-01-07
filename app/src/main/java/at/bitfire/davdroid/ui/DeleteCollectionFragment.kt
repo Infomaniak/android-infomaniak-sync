@@ -13,20 +13,18 @@ import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.Loader
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import at.bitfire.dav4android.DavResource
-import at.bitfire.davdroid.AccountSettings
 import at.bitfire.davdroid.HttpClient
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.model.CollectionInfo
 import at.bitfire.davdroid.model.ServiceDB
-import at.bitfire.davdroid.settings.Settings
+import at.bitfire.davdroid.settings.AccountSettings
 
-@Suppress("DEPRECATION")
 class DeleteCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<Exception> {
 
     companion object {
@@ -40,12 +38,13 @@ class DeleteCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        account = arguments!!.getParcelable(ARG_ACCOUNT)
-        collectionInfo = arguments!!.getParcelable(ARG_COLLECTION_INFO)
+        account = arguments!!.getParcelable(ARG_ACCOUNT)!!
+        collectionInfo = arguments!!.getParcelable(ARG_COLLECTION_INFO)!!
 
-        loaderManager.initLoader(0, null, this)
+        LoaderManager.getInstance(this).initLoader(0, null, this)
     }
 
+    @Suppress("DEPRECATION")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val progress = ProgressDialog(context)
         progress.setTitle(R.string.delete_collection_deleting_collection)
@@ -83,24 +82,22 @@ class DeleteCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<
         override fun onStartLoading() = forceLoad()
 
         override fun loadInBackground(): Exception? {
-            Settings.getInstance(context)?.use { settings ->
-                HttpClient.Builder(context, settings, AccountSettings(context, settings, account))
-                        .setForeground(true)
-                        .build().use { httpClient ->
-                    try {
-                        val collection = DavResource(httpClient.okHttpClient, collectionInfo.url)
+            HttpClient.Builder(context, AccountSettings(context, account))
+                    .setForeground(true)
+                    .build().use { httpClient ->
+                try {
+                    val collection = DavResource(httpClient.okHttpClient, collectionInfo.url)
 
-                        // delete collection from server
-                        collection.delete(null) {}
+                    // delete collection from server
+                    collection.delete(null) {}
 
-                        // delete collection locally
-                        ServiceDB.OpenHelper(context).use { dbHelper ->
-                            val db = dbHelper.writableDatabase
-                            db.delete(ServiceDB.Collections._TABLE, "${ServiceDB.Collections.ID}=?", arrayOf(collectionInfo.id.toString()))
-                        }
-                    } catch(e: Exception) {
-                        return e
+                    // delete collection locally
+                    ServiceDB.OpenHelper(context).use { dbHelper ->
+                        val db = dbHelper.writableDatabase
+                        db.delete(ServiceDB.Collections._TABLE, "${ServiceDB.Collections.ID}=?", arrayOf(collectionInfo.id.toString()))
                     }
+                } catch(e: Exception) {
+                    return e
                 }
             }
             return null

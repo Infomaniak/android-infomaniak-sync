@@ -12,8 +12,10 @@ import android.Manifest
 import android.accounts.Account
 import android.accounts.AccountManager
 import android.content.ContentResolver
+import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Build
@@ -21,31 +23,31 @@ import android.os.Bundle
 import android.os.PowerManager
 import android.provider.CalendarContract
 import android.provider.ContactsContract
-import android.support.v4.app.LoaderManager
-import android.support.v4.content.AsyncTaskLoader
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v4.content.Loader
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.core.content.pm.PackageInfoCompat
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
 import at.bitfire.dav4android.exception.HttpException
-import at.bitfire.davdroid.AccountSettings
 import at.bitfire.davdroid.BuildConfig
 import at.bitfire.davdroid.InvalidAccountException
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.ServiceDB
 import at.bitfire.davdroid.resource.LocalAddressBook
-import at.bitfire.davdroid.settings.Settings
+import at.bitfire.davdroid.settings.AccountSettings
 import at.bitfire.ical4android.TaskProvider
 import kotlinx.android.synthetic.main.activity_debug_info.*
+import org.dmfs.tasks.contract.TaskContract
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 import java.util.logging.Level
 
 class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<String> {
@@ -66,7 +68,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_debug_info)
 
-        supportLoaderManager.initLoader(0, intent.extras, this)
+        LoaderManager.getInstance(this).initLoader(0, intent.extras, this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,31 +79,31 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
 
     fun onShare(item: MenuItem) {
         report?.let {
-            val sendIntent = Intent()
-            sendIntent.action = Intent.ACTION_SEND
-            sendIntent.type = "text/plain"
-            sendIntent.putExtra(Intent.EXTRA_EMAIL, Array(1) { "support@infomaniak.com" })
-            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "${getString(R.string.app_name)} ${BuildConfig.VERSION_NAME} debug info")
+            val builder = ShareCompat.IntentBuilder.from(this)
+                    .setEmailTo(Array(1) { "support@infomaniak.com" })
+                    .setSubject("${getString(R.string.app_name)} ${BuildConfig.VERSION_NAME} debug info")
+                    .setType("text/plain")
 
             try {
-                val debugInfoDir = File(cacheDir, "debug-info")
-                debugInfoDir.mkdir()
+                val debugInfoDir = File(filesDir, "debug")
+                if (!(debugInfoDir.exists() && debugInfoDir.isDirectory) && !debugInfoDir.mkdir())
+                    throw IOException("Couldn't create debug directory")
 
-                val reportFile = File(debugInfoDir, "debug.txt")
+                val reportFile = File(debugInfoDir, "infomaniak-sync-info.txt")
                 Logger.log.fine("Writing debug info to ${reportFile.absolutePath}")
                 val writer = FileWriter(reportFile)
                 writer.write(it)
                 writer.close()
 
-                sendIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(this, getString(R.string.authority_log_provider), reportFile))
-                sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
+                builder.setStream(FileProvider.getUriForFile(this, getString(R.string.authority_debug_provider), reportFile))
+                builder.intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
             } catch(e: IOException) {
                 // creating an attachment failed, so send it inline
-                sendIntent.putExtra(Intent.EXTRA_TEXT, it)
+                val text = "Couldn't create debug info file: " + Log.getStackTraceString(e) + "\n\n$it"
+                builder.setText(text)
             }
 
-            startActivity(Intent.createChooser(sendIntent, null))
+            builder.startChooser()
         }
     }
 
@@ -183,25 +185,47 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
 
             // software information
             try {
+                report.append("\nSOFTWARE INFORMATION\n")
                 val pm = context.packageManager
-                val installedFrom = pm.getInstallerPackageName(BuildConfig.APPLICATION_ID) ?: "APK (directly)"
-                var workaroundInstalled = false
-                try {
-                    workaroundInstalled = pm.getPackageInfo("${BuildConfig.APPLICATION_ID}.jbworkaround", 0) != null
-                } catch(e: PackageManager.NameNotFoundException) {
+                val appIDs = mutableSetOf(      // we always want info about these packages
+                        BuildConfig.APPLICATION_ID,                     // DAVx5
+                        "${BuildConfig.APPLICATION_ID}.jbworkaround",   // DAVdroid JB Workaround
+                        "org.dmfs.tasks"                               // OpenTasks
+                )
+                // add info about contact, calendar, task provider
+                for (authority in arrayOf(ContactsContract.AUTHORITY, CalendarContract.AUTHORITY, TaskProvider.ProviderName.OpenTasks.authority))
+                    pm.resolveContentProvider(authority, 0)?.let { appIDs += it.packageName }
+                // add info about available contact, calendar, task apps
+                for (uri in arrayOf(ContactsContract.Contacts.CONTENT_URI, CalendarContract.Events.CONTENT_URI, TaskContract.Tasks.getContentUri(TaskProvider.ProviderName.OpenTasks.authority))) {
+                    val viewIntent = Intent(Intent.ACTION_VIEW, ContentUris.withAppendedId(uri, 1))
+                    for (info in pm.queryIntentActivities(viewIntent, 0))
+                        appIDs += info.activityInfo.packageName
                 }
-                val formatter = SimpleDateFormat.getDateInstance()
-                report.append("\nSOFTWARE INFORMATION\n" +
-                              "Package: ${BuildConfig.APPLICATION_ID}\n" +
-                              "Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}) from ${formatter.format(Date(BuildConfig.buildTime))}\n")
-                      .append("Installed from: $installedFrom\n")
-                      .append("JB Workaround installed: ${if (workaroundInstalled) "yes" else "no"}\n\n")
+
+                for (appID in appIDs)
+                    try {
+                        val info = pm.getPackageInfo(appID, 0)
+                        report  .append("* ").append(appID)
+                                .append(" ").append(info.versionName)
+                                .append(" (").append(PackageInfoCompat.getLongVersionCode(info)).append(")")
+                        pm.getInstallerPackageName(appID)?.let { installer ->
+                            report.append(" from ").append(installer)
+                        }
+                        info.applicationInfo?.let { applicationInfo ->
+                            if (!applicationInfo.enabled)
+                                report.append(" disabled!")
+                            if (applicationInfo.flags.and(ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0)
+                                report.append(" on external storage!")
+                        }
+                        report.append("\n")
+                    } catch(e: PackageManager.NameNotFoundException) {
+                    }
             } catch(e: Exception) {
                 Logger.log.log(Level.SEVERE, "Couldn't get software information", e)
             }
 
             // connectivity
-            report.append("CONNECTIVITY (at the moment)\n")
+            report.append("\nCONNECTIVITY (at the moment)\n")
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             connectivityManager.activeNetworkInfo?.let { networkInfo ->
                 val type = when (networkInfo.type) {
@@ -237,27 +261,24 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
                   .append("\n")
             // main accounts
             val accountManager = AccountManager.get(context)
-            Settings.getInstance(context)?.let { settings ->
-                for (acct in accountManager.getAccountsByType(context.getString(R.string.account_type))) {
-                    try {
-                        val accountSettings = AccountSettings(context, settings, acct)
-                        report.append("Account: ${acct.name}\n" +
-                                "  Address book sync. interval: ${syncStatus(accountSettings, context.getString(R.string.address_books_authority))}\n" +
-                                "  Calendar     sync. interval: ${syncStatus(accountSettings, CalendarContract.AUTHORITY)}\n" +
-                                "  OpenTasks    sync. interval: ${syncStatus(accountSettings, TaskProvider.ProviderName.OpenTasks.authority)}\n" +
-                                "  WiFi only: ").append(accountSettings.getSyncWifiOnly())
-                        accountSettings.getSyncWifiOnlySSIDs()?.let {
-                            report.append(", SSIDs: ${accountSettings.getSyncWifiOnlySSIDs()}")
-                        }
-                        report.append("\n  [CardDAV] Contact group method: ${accountSettings.getGroupMethod()}")
-                                .append("\n  [CalDAV] Time range (past days): ${accountSettings.getTimeRangePastDays()}")
-                                .append("\n           Manage calendar colors: ${accountSettings.getManageCalendarColors()}")
-                                .append("\n")
-                    } catch (e: InvalidAccountException) {
-                        report.append("$acct is invalid (unsupported settings version) or does not exist\n")
+            for (acct in accountManager.getAccountsByType(context.getString(R.string.account_type)))
+                try {
+                    val accountSettings = AccountSettings(context, acct)
+                    report.append("Account: ${acct.name}\n" +
+                            "  Address book sync. interval: ${syncStatus(accountSettings, context.getString(R.string.address_books_authority))}\n" +
+                            "  Calendar     sync. interval: ${syncStatus(accountSettings, CalendarContract.AUTHORITY)}\n" +
+                            "  OpenTasks    sync. interval: ${syncStatus(accountSettings, TaskProvider.ProviderName.OpenTasks.authority)}\n" +
+                            "  WiFi only: ").append(accountSettings.getSyncWifiOnly())
+                    accountSettings.getSyncWifiOnlySSIDs()?.let {
+                        report.append(", SSIDs: ${accountSettings.getSyncWifiOnlySSIDs()}")
                     }
+                    report.append("\n  [CardDAV] Contact group method: ${accountSettings.getGroupMethod()}")
+                            .append("\n  [CalDAV] Time range (past days): ${accountSettings.getTimeRangePastDays()}")
+                            .append("\n           Manage calendar colors: ${accountSettings.getManageCalendarColors()}")
+                            .append("\n")
+                } catch (e: InvalidAccountException) {
+                    report.append("$acct is invalid (unsupported settings version) or does not exist\n")
                 }
-            }
             // address book accounts
             for (acct in accountManager.getAccountsByType(context.getString(R.string.account_type_address_book)))
                 try {

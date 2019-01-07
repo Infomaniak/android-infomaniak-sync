@@ -13,11 +13,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.security.KeyChain
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.fragment.app.Fragment
 import at.bitfire.dav4android.Constants
 import at.bitfire.davdroid.R
 import kotlinx.android.synthetic.main.login_credentials_fragment.view.*
@@ -53,7 +53,7 @@ class DefaultLoginCredentialsFragment: Fragment(), CompoundButton.OnCheckedChang
         }
 
         v.urlcert_select_cert.setOnClickListener {
-            KeyChain.choosePrivateKeyAlias(activity, { alias ->
+            KeyChain.choosePrivateKeyAlias(requireActivity(), { alias ->
                 Handler(Looper.getMainLooper()).post {
                     v.urlcert_cert_alias.text = alias
                     v.urlcert_cert_alias.error = null

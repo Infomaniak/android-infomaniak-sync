@@ -16,8 +16,8 @@ import android.os.Bundle
 import android.os.RemoteException
 import android.provider.CalendarContract
 import android.provider.ContactsContract
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import at.bitfire.dav4android.*
 import at.bitfire.dav4android.exception.*
 import at.bitfire.dav4android.property.GetCTag
@@ -30,7 +30,7 @@ import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.SyncState
 import at.bitfire.davdroid.resource.*
-import at.bitfire.davdroid.settings.ISettings
+import at.bitfire.davdroid.settings.AccountSettings
 import at.bitfire.davdroid.ui.AccountSettingsActivity
 import at.bitfire.davdroid.ui.DebugInfoActivity
 import at.bitfire.davdroid.ui.NotificationUtils
@@ -54,7 +54,6 @@ import javax.net.ssl.SSLHandshakeException
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: LocalCollection<ResourceType>, RemoteType: DavCollection>(
         val context: Context,
-        val settings: ISettings,
         val account: Account,
         val accountSettings: AccountSettings,
         val extras: Bundle,
@@ -70,8 +69,8 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
 
     companion object {
 
-        val MAX_PROCESSING_THREADS = Math.max(Runtime.getRuntime().availableProcessors(), 4)
-        val MAX_DOWNLOAD_THREADS = Math.max(Runtime.getRuntime().availableProcessors(), 4)
+        val MAX_PROCESSING_THREADS = Math.min(Runtime.getRuntime().availableProcessors()/2, 1)
+        val MAX_DOWNLOAD_THREADS = Math.max(Runtime.getRuntime().availableProcessors(), 2)
         const val MAX_MULTIGET_RESOURCES = 10
 
         fun cancelNotifications(manager: NotificationManagerCompat, authority: String, account: Account) =
@@ -90,7 +89,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
     protected val notificationManager = NotificationManagerCompat.from(context)
     protected val notificationTag = notificationTag(authority, mainAccount)
 
-    protected val httpClient = HttpClient.Builder(context, settings, accountSettings).build()
+    protected val httpClient = HttpClient.Builder(context, accountSettings).build()
 
     protected lateinit var collectionURL: HttpUrl
     protected lateinit var davCollection: RemoteType
@@ -170,7 +169,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                                     syncState = SyncState.fromSyncToken(result.first, initialSync)
                                     furtherChanges = result.second
                                 } catch(e: HttpException) {
-                                    if (e.errors.any { it.name == Property.Name(XmlUtils.NS_WEBDAV, "valid-sync-token") }) {
+                                    if (e.errors.contains(Error.VALID_SYNC_TOKEN)) {
                                         Logger.log.info("Sync token invalid, performing initial sync")
                                         initialSync = true
                                         resetPresentRemotely()
@@ -312,9 +311,9 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                     val body = prepareUpload(local)
 
                     var eTag: String? = null
-                    val processETag: (response: okhttp3.Response) -> Unit = {
-                        it.header("ETag")?.let {
-                            eTag = GetETag(it).eTag
+                    val processETag: (response: okhttp3.Response) -> Unit = { response ->
+                        response.header("ETag")?.let { getETag ->
+                            eTag = GetETag(getETag).eTag
                         }
                     }
                     try {
@@ -326,10 +325,20 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                             remote.put(body, local.eTag, false, processETag)
                         }
                         numUploaded++
+                    } catch(e: ForbiddenException) {
+                        // HTTP 403 Forbidden
+                        // If and only if the upload failed because of missing permissions, treat it like 412.
+                        if (e.errors.contains(Error.NEED_PRIVILEGES))
+                            Logger.log.log(Level.INFO, "Couldn't upload because of missing permissions, ignoring", e)
+                        else
+                            throw e
                     } catch(e: ConflictException) {
-                        // we can't interact with the user to resolve the conflict, so we treat 409 like 412
+                        // HTTP 409 Conflict
+                        // We can't interact with the user to resolve the conflict, so we treat 409 like 412.
                         Logger.log.log(Level.INFO, "Edit conflict, ignoring", e)
                     } catch(e: PreconditionFailedException) {
+                        // HTTP 412 Precondition failed: Resource has been modified on the server in the meanwhile.
+                        // Ignore this condition so that the resource can be downloaded and reset again.
                         Logger.log.log(Level.INFO, "Resource has been modified on the server before upload, ignoring", e)
                     }
 
@@ -644,7 +653,11 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
         var viewItemAction: NotificationCompat.Action? = null
         if (e is UnauthorizedException) {
             contentIntent = Intent(context, AccountSettingsActivity::class.java)
-            contentIntent.putExtra(AccountSettingsActivity.EXTRA_ACCOUNT, account)
+            contentIntent.putExtra(AccountSettingsActivity.EXTRA_ACCOUNT,
+                    if (authority == ContactsContract.AUTHORITY)
+                        mainAccount
+                    else
+                        account)
         } else {
             contentIntent = Intent(context, DebugInfoActivity::class.java)
             contentIntent.putExtra(DebugInfoActivity.KEY_THROWABLE, e)

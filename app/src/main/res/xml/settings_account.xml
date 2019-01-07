@@ -7,28 +7,7 @@
   ~ http://www.gnu.org/licenses/gpl.html
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <EditTextPreference
-        android:dialogTitle="@string/settings_enter_username"
-        android:enabled="false"
-        android:key="username"
-        android:persistent="false"
-        android:title="@string/settings_username" />
-
-    <EditTextPreference
-        android:dialogTitle="@string/settings_enter_password"
-        android:enabled="false"
-        android:inputType="textPassword"
-        android:key="password"
-        android:persistent="false"
-        android:summary="@string/settings_password_summary"
-        android:title="@string/settings_password" />
-
-    <Preference
-        android:key="certificate_alias"
-        android:persistent="false"
-        android:title="@string/settings_certificate_alias" />
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         android:key="sync"
@@ -38,6 +17,7 @@
             android:key="sync_interval_contacts"
             android:persistent="false"
             android:title="@string/settings_sync_interval_contacts"
+            android:icon="@drawable/ic_contacts_dark"
             android:entries="@array/settings_sync_interval_names"
             android:entryValues="@array/settings_sync_interval_seconds"/>
 
@@ -45,6 +25,7 @@
             android:key="sync_interval_calendars"
             android:persistent="false"
             android:title="@string/settings_sync_interval_calendars"
+            android:icon="@drawable/ic_today_dark"
             android:entries="@array/settings_sync_interval_names"
             android:entryValues="@array/settings_sync_interval_seconds"/>
 
@@ -52,6 +33,7 @@
             android:key="sync_interval_tasks"
             android:persistent="false"
             android:title="@string/settings_sync_interval_tasks"
+            android:icon="@drawable/ic_playlist_add_check_dark"
             android:entries="@array/settings_sync_interval_names"
             android:entryValues="@array/settings_sync_interval_seconds"/>
 
@@ -59,6 +41,7 @@
             android:key="sync_wifi_only"
             android:persistent="false"
             android:title="@string/settings_sync_wifi_only"
+            android:icon="@drawable/ic_network_wifi_dark"
             android:summaryOn="@string/settings_sync_wifi_only_on"
             android:summaryOff="@string/settings_sync_wifi_only_off" />
 
@@ -71,18 +54,25 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="carddav"
-        android:title="@string/account_carddav">
+    <EditTextPreference
+        android:key="username"
+        android:title="@string/settings_username"
+        android:persistent="false"
+        android:dialogTitle="@string/settings_enter_username"/>
 
-        <ListPreference
-            android:key="contact_group_method"
-            android:persistent="false"
-            android:title="@string/settings_contact_group_method"
-            android:entries="@array/settings_contact_group_method_entries"
-            android:entryValues="@array/settings_contact_group_method_values"/>
+    <EditTextPreference
+        android:key="password"
+        android:title="@string/settings_password"
+        android:persistent="false"
+        android:inputType="textPassword"
+        android:summary="@string/settings_password_summary"
+        android:dialogTitle="@string/settings_enter_password"/>
 
-    </PreferenceCategory>
+    <Preference
+        android:key="certificate_alias"
+        android:title="@string/settings_certificate_alias"
+        android:persistent="false"/>
+
 
     <PreferenceCategory
         android:key="caldav"
@@ -92,6 +82,7 @@
             android:key="time_range_past_days"
             android:persistent="false"
             android:title="@string/settings_sync_time_range_past"
+            android:icon="@drawable/ic_date_range_dark"
             android:dialogMessage="@string/settings_sync_time_range_past_message"
             android:inputType="number"/>
 
@@ -111,4 +102,18 @@
 
     </PreferenceCategory>
 
-</PreferenceScreen>
+    <PreferenceCategory
+        android:key="carddav"
+        android:title="@string/settings_carddav">
+
+        <ListPreference
+            android:key="contact_group_method"
+            android:persistent="false"
+            android:title="@string/settings_contact_group_method"
+            android:icon="@drawable/ic_group_dark"
+            android:entries="@array/settings_contact_group_method_entries"
+            android:entryValues="@array/settings_contact_group_method_values"/>
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

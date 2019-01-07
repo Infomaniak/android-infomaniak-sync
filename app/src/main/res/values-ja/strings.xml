@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">Infomaniak Sync</string>
-  <string name="account_title_address_book">Infomaniak Sync アドレス帳</string>
+  <string name="app_name">DAVx⁵</string>
+  <string name="account_title_address_book">DAVx⁵ アドレス帳</string>
   <string name="address_books_authority_title">アドレス帳</string>
   <string name="help">ヘルプ</string>
   <string name="manage_accounts">アカウントの管理</string>
@@ -18,32 +18,25 @@
   <string name="startup_autostart_permission">自動同期</string>
   <string name="startup_autostart_permission_message">%s ファームウェアは自動同期をブロックすることがよくあります。 この場合、Android の設定で自動同期を許可してください。</string>
   <string name="startup_battery_optimization">スケジュール同期</string>
-  <string name="startup_battery_optimization_message">お使いのデバイスは DAVdroid の同期を制限します。 通常の DAVdroid 同期間隔を適用するには、「バッテリ最適化」をオフにしてください。</string>
-  <string name="startup_battery_optimization_disable">Infomaniak Sync 用にオフにする</string>
+  <string name="startup_battery_optimization_message">お使いのデバイスは DAVx⁵ の同期を制限します。 通常の DAVx⁵ 同期間隔を適用するには、「バッテリ最適化」をオフにしてください。</string>
+  <string name="startup_battery_optimization_disable">DAVx⁵ 用にオフにする</string>
   <string name="startup_dont_show_again">次回から表示しない</string>
   <string name="startup_not_now">後で</string>
   <string name="startup_donate">オープンソース情報</string>
-  <string name="startup_donate_message">あなたがオープンソース ソフトウェア (GPLv3) の DAVdroid を使用していただくことに、私たちは満足しています。 DAVdroid の開発はハードワークで、何千もの作業時間がかかりました。寄付をご検討ください。</string>
+  <string name="startup_donate_message">あなたがオープンソース ソフトウェア (GPLv3) の DAVx⁵ を使用していただくことに、私たちは満足しています。 DAVx⁵ の開発はハードワークで、何千もの作業時間がかかりました。寄付をご検討ください。</string>
   <string name="startup_donate_now">寄付ページを表示</string>
   <string name="startup_donate_later">たぶん後で</string>
-  <string name="startup_google_play_accounts_removed">Play ストア DRM バグ情報</string>
-  <string name="startup_google_play_accounts_removed_message">特定の条件下で、DAVdroid を再起動後またはアップグレードした後、Play ストア DRM によりすべての DAVdroid アカウントがなくなる可能性があります。この問題の影響を受けている場合 (のみ)、Play ストアから「DAVdroid JB 回避策」をインストールしてください。</string>
   <string name="startup_more_info">追加情報</string>
   <string name="startup_opentasks_not_installed">OpenTasks がインストールされていません</string>
   <string name="startup_opentasks_not_installed_message">タスクを同期するために、無料アプリのOpenTasksが必要です。 (連絡先/イベントには必要ありません)</string>
- <string name="startup_opentasks_reinstall_davdroid">OpenTasks をインストールした後で、Infomaniak Syncを再インストールして、再度アカウントを追加してください (Android のバグ)。</string>
+  <string name="startup_opentasks_reinstall_davx5">OpenTasks をインストールした後で、DAVx⁵を再インストールして、再度アカウントを追加してください (Android のバグ)。</string>
   <string name="startup_opentasks_not_installed_install">OpenTasks をインストール</string>
   <!--AboutActivity-->
   <string name="about_libraries">ライブラリー</string>
   <string name="about_version">バージョン %1s (%2d)</string>
   <string name="about_build_date">コンパイル日時 %s</string>
-  <string name="about_flavor_info">このバージョンは Google Play での配信にのみ対応です。</string>
   <string name="about_license_info_no_warranty">このプログラムは完全に無保証で提供されます。これはフリーソフトウェアで、特定の条件下での再頒布を歓迎します。</string>
   <!--global settings-->
-  <string name="logging_davdroid_file_logging">Infomaniak Sync ファイルログ</string>
-  <string name="logging_to_external_storage">外部ストレージにログ: %s</string>
-  <string name="logging_couldnt_create_file">外部ログファイルを作成できませんでした: %s</string>
-  <string name="logging_no_external_storage">外部ストレージが見つかりません</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">ナビゲーションドロワーを開く</string>
   <string name="navigation_drawer_close">ナビゲーションドロワーを閉じる</string>
@@ -58,7 +51,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">ヘルプ / フォーラム</string>
   <string name="navigation_drawer_donate">寄付</string>
-  <string name="account_list_empty">Infomaniak Sync にようこそ!\n\nInfomaniak アカウントを追加できるようになりました。</string>
+  <string name="account_list_empty">DAVx⁵ にようこそ!\n\nCalDAV/CardDAV アカウントを追加できるようになりました。</string>
   <string name="accounts_global_sync_disabled">システム全体の自動同期が無効です</string>
   <string name="accounts_global_sync_enable">有効</string>
   <!--DavService-->
@@ -66,10 +59,9 @@
   <string name="dav_service_refresh_couldnt_refresh">コレクション リストを更新できません</string>
   <!--AppSettingsActivity-->
   <string name="app_settings">設定</string>
-  <string name="app_settings_user_interface">ユーザーインターフェイス</string>
-  <string name="app_settings_reset_hints">ヒントをリセット</string>
-  <string name="app_settings_reset_hints_summary">以前非表示にしたヒントを、再度有効にします</string>
-  <string name="app_settings_reset_hints_success">すべてのヒントが再度表示されます</string>
+  <string name="app_settings_debug">デバッグ</string>
+  <string name="app_settings_show_debug_info">デバッグ情報を表示</string>
+  <string name="app_settings_show_debug_info_details">ソフトウェアと設定の詳細を表示/共有</string>
   <string name="app_settings_connection">接続</string>
   <string name="app_settings_override_proxy">プロキシ設定を上書き</string>
   <string name="app_settings_override_proxy_on">カスタムのプロキシ設定を使用する</string>
@@ -83,12 +75,10 @@
   <string name="app_settings_reset_certificates">(未)信頼済証明書をリセット</string>
   <string name="app_settings_reset_certificates_summary">すべてのカスタム証明書の信頼をリセット</string>
   <string name="app_settings_reset_certificates_success">すべてのカスタム証明書をクリアしました</string>
-  <string name="app_settings_debug">デバッグ</string>
-  <string name="app_settings_log_to_external_storage">外部ファイルにログ出力</string>
-  <string name="app_settings_log_to_external_storage_on">(可能な場合) 外部ストレージにログ出力します</string>
-  <string name="app_settings_log_to_external_storage_off">外部ファイルログ出力は無効です</string>
-  <string name="app_settings_show_debug_info">デバッグ情報を表示</string>
-  <string name="app_settings_show_debug_info_details">ソフトウェアと設定の詳細を表示/共有</string>
+  <string name="app_settings_user_interface">ユーザーインターフェイス</string>
+  <string name="app_settings_reset_hints">ヒントをリセット</string>
+  <string name="app_settings_reset_hints_summary">以前非表示にしたヒントを、再度有効にします</string>
+  <string name="app_settings_reset_hints_success">すべてのヒントが再度表示されます</string>
   <!--AccountActivity-->
   <string name="account_synchronize_now">今すぐ同期</string>
   <string name="account_synchronizing_now">同期中</string>
@@ -112,7 +102,6 @@
   <string name="account_refresh_calendar_list">カレンダーリストを更新</string>
   <string name="account_create_new_calendar">新しいカレンダーを作成</string>
   <string name="account_no_webcal_handler_found">Webcal に対応するアプリが見つかりません</string>
-  <string name="account_install_icsdroid">ICSdroid をインストール</string>
   <!--AddAccountActivity-->
   <string name="login_title">アカウントを追加</string>
   <string name="login_type_email">メールアドレスでログイン</string>
@@ -174,10 +163,6 @@
   <string name="settings_sync_wifi_only_ssids_message">利用可能な WiFi ネットワークのカンマ区切りの名前 (SSID) (空白にするとすべて)</string>
   <string name="settings_carddav">CardDAV</string>
   <string name="settings_contact_group_method">連絡先グループ方法</string>
-  <string-array name="settings_contact_group_method_values">
-    <item>GROUP_VCARDS</item>
-    <item>CATEGORIES</item>
-  </string-array>
   <string-array name="settings_contact_group_method_entries">
     <item>グループは個別の VCards</item>
     <item>グループは連絡先カテゴリーごと</item>
@@ -192,8 +177,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">この日数より過去のイベントは無視されます (0 も可)。すべてのイベントを同期させるには、空白のままにしてください。</string>
   <string name="settings_manage_calendar_colors">カレンダーの色を管理</string>
-  <string name="settings_manage_calendar_colors_on">カレンダーの色は Infomaniak Sync が管理します</string>
-  <string name="settings_manage_calendar_colors_off">カレンダーの色を Infomaniak Sync が設定しません</string>
+  <string name="settings_manage_calendar_colors_on">カレンダーの色は DAVx⁵ が管理します</string>
+  <string name="settings_manage_calendar_colors_off">カレンダーの色を DAVx⁵ が設定しません</string>
   <string name="settings_event_colors">イベントカラーサポート</string>
   <string name="settings_event_colors_on">イベントカラーを同期</string>
   <string name="settings_event_colors_off">イベントカラーを同期しない</string>
@@ -234,17 +219,17 @@
   <plurals name="sync_contacts_local_contact_changes_discarded">
     <item quantity="other">%d ローカル連絡先の変更が破棄されました</item>
   </plurals>
-  <string name="sync_error_permissions">Infomaniak Sync アクセス許可</string>
+  <string name="sync_error_permissions">DAVx⁵ アクセス許可</string>
   <string name="sync_error_permissions_text">追加のアクセス許可が必要です</string>
   <string name="sync_error_opentasks_too_old">OpenTasks が古すぎます</string>
   <string name="sync_error_opentasks_required_version">必要なバージョン: %1$s (現在 %2$s)</string>
   <string name="sync_error_authentication_failed">認証に失敗しました (ログイン情報を確認してください)</string>
-  <string name="sync_error_io">ネットワークまたは I/O エラー</string>
-  <string name="sync_error_http_dav">HTTP サーバーエラー</string>
-  <string name="sync_error_local_storage">内蔵ストレージエラー</string>
+  <string name="sync_error_io">ネットワークまたは I/O エラー – %s</string>
+  <string name="sync_error_http_dav">HTTP サーバーエラー – %s</string>
+  <string name="sync_error_local_storage">内蔵ストレージエラー – %s</string>
   <string name="sync_error_retry">再試行</string>
   <string name="sync_error_view_item">アイテムを表示</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">Infomaniak Sync: 接続セキュリティ</string>
-  <string name="trust_certificate_unknown_certificate_found">Infomaniak Syncは、未知の証明書を検出しました。それを信頼しますか?</string>
+  <string name="certificate_notification_connection_security">DAVx⁵: 接続セキュリティ</string>
+  <string name="trust_certificate_unknown_certificate_found">DAVx⁵は、未知の証明書を検出しました。それを信頼しますか?</string>
 </resources>

@@ -17,23 +17,15 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.StrictMode
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.ui.NotificationUtils
 import kotlin.concurrent.thread
 
+@Suppress("unused")
 class App: Application() {
 
     companion object {
-
-        const val DISTRUST_SYSTEM_CERTIFICATES = "distrust_system_certs"
-        const val OVERRIDE_PROXY = "override_proxy"
-        const val OVERRIDE_PROXY_HOST = "override_proxy_host"
-        const val OVERRIDE_PROXY_PORT = "override_proxy_port"
-
-        const val OVERRIDE_PROXY_HOST_DEFAULT = "localhost"
-        const val OVERRIDE_PROXY_PORT_DEFAULT = 8118
-
 
         fun getLauncherBitmap(context: Context): Bitmap? {
             val drawableLogo = if (android.os.Build.VERSION.SDK_INT >= 21)
@@ -61,7 +53,7 @@ class App: Application() {
         super.onCreate()
         Logger.initialize(this)
 
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG)
             StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
                     .detectActivityLeaks()
                     .detectFileUriExposure()
@@ -70,13 +62,6 @@ class App: Application() {
                     .detectLeakedSqlLiteObjects()
                     .penaltyLog()
                     .build())
-
-            // main thread
-            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
-                    .detectAll()
-                    .penaltyLog()
-                    .build())
-        }
 
         if (Build.VERSION.SDK_INT <= 21)
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)

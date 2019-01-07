@@ -9,6 +9,7 @@
 package at.bitfire.davdroid.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.Menu
@@ -16,16 +17,15 @@ import android.view.MenuItem
 import at.bitfire.davdroid.App
 import at.bitfire.davdroid.BuildConfig
 import at.bitfire.davdroid.R
-import at.bitfire.davdroid.settings.ISettings
 
 class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
 
     companion object {
-        private const val BETA_FEEDBACK_URI = "mailto:support@davdroid.com?subject=${BuildConfig.APPLICATION_ID}/${BuildConfig.VERSION_NAME} feedback (${BuildConfig.VERSION_CODE})"
+        private const val BETA_FEEDBACK_URI = "mailto:support@davx5.com?subject=${BuildConfig.APPLICATION_ID}/${BuildConfig.VERSION_NAME} feedback (${BuildConfig.VERSION_CODE})"
     }
 
 
-    override fun onSettingsChanged(settings: ISettings?, menu: Menu) {
+    override fun initMenu(context: Context, menu: Menu) {
         if (BuildConfig.VERSION_NAME.contains("-beta") || BuildConfig.VERSION_NAME.contains("-rc"))
             menu.findItem(R.id.nav_beta_feedback).isVisible = true
     }
@@ -36,11 +36,8 @@ class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
                 activity.startActivity(Intent(activity, AboutActivity::class.java))
             R.id.nav_app_settings ->
                 activity.startActivity(Intent(activity, AppSettingsActivity::class.java))
-            R.id.nav_beta_feedback -> {
-                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(BETA_FEEDBACK_URI))
-                if (activity.packageManager.resolveActivity(intent, 0) != null)
-                    activity.startActivity(intent)
-            }
+            R.id.nav_beta_feedback ->
+                UiUtils.launchUri(activity, Uri.parse(BETA_FEEDBACK_URI), Intent.ACTION_SENDTO)
             R.id.nav_website ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW,  Uri.parse("https://www.infomaniak.com")))
             R.id.nav_faq ->
