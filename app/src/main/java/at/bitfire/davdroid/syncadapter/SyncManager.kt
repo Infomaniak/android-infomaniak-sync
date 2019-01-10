@@ -18,15 +18,13 @@ import android.provider.CalendarContract
 import android.provider.ContactsContract
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import at.bitfire.dav4android.*
-import at.bitfire.dav4android.exception.*
-import at.bitfire.dav4android.property.GetCTag
-import at.bitfire.dav4android.property.GetETag
-import at.bitfire.dav4android.property.SyncToken
+import at.bitfire.dav4jvm.*
+import at.bitfire.dav4jvm.exception.*
+import at.bitfire.dav4jvm.property.GetCTag
+import at.bitfire.dav4jvm.property.GetETag
+import at.bitfire.dav4jvm.property.SyncToken
 import at.bitfire.davdroid.*
-import at.bitfire.davdroid.BuildConfig
 import at.bitfire.davdroid.Constants
-import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.SyncState
 import at.bitfire.davdroid.resource.*
@@ -69,8 +67,10 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
 
     companion object {
 
-        val MAX_PROCESSING_THREADS = Math.min(Runtime.getRuntime().availableProcessors()/2, 1)
-        val MAX_DOWNLOAD_THREADS = Math.max(Runtime.getRuntime().availableProcessors(), 2)
+        val MAX_PROCESSING_THREADS =    // nCPU/2 (rounded up for case of 1 CPU), but max. 4
+                Math.min((Runtime.getRuntime().availableProcessors()+1)/2, 4)
+        val MAX_DOWNLOAD_THREADS =      // one (if one CPU), 2 otherwise
+                Math.min(Runtime.getRuntime().availableProcessors(), 2)
         const val MAX_MULTIGET_RESOURCES = 10
 
         fun cancelNotifications(manager: NotificationManagerCompat, authority: String, account: Account) =
@@ -79,6 +79,10 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
         private fun notificationTag(authority: String, account: Account) =
                 "$authority-${account.name}".hashCode().toString()
 
+    }
+
+    init {
+        Logger.log.info("SyncManager: using up to $MAX_PROCESSING_THREADS processing threads and $MAX_DOWNLOAD_THREADS download threads")
     }
 
     private val mainAccount = if (localCollection is LocalAddressBook)
@@ -454,7 +458,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                 return@listRemote
 
             // ignore collections
-            if (response[at.bitfire.dav4android.property.ResourceType::class.java]?.types?.contains(at.bitfire.dav4android.property.ResourceType.COLLECTION) == true)
+            if (response[at.bitfire.dav4jvm.property.ResourceType::class.java]?.types?.contains(at.bitfire.dav4jvm.property.ResourceType.COLLECTION) == true)
                 return@listRemote
 
             val name = response.hrefName()

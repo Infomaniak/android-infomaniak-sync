@@ -27,6 +27,8 @@ android {
         minSdkVersion 21        // Android 5.0
         targetSdkVersion 28     // Android 9.0
 
+        buildConfigField "String", "userAgent", "\"DAVx5\""
+
         // when using this, make sure that notification icons are real bitmaps
         vectorDrawables.useSupportLibrary = true
     }
@@ -70,7 +72,6 @@ android {
 
 dependencies {
     implementation project(':cert4android')
-    implementation project(':dav4android')
     implementation project(':ical4android')
     implementation project(':vcard4android')
 
@@ -82,6 +83,9 @@ dependencies {
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
 
+    implementation(':dav4jvm') {
+        exclude group: 'org.ogce', module: 'xpp3'	// Android comes with its own XmlPullParser
+    }
     implementation 'com.jaredrummler:colorpicker:1.0.5'
     implementation 'com.mikepenz:aboutlibraries:6.2.0'
 
