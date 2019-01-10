@@ -50,7 +50,7 @@ import java.io.FileWriter
 import java.io.IOException
 import java.util.logging.Level
 
-class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<String> {
+class DebugInfoActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<String> {
 
     companion object {
         const val KEY_THROWABLE = "throwable"
@@ -67,6 +67,9 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_debug_info)
+
+        setSupportActionBar(toolbar_debug)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         LoaderManager.getInstance(this).initLoader(0, intent.extras, this)
     }
@@ -97,7 +100,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
 
                 builder.setStream(FileProvider.getUriForFile(this, getString(R.string.authority_debug_provider), reportFile))
                 builder.intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
-            } catch(e: IOException) {
+            } catch (e: IOException) {
                 // creating an attachment failed, so send it inline
                 val text = "Couldn't create debug info file: " + Log.getStackTraceString(e) + "\n\n$it"
                 builder.setText(text)
@@ -126,7 +129,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
     class ReportLoader(
             context: Context,
             val extras: Bundle?
-    ): AsyncTaskLoader<String>(context) {
+    ) : AsyncTaskLoader<String>(context) {
 
         var result: String? = null
 
@@ -205,7 +208,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
                 for (appID in appIDs)
                     try {
                         val info = pm.getPackageInfo(appID, 0)
-                        report  .append("* ").append(appID)
+                        report.append("* ").append(appID)
                                 .append(" ").append(info.versionName)
                                 .append(" (").append(PackageInfoCompat.getLongVersionCode(info)).append(")")
                         pm.getInstallerPackageName(appID)?.let { installer ->
@@ -218,9 +221,9 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
                                 report.append(" on external storage!")
                         }
                         report.append("\n")
-                    } catch(e: PackageManager.NameNotFoundException) {
+                    } catch (e: PackageManager.NameNotFoundException) {
                     }
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 Logger.log.log(Level.SEVERE, "Couldn't get software information", e)
             }
 
@@ -229,7 +232,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             connectivityManager.activeNetworkInfo?.let { networkInfo ->
                 val type = when (networkInfo.type) {
-                    ConnectivityManager.TYPE_WIFI   -> "WiFi"
+                    ConnectivityManager.TYPE_WIFI -> "WiFi"
                     ConnectivityManager.TYPE_MOBILE -> "mobile"
                     else -> "type: ${networkInfo.type}"
                 }
@@ -246,19 +249,19 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
             val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
             if (Build.VERSION.SDK_INT >= 23)
                 report.append("Power saving disabled: ")
-                      .append(if (powerManager.isIgnoringBatteryOptimizations(BuildConfig.APPLICATION_ID)) "yes" else "no")
-                      .append("\n")
+                        .append(if (powerManager.isIgnoringBatteryOptimizations(BuildConfig.APPLICATION_ID)) "yes" else "no")
+                        .append("\n")
             // permissions
             for (permission in arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS,
-                                       Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR,
-                                       TaskProvider.PERMISSION_READ_TASKS, TaskProvider.PERMISSION_WRITE_TASKS))
+                    Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR,
+                    TaskProvider.PERMISSION_READ_TASKS, TaskProvider.PERMISSION_WRITE_TASKS))
                 report.append(permission).append(" permission: ")
-                      .append(if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) "granted" else "denied")
-                      .append("\n")
+                        .append(if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) "granted" else "denied")
+                        .append("\n")
             // system-wide sync settings
             report.append("System-wide synchronization: ")
-                  .append(if (ContentResolver.getMasterSyncAutomatically()) "automatically" else "manually")
-                  .append("\n")
+                    .append(if (ContentResolver.getMasterSyncAutomatically()) "automatically" else "manually")
+                    .append("\n")
             // main accounts
             val accountManager = AccountManager.get(context)
             for (acct in accountManager.getAccountsByType(context.getString(R.string.account_type)))
@@ -287,7 +290,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
                             "  Main account: ${addressBook.mainAccount}\n" +
                             "  URL: ${addressBook.url}\n" +
                             "  Sync automatically: ").append(ContentResolver.getSyncAutomatically(acct, ContactsContract.AUTHORITY)).append("\n")
-                } catch(e: Exception) {
+                } catch (e: Exception) {
                     report.append("$acct is invalid: ${e.message}\n")
                 }
             report.append("\n")
@@ -301,10 +304,10 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
             try {
                 report.append(
                         "SYSTEM INFORMATION\n" +
-                        "Android version: ${Build.VERSION.RELEASE} (${Build.DISPLAY})\n" +
-                        "Device: ${Build.MANUFACTURER} ${Build.MODEL} (${Build.DEVICE})\n\n"
+                                "Android version: ${Build.VERSION.RELEASE} (${Build.DISPLAY})\n" +
+                                "Device: ${Build.MANUFACTURER} ${Build.MODEL} (${Build.DEVICE})\n\n"
                 )
-            } catch(e: Exception) {
+            } catch (e: Exception) {
                 Logger.log.log(Level.SEVERE, "Couldn't get system details", e)
             }
 
@@ -319,7 +322,7 @@ class DebugInfoActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks<Stri
         private fun syncStatus(settings: AccountSettings, authority: String): String {
             val interval = settings.getSyncInterval(authority)
             return if (interval != null) {
-                if (interval == AccountSettings.SYNC_INTERVAL_MANUALLY) "manually" else "${interval/60} min"
+                if (interval == AccountSettings.SYNC_INTERVAL_MANUALLY) "manually" else "${interval / 60} min"
             } else
                 "—"
         }
