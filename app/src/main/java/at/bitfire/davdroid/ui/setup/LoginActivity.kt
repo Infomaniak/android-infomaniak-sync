@@ -13,9 +13,12 @@ import android.accounts.AccountManager
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import at.bitfire.davdroid.App
 import at.bitfire.davdroid.R
+import at.bitfire.davdroid.ui.UiUtils
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.infomaniak.sync.ApiToken
@@ -120,6 +123,12 @@ class LoginActivity : AppCompatActivity() {
         if (connection != null) {
             connection!!.cancel(true)
         }
+    }
+
+    fun showHelp(item: MenuItem) {
+        UiUtils.launchUri(this, App.homepageUrl(this).buildUpon()
+                .appendPath("tested-with")
+                .build())
     }
 
     class GenerateInfomaniakAccountTask internal constructor(context: LoginActivity, private val code: String) : AsyncTask<String, CharSequence, DavResourceFinder.Configuration>() {

@@ -11,6 +11,7 @@ package at.bitfire.davdroid.ui
 import android.Manifest
 import android.accounts.Account
 import android.accounts.AccountManager
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
@@ -127,9 +128,9 @@ class DebugInfoActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Str
 
 
     class ReportLoader(
-            context: Context,
+            val activity: Activity,
             val extras: Bundle?
-    ) : AsyncTaskLoader<String>(context) {
+    ): AsyncTaskLoader<String>(activity) {
 
         var result: String? = null
 
@@ -253,11 +254,16 @@ class DebugInfoActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Str
                         .append("\n")
             // permissions
             for (permission in arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS,
-                    Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR,
-                    TaskProvider.PERMISSION_READ_TASKS, TaskProvider.PERMISSION_WRITE_TASKS))
-                report.append(permission).append(" permission: ")
-                        .append(if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) "granted" else "denied")
+                                       Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR,
+                                       TaskProvider.PERMISSION_READ_TASKS, TaskProvider.PERMISSION_WRITE_TASKS,
+                                       Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                report  .append(permission).append(": ")
+                        .append(if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED)
+                            "granted"
+                        else
+                            "denied")
                         .append("\n")
+            }
             // system-wide sync settings
             report.append("System-wide synchronization: ")
                     .append(if (ContentResolver.getMasterSyncAutomatically()) "automatically" else "manually")
@@ -278,6 +284,7 @@ class DebugInfoActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Str
                     report.append("\n  [CardDAV] Contact group method: ${accountSettings.getGroupMethod()}")
                             .append("\n  [CalDAV] Time range (past days): ${accountSettings.getTimeRangePastDays()}")
                             .append("\n           Manage calendar colors: ${accountSettings.getManageCalendarColors()}")
+                            .append("\n           Use event colors: ${accountSettings.getEventColors()}")
                             .append("\n")
                 } catch (e: InvalidAccountException) {
                     report.append("$acct is invalid (unsupported settings version) or does not exist\n")

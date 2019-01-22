@@ -24,11 +24,11 @@ import android.security.KeyChain
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.preference.*
+import at.bitfire.davdroid.App
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.model.Credentials
 import at.bitfire.davdroid.resource.LocalCalendar
@@ -172,15 +172,19 @@ class AccountSettingsActivity: AppCompatActivity() {
 
             (findPreference("sync_interval_contacts") as ListPreference).let {
                 if (syncIntervalContacts != null) {
+                    it.isEnabled = true
                     it.isVisible = true
                     it.value = syncIntervalContacts.toString()
                     if (syncIntervalContacts == AccountSettings.SYNC_INTERVAL_MANUALLY)
                         it.setSummary(R.string.settings_sync_summary_manually)
                     else
                         it.summary = getString(R.string.settings_sync_summary_periodically, syncIntervalContacts / 60)
-                    it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-                        accountSettings.setSyncInterval(getString(R.string.address_books_authority), (newValue as String).toLong())
-                        reload()
+                    it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { pref, newValue ->
+                        Handler(Looper.myLooper()).post {
+                            pref.isEnabled = false
+                            accountSettings.setSyncInterval(getString(R.string.address_books_authority), (newValue as String).toLong())
+                            reload()
+                        }
                         false
                     }
                 } else
@@ -189,15 +193,19 @@ class AccountSettingsActivity: AppCompatActivity() {
 
             (findPreference("sync_interval_calendars") as ListPreference).let {
                 if (syncIntervalCalendars != null) {
+                    it.isEnabled = true
                     it.isVisible = true
                     it.value = syncIntervalCalendars.toString()
                     if (syncIntervalCalendars == AccountSettings.SYNC_INTERVAL_MANUALLY)
                         it.setSummary(R.string.settings_sync_summary_manually)
                     else
                         it.summary = getString(R.string.settings_sync_summary_periodically, syncIntervalCalendars / 60)
-                    it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-                        accountSettings.setSyncInterval(CalendarContract.AUTHORITY, (newValue as String).toLong())
-                        reload()
+                    it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { pref, newValue ->
+                        Handler(Looper.myLooper()).post {
+                            pref.isEnabled = false
+                            accountSettings.setSyncInterval(CalendarContract.AUTHORITY, (newValue as String).toLong())
+                            reload()
+                        }
                         false
                     }
                 } else
@@ -206,15 +214,19 @@ class AccountSettingsActivity: AppCompatActivity() {
 
             (findPreference("sync_interval_tasks") as ListPreference).let {
                 if (syncIntervalTasks != null) {
+                    it.isEnabled = true
                     it.isVisible = true
                     it.value = syncIntervalTasks.toString()
                     if (syncIntervalTasks == AccountSettings.SYNC_INTERVAL_MANUALLY)
                         it.setSummary(R.string.settings_sync_summary_manually)
                     else
                         it.summary = getString(R.string.settings_sync_summary_periodically, syncIntervalTasks / 60)
-                    it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-                        accountSettings.setSyncInterval(TaskProvider.ProviderName.OpenTasks.authority, (newValue as String).toLong())
-                        reload()
+                    it.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { pref, newValue ->
+                        Handler(Looper.myLooper()).post {
+                            pref.isEnabled = false
+                            accountSettings.setSyncInterval(TaskProvider.ProviderName.OpenTasks.authority, (newValue as String).toLong())
+                            reload()
+                        }
                         false
                     }
                 } else
@@ -234,7 +246,8 @@ class AccountSettingsActivity: AppCompatActivity() {
             val onlySSIDs = accountSettings.getSyncWifiOnlySSIDs()?.joinToString(", ")
             prefWifiOnlySSIDs.text = onlySSIDs
             if (onlySSIDs != null)
-                prefWifiOnlySSIDs.summary = getString(R.string.settings_sync_wifi_only_ssids_on, onlySSIDs)
+                prefWifiOnlySSIDs.summary = getString(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1)
+                    R.string.settings_sync_wifi_only_ssids_on_location_services else R.string.settings_sync_wifi_only_ssids_on, onlySSIDs)
             else
                 prefWifiOnlySSIDs.setSummary(R.string.settings_sync_wifi_only_ssids_off)
             prefWifiOnlySSIDs.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
@@ -248,7 +261,7 @@ class AccountSettingsActivity: AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1 &&
                 accountSettings.getSyncWifiOnly() && onlySSIDs != null &&
                 ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                    ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0)
+                    requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 0)
 
             // preference group: CardDAV
             (findPreference("contact_group_method") as ListPreference).let {
@@ -366,6 +379,30 @@ class AccountSettingsActivity: AppCompatActivity() {
                     }
                 } else
                     it.isVisible = false
+            }
+        }
+
+        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+            if (permissions.first() == Manifest.permission.ACCESS_COARSE_LOCATION && grantResults.first() == PackageManager.PERMISSION_DENIED) {
+                // location permission denied, reset SSID restriction
+                AccountSettings(requireActivity(), account).setSyncWifiOnlySSIDs(null)
+                reload()
+
+                AlertDialog.Builder(requireActivity())
+                        .setIcon(R.drawable.ic_network_wifi_dark)
+                        .setTitle(R.string.settings_sync_wifi_only_ssids)
+                        .setMessage(R.string.settings_sync_wifi_only_ssids_location_permission)
+                        .setPositiveButton(android.R.string.ok) { _, _ -> }
+                        .setNeutralButton(R.string.settings_more_info_faq) { _, _ ->
+                            val faqUrl = App.homepageUrl(requireActivity()).buildUpon()
+                                    .appendPath("faq").appendPath("wifi-ssid-restriction-location-permission")
+                                    .build()
+                            val intent = Intent(Intent.ACTION_VIEW, faqUrl)
+                            startActivity(Intent.createChooser(intent, null))
+                        }
+                        .show()
             }
         }
 

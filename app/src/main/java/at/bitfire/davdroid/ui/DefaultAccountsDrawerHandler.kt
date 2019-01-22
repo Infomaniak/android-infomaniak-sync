@@ -43,8 +43,8 @@ class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
             R.id.nav_faq ->
                 activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://faq.infomaniak.com/2302")))
             R.id.nav_manual ->
-                activity.startActivity(Intent(Intent.ACTION_VIEW, App.homepageUrl(activity)
-                        .buildUpon().appendEncodedPath("manual/").build()))
+                UiUtils.launchUri(activity, App.homepageUrl(activity)
+                        .buildUpon().appendPath("manual").build())
             else ->
                 return false
         }
