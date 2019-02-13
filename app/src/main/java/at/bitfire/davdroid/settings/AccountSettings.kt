@@ -57,6 +57,8 @@ class AccountSettings(
         const val KEY_SETTINGS_VERSION = "version"
 
         const val KEY_USERNAME = "user_name"
+        const val KEY_ACCOUNTNAME = "account_name"
+        const val KEY_EMAIL = "user_email"
         const val KEY_CERTIFICATE_ALIAS = "certificate_alias"
 
         const val KEY_WIFI_ONLY = "wifi_only"               // sync on WiFi only (default: false)
@@ -94,8 +96,11 @@ class AccountSettings(
             bundle.putString(KEY_SETTINGS_VERSION, CURRENT_VERSION.toString())
 
             when (credentials.type) {
-                Credentials.Type.UsernamePassword ->
+                Credentials.Type.UsernamePassword -> {
                     bundle.putString(KEY_USERNAME, credentials.userName)
+                    bundle.putString(KEY_ACCOUNTNAME, credentials.accountName)
+                    bundle.putString(KEY_EMAIL, credentials.email)
+                }
                 Credentials.Type.ClientCertificate ->
                     bundle.putString(KEY_CERTIFICATE_ALIAS, credentials.certificateAlias)
             }
@@ -130,13 +135,17 @@ class AccountSettings(
     fun credentials() = Credentials(
             accountManager.getUserData(account, KEY_USERNAME),
             accountManager.getPassword(account),
-            accountManager.getUserData(account, KEY_CERTIFICATE_ALIAS)
+            accountManager.getUserData(account, KEY_CERTIFICATE_ALIAS),
+            accountManager.getUserData(account, KEY_ACCOUNTNAME),
+            accountManager.getUserData(account, KEY_EMAIL)
     )
 
     fun credentials(credentials: Credentials) {
         accountManager.setUserData(account, KEY_USERNAME, credentials.userName)
         accountManager.setPassword(account, credentials.password)
         accountManager.setUserData(account, KEY_CERTIFICATE_ALIAS, credentials.certificateAlias)
+        accountManager.setUserData(account, KEY_ACCOUNTNAME, credentials.accountName)
+        accountManager.setUserData(account, KEY_EMAIL, credentials.email)
     }
 
 

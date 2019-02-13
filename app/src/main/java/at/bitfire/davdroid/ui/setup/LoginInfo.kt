@@ -19,10 +19,10 @@ data class LoginInfo(
 ): Parcelable {
 
     constructor(uri: URI, userName: String? = null, password: String? = null, certificateAlias: String? = null) :
-            this(uri, Credentials(userName, password, certificateAlias, null))
+            this(uri, Credentials(userName, password, certificateAlias))
 
-    constructor(uri: URI, userName: String? = null, password: String? = null, certificateAlias: String? = null, accountName: String? = null) :
-            this(uri, Credentials(userName, password, certificateAlias, accountName))
+    constructor(uri: URI, userName: String? = null, password: String? = null, certificateAlias: String? = null, accountName: String? = null, email: String? = "noreply@infomaniak.com") :
+            this(uri, Credentials(userName, password, certificateAlias, accountName, email))
 
     override fun describeContents() = 0
 

@@ -236,7 +236,7 @@ class LoginActivity : AppCompatActivity() {
                         publishProgress(loginActivity.getText(R.string.login_querying_server))
 
                         loginActivity = activityReference.get()!!
-                        val loginInfo = LoginInfo(URI(URL_SYNC_INFOMANIAK), infomaniakUser.login, infomaniakPassword.password, null, infomaniakUser.display_name)
+                        val loginInfo = LoginInfo(URI(URL_SYNC_INFOMANIAK), infomaniakUser.login, infomaniakPassword.password, null, infomaniakUser.display_name, infomaniakUser.email)
                         val configuration: DavResourceFinder.Configuration = DavResourceFinder(loginActivity.baseContext, loginInfo).findInitialConfiguration()
 
                         publishProgress(loginActivity.getString(R.string.login_finalising))

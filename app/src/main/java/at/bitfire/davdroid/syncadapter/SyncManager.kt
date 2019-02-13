@@ -35,6 +35,7 @@ import at.bitfire.davdroid.ui.NotificationUtils
 import at.bitfire.ical4android.CalendarStorageException
 import at.bitfire.ical4android.TaskProvider
 import at.bitfire.vcard4android.ContactsStorageException
+import net.fortuna.ical4j.model.property.Organizer
 import okhttp3.HttpUrl
 import okhttp3.RequestBody
 import org.apache.commons.lang3.exception.ContextedException
@@ -42,6 +43,7 @@ import org.dmfs.tasks.contract.TaskContract
 import java.io.IOException
 import java.io.InterruptedIOException
 import java.net.HttpURLConnection
+import java.net.URI
 import java.security.cert.CertificateException
 import java.util.*
 import java.util.concurrent.*
@@ -311,8 +313,6 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
 
                 val fileName = local.fileName!!
                 useRemote(DavResource(httpClient.okHttpClient, collectionURL.newBuilder().addPathSegment(fileName).build())) { remote ->
-                    // generate entity to upload (VCard, iCal, whatever)
-                    val body = prepareUpload(local)
 
                     var eTag: String? = null
                     val processETag: (response: okhttp3.Response) -> Unit = { response ->
@@ -321,6 +321,18 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                         }
                     }
                     try {
+                        if (local is LocalEvent) {
+                            local.event?.let { event ->
+                                if (event.attendees.isNotEmpty()) {
+                                    event.attendees[0].value = "mailto:" + accountSettings.credentials().email
+                                    event.organizer = Organizer(URI("mailto", accountSettings.credentials().email, null))
+                                }
+                            }
+                        }
+
+                        // generate entity to upload (VCard, iCal, whatever)
+                        val body = prepareUpload(local)
+
                         if (local.eTag == null) {
                             Logger.log.info("Uploading new record $fileName")
                             remote.put(body, null, true, processETag)

@@ -14,7 +14,8 @@ class Credentials(
         val userName: String? = null,
         val password: String? = null,
         val certificateAlias: String? = null,
-        val accountName: String?
+        val accountName: String? = null,
+        val email: String? = null
 ): Serializable {
 
     constructor(userName: String? = null, password: String? = null, certificateAlias: String? = null) :
