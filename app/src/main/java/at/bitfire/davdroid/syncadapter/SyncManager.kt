@@ -324,8 +324,15 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                         if (local is LocalEvent) {
                             local.event?.let { event ->
                                 if (event.attendees.isNotEmpty()) {
-                                    event.attendees[0].value = "mailto:" + accountSettings.credentials().email
-                                    event.organizer = Organizer(URI("mailto", accountSettings.credentials().email, null))
+                                    if (event.organizer!!.value.replace("%20", " ") == "mailto:" + accountSettings.credentials().accountName) {
+                                        event.organizer = Organizer(URI("mailto", accountSettings.credentials().email, null))
+                                    }
+
+                                    for (attender in event.attendees) {
+                                        if (attender.value.replace("%20", " ") == "mailto:" + accountSettings.credentials().accountName) {
+                                            attender.value = "mailto:" + accountSettings.credentials().email
+                                        }
+                                    }
                                 }
                             }
                         }
