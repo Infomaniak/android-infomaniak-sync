@@ -9,13 +9,12 @@
 package at.bitfire.davdroid.ui
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -33,16 +32,6 @@ import org.apache.commons.io.IOUtils
 
 
 class AboutActivity : AppCompatActivity() {
-
-    companion object {
-        fun fromHtml(html: String): Spanned {
-            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
-            } else {
-                Html.fromHtml(html)
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,12 +89,10 @@ class AboutActivity : AppCompatActivity() {
 
             infomaniak_copyright.isClickable = true
             infomaniak_copyright.movementMethod = LinkMovementMethod.getInstance()
-            infomaniak_copyright.text = fromHtml(getString(R.string.about_infomaniak_copyright))
+            infomaniak_copyright.text = HtmlCompat.fromHtml(getString(R.string.about_infomaniak_copyright), HtmlCompat.FROM_HTML_MODE_LEGACY)
 
-            if (true /* open-source version */) {
-                warranty.text = fromHtml(getString(R.string.about_license_info_no_warranty))
-                LoaderManager.getInstance(this).initLoader(0, null, this)
-            }
+            warranty.setText(R.string.about_license_info_no_warranty)
+            LoaderManager.getInstance(this).initLoader(0, null, this)
         }
 
         override fun onCreateLoader(id: Int, args: Bundle?) =
@@ -132,7 +119,7 @@ class AboutActivity : AppCompatActivity() {
 
         override fun loadInBackground(): Spanned =
                 context.resources.assets.open(fileName).use {
-                    fromHtml(IOUtils.toString(it, Charsets.UTF_8))
+                    HtmlCompat.fromHtml(IOUtils.toString(it, Charsets.UTF_8), HtmlCompat.FROM_HTML_MODE_LEGACY)
                 }
 
     }

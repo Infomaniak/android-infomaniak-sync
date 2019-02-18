@@ -19,6 +19,7 @@ import at.bitfire.dav4jvm.Response
 import at.bitfire.dav4jvm.exception.DavException
 import at.bitfire.dav4jvm.property.*
 import at.bitfire.davdroid.DavUtils
+import at.bitfire.davdroid.R
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.model.SyncState
 import at.bitfire.davdroid.resource.LocalCalendar
@@ -169,12 +170,12 @@ class CalendarSyncManager(
             // delete local event, if it exists
             useLocal(localCollection.findByName(fileName)) { local ->
                 if (local != null) {
-                    Logger.log.info("Updating $fileName in local calendar")
+                    Logger.log.log(Level.INFO, "Updating $fileName in local calendar", newData)
                     local.eTag = eTag
                     local.update(newData)
                     syncResult.stats.numUpdates++
                 } else {
-                    Logger.log.info("Adding $fileName to local calendar")
+                    Logger.log.log(Level.INFO, "Adding $fileName to local calendar", newData)
                     useLocal(LocalEvent(localCollection, newData, fileName, eTag, LocalResource.FLAG_REMOTELY_PRESENT)) {
                         it.add()
                     }
@@ -184,5 +185,8 @@ class CalendarSyncManager(
         } else
             Logger.log.info("Received VCALENDAR with not exactly one VEVENT with UID and without RECURRENCE-ID; ignoring $fileName")
     }
+
+    override fun notifyInvalidResourceTitle(): String =
+            context.getString(R.string.sync_invalid_event)
 
 }
