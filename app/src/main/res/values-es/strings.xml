@@ -33,7 +33,7 @@
   <string name="startup_opentasks_reinstall_davx5">Tras instalar OpenTasks, tendrás que re-instalar Infomaniak Sync y añadir tus cuentas de nuevo (por un error de Android).</string>
   <string name="startup_opentasks_not_installed_install">Instalar OpenTasks</string>
   <!--AboutActivity-->
-  <string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync permite sincronizar los contactos y los calendarios de WorkSpace, el webmail del proveedor de alojamiento Infomaniak.<br>Esta aplicación es un fork de la solución OpenSource <a href=\'https://www.davdroid.com/\'>DAVDroid</a>.]]></string>
+  <string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync permite sincronizar los contactos y los calendarios de WorkSpace, el webmail del proveedor de alojamiento Infomaniak.<br>Esta aplicación es un fork de la solución OpenSource <a href=\'https://www.davx5.com/\'>DAVx⁵</a>.]]></string>
   <string name="about_license_info_no_warranty">Este programa viene sin NINGÚN TIPO DE GARANTÍA. Es software libre, y cualquier contribución es bienvenida y redistribuida bajo ciertas condiciones.</string>
   <!--global settings-->
   <!--AccountsActivity-->
