@@ -45,6 +45,10 @@ public class InfomaniakUser {
         return sanitize(lastname);
     }
 
+    public void setDisplay_name(String display_name) {
+        this.display_name = display_name;
+    }
+
     public String getDisplay_name() {
         return sanitize(display_name);
     }

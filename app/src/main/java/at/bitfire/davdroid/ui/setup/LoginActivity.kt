@@ -200,11 +200,20 @@ class LoginActivity : AppCompatActivity() {
 
                     val accounts: Array<Account> = AccountManager.get(loginActivity).getAccountsByType(loginActivity.getString(R.string.account_type))
 
-                    for (account in accounts) {
-                        if (account.name == infomaniakUser.display_name) {
-                            return null
+                    var numberSameName = 1
+                    var tempDisplayName = infomaniakUser.display_name
+                    var i = 0
+                    while (i < accounts.size) {
+                        val account = accounts[i]
+                        if (account.name == tempDisplayName) {
+                            tempDisplayName = infomaniakUser.display_name + " $numberSameName"
+                            numberSameName++
+                            i = 0
+                        } else {
+                            i++
                         }
                     }
+                    infomaniakUser.display_name = tempDisplayName
 
                     val formater = SimpleDateFormat("EEEE MMM d yyyy HH:mm:ss", Locale.getDefault())
 
