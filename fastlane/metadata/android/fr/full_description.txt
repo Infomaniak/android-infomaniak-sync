@@ -1,0 +1,7 @@
+Infomaniak Sync permet de synchroniser les contacts et les calendriers entre le WorkSpace d'Infomaniak et vos appareils Android.
+
+Grâce à cette app, vous pourrez donc consultez vos contacts et calendriers où que vous soyez directement depuis vos appareils Android.
+
+Basée sur la solution Open Source DAVx⁵, cette application garantit la confidentialité de vos données personnelles
+
+Pour en savoir plus à propos du WorkSpace d'Infomaniak : https://www.infomaniak.com/fr/outils-professionnels/workspace
