@@ -63,7 +63,7 @@ class DefaultLoginCredentialsFragment: Fragment(), CompoundButton.OnCheckedChang
 
         v.login.setOnClickListener {
             validateLoginData()?.let { info ->
-                DetectConfigurationFragment.newInstance(info).show(fragmentManager, null)
+                DetectConfigurationFragment.newInstance(info).show(fragmentManager!!, null)
             }
         }
 

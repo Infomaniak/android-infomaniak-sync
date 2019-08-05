@@ -55,7 +55,7 @@ class DetectConfigurationFragment: DialogFragment(), LoaderManager.LoaderCallbac
         LoaderManager.getInstance(this).initLoader(0, arguments, this)
     }
 
-    override fun onCancel(dialog: DialogInterface?) {
+    override fun onCancel(dialog: DialogInterface) {
         Logger.log.info("Cancelling resource detection")
         LoaderManager.getInstance(this).getLoader<Configuration>(0)?.cancelLoad()
     }

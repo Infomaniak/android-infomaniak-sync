@@ -133,7 +133,7 @@ class DeleteCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<
                     .setPositiveButton(android.R.string.yes) { _, _ ->
                         val frag = DeleteCollectionFragment()
                         frag.arguments = arguments
-                        frag.show(fragmentManager, null)
+                        frag.show(fragmentManager!!, null)
                     }
                     .setNegativeButton(android.R.string.no) { _, _ ->
                         dismiss()

@@ -41,7 +41,7 @@ class AccountListFragment: ListFragment(), LoaderManager.LoaderCallbacks<Array<A
 
         listView.choiceMode = AbsListView.CHOICE_MODE_SINGLE
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val account = listAdapter.getItem(position) as Account
+            val account = listAdapter?.getItem(position) as Account
             val intent = Intent(activity, AccountActivity::class.java)
             intent.putExtra(AccountActivity.EXTRA_ACCOUNT, account)
             startActivity(intent)
