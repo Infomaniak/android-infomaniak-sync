@@ -52,7 +52,7 @@ import java.util.logging.Level
 import javax.net.ssl.SSLHandshakeException
 
 @Suppress("MemberVisibilityCanBePrivate")
-abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: LocalCollection<ResourceType>, RemoteType: DavCollection>(
+abstract class SyncManager<ResourceType : LocalResource<*>, out CollectionType : LocalCollection<ResourceType>, RemoteType : DavCollection>(
         val context: Context,
         val account: Account,
         val accountSettings: AccountSettings,
@@ -60,7 +60,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
         val authority: String,
         val syncResult: SyncResult,
         val localCollection: CollectionType
-): AutoCloseable {
+) : AutoCloseable {
 
     enum class SyncAlgorithm {
         PROPFIND_REPORT,
@@ -70,7 +70,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
     companion object {
 
         val MAX_PROCESSING_THREADS =    // nCPU/2 (rounded up for case of 1 CPU), but max. 4
-                Math.min((Runtime.getRuntime().availableProcessors()+1)/2, 4)
+                Math.min((Runtime.getRuntime().availableProcessors() + 1) / 2, 4)
         val MAX_DOWNLOAD_THREADS =      // one (if one CPU), 2 otherwise
                 Math.min(Runtime.getRuntime().availableProcessors(), 2)
         const val MAX_MULTIGET_RESOURCES = 10
@@ -174,7 +174,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                                     val result = listRemoteChanges(syncState, callback)
                                     syncState = SyncState.fromSyncToken(result.first, initialSync)
                                     furtherChanges = result.second
-                                } catch(e: HttpException) {
+                                } catch (e: HttpException) {
                                     if (e.errors.contains(Error.VALID_SYNC_TOKEN)) {
                                         Logger.log.info("Sync token invalid, performing initial sync")
                                         initialSync = true
@@ -192,7 +192,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                             }
 
                             Logger.log.info("Server has further changes: $furtherChanges")
-                        } while(furtherChanges)
+                        } while (furtherChanges)
 
                         if (initialSync) {
                             // initial sync is finished, remove all local resources which have not been listed by server
@@ -324,8 +324,10 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                         if (local is LocalEvent) {
                             local.event?.let { event ->
                                 if (event.attendees.isNotEmpty()) {
-                                    if (event.organizer!!.value.replace("%20", " ") == "mailto:" + accountSettings.credentials().accountName) {
-                                        event.organizer = Organizer(URI("mailto", accountSettings.credentials().email, null))
+                                    event.organizer?.let {
+                                        if (it.value.replace("%20", " ") == "mailto:" + accountSettings.credentials().accountName) {
+                                            event.organizer = Organizer(URI("mailto", accountSettings.credentials().email, null))
+                                        }
                                     }
 
                                     for (attender in event.attendees) {
@@ -348,18 +350,18 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                             remote.put(body, local.eTag, false, processETag)
                         }
                         numUploaded++
-                    } catch(e: ForbiddenException) {
+                    } catch (e: ForbiddenException) {
                         // HTTP 403 Forbidden
                         // If and only if the upload failed because of missing permissions, treat it like 412.
                         if (e.errors.contains(Error.NEED_PRIVILEGES))
                             Logger.log.log(Level.INFO, "Couldn't upload because of missing permissions, ignoring", e)
                         else
                             throw e
-                    } catch(e: ConflictException) {
+                    } catch (e: ConflictException) {
                         // HTTP 409 Conflict
                         // We can't interact with the user to resolve the conflict, so we treat 409 like 412.
                         Logger.log.log(Level.INFO, "Edit conflict, ignoring", e)
-                    } catch(e: PreconditionFailedException) {
+                    } catch (e: PreconditionFailedException) {
                         // HTTP 412 Precondition failed: Resource has been modified on the server in the meanwhile.
                         // Ignore this condition so that the resource can be downloaded and reset again.
                         Logger.log.log(Level.INFO, "Resource has been modified on the server before upload, ignoring", e)
@@ -463,6 +465,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                 LinkedBlockingQueue(MAX_DOWNLOAD_THREADS),  // accept up to MAX_DOWNLOAD_THREADS download tasks
                 ThreadPoolExecutor.CallerRunsPolicy()       // if the queue is full, run task in submitting thread
         )
+
         fun downloadBunch() {
             val bunch = LinkedList<HttpUrl>()
             toDownload.drainTo(bunch, MAX_MULTIGET_RESOURCES)
@@ -493,7 +496,8 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                             nInserted.incrementAndGet()
                         } else {
                             val localETag = local.eTag
-                            val remoteETag = response[GetETag::class.java]?.eTag ?: throw DavException("Server didn't provide ETag")
+                            val remoteETag = response[GetETag::class.java]?.eTag
+                                    ?: throw DavException("Server didn't provide ETag")
                             if (localETag == remoteETag) {
                                 Logger.log.info("$name has not been changed on server (ETag still $remoteETag)")
                                 nSkipped.incrementAndGet()
@@ -510,7 +514,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
 
                     synchronized(processor) {
                         if (toDownload.size >= MAX_MULTIGET_RESOURCES)
-                            // download another bunch of MAX_MULTIGET_RESOURCES resources
+                        // download another bunch of MAX_MULTIGET_RESOURCES resources
                             downloadBunch()
                     }
                 }
@@ -623,8 +627,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
     protected fun syncState(dav: Response) =
             dav[SyncToken::class.java]?.token?.let {
                 SyncState(SyncState.Type.SYNC_TOKEN, it)
-            } ?:
-            dav[GetCTag::class.java]?.cTag?.let {
+            } ?: dav[GetCTag::class.java]?.cTag?.let {
                 SyncState(SyncState.Type.CTAG, it)
             }
 
@@ -701,7 +704,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
         }
 
         val builder = NotificationUtils.newBuilder(context, channel)
-        builder .setSmallIcon(R.drawable.ic_sync_error_notification)
+        builder.setSmallIcon(R.drawable.ic_sync_error_notification)
                 .setContentTitle(localCollection.title)
                 .setContentText(message)
                 .setStyle(NotificationCompat.BigTextStyle(builder).bigText(message))
@@ -784,7 +787,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
             if (result.isDone) {
                 try {
                     result.get()
-                } catch(e: ExecutionException) {
+                } catch (e: ExecutionException) {
                     throw e.cause!!
                 }
                 iter.remove()
@@ -796,7 +799,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
         val intent = buildDebugInfoIntent(e, null, collectionURL.resolve(fileName))
 
         val builder = NotificationUtils.newBuilder(context, NotificationUtils.CHANNEL_SYNC_WARNINGS)
-        builder .setSmallIcon(R.drawable.ic_warning_notify)
+        builder.setSmallIcon(R.drawable.ic_warning_notify)
                 .setContentTitle(notifyInvalidResourceTitle())
                 .setContentText(context.getString(R.string.sync_invalid_resources_ignoring))
                 .setSubText(mainAccount.name)
@@ -809,7 +812,7 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
 
     protected abstract fun notifyInvalidResourceTitle(): String
 
-    protected fun<T: ResourceType?, R> useLocal(local: T, body: (T) -> R): R {
+    protected fun <T : ResourceType?, R> useLocal(local: T, body: (T) -> R): R {
         try {
             return body(local)
         } catch (e: ContextedException) {
@@ -823,18 +826,18 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
         }
     }
 
-    protected fun<T: DavResource, R> useRemote(remote: T, body: (T) -> R): R {
+    protected fun <T : DavResource, R> useRemote(remote: T, body: (T) -> R): R {
         try {
             return body(remote)
         } catch (e: ContextedException) {
             e.addContextValue(Constants.EXCEPTION_CONTEXT_REMOTE_RESOURCE, remote.location)
             throw e
-        } catch(e: Throwable) {
+        } catch (e: Throwable) {
             throw ContextedException(e).setContextValue(Constants.EXCEPTION_CONTEXT_REMOTE_RESOURCE, remote.location)
         }
     }
 
-    protected fun<T> useRemote(remote: Response, body: (Response) -> T): T {
+    protected fun <T> useRemote(remote: Response, body: (Response) -> T): T {
         try {
             return body(remote)
         } catch (e: ContextedException) {
@@ -845,14 +848,14 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
         }
     }
 
-    protected fun<R> useRemoteCollection(body: (RemoteType) -> R) =
+    protected fun <R> useRemoteCollection(body: (RemoteType) -> R) =
             useRemote(davCollection, body)
 
     private fun unwrapExceptions(body: () -> Unit, handler: (e: Throwable, local: ResourceType?, remote: HttpUrl?) -> Unit) {
         var ex: Throwable? = null
         try {
             body()
-        } catch(e: Throwable) {
+        } catch (e: Throwable) {
             ex = e
         }
 
