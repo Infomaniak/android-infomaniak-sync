@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <!--common strings-->
-  <string name="app_name">DAVDroid</string>
+<!--common strings-->
   <string name="help">Ajuda</string>
   <!--startup dialogs-->
   <!--AboutActivity-->
