@@ -62,17 +62,20 @@ class AccountDetailsFragment : Fragment() {
         }
 
         val args = requireNotNull(arguments)
-        val config = args.getParcelable(KEY_CONFIG) as DavResourceFinder.Configuration
+        val config = args.getParcelable<DavResourceFinder.Configuration>(KEY_CONFIG)
 
-        v.account_name.setText(config.credentials.accountName ?:
-                config.calDAV?.email ?:
-                config.credentials.userName ?:
-                config.credentials.certificateAlias)
+        config?.let {
+            v.account_name.setText(config.credentials.accountName ?:
+            config.calDAV?.email ?:
+            config.credentials.userName ?:
+            config.credentials.certificateAlias)
+
+            v.carddav.visibility = if (config.cardDAV != null) View.VISIBLE else View.GONE
+        }
 
         val settings = Settings.getInstance(requireActivity())
 
         // CardDAV-specific
-        v.carddav.visibility = if (config.cardDAV != null) View.VISIBLE else View.GONE
         if (settings.has(AccountSettings.KEY_CONTACT_GROUP_METHOD))
             v.contact_group_method.isEnabled = false
 
@@ -87,10 +90,12 @@ class AccountDetailsFragment : Fragment() {
                 v.create_account.visibility = View.GONE
                 v.create_account_progress.visibility = View.VISIBLE
 
-                CreateAccountTask(requireActivity(),
-                        name,
-                        args.getParcelable(KEY_CONFIG) as DavResourceFinder.Configuration,
-                        GroupMethod.valueOf(groupMethodName)).execute()
+                config?.let {
+                    CreateAccountTask(requireActivity(),
+                            name,
+                            config,
+                            GroupMethod.valueOf(groupMethodName)).execute()
+                }
             }
         }
 

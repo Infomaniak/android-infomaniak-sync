@@ -44,7 +44,7 @@ class CreateCalendarActivity: AppCompatActivity(), LoaderManager.LoaderCallbacks
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        account = intent.extras.getParcelable(EXTRA_ACCOUNT)!!
+        account = intent.extras?.getParcelable(EXTRA_ACCOUNT)!!
 
         setContentView(R.layout.activity_create_calendar)
         setSupportActionBar(toolbar)

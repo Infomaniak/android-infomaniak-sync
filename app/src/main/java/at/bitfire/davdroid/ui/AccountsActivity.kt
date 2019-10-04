@@ -139,7 +139,7 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     private fun closeCustomTabs() {
         if (mCustomTabsServiceConnection != null) {
-            unbindService(mCustomTabsServiceConnection)
+            unbindService(mCustomTabsServiceConnection!!)
         }
     }
 

@@ -179,7 +179,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
             val info = adapter.getItem(i)
             val nowChecked = true
 
-            SelectCollectionTask(applicationContext, info, nowChecked, WeakReference(adapter), WeakReference(view)).execute()
+            SelectCollectionTask(applicationContext, info!!, nowChecked, WeakReference(adapter), WeakReference(view)).execute()
         }
     }
 
@@ -568,7 +568,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
     class AddressBookAdapter(
             context: Context
     ) : ArrayAdapter<CollectionInfo>(context, R.layout.account_carddav_item) {
-        override fun getView(position: Int, _v: View?, parent: ViewGroup?): View {
+        override fun getView(position: Int, _v: View?, parent: ViewGroup): View {
             val v = _v
                     ?: LayoutInflater.from(context).inflate(R.layout.account_carddav_item, parent, false)
             val info = getItem(position)!!
@@ -597,7 +597,7 @@ class AccountActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener, Po
     class CalendarAdapter(
             context: Context
     ) : ArrayAdapter<CollectionInfo>(context, R.layout.account_caldav_item) {
-        override fun getView(position: Int, _v: View?, parent: ViewGroup?): View {
+        override fun getView(position: Int, _v: View?, parent: ViewGroup): View {
             val v = _v
                     ?: LayoutInflater.from(context).inflate(R.layout.account_caldav_item, parent, false)
             val info = getItem(position)!!

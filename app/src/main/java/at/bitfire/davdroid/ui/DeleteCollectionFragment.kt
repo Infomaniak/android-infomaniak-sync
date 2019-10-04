@@ -104,42 +104,4 @@ class DeleteCollectionFragment: DialogFragment(), LoaderManager.LoaderCallbacks<
         }
     }
 
-
-    class ConfirmDeleteCollectionFragment: DialogFragment() {
-
-        companion object {
-
-            fun newInstance(account: Account, collectionInfo: CollectionInfo): DialogFragment {
-                val frag = ConfirmDeleteCollectionFragment()
-                val args = Bundle(2)
-                args.putParcelable(ARG_ACCOUNT, account)
-                args.putParcelable(ARG_COLLECTION_INFO, collectionInfo)
-                frag.arguments = args
-                return frag
-            }
-
-        }
-
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            val collectionInfo = arguments!!.getParcelable(ARG_COLLECTION_INFO) as CollectionInfo
-            val name = if (collectionInfo.displayName.isNullOrBlank())
-                collectionInfo.url.toString()
-            else
-                collectionInfo.displayName
-
-            return AlertDialog.Builder(activity!!)
-                    .setTitle(R.string.delete_collection_confirm_title)
-                    .setMessage(getString(R.string.delete_collection_confirm_warning, name))
-                    .setPositiveButton(android.R.string.yes) { _, _ ->
-                        val frag = DeleteCollectionFragment()
-                        frag.arguments = arguments
-                        frag.show(fragmentManager!!, null)
-                    }
-                    .setNegativeButton(android.R.string.no) { _, _ ->
-                        dismiss()
-                    }
-                    .create()
-        }
-    }
-
 }
