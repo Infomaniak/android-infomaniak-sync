@@ -10,7 +10,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- common strings -->
-    <string name="app_name">Infomaniak Sync</string>
+    <string name="app_name" translatable="false">kSync</string>
+    <string name="app_name_title" translatable="false">Infomaniak Sync</string>
     <string name="account_type" translatable="false">infomaniak.com.sync</string>
     <string name="account_type_address_book" translatable="false">com.infomaniak.sync.address_book</string>
     <string name="account_title_address_book">Infomaniak Sync Address book</string>
