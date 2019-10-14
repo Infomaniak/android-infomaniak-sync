@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import at.bitfire.davdroid.App
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.ui.UiUtils
+import com.bugsnag.android.Bugsnag
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.infomaniak.sync.ApiToken
@@ -143,6 +144,7 @@ class LoginActivity : AppCompatActivity() {
         private val activityReference: WeakReference<LoginActivity> = WeakReference(context)
 
         override fun doInBackground(vararg params: String): DavResourceFinder.Configuration? {
+            var bodyResult: String? = ""
             try {
 
                 val okHttpClient = OkHttpClient.Builder()
@@ -167,7 +169,7 @@ class LoginActivity : AppCompatActivity() {
 
                 var responseBody: ResponseBody? = response.body() ?: return null
 
-                var bodyResult: String? = responseBody!!.string()
+                bodyResult = responseBody!!.string()
 
                 val apiToken: ApiToken
                 if (bodyResult != null) {
@@ -264,6 +266,9 @@ class LoginActivity : AppCompatActivity() {
                 return null
             } catch (exception: Exception) {
                 exception.printStackTrace()
+                Bugsnag.notify(exception) { report ->
+                    report.error.metaData.addToTab("textError", "error", bodyResult ?: "")
+                }
                 return null
             }
         }
