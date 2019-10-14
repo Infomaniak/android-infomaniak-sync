@@ -8,26 +8,26 @@
 
 package at.bitfire.davdroid.ui
 
-import android.content.*
-import android.net.Uri
+import android.content.ContentResolver
+import android.content.Intent
+import android.content.SyncStatusObserver
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.customtabs.CustomTabsClient
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.browser.customtabs.CustomTabsServiceConnection
-import androidx.browser.customtabs.CustomTabsSession
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import at.bitfire.davdroid.R
 import at.bitfire.davdroid.settings.Settings
 import at.bitfire.davdroid.ui.setup.LoginActivity
+import at.bitfire.davdroid.ui.setup.LoginActivity.Companion.APP_UID
+import at.bitfire.davdroid.ui.setup.LoginActivity.Companion.AUTHORIZE_LOGIN_URL
+import at.bitfire.davdroid.ui.setup.LoginActivity.Companion.CLIENT_ID
+import at.bitfire.davdroid.ui.setup.LoginActivity.Companion.REDIRECT_URI
 import com.bugsnag.android.Bugsnag
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.infomaniak.sync.CustomTab
 import kotlinx.android.synthetic.main.accounts_content.*
 import kotlinx.android.synthetic.main.activity_accounts.*
 import kotlinx.android.synthetic.main.activity_accounts.view.*
@@ -39,7 +39,6 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         val accountsDrawerHandler = DefaultAccountsDrawerHandler()
 
         private const val fragTagStartup = "startup"
-        private const val CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome"
     }
 
     private lateinit var settings: Settings
@@ -47,9 +46,7 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private var syncStatusSnackbar: Snackbar? = null
     private var syncStatusObserver: Any? = null
 
-    private var mClient: CustomTabsClient? = null
-    private var mCustomTabsSession: CustomTabsSession? = null
-    private var mCustomTabsServiceConnection: CustomTabsServiceConnection? = null
+    private var customTab: CustomTab? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,35 +57,22 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         setSupportActionBar(toolbar)
 
+        customTab = CustomTab(this@AccountsActivity)
+
+        customTab?.getPkceCodes()
+
         val data = intent.data
-        if (data != null && LoginActivity.REDIRECT_URI_ROOT == data.scheme) {
+        if (data != null && APP_UID == data.scheme) {
             intent.data = null
             val code = data.getQueryParameter("code")
             val error = data.getQueryParameter("error")
             if (!TextUtils.isEmpty(code)) {
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.putExtra("code", code)
+                intent.putExtra("verifier", customTab?.codeVerifier)
                 startActivity(intent)
             }
         }
-
-        mCustomTabsServiceConnection = object : CustomTabsServiceConnection() {
-            override fun onCustomTabsServiceConnected(componentName: ComponentName, customTabsClient: CustomTabsClient) {
-                mClient = customTabsClient
-                mClient!!.warmup(0L)
-                mCustomTabsSession = mClient!!.newSession(null)
-            }
-
-            override fun onServiceDisconnected(name: ComponentName) {
-                mClient = null
-            }
-        }
-
-        CustomTabsClient.bindCustomTabsService(this@AccountsActivity, CUSTOM_TAB_PACKAGE_NAME, mCustomTabsServiceConnection)
-        val customTabsIntent = CustomTabsIntent.Builder(mCustomTabsSession)
-                .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                .setShowTitle(true)
-                .build()
 
         if (supportFragmentManager.findFragmentByTag(fragTagStartup) == null) {
             val ft = supportFragmentManager.beginTransaction()
@@ -97,11 +81,15 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
 
         fab.setOnClickListener {
-            try {
-                customTabsIntent.launchUrl(this@AccountsActivity, Uri.parse("${LoginActivity.LOGIN_URL_AUTHORIZE}?client_id=${LoginActivity.CLIENT_ID}&response_type=code&redirect_uri=${LoginActivity.REDIRECT_URI_ROOT}:/oauth2redirect"))
-            } catch (e: ActivityNotFoundException) {
-                Toast.makeText(this@AccountsActivity, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
-            }
+            customTab?.showTab(
+                    AUTHORIZE_LOGIN_URL +
+                            "?client_id=$CLIENT_ID" +
+                            "&response_type=code" +
+                            "&redirect_uri=$REDIRECT_URI" +
+                            "&access_type=offline" +
+                            "&code_challenge_method=" + customTab?.codeChallengeMethod +
+                            "&code_challenge=" + customTab?.codeChallenge
+            )
         }
         fab.show()
 
@@ -132,15 +120,9 @@ class AccountsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     public override fun onDestroy() {
+        customTab?.unbind()
+
         super.onDestroy()
-
-        closeCustomTabs()
-    }
-
-    private fun closeCustomTabs() {
-        if (mCustomTabsServiceConnection != null) {
-            unbindService(mCustomTabsServiceConnection)
-        }
     }
 
     override fun onStatusChanged(which: Int) {

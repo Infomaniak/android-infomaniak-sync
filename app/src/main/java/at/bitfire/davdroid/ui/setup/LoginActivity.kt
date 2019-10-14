@@ -60,17 +60,20 @@ class LoginActivity : AppCompatActivity() {
          */
         const val EXTRA_PASSWORD = "password"
 
-        internal const val LOGIN_URL_AUTHORIZE = "https://login.infomaniak.com/authorize"
-        private const val LOGIN_URL_TOKEN = "https://login.infomaniak.com/token"
+        const val APP_UID = "com.infomaniak.sync"
+        const val CLIENT_ID = "CE011334-F75A-4263-9F9F-45FC5A142F59"
 
-        internal const val REDIRECT_URI_ROOT = "com.infomaniak.sync"
+        const val REDIRECT_URI = "$APP_UID:/oauth2redirect"
 
-        internal const val CLIENT_ID = "CE011334-F75A-4263-9F9F-45FC5A142F59"
+        private const val LOGIN_ENDPOINT = "https://login.infomaniak.com"
+        const val AUTHORIZE_LOGIN_URL = "$LOGIN_ENDPOINT/authorize"
+        const val TOKEN_LOGIN_URL = "$LOGIN_ENDPOINT/token"
 
-        private const val URL_API_PROFIL = "https://api.infomaniak.com/1/profile";
-        private const val URL_API_PROFIL_PASSWORD = "https://api.infomaniak.com/1/profile/password"
+        private const val API_ENDPOINT = "https://api.infomaniak.com/1"
+        const val PROFILE_API_URL = "$API_ENDPOINT/profile"
+        const val PASSWORD_API_URL = "$API_ENDPOINT/profile/password"
 
-        private const val URL_SYNC_INFOMANIAK = "https://sync.infomaniak.com"
+        private const val SYNC_INFOMANIAK = "https://sync.infomaniak.com"
 
         private var connection: GenerateInfomaniakAccountTask? = null
         private var mutex = ReentrantLock(true)
@@ -83,11 +86,12 @@ class LoginActivity : AppCompatActivity() {
 
         if (intent != null) {
             val code = intent.getStringExtra("code")
-            if (TextUtils.isEmpty(code)) {
+            val codeVerifier = intent.getStringExtra("verifier")
+            if (TextUtils.isEmpty(code) || TextUtils.isEmpty(codeVerifier)) {
                 Toast.makeText(this, getString(R.string.an_error_has_occurred), Toast.LENGTH_LONG).show()
                 backPressed()
             } else {
-                connection = GenerateInfomaniakAccountTask(this, code)
+                connection = GenerateInfomaniakAccountTask(this, code, codeVerifier)
                 connection!!.execute()
             }
         } else {
@@ -131,7 +135,10 @@ class LoginActivity : AppCompatActivity() {
                 .build())
     }
 
-    class GenerateInfomaniakAccountTask internal constructor(context: LoginActivity, private val code: String) : AsyncTask<String, CharSequence, DavResourceFinder.Configuration>() {
+    class GenerateInfomaniakAccountTask internal constructor(context: LoginActivity,
+                                                             private val code: String,
+                                                             private val codeVerifier: String) :
+            AsyncTask<String, CharSequence, DavResourceFinder.Configuration>() {
 
         private val activityReference: WeakReference<LoginActivity> = WeakReference(context)
 
@@ -143,16 +150,16 @@ class LoginActivity : AppCompatActivity() {
 
                 val gson = Gson()
 
-
                 var formBuilder: MultipartBody.Builder = MultipartBody.Builder()
                         .setType(MultipartBody.FORM)
                         .addFormDataPart("grant_type", "authorization_code")
                         .addFormDataPart("client_id", CLIENT_ID)
                         .addFormDataPart("code", code)
-                        .addFormDataPart("redirect_uri", "$REDIRECT_URI_ROOT:/oauth2redirect")
+                        .addFormDataPart("code_verifier", codeVerifier)
+                        .addFormDataPart("redirect_uri", REDIRECT_URI)
 
                 var request = Request.Builder()
-                        .url(LOGIN_URL_TOKEN)
+                        .url(TOKEN_LOGIN_URL)
                         .post(formBuilder.build())
                         .build()
 
@@ -175,7 +182,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 request = Request.Builder()
-                        .url(URL_API_PROFIL)
+                        .url(PROFILE_API_URL)
                         .header("Authorization", "Bearer " + apiToken.access_token)
                         .get()
                         .build()
@@ -222,7 +229,7 @@ class LoginActivity : AppCompatActivity() {
                             .addFormDataPart("name", "Infomaniak Sync - " + formater.format(Date()))
 
                     request = Request.Builder()
-                            .url(URL_API_PROFIL_PASSWORD)
+                            .url(PASSWORD_API_URL)
                             .header("Authorization", "Bearer " + apiToken.access_token)
                             .post(formBuilder.build())
                             .build()
@@ -245,7 +252,7 @@ class LoginActivity : AppCompatActivity() {
                         publishProgress(loginActivity.getText(R.string.login_querying_server))
 
                         loginActivity = activityReference.get()!!
-                        val loginInfo = LoginInfo(URI(URL_SYNC_INFOMANIAK), infomaniakUser.login, infomaniakPassword.password, null, infomaniakUser.display_name, infomaniakUser.email)
+                        val loginInfo = LoginInfo(URI(SYNC_INFOMANIAK), infomaniakUser.login, infomaniakPassword.password, null, infomaniakUser.display_name, infomaniakUser.email)
                         val configuration: DavResourceFinder.Configuration = DavResourceFinder(loginActivity.baseContext, loginInfo).findInitialConfiguration()
 
                         publishProgress(loginActivity.getString(R.string.login_finalising))
