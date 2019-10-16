@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="at.bitfire.davdroid"
-          xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:installLocation="internalOnly">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:installLocation="internalOnly">
 
     <!-- normal permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -27,8 +27,12 @@
     <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
 
     <!-- android.permission-group.LOCATION -->
-    <!-- required since Android 8.1 to get the WiFi name (for "sync in Wifi only" feature) -->
-    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- getting the WiFi name (for "sync in Wifi only") requires
+      - coarse location (Android 8.1)
+      - fine location (Android 10)  -->
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- required since Android 10 to get the WiFi name while in background (= while syncing) -->
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 
     <!-- ical4android declares task access permissions -->
 
@@ -77,7 +81,11 @@
             android:name=".ui.AppSettingsActivity"
             android:label="@string/app_settings"
             android:parentActivityName=".ui.AccountsActivity"
-            android:exported="true"/>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.APPLICATION_PREFERENCES"/>
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ui.setup.LoginActivity"
@@ -106,6 +114,9 @@
             android:parentActivityName=".ui.AppSettingsActivity"
             android:exported="true"
             android:label="@string/debug_info_title">
+            <intent-filter>
+                <action android:name="android.intent.action.BUG_REPORT"/>
+            </intent-filter>
         </activity>
         <provider
             android:name="androidx.core.content.FileProvider"

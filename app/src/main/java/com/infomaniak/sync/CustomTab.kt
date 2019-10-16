@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.util.Base64
 import android.webkit.URLUtil
@@ -122,8 +123,8 @@ class CustomTab constructor(private val activity: Activity) {
 		val serviceIntent = Intent(SERVICE_ACTION).apply {
 			setPackage(CHROME_STABLE_PACKAGE)
 		}
-		val resolveInfos = context.packageManager.queryIntentServices(serviceIntent, 0)
-		return resolveInfos.isNotEmpty()
+		val resolveInfos: MutableList<ResolveInfo>? = context.packageManager.queryIntentServices(serviceIntent, 0)
+		return !resolveInfos.isNullOrEmpty()
 	}
 
 	companion object {
@@ -131,7 +132,7 @@ class CustomTab constructor(private val activity: Activity) {
 		private const val SERVICE_ACTION = "android.support.customtabs.action.CustomTabsService"
 	}
 
-	public fun getPkceCodes() {
+	fun getPkceCodes() {
 		val preferenceName = "pkce_step_codes"
 		val verifierTag = "code_verifier"
 		val challengeTag = "code_challenge"
