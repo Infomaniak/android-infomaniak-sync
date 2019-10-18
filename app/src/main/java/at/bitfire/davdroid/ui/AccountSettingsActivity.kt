@@ -126,7 +126,7 @@ class AccountSettingsActivity: AppCompatActivity() {
             val credentials = accountSettings.credentials()
             when (credentials.type) {
                 Credentials.Type.UsernamePassword -> {
-                    prefUserName.isVisible = true
+                    prefUserName.isVisible = false
                     prefUserName.summary = credentials.userName
                     prefUserName.text = credentials.userName
                     prefUserName.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
@@ -135,7 +135,7 @@ class AccountSettingsActivity: AppCompatActivity() {
                         false
                     }
 
-                    prefPassword.isVisible = true
+                    prefPassword.isVisible = false
                     prefPassword.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
                         accountSettings.credentials(Credentials(credentials.userName, newValue as String))
                         reload()

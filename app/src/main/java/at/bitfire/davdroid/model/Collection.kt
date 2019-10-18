@@ -1,5 +1,6 @@
 package at.bitfire.davdroid.model
 
+import android.util.Log
 import androidx.room.*
 import at.bitfire.dav4jvm.Response
 import at.bitfire.dav4jvm.UrlUtils
@@ -25,7 +26,7 @@ data class Collection(
     var url: HttpUrl,
 
     var privWriteContent: Boolean = true,
-    var privUnbind: Boolean = true,
+    var privUnbind: Boolean = false,
     var forceReadOnly: Boolean = false,
 
     var displayName: String? = null,
@@ -77,10 +78,14 @@ data class Collection(
             } ?: return null
 
             var privWriteContent = true
-            var privUnbind = true
+            var privUnbind = false
             dav[CurrentUserPrivilegeSet::class.java]?.let { privilegeSet ->
                 privWriteContent = privilegeSet.mayWriteContent
-                privUnbind = privilegeSet.mayUnbind
+                privUnbind = if (type == TYPE_CALENDAR) {
+                    privilegeSet.mayUnbind
+                } else {
+                    false
+                }
             }
 
             var displayName: String? = null

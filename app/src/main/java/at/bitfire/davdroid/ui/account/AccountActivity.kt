@@ -180,8 +180,8 @@ class AccountActivity: AppCompatActivity() {
                 null
 
             if (calDavSvcId != null) {
-                idxCalDav = currentIndex++
-                idxWebcal = currentIndex
+                idxCalDav = currentIndex
+                idxWebcal = null
             } else {
                 idxCalDav = null
                 idxWebcal = null

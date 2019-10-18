@@ -54,28 +54,24 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_authentication">
+    <EditTextPreference
+        android:key="username"
+        android:title="@string/settings_username"
+        android:persistent="false"
+        android:dialogTitle="@string/settings_enter_username"/>
 
-        <EditTextPreference
-            android:key="username"
-            android:title="@string/settings_username"
-            android:persistent="false"
-            android:dialogTitle="@string/settings_enter_username"/>
+    <EditTextPreference
+        android:key="password"
+        android:title="@string/settings_password"
+        android:persistent="false"
+        android:inputType="textPassword"
+        android:summary="@string/settings_password_summary"
+        android:dialogTitle="@string/settings_enter_password"/>
 
-        <EditTextPreference
-            android:key="password"
-            android:title="@string/settings_password"
-            android:persistent="false"
-            android:inputType="textPassword"
-            android:summary="@string/settings_password_summary"
-            android:dialogTitle="@string/settings_enter_password"/>
-
-        <Preference
-            android:key="certificate_alias"
-            android:title="@string/settings_certificate_alias"
-            android:persistent="false"/>
-
-    </PreferenceCategory>
+    <Preference
+        android:key="certificate_alias"
+        android:title="@string/settings_certificate_alias"
+        android:persistent="false"/>
 
     <PreferenceCategory
         android:key="caldav"

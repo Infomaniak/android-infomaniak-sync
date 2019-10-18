@@ -87,8 +87,8 @@
   <string name="app_settings_reset_hints_summary">Réactiver les astuces qui ont été vues précédemment</string>
   <string name="app_settings_reset_hints_success">Toutes les astuces seront affichés à nouveau</string>
   <!--AccountActivity-->
-  <string name="account_carddav">CardDAV (les carnets d\'adresse) </string>
-  <string name="account_caldav">CalDAV (les agendas) </string>
+  <string name="account_carddav">Carnets d\'adresses</string>
+  <string name="account_caldav">Calendriers</string>
   <string name="account_webcal">WebCal (les anciens agenda)</string>
   <string name="account_no_address_books">Il n\'y a pas (encore) de carnet d\'adresses.</string>
   <string name="account_no_calendars">Il n\'y a pas (encore) de calendriers.</string>
