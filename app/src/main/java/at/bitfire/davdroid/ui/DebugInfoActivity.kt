@@ -51,6 +51,8 @@ import org.dmfs.tasks.contract.TaskContract
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.logging.Level
 import kotlin.concurrent.thread
 
@@ -87,6 +89,7 @@ class DebugInfoActivity: AppCompatActivity() {
     fun onShare(item: MenuItem) {
         model.report.value?.let { report ->
             val builder = ShareCompat.IntentBuilder.from(this)
+                    .setEmailTo(Array(1) { "support@infomaniak.com" })
                     .setSubject("${getString(R.string.app_name)} ${BuildConfig.VERSION_NAME} debug info")
                     .setText(getString(R.string.debug_info_logs_attached))
                     .setType("text/plain")
@@ -298,10 +301,13 @@ class DebugInfoActivity: AppCompatActivity() {
                 text.append("\n")
 
                 try {
+                    val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+                    val currentDate = simpleDateFormat.format(Date())
                     text.append(
                             "SYSTEM INFORMATION\n" +
                                     "Android version: ${Build.VERSION.RELEASE} (${Build.DISPLAY})\n" +
-                                    "Device: ${Build.MANUFACTURER} ${Build.MODEL} (${Build.DEVICE})\n\n"
+                                    "Device: ${Build.MANUFACTURER} ${Build.MODEL} (${Build.DEVICE})\n\n"+
+                                    "Date-Time: $currentDate (device)\n\n"
                     )
                 } catch(e: Exception) {
                     Logger.log.log(Level.SEVERE, "Couldn't get system details", e)

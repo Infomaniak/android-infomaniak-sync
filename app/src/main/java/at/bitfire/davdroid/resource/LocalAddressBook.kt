@@ -87,14 +87,14 @@ class LocalAddressBook(
             baos.write(info.url.hashCode())
             val hash = Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP or Base64.NO_PADDING)
 
-            val sb = StringBuilder(info.displayName.let {
+            val sb = StringBuilder(mainAccount.name.let {
                 if (it.isNullOrEmpty())
                     DavUtils.lastSegmentOfUrl(info.url)
                 else
                     it
             })
-            sb.append(" (${mainAccount.name} $hash)")
-            return sb.toString()
+            sb.append(" (${info.displayName} $hash)")
+            return sb.toString().replace("'"," ")
         }
 
         fun initialUserData(mainAccount: Account, url: String): Bundle {
