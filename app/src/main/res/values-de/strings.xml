@@ -18,9 +18,6 @@
   <!--startup dialogs-->
   <string name="startup_autostart_permission">Automatische Synchronisierung</string>
   <string name="startup_autostart_permission_message">%s-Firmware verhindert oftmals das automatische Synchronisieren. In diesem Fall müssen Sie das automatische Synchronisieren in den Android-Einstellung erlauben.</string>
-  <string name="startup_battery_optimization">Geplante Synchronisierung</string>
-  <string name="startup_battery_optimization_message">Ihr Gerät wird die kSync- Synchronisierung einschränken. Damit regelmäßig synchronisiert werden kann, muss die »Akku-Leistungsoptimierung« deaktiviert werden.</string>
-  <string name="startup_battery_optimization_disable">Für kSync deaktivieren</string>
   <string name="startup_dont_show_again">Nicht mehr anzeigen</string>
   <string name="startup_not_now">Später</string>
   <string name="startup_donate">Open-Source-Information</string>

@@ -26,7 +26,7 @@
 
     <!-- app theme -->
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light" />
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
 
     <style name="AppTheme" parent="AppBaseTheme">
         <item name="colorPrimary">@color/primaryColor</item>

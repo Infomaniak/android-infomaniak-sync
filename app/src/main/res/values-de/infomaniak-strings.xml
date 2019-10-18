@@ -13,4 +13,7 @@
 
 	<string name="navigation_drawer_manual">Handbuch (Original)</string>
 
+	<string name="startup_battery_optimization">Synchronisation im Hintergrund</string>
+	<string name="startup_battery_optimization_message">Um Ihre Kontakte und Kalender und automatisch im Hintergrund synchronisieren zu können, muss die Option \"Akku-Optimierung\" in Android für Infomaniak Sync deaktiviert werden.</string>
+	<string name="startup_battery_optimization_disable">Ausführung im Hintergrund zulassen</string>
 </resources>

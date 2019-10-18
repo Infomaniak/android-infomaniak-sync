@@ -13,4 +13,8 @@
 
 	<string name="navigation_drawer_manual">Manuale (Originale)</string>
 
+	<string name="startup_battery_optimization">Sincronizzazione in background</string>
+	<string name="startup_battery_optimization_message">Per sincronizzare automaticamente i tuoi contatti e agende in background, è necessario disattivare l\'opzione \"Ottimizzazione della batteria\" di Android per Infomaniak Sync.</string>
+	<string name="startup_battery_optimization_disable">Autorizzare l\'esecuzione in background</string>
+
 </resources>

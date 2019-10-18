@@ -13,4 +13,8 @@
 
 	<string name="navigation_drawer_manual">Manual (Original)</string>
 
+	<string name="startup_battery_optimization">Sincronización en segundo plano</string>
+	<string name="startup_battery_optimization_message">Para sincronizar automáticamente tus contactos y agendas en segundo plano, es necesario desactivar la opción "Optimización de la batería" de Android para Infomaniak Sync.</string>
+	<string name="startup_battery_optimization_disable">Autorizar la ejecución en segundo plano</string>
+
 </resources>

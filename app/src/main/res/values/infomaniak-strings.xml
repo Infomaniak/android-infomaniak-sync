@@ -13,4 +13,8 @@
 
 	<string name="navigation_drawer_manual">Manual (Original)</string>
 
+	<string name="startup_battery_optimization">Background synchronisation</string>
+	<string name="startup_battery_optimization_message">For automatic background synchronisation of your contacts and calendars, it is necessary to disable the Android \"Battery optimisation\" option for Infomaniak Sync.</string>
+	<string name="startup_battery_optimization_disable">Authorise background execution</string>
+
 </resources>

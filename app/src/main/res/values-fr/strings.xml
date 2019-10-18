@@ -18,9 +18,6 @@
   <!--startup dialogs-->
   <string name="startup_autostart_permission">Synchronisation automatique</string>
   <string name="startup_autostart_permission_message">%s le matériel bloque souvent la synchronisation automatique. Dans ce cas, autorisez la synchronisation automatique dans vos paramètres d\'Android.</string>
-  <string name="startup_battery_optimization">Synchronisation planifiée</string>
-  <string name="startup_battery_optimization_message">Votre appareil va restreindre la synchronisation kSync. Pour forcer des intervalles de synchronisation kSync plus réguliers, enlever l\'option \"optimisation de batterie\"</string>
-  <string name="startup_battery_optimization_disable">Désactiver pour kSync</string>
   <string name="startup_dont_show_again">Ne plus afficher</string>
   <string name="startup_not_now">Pas maintenant</string>
   <string name="startup_donate">Open-Source Information</string>
