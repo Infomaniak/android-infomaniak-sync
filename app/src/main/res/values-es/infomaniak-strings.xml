@@ -11,4 +11,6 @@
 
 	<string name="account_welcome_add_first_account">Pulsa + para agregar una cuenta de WorkSpace.</string>
 
+	<string name="navigation_drawer_manual">Manual (Original)</string>
+
 </resources>

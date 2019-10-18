@@ -11,4 +11,6 @@
 
 	<string name="account_welcome_add_first_account">Premi su + per aggiungere un account WorkSpace.</string>
 
+	<string name="navigation_drawer_manual">Manuale (Originale)</string>
+
 </resources>

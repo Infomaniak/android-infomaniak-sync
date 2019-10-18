@@ -17,13 +17,13 @@
     android:descendantFocusability="blocksDescendants">
 
     <androidx.cardview.widget.CardView
-            style="@style/account_list_card"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/cardview_background"
-            app:contentPadding="16dp"
-            app:cardElevation="2dp">
+        style="@style/account_list_card"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/cardview_background"
+        app:cardElevation="3dp"
+        app:contentPadding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                app:srcCompat="@drawable/ic_account_circle_white"/>
+                app:srcCompat="@drawable/ic_account_circle_grey" />
 
             <TextView
                 android:id="@+id/account_name"
@@ -42,8 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@android:color/white"
-                tools:text="Account Name"/>
+                android:textColor="@color/grey_text"
+                tools:text="Account Name" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

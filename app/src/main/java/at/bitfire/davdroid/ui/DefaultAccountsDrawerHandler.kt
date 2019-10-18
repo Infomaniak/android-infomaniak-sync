@@ -41,13 +41,12 @@ class DefaultAccountsDrawerHandler: IAccountsDrawerHandler {
             R.id.nav_twitter ->
                 UiUtils.launchUri(activity, Uri.parse("https://twitter.com/" + activity.getString(R.string.twitter_handle)))
             R.id.nav_website ->
-                UiUtils.launchUri(activity, App.homepageUrl(activity))
+                UiUtils.launchUri(activity, Uri.parse("https://www.infomaniak.com"))
             R.id.nav_manual ->
                 UiUtils.launchUri(activity, App.homepageUrl(activity)
                         .buildUpon().appendPath("manual").build())
             R.id.nav_faq ->
-                UiUtils.launchUri(activity, App.homepageUrl(activity)
-                        .buildUpon().appendPath("faq").build())
+                UiUtils.launchUri(activity, Uri.parse("https://faq.infomaniak.com/2302"))
             R.id.nav_forums ->
                 UiUtils.launchUri(activity, App.homepageUrl(activity)
                         .buildUpon().appendPath("forums").build())

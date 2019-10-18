@@ -90,7 +90,7 @@
 
     <!-- widgets -->
 
-    <color name="cardview_background">@color/secondaryLightColor</color>
+    <color name="cardview_background">@color/hover</color>
 
     <style name="tablayout" parent="Widget.Design.TabLayout">
         <item name="android:background">@color/primaryDarkColor</item>

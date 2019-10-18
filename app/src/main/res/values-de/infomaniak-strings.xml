@@ -11,4 +11,6 @@
 
 	<string name="account_welcome_add_first_account">Tippen Sie auf +, um ein Workspace-Konto hinzuzufügen.</string>
 
+	<string name="navigation_drawer_manual">Handbuch (Original)</string>
+
 </resources>
