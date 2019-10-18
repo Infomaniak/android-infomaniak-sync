@@ -53,6 +53,8 @@ class AccountSettings(
 
         const val KEY_USERNAME = "user_name"
         const val KEY_CERTIFICATE_ALIAS = "certificate_alias"
+        const val KEY_ACCOUNTNAME = "account_name"
+        const val KEY_EMAIL = "user_email"
 
         const val KEY_WIFI_ONLY = "wifi_only"               // sync on WiFi only (default: false)
         const val WIFI_ONLY_DEFAULT = false
@@ -125,13 +127,17 @@ class AccountSettings(
     fun credentials() = Credentials(
             accountManager.getUserData(account, KEY_USERNAME),
             accountManager.getPassword(account),
-            accountManager.getUserData(account, KEY_CERTIFICATE_ALIAS)
+            accountManager.getUserData(account, KEY_CERTIFICATE_ALIAS),
+            accountManager.getUserData(account, KEY_ACCOUNTNAME),
+            accountManager.getUserData(account, KEY_EMAIL)
     )
 
     fun credentials(credentials: Credentials) {
         accountManager.setUserData(account, KEY_USERNAME, credentials.userName)
         accountManager.setPassword(account, credentials.password)
         accountManager.setUserData(account, KEY_CERTIFICATE_ALIAS, credentials.certificateAlias)
+        accountManager.setUserData(account, KEY_ACCOUNTNAME, credentials.accountName)
+        accountManager.setUserData(account, KEY_EMAIL, credentials.email)
     }
 
 

@@ -35,6 +35,7 @@ import at.bitfire.davdroid.ui.NotificationUtils
 import at.bitfire.ical4android.CalendarStorageException
 import at.bitfire.ical4android.TaskProvider
 import at.bitfire.vcard4android.ContactsStorageException
+import net.fortuna.ical4j.model.property.Organizer
 import okhttp3.HttpUrl
 import okhttp3.RequestBody
 import org.apache.commons.lang3.exception.ContextedException
@@ -42,6 +43,7 @@ import org.dmfs.tasks.contract.TaskContract
 import java.io.IOException
 import java.io.InterruptedIOException
 import java.net.HttpURLConnection
+import java.net.URI
 import java.security.cert.CertificateException
 import java.util.*
 import java.util.concurrent.*
@@ -322,6 +324,24 @@ abstract class SyncManager<ResourceType: LocalResource<*>, out CollectionType: L
                         }
                     }
                     try {
+                        if (local is LocalEvent) {
+                            local.event?.let { event ->
+                                if (event.attendees.isNotEmpty()) {
+                                    event.organizer?.let {
+                                        if (it.value.replace("%20", " ") == "mailto:" + accountSettings.credentials().accountName) {
+                                            event.organizer = Organizer(URI("mailto", accountSettings.credentials().email, null))
+                                        }
+                                    }
+
+                                    for (attender in event.attendees) {
+                                        if (attender.value.replace("%20", " ") == "mailto:" + accountSettings.credentials().accountName) {
+                                            attender.value = "mailto:" + accountSettings.credentials().email
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         if (local.eTag == null) {
                             Logger.log.info("Uploading new record $fileName")
                             remote.put(body, null, true, processETag)

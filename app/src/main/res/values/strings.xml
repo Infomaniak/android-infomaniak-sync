@@ -9,11 +9,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- common strings -->
-    <string name="app_name">DAVx⁵</string>
-    <string name="account_type" translatable="false">bitfire.at.davdroid</string>
-    <string name="account_type_address_book" translatable="false">at.bitfire.davdroid.address_book</string>
-    <string name="account_title_address_book">DAVx⁵ Address book</string>
-    <string name="address_books_authority" translatable="false">at.bitfire.davdroid.addressbooks</string>
+    <string name="app_name" translatable="false">kSync</string>
+    <string name="app_name_title" translatable="false">Infomaniak Sync</string>
+    <string name="account_type" translatable="false">infomaniak.com.sync</string>
+    <string name="account_type_address_book" translatable="false">com.infomaniak.sync.address_book</string>
+    <string name="account_title_address_book">kSync Address book</string>
+    <string name="address_books_authority" translatable="false">com.infomaniak.sync.addressbooks</string>
     <string name="address_books_authority_title">Address books</string>
     <string name="help">Help</string>
     <string name="manage_accounts">Manage accounts</string>
@@ -280,7 +281,7 @@
     <string name="exception_show_details">Show details</string>
 
     <!-- sync adapters and DebugInfoActivity -->
-    <string name="authority_debug_provider" translatable="false">at.bitfire.davdroid.debug</string>
+    <string name="authority_debug_provider" translatable="false">com.infomaniak.sync.debug</string>
     <string name="debug_info_title">Debug info</string>
     <string name="debug_info_logs_attached">Logs are attached to this message (requires attachment support of the receiving app).</string>
     <string name="sync_contacts_read_only_address_book">Read-only address book</string>

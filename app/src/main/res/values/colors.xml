@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorBackgroundCard">#FAFAFA</color>
+
+    <color name="green_succes">#56BF62</color>
+    <color name="red_error">#FE644E</color>
+    <color name="orange_warning">#FFB700</color>
+    <color name="blue_general">#0098FF</color>
+
+    <color name="black">#000000</color>
+    <color name="grey_title">#333333</color>
+    <color name="grey_text">#666666</color>
+    <color name="grey_text_secondary">#9F9F9F</color>
+    <color name="grey_background">#EDECEC</color>
+    <color name="hover">#F5F5F5</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="purple">#7974B4</color>
+    <color name="blue_dark_2">#3990BB</color>
+    <color name="blue_dark_1">#00A1B9</color>
+    <color name="green_darken_2">#3CB572</color>
+    <color name="orange">#FFB11B</color>
+    <color name="pink">#ED2C6E</color>
+    <color name="red">#D9283A</color>
+    <color name="shadow">#80000000</color>
+
+</resources>

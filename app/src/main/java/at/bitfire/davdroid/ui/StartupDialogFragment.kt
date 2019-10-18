@@ -53,9 +53,6 @@ class StartupDialogFragment: DialogFragment() {
             val dialogs = LinkedList<StartupDialogFragment>()
             val settings = Settings.getInstance(context)
 
-            if (System.currentTimeMillis() > settings.getLong(SETTING_NEXT_DONATION_POPUP) ?: 0)
-                dialogs += StartupDialogFragment.instantiate(Mode.OSE_DONATE)
-
             // battery optimization white-listing
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && settings.getBoolean(HINT_BATTERY_OPTIMIZATIONS) != false) {
                 val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager

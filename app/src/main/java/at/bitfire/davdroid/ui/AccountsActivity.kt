@@ -13,6 +13,7 @@ import android.content.ContentResolver
 import android.content.Intent
 import android.content.SyncStatusObserver
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,11 @@ import at.bitfire.davdroid.settings.Settings
 import at.bitfire.davdroid.ui.setup.LoginActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.infomaniak.sync.GlobalConstants.APP_UID
+import com.infomaniak.sync.GlobalConstants.AUTHORIZE_LOGIN_URL
+import com.infomaniak.sync.GlobalConstants.CLIENT_ID
+import com.infomaniak.sync.GlobalConstants.REDIRECT_URI
+import com.infomaniak.sync.model.CustomTab
 import kotlinx.android.synthetic.main.accounts_content.*
 import kotlinx.android.synthetic.main.activity_accounts.*
 import kotlinx.android.synthetic.main.activity_accounts.view.*
@@ -39,6 +45,7 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     private var syncStatusSnackbar: Snackbar? = null
     private var syncStatusObserver: Any? = null
 
+    private var customTab: CustomTab? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +54,23 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         setContentView(R.layout.activity_accounts)
         setSupportActionBar(toolbar)
 
+        customTab = CustomTab(this@AccountsActivity)
+
+        customTab?.getPkceCodes()
+
+        val data = intent.data
+        if (data != null && APP_UID == data.scheme) {
+            intent.data = null
+            val code = data.getQueryParameter("code")
+            val error = data.getQueryParameter("error")
+            if (!TextUtils.isEmpty(code)) {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("code", code)
+                intent.putExtra("verifier", customTab?.codeVerifier)
+                startActivity(intent)
+            }
+        }
+
         if (supportFragmentManager.findFragmentByTag(fragTagStartup) == null) {
             val ft = supportFragmentManager.beginTransaction()
             StartupDialogFragment.getStartupDialogs(this).forEach { ft.add(it, fragTagStartup) }
@@ -54,7 +78,15 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         }
 
         fab.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            customTab?.showTab(
+                    AUTHORIZE_LOGIN_URL +
+                            "?client_id=$CLIENT_ID" +
+                            "&response_type=code" +
+                            "&redirect_uri=$REDIRECT_URI" +
+                            "&access_type=offline" +
+                            "&code_challenge_method=" + customTab?.codeChallengeMethod +
+                            "&code_challenge=" + customTab?.codeChallenge
+            )
         }
         fab.show()
 
@@ -82,6 +114,12 @@ class AccountsActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             ContentResolver.removeStatusChangeListener(it)
             syncStatusObserver = null
         }
+    }
+
+    public override fun onDestroy() {
+        customTab?.unbind()
+
+        super.onDestroy()
     }
 
     override fun onStatusChanged(which: Int) {

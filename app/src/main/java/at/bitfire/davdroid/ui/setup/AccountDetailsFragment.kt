@@ -36,6 +36,7 @@ import at.bitfire.davdroid.settings.Settings
 import at.bitfire.ical4android.TaskProvider
 import at.bitfire.vcard4android.GroupMethod
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.login_account_details.*
 import java.util.logging.Level
 import kotlin.concurrent.thread
 
@@ -57,7 +58,8 @@ class AccountDetailsFragment: Fragment() {
 
         val config = loginModel.configuration ?: throw IllegalStateException()
 
-        model.name.value = config.calDAV?.email ?:
+        model.name.value = loginModel.credentials?.accountName ?:
+                config.calDAV?.email ?:
                 loginModel.credentials?.userName ?:
                 loginModel.credentials?.certificateAlias
 
@@ -118,6 +120,10 @@ class AccountDetailsFragment: Fragment() {
         return v.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        create_account.callOnClick()
+    }
 
     class AccountDetailsModel(
             application: Application

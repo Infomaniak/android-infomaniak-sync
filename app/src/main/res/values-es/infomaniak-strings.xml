@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+	<string name="login_initialization">Inicialización …</string>
+	<string name="login_retrieving_account_information">Recuperando información de la cuenta …</string>
+	<string name="login_generating_an_application_password">Generando una contraseña de aplicación …</string>
+	<string name="login_finalising">Finalización …</string>
+
+	<string name="an_error_has_occurred">Se produjo un error</string>
+
+</resources>

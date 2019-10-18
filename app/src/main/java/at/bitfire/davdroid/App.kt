@@ -22,6 +22,7 @@ import androidx.multidex.MultiDexApplication
 import at.bitfire.davdroid.log.Logger
 import at.bitfire.davdroid.ui.DebugInfoActivity
 import at.bitfire.davdroid.ui.NotificationUtils
+import com.bugsnag.android.Bugsnag
 import java.util.logging.Level
 import kotlin.concurrent.thread
 import kotlin.system.exitProcess
@@ -52,6 +53,8 @@ class App: MultiDexApplication(), Thread.UncaughtExceptionHandler {
     override fun onCreate() {
         super.onCreate()
         Logger.initialize(this)
+        Bugsnag.init(this)
+        Bugsnag.setNotifyReleaseStages("production")
 
         //if (BuildConfig.FLAVOR == FLAVOR_STANDARD)
             Thread.setDefaultUncaughtExceptionHandler(this)
