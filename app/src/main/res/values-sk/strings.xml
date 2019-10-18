@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵ adresár</string>
+  <string name="account_title_address_book">kSync adresár</string>
   <string name="address_books_authority_title">Adresáre</string>
   <string name="help">Pomoc</string>
   <string name="manage_accounts">Spravovať používateľské účty</string>
@@ -20,18 +19,18 @@
   <string name="startup_autostart_permission">Automatická sychnronizácia</string>
   <string name="startup_autostart_permission_message">%s firmware často blokuje automatickú synchronizáciu. V takom prípade povoľte automatickú synchronizáciu v nastavení Androidu.</string>
   <string name="startup_battery_optimization">Naplánovaná synchronizácia</string>
-  <string name="startup_battery_optimization_message">Vaše zariadenie bráni DAVx⁵ synchronizácii. Na vynútenie pravidelných DAVx⁵ synchronizačných intervalov vypnite \"režim úspory energie\".</string>
-  <string name="startup_battery_optimization_disable">Pre DAVx⁵ vypnúť</string>
+  <string name="startup_battery_optimization_message">Vaše zariadenie bráni kSync synchronizácii. Na vynútenie pravidelných kSync synchronizačných intervalov vypnite \"režim úspory energie\".</string>
+  <string name="startup_battery_optimization_disable">Pre kSync vypnúť</string>
   <string name="startup_dont_show_again">Opätovne neukazovať</string>
   <string name="startup_not_now">Teraz nie</string>
   <string name="startup_donate">Open-Source informácie</string>
-  <string name="startup_donate_message">Sme radi že používate DAVx⁵, čo je open-source softvér (GPLv3). Pretože vývoj DAVx⁵ je náročný a stojí nás tisícky hodín práce, zvážte prosím, dar.</string>
+  <string name="startup_donate_message">Sme radi že používate kSync, čo je open-source softvér (GPLv3). Pretože vývoj kSync je náročný a stojí nás tisícky hodín práce, zvážte prosím, dar.</string>
   <string name="startup_donate_now">Zobraziť darovaciu stránku</string>
   <string name="startup_donate_later">Snáď neskôr</string>
   <string name="startup_more_info">Viac informácii</string>
   <string name="startup_opentasks_not_installed">OpenTasks nie je nainštalovaný</string>
   <string name="startup_opentasks_not_installed_message">Na synchronizáciu úloh sa vyžaduje slobodná aplikácia OpenTask (Nie je potrebná pre kontakty/udalosti).</string>
-  <string name="startup_opentasks_reinstall_davx5">Po inštalácii OpenTask je potrebné PREINŠTALOVAŤ DAVx⁵ a znovu pridať vaše používateľské účty (Chyba Androidu).</string>
+  <string name="startup_opentasks_reinstall_davx5">Po inštalácii OpenTask je potrebné PREINŠTALOVAŤ kSync a znovu pridať vaše používateľské účty (Chyba Androidu).</string>
   <string name="startup_opentasks_not_installed_install">Nainštalovať OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Knižnice</string>
@@ -41,8 +40,8 @@
   <string name="about_license_info_no_warranty">Tento program sa poskytuje BEZ AKEJKOĽVEK ZÁRUKY. Je to slobodný softvér a môžete ho ďalej šíriť pri splnení určitých podmienok.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">Nie je možné vytvoriť súbor protokolu</string>
-  <string name="logging_notification_title">DAVx⁵ protokol</string>
-  <string name="logging_notification_text">Odteraz sa protokolujú všetky DAVx⁵ aktivity</string>
+  <string name="logging_notification_title">kSync protokol</string>
+  <string name="logging_notification_text">Odteraz sa protokolujú všetky kSync aktivity</string>
   <string name="logging_notification_send_log">Poslať protokol</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Otvoriť navigačnú zásuvku</string>
@@ -58,7 +57,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">Pomoc / Fóra</string>
   <string name="navigation_drawer_donate">Darovať</string>
-  <string name="account_list_empty">Vitajte v programe DAVx⁵!\n\nTeraz môžete pridať používateľský účet pre CalDAV/CardDAV .</string>
+  <string name="account_list_empty">Vitajte v programe kSync!\n\nTeraz môžete pridať používateľský účet pre CalDAV/CardDAV .</string>
   <string name="accounts_global_sync_disabled">Automatická synchronizácia platná pre celý systém je zakázaná</string>
   <string name="accounts_global_sync_enable">Povoliť</string>
   <!--DavService-->
@@ -200,8 +199,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Udalosti ktoré sú staršie ako tento počet dní budú ignorované (0 je povolená). Ponechajte prázdne aby ste synchronizovali všetky udalosti.</string>
   <string name="settings_manage_calendar_colors">Spravovať farby kalendára</string>
-  <string name="settings_manage_calendar_colors_on">Farby kalendára sú spravované DAVx⁵</string>
-  <string name="settings_manage_calendar_colors_off">Farby kalendáre nie sú nastavované DAVx⁵</string>
+  <string name="settings_manage_calendar_colors_on">Farby kalendára sú spravované kSync</string>
+  <string name="settings_manage_calendar_colors_off">Farby kalendáre nie sú nastavované kSync</string>
   <string name="settings_event_colors">Podpora farieb pre udalosť</string>
   <string name="settings_event_colors_on">Farby synchronizácie udalostí</string>
   <string name="settings_event_colors_off">Nesynchronizovať farby udalostí</string>
@@ -243,7 +242,7 @@
   <string name="debug_info_title">Ladiace informácie</string>
   <string name="debug_info_logs_attached">Protokoly sú pripojené k tejto správe (vyžaduje podporu prílohy v prijímacej aplikácii).</string>
   <string name="sync_contacts_read_only_address_book">Adresár len na čítanie</string>
-  <string name="sync_error_permissions">Oprávnenia DAVx⁵ </string>
+  <string name="sync_error_permissions">Oprávnenia kSync </string>
   <string name="sync_error_permissions_text">Vyžadujú sa dodatočné oprávnenia</string>
   <string name="sync_error_opentasks_too_old">OpenTask je príliš starý</string>
   <string name="sync_error_opentasks_required_version">Vyžaduje sa verzia: %1$s (aktuálna %2$s)</string>
@@ -258,6 +257,6 @@
   <string name="sync_invalid_task">Úloha prijatá zo servera nie je platná</string>
   <string name="sync_invalid_resources_ignoring">Ignoruje sa jeden alebo viac neplatných zdrojov</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: Zabezpečenie spojenia</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ zistil neznámy certifikát. Prajete si dôverovať mu?</string>
+  <string name="certificate_notification_connection_security">kSync: Zabezpečenie spojenia</string>
+  <string name="trust_certificate_unknown_certificate_found">kSync zistil neznámy certifikát. Prajete si dôverovať mu?</string>
 </resources>

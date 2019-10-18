@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵-adressebok</string>
+  <string name="account_title_address_book">kSync-adressebok</string>
   <string name="address_books_authority_title">Adressebøker</string>
   <string name="help">Hjelp</string>
   <string name="manage_accounts">Behandle kontoer</string>
@@ -18,12 +17,12 @@
   <string name="startup_autostart_permission">Automatisk synkronisering</string>
   <string name="startup_autostart_permission_message">Firmware fra %s stenger ofte for automatisk synkronisering. I så fall tillat automatisk synkronisering i Android innstillingene</string>
   <string name="startup_battery_optimization">Planlagt synkronisering</string>
-  <string name="startup_battery_optimization_message">Enheten din vil begrense DAVx⁵ synkronisering. For å sikre jevnlige DAVx⁵ synkroniseringsintervall må du skru av \"batterioptimalisering\"</string>
-  <string name="startup_battery_optimization_disable">Skru av for DAVx⁵</string>
+  <string name="startup_battery_optimization_message">Enheten din vil begrense kSync synkronisering. For å sikre jevnlige kSync synkroniseringsintervall må du skru av \"batterioptimalisering\"</string>
+  <string name="startup_battery_optimization_disable">Skru av for kSync</string>
   <string name="startup_dont_show_again">Ikke vis igjen</string>
   <string name="startup_not_now">Ikke nå</string>
   <string name="startup_donate">Friprog-informasjon</string>
-  <string name="startup_donate_message">Vi er glade for at du bruker DAVx⁵, som er fri programvare (GPLv3). Siden utvikling av DAVx⁵ er hardt arbeid og har tatt tusenvis av arbeidstimer, bes du overveie en donasjon.</string>
+  <string name="startup_donate_message">Vi er glade for at du bruker kSync, som er fri programvare (GPLv3). Siden utvikling av kSync er hardt arbeid og har tatt tusenvis av arbeidstimer, bes du overveie en donasjon.</string>
   <string name="startup_donate_now">Vis donasjonsside</string>
   <string name="startup_donate_later">Kanskje senere</string>
   <string name="startup_more_info">Mer informasjon</string>
@@ -38,8 +37,8 @@
   <string name="about_license_info_no_warranty">Dette programmet kommer uten NOEN FORM FOR GARANTI. Det er fri programvare, og du er velkommen til å redistribuere det under gitte forhold.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">Kan ikke opprette loggfil</string>
-  <string name="logging_notification_title">DAVx⁵ logging</string>
-  <string name="logging_notification_text">Logger nå all aktivitet fra DAVx⁵</string>
+  <string name="logging_notification_title">kSync logging</string>
+  <string name="logging_notification_text">Logger nå all aktivitet fra kSync</string>
   <string name="logging_notification_send_log">Send logg</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Åpne navigasjonsskuff</string>
@@ -55,7 +54,7 @@
   <string name="navigation_drawer_faq">O-S-S</string>
   <string name="navigation_drawer_forums">Hjelp / Forum</string>
   <string name="navigation_drawer_donate">Doner</string>
-  <string name="account_list_empty">Velkommen til DAVx⁵.\n\nDu kan legge til en CalDAV/CardDAV-konto nå.</string>
+  <string name="account_list_empty">Velkommen til kSync.\n\nDu kan legge til en CalDAV/CardDAV-konto nå.</string>
   <string name="accounts_global_sync_disabled">Systemomspennende automatisk synkronisering avskrudd</string>
   <string name="accounts_global_sync_enable">Skru på</string>
   <!--DavService-->
@@ -190,8 +189,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Hendelser som er mer enn dette antallet dager i fortid vil bli ignorert (kan være 0). La stå tomt for å synkronisere alle hendelser.</string>
   <string name="settings_manage_calendar_colors">Velg kalenderfarger</string>
-  <string name="settings_manage_calendar_colors_on">Kalenderfarger behandles av DAVx⁵</string>
-  <string name="settings_manage_calendar_colors_off">Kalenderfarger settes ikke av DAVx⁵</string>
+  <string name="settings_manage_calendar_colors_on">Kalenderfarger behandles av kSync</string>
+  <string name="settings_manage_calendar_colors_off">Kalenderfarger settes ikke av kSync</string>
   <string name="settings_event_colors">Støtte for fargelegging av hendelser</string>
   <string name="settings_event_colors_on">Synkroniser hendelsesfarger</string>
   <string name="settings_event_colors_off">Ikke synkroniser hendelsesfarger</string>
@@ -231,7 +230,7 @@
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Feilrettingsinfo</string>
   <string name="sync_contacts_read_only_address_book">Adressebok uten skrivetilgang</string>
-  <string name="sync_error_permissions">DAVx⁵-tilganger</string>
+  <string name="sync_error_permissions">kSync-tilganger</string>
   <string name="sync_error_permissions_text">Ytterligere tilganger kreves</string>
   <string name="sync_error_opentasks_too_old">OpenTasks er for gammel</string>
   <string name="sync_error_opentasks_required_version">Krever versjon: %1$s (er nå %2$s)</string>
@@ -241,6 +240,6 @@
   <string name="sync_error_retry">Forsøk igjen</string>
   <string name="sync_invalid_contact">Fikk ugyldig kontakt fra server</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: Tilkoblingssikkerhet</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ har støtt på et ukjent sertifikat. Har du tiltro til det?</string>
+  <string name="certificate_notification_connection_security">kSync: Tilkoblingssikkerhet</string>
+  <string name="trust_certificate_unknown_certificate_found">kSync har støtt på et ukjent sertifikat. Har du tiltro til det?</string>
 </resources>

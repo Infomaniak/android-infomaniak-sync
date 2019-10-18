@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵ libreta de enderezos</string>
+  <string name="account_title_address_book">kSync libreta de enderezos</string>
   <string name="address_books_authority_title">Libretas de enderezos</string>
   <string name="help">Axuda</string>
   <string name="manage_accounts">Xestionar contas</string>
@@ -20,18 +19,18 @@
   <string name="startup_autostart_permission">Sincronización automática</string>
   <string name="startup_autostart_permission_message">O firmware %s soe bloquear a sincronización automática. En este caso, permita a sincronización automática nos axustes de Android.</string>
   <string name="startup_battery_optimization">Sincronización programada</string>
-  <string name="startup_battery_optimization_message">O seu dispositivo restrinxirá a sincronización de DAVx⁵. Para forzar un intervalo regular de sincronización de DAVx⁵, desactive a \"optimización de batería\".</string>
-  <string name="startup_battery_optimization_disable">Desactivar para DAVx⁵</string>
+  <string name="startup_battery_optimization_message">O seu dispositivo restrinxirá a sincronización de kSync. Para forzar un intervalo regular de sincronización de kSync, desactive a \"optimización de batería\".</string>
+  <string name="startup_battery_optimization_disable">Desactivar para kSync</string>
   <string name="startup_dont_show_again">Non mostrar de novo</string>
   <string name="startup_not_now">Non agora</string>
   <string name="startup_donate">Información Código Aberto</string>
-  <string name="startup_donate_message">Alegrámonos de que utilice DAVx⁵, que é software de código aberto (GPLv3). Desenvolver DAVx⁵ require un importante esforzo e toma miles de horas de traballo, por favor considere facer unha doazón.</string>
+  <string name="startup_donate_message">Alegrámonos de que utilice kSync, que é software de código aberto (GPLv3). Desenvolver kSync require un importante esforzo e toma miles de horas de traballo, por favor considere facer unha doazón.</string>
   <string name="startup_donate_now">Mostrar páxina de doazón</string>
   <string name="startup_donate_later">Quizáis máis tarde</string>
   <string name="startup_more_info">Máis información</string>
   <string name="startup_opentasks_not_installed">OpenTasks non instalado</string>
   <string name="startup_opentasks_not_installed_message">Para sincronizar tarefas precisa a app gratuíta OpenTasks. (Non requerida para contactos/eventos.)</string>
-  <string name="startup_opentasks_reinstall_davx5">Tras instalar OpenTasks, debe REINSTALAR DAVx⁵ e engadir as súas contas novamente (tara de Android).</string>
+  <string name="startup_opentasks_reinstall_davx5">Tras instalar OpenTasks, debe REINSTALAR kSync e engadir as súas contas novamente (tara de Android).</string>
   <string name="startup_opentasks_not_installed_install">Instalar OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Bibliotecas</string>
@@ -41,8 +40,8 @@
   <string name="about_license_info_no_warranty">Este programa non proporciona NINGUNHA GARANTÍA. É software libre, e convidámolo a redistribuílo baixo certas condicións.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">Non se creou ficheiro de rexistro</string>
-  <string name="logging_notification_title">Rexistro DAVx⁵</string>
-  <string name="logging_notification_text">Está a rexistrar todas as actividades DAVx⁵</string>
+  <string name="logging_notification_title">Rexistro kSync</string>
+  <string name="logging_notification_text">Está a rexistrar todas as actividades kSync</string>
   <string name="logging_notification_send_log">Enviar rexistro</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Abrir cado de navegación</string>
@@ -58,7 +57,7 @@
   <string name="navigation_drawer_faq">PMF</string>
   <string name="navigation_drawer_forums">Axuda / Foros</string>
   <string name="navigation_drawer_donate">Doar</string>
-  <string name="account_list_empty">Ben vida a DAVx⁵!\n\nXa pode engadir unha conta CalDAV/CardDAV</string>
+  <string name="account_list_empty">Ben vida a kSync!\n\nXa pode engadir unha conta CalDAV/CardDAV</string>
   <string name="accounts_global_sync_disabled">A sincronización global automática do sistema está desactivada</string>
   <string name="accounts_global_sync_enable">Activar</string>
   <!--DavService-->
@@ -198,8 +197,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Eventos anteriores a máis dos días indicados serán ignorados (podería ser 0). Deixar en branco para sincronizar todos os eventos.</string>
   <string name="settings_manage_calendar_colors">Xestionar cores dos calendarios</string>
-  <string name="settings_manage_calendar_colors_on">As cores dos calendarios son xestionadas por DAVx⁵</string>
-  <string name="settings_manage_calendar_colors_off">As cores do calendario non son establecidas por DAVx⁵</string>
+  <string name="settings_manage_calendar_colors_on">As cores dos calendarios son xestionadas por kSync</string>
+  <string name="settings_manage_calendar_colors_off">As cores do calendario non son establecidas por kSync</string>
   <string name="settings_event_colors">Soporte para cor de eventos</string>
   <string name="settings_event_colors_on">Sincr. cores de eventos</string>
   <string name="settings_event_colors_off">Non sincr. cores de eventos</string>
@@ -241,7 +240,7 @@
   <string name="debug_info_title">Info depuración</string>
   <string name="debug_info_logs_attached">Os rexistros están anexos a esta mensaxe (precisa soporte de anexos da app receptora).</string>
   <string name="sync_contacts_read_only_address_book">Libreta de enderezos de só lectura</string>
-  <string name="sync_error_permissions">Permisos DAVx⁵</string>
+  <string name="sync_error_permissions">Permisos kSync</string>
   <string name="sync_error_permissions_text">Precísanse permisos adicionais</string>
   <string name="sync_error_opentasks_too_old">OpenTask demasiado antigo</string>
   <string name="sync_error_opentasks_required_version">Require versión: %1$s (actual %2$s)</string>
@@ -256,6 +255,6 @@
   <string name="sync_invalid_task">Recibida tarefa non válida desde o servidor</string>
   <string name="sync_invalid_resources_ignoring">Ignorando un ou varios recursos non válidos</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: seguridade da conexión</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ atopou un certificado descoñecido. Quere confiar nel?</string>
+  <string name="certificate_notification_connection_security">kSync: seguridade da conexión</string>
+  <string name="trust_certificate_unknown_certificate_found">kSync atopou un certificado descoñecido. Quere confiar nel?</string>
 </resources>

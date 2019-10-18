@@ -35,8 +35,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="DAVx⁵"
-            tools:ignore="HardcodedText" />
+            android:text="@string/app_name_title" />
 
         <TextView
             android:id="@+id/app_version"

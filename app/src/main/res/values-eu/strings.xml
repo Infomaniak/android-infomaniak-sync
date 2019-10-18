@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵ Helbide liburua</string>
+  <string name="account_title_address_book">kSync Helbide liburua</string>
   <string name="address_books_authority_title">Helbide liburuak</string>
   <string name="help">Laguntza</string>
   <string name="manage_accounts">Kudeatu kontuak</string>
@@ -107,10 +106,10 @@
   <!--ExceptionInfoFragment-->
   <string name="exception_httpexception">HTTP errore bat gertatu da.</string>
   <!--sync adapters and DebugInfoActivity-->
-  <string name="sync_error_permissions">DAVx⁵ baimenak</string>
+  <string name="sync_error_permissions">kSync baimenak</string>
   <string name="sync_error_io">Sare edo S/I errorea – %s</string>
   <string name="sync_error_retry">Saiatu berriz</string>
   <string name="sync_error_view_item">Ikusi elementua</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: Konexio segurtasuna</string>
+  <string name="certificate_notification_connection_security">kSync: Konexio segurtasuna</string>
 </resources>

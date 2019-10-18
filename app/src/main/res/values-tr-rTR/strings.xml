@@ -1,18 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
   <string name="help">Yardım</string>
   <string name="manage_accounts">Hesapları yönet</string>
   <string name="send">Gönder</string>
   <!--startup dialogs-->
   <string name="startup_dont_show_again">Bir daha gösterme</string>
   <string name="startup_donate">Açık-Kaynak Bilgisi</string>
-  <string name="startup_donate_message">Açık kaynaklı yazılım (GPLv3) olan DAVx⁵\'i kullandığına çok mutluyuz. DAVx⁵\'i geliştirmek zor bir iş ve üzerinde binlerce saat çalıştığımızdan, lütfen bir bağışta bulunmayı düşün.</string>
+  <string name="startup_donate_message">Açık kaynaklı yazılım (GPLv3) olan kSync\'i kullandığına çok mutluyuz. kSync\'i geliştirmek zor bir iş ve üzerinde binlerce saat çalıştığımızdan, lütfen bir bağışta bulunmayı düşün.</string>
   <string name="startup_donate_now">Bağış sayfasını göster</string>
   <string name="startup_donate_later">Belki sonra</string>
   <string name="startup_opentasks_not_installed">OpenTasks kurulu değil</string>
-  <string name="startup_opentasks_reinstall_davx5">OpenTasks\'i kurduktan sonra, DAVx⁵\'i YENİDEN KURMAN ve hesaplarını yeniden eklemen gerek. (Android hatası).</string>
+  <string name="startup_opentasks_reinstall_davx5">OpenTasks\'i kurduktan sonra, kSync\'i YENİDEN KURMAN ve hesaplarını yeniden eklemen gerek. (Android hatası).</string>
   <string name="startup_opentasks_not_installed_install">OpenTasks kur</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">Bu uygulama HİÇ BİR GARANTİ ile gelmemektedir. Bedava bir yazılımdır ve belli koşullar altında dağıtabilirsiniz.</string>
@@ -28,7 +27,7 @@
   <string name="navigation_drawer_website">Web sitesi</string>
   <string name="navigation_drawer_faq">SSS</string>
   <string name="navigation_drawer_donate">Bağış yap</string>
-  <string name="account_list_empty">DAVx⁵\'e hoşgeldin!\n\nŞimdi bir CalDAV/CardDAV hesabı ekleyebilirsin.</string>
+  <string name="account_list_empty">kSync\'e hoşgeldin!\n\nŞimdi bir CalDAV/CardDAV hesabı ekleyebilirsin.</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">Servis keşfi başarısız</string>
   <string name="dav_service_refresh_couldnt_refresh">Kolleksiyon listesi yenilenemedi</string>
@@ -102,8 +101,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Bu sayıdan daha eski olan olaylar yok sayılacaktır (0 olabilir). Tüm olayları senkronize etmek için boş bırak.</string>
   <string name="settings_manage_calendar_colors">Takvim renklerini yönet</string>
-  <string name="settings_manage_calendar_colors_on">Takvim renkleri DAVx⁵ tarafından yönetilmekte</string>
-  <string name="settings_manage_calendar_colors_off">Takvim renkleri DAVx⁵ tarafından ayarlanmadı</string>
+  <string name="settings_manage_calendar_colors_on">Takvim renkleri kSync tarafından yönetilmekte</string>
+  <string name="settings_manage_calendar_colors_off">Takvim renkleri kSync tarafından ayarlanmadı</string>
   <!--collection management-->
   <string name="create_addressbook">Rehber yarat</string>
   <string name="create_addressbook_display_name_hint">Benim Rehberim</string>
@@ -121,7 +120,7 @@
   <string name="exception_show_details">Detayları göster</string>
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">Hata ayıklama bilgisi</string>
-  <string name="sync_error_permissions">DAVx⁵ izinleri</string>
+  <string name="sync_error_permissions">kSync izinleri</string>
   <string name="sync_error_permissions_text">Ek izinler zorunludur</string>
   <!--cert4android-->
 </resources>

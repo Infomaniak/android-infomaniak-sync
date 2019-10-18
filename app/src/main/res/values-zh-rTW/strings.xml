@@ -1,21 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵ 通訊錄</string>
+  <string name="account_title_address_book">kSync 通訊錄</string>
   <string name="address_books_authority_title">通訊錄</string>
   <string name="help">幫助</string>
   <string name="manage_accounts">管理帳號</string>
   <string name="send">送出</string>
   <!--startup dialogs-->
-  <string name="startup_battery_optimization_disable">關閉 DAVx⁵ 的電池最佳化</string>
+  <string name="startup_battery_optimization_disable">關閉 kSync 的電池最佳化</string>
   <string name="startup_dont_show_again">不要再顯示此訊息</string>
   <string name="startup_donate">開源資訊</string>
-  <string name="startup_donate_message">很高興您使用 DAVx⁵，這是個開源軟體 (GPLv3授權)。因為開發 DAVx⁵ 是艱難的工作，需要上千個小時，請考慮捐款支持我們。</string>
+  <string name="startup_donate_message">很高興您使用 kSync，這是個開源軟體 (GPLv3授權)。因為開發 kSync 是艱難的工作，需要上千個小時，請考慮捐款支持我們。</string>
   <string name="startup_donate_now">開啟捐款頁面</string>
   <string name="startup_donate_later">下次再說</string>
   <string name="startup_opentasks_not_installed">OpenTasks 未安裝</string>
-  <string name="startup_opentasks_reinstall_davx5">安裝 OpenTasks 後，您必須｢重新安裝｣ DAVx⁵ 並且重新加入要同步的帳號 (這是 Android 的設計問題)</string>
+  <string name="startup_opentasks_reinstall_davx5">安裝 OpenTasks 後，您必須｢重新安裝｣ kSync 並且重新加入要同步的帳號 (這是 Android 的設計問題)</string>
   <string name="startup_opentasks_not_installed_install">安裝 OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_license_info_no_warranty">我們｢完全不保證｣本程式無瑕疵。這是個自由軟體，歡迎您在符合公用授權條款的情況下任意散布它。</string>
@@ -31,7 +30,7 @@
   <string name="navigation_drawer_website">我們的網站</string>
   <string name="navigation_drawer_faq">常見問答</string>
   <string name="navigation_drawer_donate">贊助我們</string>
-  <string name="account_list_empty">歡迎使用 DAVx⁵!\n\n您現在可以新增 CalDAV/CardDAV 帳號</string>
+  <string name="account_list_empty">歡迎使用 kSync!\n\n您現在可以新增 CalDAV/CardDAV 帳號</string>
   <string name="accounts_global_sync_enable">啟用</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">未發現遠端服務</string>
@@ -127,8 +126,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">這個天數之前的項目將被忽略 (可設為0)。留白，則所有項目都會同步。</string>
   <string name="settings_manage_calendar_colors">管理行事曆的顏色</string>
-  <string name="settings_manage_calendar_colors_on">行事曆顏色由 DAVx⁵ 管理</string>
-  <string name="settings_manage_calendar_colors_off">行事曆顏色不由 DAVx⁵ 管理</string>
+  <string name="settings_manage_calendar_colors_on">行事曆顏色由 kSync 管理</string>
+  <string name="settings_manage_calendar_colors_off">行事曆顏色不由 kSync 管理</string>
   <!--collection management-->
   <string name="create_addressbook">建立通訊錄</string>
   <string name="create_addressbook_display_name_hint">我的通訊錄</string>
@@ -146,9 +145,9 @@
   <string name="exception_show_details">顯示細節</string>
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_title">除錯訊息</string>
-  <string name="sync_error_permissions">DAVx⁵ 權限</string>
+  <string name="sync_error_permissions">kSync 權限</string>
   <string name="sync_error_permissions_text">需要額外的權限</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: 連線安全性</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ 發現未知的憑證，您要信任它嗎?</string>
+  <string name="certificate_notification_connection_security">kSync: 連線安全性</string>
+  <string name="trust_certificate_unknown_certificate_found">kSync 發現未知的憑證，您要信任它嗎?</string>
 </resources>

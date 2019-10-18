@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵ адресен указател</string>
+  <string name="account_title_address_book">kSync адресен указател</string>
   <string name="address_books_authority_title">Адресни указатели</string>
   <string name="help">Помощ</string>
   <string name="manage_accounts">Управление на регистрациите</string>
@@ -17,18 +16,18 @@
   <!--startup dialogs-->
   <string name="startup_autostart_permission">Автоматична синхронизация</string>
   <string name="startup_battery_optimization">Планувана синхронизация</string>
-  <string name="startup_battery_optimization_message">Устройството ти ще възпрепятства DAVx⁵ да синхронизира.  За да се извършва редовна, периодична синхронизация, изключи “оптимизация на батерията”.</string>
-  <string name="startup_battery_optimization_disable">Изключи за DAVx⁵</string>
+  <string name="startup_battery_optimization_message">Устройството ти ще възпрепятства kSync да синхронизира.  За да се извършва редовна, периодична синхронизация, изключи “оптимизация на батерията”.</string>
+  <string name="startup_battery_optimization_disable">Изключи за kSync</string>
   <string name="startup_dont_show_again">Не показвай отново</string>
   <string name="startup_not_now">Не сега</string>
   <string name="startup_donate">Информация за отворения код</string>
-  <string name="startup_donate_message">Радваме се, че изполваш DAVx⁵ – софтуер с отворен код (GPLv3).  Тъй като разработването на DAVx⁵ е много трудоемка работа, моля да направите дарение.</string>
+  <string name="startup_donate_message">Радваме се, че изполваш kSync – софтуер с отворен код (GPLv3).  Тъй като разработването на kSync е много трудоемка работа, моля да направите дарение.</string>
   <string name="startup_donate_now">Покажи страницата за дарения</string>
   <string name="startup_donate_later">Може би по-късно</string>
   <string name="startup_more_info">Повече информация</string>
   <string name="startup_opentasks_not_installed">OpenTasks не е инсталирана.</string>
   <string name="startup_opentasks_not_installed_message">За да синхронизираш задачи е нужна програмата OpenTasks.  Тя не е необходима за синхронизиране на контакти или събития.</string>
-  <string name="startup_opentasks_reinstall_davx5">След като инсталирате OpenTasks трябва да инсталирате отново DAVx⁵ и да добавите своите регистрации (грешката е в Андроид).</string>
+  <string name="startup_opentasks_reinstall_davx5">След като инсталирате OpenTasks трябва да инсталирате отново kSync и да добавите своите регистрации (грешката е в Андроид).</string>
   <string name="startup_opentasks_not_installed_install">Инсталирай OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Библиотеки</string>
@@ -38,8 +37,8 @@
   <string name="about_license_info_no_warranty">Тази програма няма абсолютно никаква гаранция.  Тя е свободен софтуер и можеш да я разпространяваш при определени условия.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">Не можах да създада файл с протокола</string>
-  <string name="logging_notification_title">DAVx⁵ протоколиране</string>
-  <string name="logging_notification_text">Сега действията на DAVx⁵ се протоколират</string>
+  <string name="logging_notification_title">kSync протоколиране</string>
+  <string name="logging_notification_text">Сега действията на kSync се протоколират</string>
   <string name="logging_notification_send_log">Изпрати протокола</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_subtitle">Адаптор за CalDAV/CardDAV синхронизиране</string>
@@ -52,7 +51,7 @@
   <string name="navigation_drawer_faq">Често задавани въпроси</string>
   <string name="navigation_drawer_forums">Помощ и форум</string>
   <string name="navigation_drawer_donate">Дарения</string>
-  <string name="account_list_empty">Добре дошъл при  DAVx⁵!\n\nМоже да добавиш CalDAV/CardDAV регистрация сега.</string>
+  <string name="account_list_empty">Добре дошъл при  kSync!\n\nМоже да добавиш CalDAV/CardDAV регистрация сега.</string>
   <string name="accounts_global_sync_enable">Включи</string>
   <!--DavService-->
   <string name="dav_service_refresh_failed">Откриването на услугите се провали</string>
@@ -178,8 +177,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Събития преди повече от този брой дни в миналото ще бъдат пренебрегнати (може да бъде 0).  Остави празно за да се синхронизират всички събития.</string>
   <string name="settings_manage_calendar_colors">Управлявай цвета на календарите</string>
-  <string name="settings_manage_calendar_colors_on">Цветовете на календарите се управляват от DAVx⁵</string>
-  <string name="settings_manage_calendar_colors_off">Цветовете на календарите не се задават от DAVx⁵</string>
+  <string name="settings_manage_calendar_colors_on">Цветовете на календарите се управляват от kSync</string>
+  <string name="settings_manage_calendar_colors_off">Цветовете на календарите не се задават от kSync</string>
   <string name="settings_event_colors">Поддръжка на цветове за събития</string>
   <string name="settings_event_colors_on">Синхронизирай цветовете на събитията</string>
   <string name="settings_event_colors_off">Не синхронизирай цветовете на събитията</string>
@@ -219,7 +218,7 @@
   <!--sync adapters and DebugInfoActivity-->
   <string name="debug_info_logs_attached">Протоколът е закачен към това съобщение (изисква от получаващото приложение поддръжка за прикачени файлове).</string>
   <string name="sync_contacts_read_only_address_book">Адресен указател само за четене</string>
-  <string name="sync_error_permissions">DAVx⁵ права</string>
+  <string name="sync_error_permissions">kSync права</string>
   <string name="sync_error_permissions_text">Необходими са допълнителни права</string>
   <string name="sync_error_opentasks_too_old">OpenTasks е прекалено стара</string>
   <string name="sync_error_opentasks_required_version">Изисква се версия: %1$s, а е налична %2$s.</string>
@@ -233,6 +232,6 @@
   <string name="sync_invalid_task">Получих сбъркан файл със задача от сървъра</string>
   <string name="sync_invalid_resources_ignoring">Пренебрегване на сбъркани данни</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: Защита на връзката</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ се натъкна на непознат сертификат.  Ще му се довериш ли?</string>
+  <string name="certificate_notification_connection_security">kSync: Защита на връзката</string>
+  <string name="trust_certificate_unknown_certificate_found">kSync се натъкна на непознат сертификат.  Ще му се довериш ли?</string>
 </resources>

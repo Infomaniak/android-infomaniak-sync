@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵ Adresboek</string>
+  <string name="account_title_address_book">kSync Adresboek</string>
   <string name="address_books_authority_title">Adresboeken</string>
   <string name="help">Help</string>
   <string name="manage_accounts">Beheer accounts</string>
@@ -20,18 +19,18 @@
   <string name="startup_autostart_permission">Automatische synchronisatie</string>
   <string name="startup_autostart_permission_message">meestal blokkeerd %s firmware de automatische synchronisatie. Als dat het geval is kan je automatische synchronisatie in je Android settings toestaan om het probleem te verhelpen.</string>
   <string name="startup_battery_optimization">Geplande synchronisatie</string>
-  <string name="startup_battery_optimization_message">Uw apparaat limiteerd/blokkeerd DAVx⁵ synchronisatie. Zet de \"battery optimisation\" uit om normale DAVx⁵ synchronisatie intervallen (geforceerd) aan te zetten.</string>
-  <string name="startup_battery_optimization_disable">Zet deze optie uit voor DAVx⁵</string>
+  <string name="startup_battery_optimization_message">Uw apparaat limiteerd/blokkeerd kSync synchronisatie. Zet de \"battery optimisation\" uit om normale kSync synchronisatie intervallen (geforceerd) aan te zetten.</string>
+  <string name="startup_battery_optimization_disable">Zet deze optie uit voor kSync</string>
   <string name="startup_dont_show_again">Niet opnieuw weergeven</string>
   <string name="startup_not_now">Niet nu</string>
   <string name="startup_donate">Open-Source informatie</string>
-  <string name="startup_donate_message">We zijn blij dat je DAVx⁵ gebruikt, wat open-source software (GPLv3) is. Omdat de ontwikkeling van DAVx⁵ hard werk is en duizenden uren in beslag neemt. overweeg alstublieft een donatie.</string>
+  <string name="startup_donate_message">We zijn blij dat je kSync gebruikt, wat open-source software (GPLv3) is. Omdat de ontwikkeling van kSync hard werk is en duizenden uren in beslag neemt. overweeg alstublieft een donatie.</string>
   <string name="startup_donate_now">Toon donatie pagina</string>
   <string name="startup_donate_later">Misschien later</string>
   <string name="startup_more_info">Meer informatie</string>
   <string name="startup_opentasks_not_installed">OpenTasks niet geinstalleerd</string>
   <string name="startup_opentasks_not_installed_message">De gratisch app OpenTasks is benodigd om taken te synchroniseren. (Niet nodig voor het syncen van contacts/events.)</string>
-  <string name="startup_opentasks_reinstall_davx5">Na installatie van OpenTasks dient u DAVx⁵ opnieuw te installeren en de accounts toe te voegen (Android bug).</string>
+  <string name="startup_opentasks_reinstall_davx5">Na installatie van OpenTasks dient u kSync opnieuw te installeren en de accounts toe te voegen (Android bug).</string>
   <string name="startup_opentasks_not_installed_install">OpenTasks installeren</string>
   <!--AboutActivity-->
   <string name="about_libraries">Libraries</string>
@@ -41,8 +40,8 @@
   <string name="about_license_info_no_warranty">Dit programma kom met ABSOLUUT GEEN GARANTIE. Het is gratis software, en je bent welkom dit te herdistribueren onder bepaalde voorwaarden.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">Kon de log file niet creëren.</string>
-  <string name="logging_notification_title">DAVx⁵ logged</string>
-  <string name="logging_notification_text">Op dit moment worden alle DAVx⁵ activiteiten gelogd</string>
+  <string name="logging_notification_title">kSync logged</string>
+  <string name="logging_notification_text">Op dit moment worden alle kSync activiteiten gelogd</string>
   <string name="logging_notification_send_log">Verstuur het log</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Open navigatie drawer</string>
@@ -58,7 +57,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">Help / Forums</string>
   <string name="navigation_drawer_donate">Doneren</string>
-  <string name="account_list_empty">Welkom bij DAVx⁵!\n\nJe kunt nu een CalDAV/CardDAv account toevoegen.</string>
+  <string name="account_list_empty">Welkom bij kSync!\n\nJe kunt nu een CalDAV/CardDAv account toevoegen.</string>
   <string name="accounts_global_sync_disabled">Systeembrede automatische synchronisatie is uitgeschakeld</string>
   <string name="accounts_global_sync_enable">Inschakelen</string>
   <!--DavService-->
@@ -198,8 +197,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Afspraken ouder dan dit aantal dagen worden genegeerd (mag 0 zijn). Laat leeg om alle afspraken te synchronizeren.</string>
   <string name="settings_manage_calendar_colors">Agenda kleuren beheren</string>
-  <string name="settings_manage_calendar_colors_on">Agenda kleuren worden door DAVx⁵ beheerd.</string>
-  <string name="settings_manage_calendar_colors_off">Agenda kleuren worden niet door DAVx⁵ ingesteld</string>
+  <string name="settings_manage_calendar_colors_on">Agenda kleuren worden door kSync beheerd.</string>
+  <string name="settings_manage_calendar_colors_off">Agenda kleuren worden niet door kSync ingesteld</string>
   <string name="settings_event_colors">Evenement kleur ondersteuning</string>
   <string name="settings_event_colors_on">Evenement kleuren synchroniseren</string>
   <string name="settings_event_colors_off">Evenement kleuren niet synchroniseren</string>
@@ -241,7 +240,7 @@
   <string name="debug_info_title">Debug informatie</string>
   <string name="debug_info_logs_attached">Logs worden toegevoegd aan dit bericht (vereist bijlage support van de ontvangende app).</string>
   <string name="sync_contacts_read_only_address_book">Alleen-lezen adresboek</string>
-  <string name="sync_error_permissions">DAVx⁵ rechten</string>
+  <string name="sync_error_permissions">kSync rechten</string>
   <string name="sync_error_permissions_text">Aanvullende rechten vereist</string>
   <string name="sync_error_opentasks_too_old">OpenTasks te oud</string>
   <string name="sync_error_opentasks_required_version">Vereiste verzie: %1$s(momenteel %2$s)</string>
@@ -256,6 +255,6 @@
   <string name="sync_invalid_task">Ongeldige taak ontvangen van server</string>
   <string name="sync_invalid_resources_ignoring">Ik negeer nu een of meer invalid resources</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: Verbinding beveiliging</string>
+  <string name="certificate_notification_connection_security">kSync: Verbinding beveiliging</string>
   <string name="trust_certificate_unknown_certificate_found">Davdroid is benaderd door een onbekend certificaat. Vertrouwd u dit?</string>
 </resources>

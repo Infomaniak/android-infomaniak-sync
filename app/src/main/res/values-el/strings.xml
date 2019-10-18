@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">Βιβλίο διευθύνσεων DAVx⁵</string>
+  <string name="account_title_address_book">Βιβλίο διευθύνσεων kSync</string>
   <string name="address_books_authority_title">Βιβλία διευθύνσεων</string>
   <string name="help">Βοήθεια</string>
   <string name="manage_accounts">Διαχείριση λογαριασμών</string>
@@ -20,18 +19,18 @@
   <string name="startup_autostart_permission">Αυτόματος συγχρονισμός</string>
   <string name="startup_autostart_permission_message">%s το firmware συχνά αποκλείει τον αυτόματο συγχρονισμό. Σε αυτήν την περίπτωση, επιτρέψτε τον αυτόματο συγχρονισμό στις ρυθμίσεις Android.</string>
   <string name="startup_battery_optimization">Προγραμματισμένος συγχρονισμός</string>
-  <string name="startup_battery_optimization_message">Η συσκευή σας θα περιορίσει τον συγχρονισμό DAVx⁵. Για να επιβάλλετε τακτικά διαστήματα συγχρονισμού DAVx⁵, απενεργοποιήστε τη \"βελτιστοποίηση της μπαταρίας\".</string>
-  <string name="startup_battery_optimization_disable">Απενεργοποίηση για DAVx⁵</string>
+  <string name="startup_battery_optimization_message">Η συσκευή σας θα περιορίσει τον συγχρονισμό kSync. Για να επιβάλλετε τακτικά διαστήματα συγχρονισμού kSync, απενεργοποιήστε τη \"βελτιστοποίηση της μπαταρίας\".</string>
+  <string name="startup_battery_optimization_disable">Απενεργοποίηση για kSync</string>
   <string name="startup_dont_show_again">Να μην εμφανίζεται ξανά</string>
   <string name="startup_not_now">Όχι τώρα</string>
   <string name="startup_donate">Πληροφορίες ανοικτού κώδικα</string>
-  <string name="startup_donate_message">Είμαστε ευτυχείς που χρησιμοποιείτε το DAVx⁵, το οποίο είναι λογισμικό ανοιχτού κώδικα (GPLv3). Επειδή η ανάπτυξη του DAVx⁵ είναι σκληρή δουλειά και μας πήρε ήδη χιλιάδες ώρες εργασίας, παρακαλούμε σκεφτείτε να κάνετε μια δωρεά.</string>
+  <string name="startup_donate_message">Είμαστε ευτυχείς που χρησιμοποιείτε το kSync, το οποίο είναι λογισμικό ανοιχτού κώδικα (GPLv3). Επειδή η ανάπτυξη του kSync είναι σκληρή δουλειά και μας πήρε ήδη χιλιάδες ώρες εργασίας, παρακαλούμε σκεφτείτε να κάνετε μια δωρεά.</string>
   <string name="startup_donate_now">Εμφάνιση σελίδας δωρεών</string>
   <string name="startup_donate_later">Μπορεί αργότερα</string>
   <string name="startup_more_info">Περισσότερες πληροφορίες</string>
   <string name="startup_opentasks_not_installed">Η εφαρμογή OpenTasks δεν είναι εγκατεστημένη</string>
   <string name="startup_opentasks_not_installed_message">Για να συγχρονίσετε εργασίες, απαιτείται η δωρεάν εφαρμογή OpenTasks. (Δεν απαιτείται για επαφές/συμβάντα.)</string>
-  <string name="startup_opentasks_reinstall_davx5">Μετά την εγκατάσταση της εφαρμογής OpenTasks, πρέπει να εγκαταστήσετε εκ νέου το DAVx⁵ και να προσθέσετε ξανά τους λογαριασμούς σας (σφάλμα του Android).</string>
+  <string name="startup_opentasks_reinstall_davx5">Μετά την εγκατάσταση της εφαρμογής OpenTasks, πρέπει να εγκαταστήσετε εκ νέου το kSync και να προσθέσετε ξανά τους λογαριασμούς σας (σφάλμα του Android).</string>
   <string name="startup_opentasks_not_installed_install">Εγκατάσταση εφαρμογής OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Βιβλιοθήκες</string>
@@ -41,8 +40,8 @@
   <string name="about_license_info_no_warranty">Αυτό το πρόγραμμα συνοδεύεται χωρις ΚΑΜΙΑ ΕΓΓΥΗΣΗ. Είναι ελεύθερο λογισμικό και είστε ευπρόσδεκτοι να το αναδιανείμετε υπό ορισμένες προϋποθέσεις.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">Αδυναμία δημιουργίας αρχείου ιστορικού</string>
-  <string name="logging_notification_title">Καταγραφές DAVx⁵</string>
-  <string name="logging_notification_text">Τώρα γίνεται η καταγραφή όλων των δραστηριοτήτων του DAVx⁵</string>
+  <string name="logging_notification_title">Καταγραφές kSync</string>
+  <string name="logging_notification_text">Τώρα γίνεται η καταγραφή όλων των δραστηριοτήτων του kSync</string>
   <string name="logging_notification_send_log">Αποστολή ιστορικού</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Άνοιγμα συρταριού πλοήγησης</string>
@@ -58,7 +57,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">Βοήθεια / Φόρουμ</string>
   <string name="navigation_drawer_donate">Δωρεά</string>
-  <string name="account_list_empty">Καλώς ήρθατε στο DAVx⁵!\n\nΜπορείτε να προσθέσετε τώρα έναν λογαριασμό CalDAV/CardDAV.</string>
+  <string name="account_list_empty">Καλώς ήρθατε στο kSync!\n\nΜπορείτε να προσθέσετε τώρα έναν λογαριασμό CalDAV/CardDAV.</string>
   <string name="accounts_global_sync_disabled">Ο αυτόματος συγχρονισμός σε όλο το σύστημα είναι απενεργοποιημένος</string>
   <string name="accounts_global_sync_enable">Ενεργοποίηση</string>
   <!--DavService-->
@@ -198,8 +197,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Τα συμβάντα που υπερβαίνουν αυτόν τον αριθμό ημερών στο παρελθόν θα αγνοηθούν (μπορεί να είναι 0). Αφήστε κενό για συγχρονισμό όλων των συμβάντων.</string>
   <string name="settings_manage_calendar_colors">Διαχείριση χρωμάτων ημερολογίου</string>
-  <string name="settings_manage_calendar_colors_on">Τα χρώματα του ημερολογίου διαχειρίζονται από το DAVx⁵</string>
-  <string name="settings_manage_calendar_colors_off">Τα χρώματα του ημερολογίου δεν ορίστηκαν από το DAVx⁵</string>
+  <string name="settings_manage_calendar_colors_on">Τα χρώματα του ημερολογίου διαχειρίζονται από το kSync</string>
+  <string name="settings_manage_calendar_colors_off">Τα χρώματα του ημερολογίου δεν ορίστηκαν από το kSync</string>
   <string name="settings_event_colors">Υποστήριξη χρώματος στα συμβάντα</string>
   <string name="settings_event_colors_on">Συγχρονισμός χρωμάτων συμβάντων</string>
   <string name="settings_event_colors_off">Να μην γίνει συγχρονισμός χρωμάτων συμβάντων</string>
@@ -241,7 +240,7 @@
   <string name="debug_info_title">Πληροφορίες αποσφαλμάτωσης</string>
   <string name="debug_info_logs_attached">Τα αρχεία καταγραφής επισυνάπτονται σε αυτό το μήνυμα (απαιτεί υποστήριξη συνημμένων της εφαρμογής λήψης).</string>
   <string name="sync_contacts_read_only_address_book">Βιβλίο διευθύνσεων μόνο για ανάγνωση</string>
-  <string name="sync_error_permissions">Δικαιώματα DAVx⁵</string>
+  <string name="sync_error_permissions">Δικαιώματα kSync</string>
   <string name="sync_error_permissions_text">Απαιτούνται πρόσθετα δικαιώματα</string>
   <string name="sync_error_opentasks_too_old">Πολύ παλιά εφαρμογή OpenTasks</string>
   <string name="sync_error_opentasks_required_version">Απαιτούμενη έκδοση: %1$s (τρέχουσα %2$s)</string>
@@ -256,6 +255,6 @@
   <string name="sync_invalid_task">Έλαβε μη έγκυρη εργασία από το διακομιστή</string>
   <string name="sync_invalid_resources_ignoring">Αγνόηση ενός ή περισσοτέρων μη έγκυρων πόρων</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: Ασφάλεια σύνδεσης</string>
-  <string name="trust_certificate_unknown_certificate_found">Το DAVx⁵ εντόπισε ένα άγνωστο πιστοποιητικό. Θέλετε να το εμπιστεύεστε;</string>
+  <string name="certificate_notification_connection_security">kSync: Ασφάλεια σύνδεσης</string>
+  <string name="trust_certificate_unknown_certificate_found">Το kSync εντόπισε ένα άγνωστο πιστοποιητικό. Θέλετε να το εμπιστεύεστε;</string>
 </resources>

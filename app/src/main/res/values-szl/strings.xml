@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">Ksiōnżka adresowo DAVx⁵</string>
+  <string name="account_title_address_book">Ksiōnżka adresowo kSync</string>
   <string name="address_books_authority_title">Ksiōnżka adresowo</string>
   <string name="help">Pōmoc</string>
   <string name="manage_accounts">Zarzōndzej kōntami</string>
@@ -20,18 +19,18 @@
   <string name="startup_autostart_permission">Autōmatyczno synchrōnizacyjo</string>
   <string name="startup_autostart_permission_message">Firmware %s czynsto blokuje autōmatyczno synchrōnizacyjo. W tym przipadku przizwōl na autōmatyczno synchrōnizacyjo we sztelōnkach Androida.</string>
   <string name="startup_battery_optimization">Zaplanowano synchrōnizacyjo</string>
-  <string name="startup_battery_optimization_message">Twoja maszina strzimie synchrōnizacyjo DAVx⁵. Żeby wymusić regularne interwały synchrōnizacyje DAVx⁵, zastow ôptymalizacyjo bateryje.</string>
-  <string name="startup_battery_optimization_disable">Zastow dlo DAVx⁵</string>
+  <string name="startup_battery_optimization_message">Twoja maszina strzimie synchrōnizacyjo kSync. Żeby wymusić regularne interwały synchrōnizacyje kSync, zastow ôptymalizacyjo bateryje.</string>
+  <string name="startup_battery_optimization_disable">Zastow dlo kSync</string>
   <string name="startup_dont_show_again">Niy pokazuj zaś</string>
   <string name="startup_not_now">Niy teroz</string>
   <string name="startup_donate">Informacyje Open-Source</string>
-  <string name="startup_donate_message">Sōm my radzi, że używosz DAVx⁵, co mo ôtwarte zdrzōdło (GPLv3). Bez to, że tworzynie DAVx⁵ to je ciynżko robota i wziōnło nōm tysiōnce godzin roboty, proszymy ô rozwożynie przesłanio nōm dowki.</string>
+  <string name="startup_donate_message">Sōm my radzi, że używosz kSync, co mo ôtwarte zdrzōdło (GPLv3). Bez to, że tworzynie kSync to je ciynżko robota i wziōnło nōm tysiōnce godzin roboty, proszymy ô rozwożynie przesłanio nōm dowki.</string>
   <string name="startup_donate_now">Pokoż strōna dowki</string>
   <string name="startup_donate_later">Możno niyskorzij</string>
   <string name="startup_more_info">Wiyncyj informacyji</string>
   <string name="startup_opentasks_not_installed">OpenTasks niyzainstalowany</string>
   <string name="startup_opentasks_not_installed_message">Żeby synchrōnizować zadania, potrzebno je darmowo aplikacyjo OpenTasks (niywymogano do kōntaktōw/zdarzyń).</string>
-  <string name="startup_opentasks_reinstall_davx5">Po zainstalowaniu OpenTasks potrzebne je PRZEINSTALOWANIE DAVx⁵ i przidanie na nowo twojich kōnt (feler Androida).</string>
+  <string name="startup_opentasks_reinstall_davx5">Po zainstalowaniu OpenTasks potrzebne je PRZEINSTALOWANIE kSync i przidanie na nowo twojich kōnt (feler Androida).</string>
   <string name="startup_opentasks_not_installed_install">Zainstaluj OpenTasks</string>
   <!--AboutActivity-->
   <string name="about_libraries">Bibliotyki</string>
@@ -41,14 +40,14 @@
   <string name="about_license_info_no_warranty">Tyn program przichodzi BEZ ŻODNYJ GWARANCYJE. To je wolne ôprogramowanie i możesz je rozkludzać pod ôkryślōnymi warōnkami.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">Niy szło stworzić zbioru dziynnika</string>
-  <string name="logging_notification_title">Dziynnik DAVx⁵</string>
-  <string name="logging_notification_text">Zapisowanie wszyjskich ôperacyji DAVx⁵</string>
+  <string name="logging_notification_title">Dziynnik kSync</string>
+  <string name="logging_notification_text">Zapisowanie wszyjskich ôperacyji kSync</string>
   <string name="logging_notification_send_log">Wyślij dziynnik</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">Ôtwōrz myni nawigacyje</string>
   <string name="navigation_drawer_close">Zawrzij myni nawigacyje</string>
   <string name="navigation_drawer_subtitle">Adapter synchrōnizacyje CalDAV/CardDAV</string>
-  <string name="navigation_drawer_about">Ô DAVx⁵ / Licyncyjo</string>
+  <string name="navigation_drawer_about">Ô kSync / Licyncyjo</string>
   <string name="navigation_drawer_beta_feedback">Przekoż ôpinijo</string>
   <string name="navigation_drawer_settings">Sztelōnki</string>
   <string name="navigation_drawer_news_updates">Nowości i aktualizacyje</string>
@@ -58,7 +57,7 @@
   <string name="navigation_drawer_faq">Pytania i ôdpowiedzi</string>
   <string name="navigation_drawer_forums">Pōmoc / Forum</string>
   <string name="navigation_drawer_donate">Dowka</string>
-  <string name="account_list_empty">Witōmy w DAVx⁵!\n\nMożesz teroz przidać kōnto CalDAV/CardDAV.</string>
+  <string name="account_list_empty">Witōmy w kSync!\n\nMożesz teroz przidać kōnto CalDAV/CardDAV.</string>
   <string name="accounts_global_sync_disabled">Autōmatyczno synchrōnizacyjo dlo cołkigo systymu je zastawiōno</string>
   <string name="accounts_global_sync_enable">Włōncz</string>
   <!--DavService-->
@@ -199,8 +198,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">Zdarzynia, co sōm starsze aniżeli podano wielość dni, bydōm zignorowane (może być 0). Ôstow prōzne, coby synchrōnizować wszyjske zdarzynia.</string>
   <string name="settings_manage_calendar_colors">Zarzōndzej farbami kalyndorza</string>
-  <string name="settings_manage_calendar_colors_on">Farby kalyndorza sōm zarzōndzane ôd DAVx⁵</string>
-  <string name="settings_manage_calendar_colors_off">Farby kalyndorza niy sōm sztelowane ôd DAVx⁵</string>
+  <string name="settings_manage_calendar_colors_on">Farby kalyndorza sōm zarzōndzane ôd kSync</string>
+  <string name="settings_manage_calendar_colors_off">Farby kalyndorza niy sōm sztelowane ôd kSync</string>
   <string name="settings_event_colors">Sparcie farbōw zdarzyń</string>
   <string name="settings_event_colors_on">Synchrōnizuj farby zdarzyń</string>
   <string name="settings_event_colors_off">Niy synchrōnizuj farbōw zdarzyń</string>
@@ -242,7 +241,7 @@
   <string name="debug_info_title">Informacyje debugowe</string>
   <string name="debug_info_logs_attached">Logi sōm przidane do tyj wiadōmości (wymogo sparcio przidowkōw aplikacyje, co ôdbiyro)</string>
   <string name="sync_contacts_read_only_address_book">Ksiōnżka adresowo ino do ôdczytu</string>
-  <string name="sync_error_permissions">Uprawniynia DAVx⁵</string>
+  <string name="sync_error_permissions">Uprawniynia kSync</string>
   <string name="sync_error_permissions_text">Wymogane ekstra uprawniynia</string>
   <string name="sync_error_opentasks_too_old">OpenTask je za stary</string>
   <string name="sync_error_opentasks_required_version">Wymogano wersyjo: %1$s (teroźno %2$s)</string>
@@ -257,6 +256,6 @@
   <string name="sync_invalid_task">Dostane zadanie ze serwera je niynoleżne</string>
   <string name="sync_invalid_resources_ignoring">Ignorowanie jednego abo wiyncyj niynoleżnych zasobōw</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: Bezpieczyństwo połōnczynio</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ trefiōł niyznōmy certyfikat. Chcesz go przidać?</string>
+  <string name="certificate_notification_connection_security">kSync: Bezpieczyństwo połōnczynio</string>
+  <string name="trust_certificate_unknown_certificate_found">kSync trefiōł niyznōmy certyfikat. Chcesz go przidać?</string>
 </resources>

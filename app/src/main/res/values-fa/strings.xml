@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools">
   <!--common strings-->
-  <string name="app_name">DAVx⁵</string>
-  <string name="account_title_address_book">DAVx⁵ دفترچه آدرس</string>
+  <string name="account_title_address_book">kSync دفترچه آدرس</string>
   <string name="address_books_authority_title">دفترچه‌های آدرس</string>
   <string name="help">راهنما</string>
   <string name="manage_accounts">مدیریت حساب ها</string>
@@ -20,18 +19,18 @@
   <string name="startup_autostart_permission">همگام سازی خودکار</string>
   <string name="startup_autostart_permission_message">%s سیستم عامل  همگام سازی خودکار را مسدود می کند. می توانید  همگام سازی خودکار را در تنظیمات اندروید خود انجام دهید.</string>
   <string name="startup_battery_optimization">همگام‌سازی برنامه ریزی شده </string>
-  <string name="startup_battery_optimization_message">دستگاه شما هماهنگ سازی DAVx⁵ را محدود خواهد کرد. برای اجرای هماهنگ سازی منظم DAVx⁵، «بهینه سازی باتری» را خاموش کنید.</string>
-  <string name="startup_battery_optimization_disable"> DAVx⁵را خاموش کنید</string>
+  <string name="startup_battery_optimization_message">دستگاه شما هماهنگ سازی kSync را محدود خواهد کرد. برای اجرای هماهنگ سازی منظم kSync، «بهینه سازی باتری» را خاموش کنید.</string>
+  <string name="startup_battery_optimization_disable"> kSyncرا خاموش کنید</string>
   <string name="startup_dont_show_again">دیگر نمایش داده نشود</string>
   <string name="startup_not_now">الان نه</string>
   <string name="startup_donate">Open-Source اطلاعات</string>
-  <string name="startup_donate_message">از اینکه ازDAVx⁵  استفاده می کنید خوشحالیم.  DAVx⁵یک نرم افزار منبع باز (GPLv3) است. از آنجا که توسعهDAVx⁵  کار سختی است و ما هزاران ساعت کار را انجام دادیم، لطفا کمک مالی را در نظر بگیرید.</string>
+  <string name="startup_donate_message">از اینکه ازkSync  استفاده می کنید خوشحالیم.  kSyncیک نرم افزار منبع باز (GPLv3) است. از آنجا که توسعهkSync  کار سختی است و ما هزاران ساعت کار را انجام دادیم، لطفا کمک مالی را در نظر بگیرید.</string>
   <string name="startup_donate_now">نمایش صفحه کمک مالی</string>
   <string name="startup_donate_later">شاید بعدا</string>
   <string name="startup_more_info">اطلاعات بیشتر</string>
   <string name="startup_opentasks_not_installed">مورد باز شده نصب نمی باشد</string>
   <string name="startup_opentasks_not_installed_message">برای همگام سازی وظایف، برنامه OpenTasks رایگان مورد نیاز است. (برای مخاطبین / رویدادها لازم نیست)</string>
-  <string name="startup_opentasks_reinstall_davx5">پس از نصب برنامک وظایف، شما باید DAVx⁵ را دوباره نصب کرده و حساب ابری خود را مجدد وارد کنید.(مشکل اندروید)</string>
+  <string name="startup_opentasks_reinstall_davx5">پس از نصب برنامک وظایف، شما باید kSync را دوباره نصب کرده و حساب ابری خود را مجدد وارد کنید.(مشکل اندروید)</string>
   <string name="startup_opentasks_not_installed_install">نصب کردن</string>
   <!--AboutActivity-->
   <string name="about_libraries">کتابخانه ها</string>
@@ -41,8 +40,8 @@
   <string name="about_license_info_no_warranty">این برنامه بدون هیچ گونه تغییری است. این نرم افزار رایگان است و شما می توانید آن را تحت شرایط خاصی توزیع کنید.</string>
   <!--global settings-->
   <string name="logging_couldnt_create_file">فایل ورودی خارجی ایجاد نشد: %s</string>
-  <string name="logging_notification_title">رویداد نگار DAVx⁵</string>
-  <string name="logging_notification_text">اکنون همه‌ی رویدادهای DAVx⁵ ثبت می‌شوند</string>
+  <string name="logging_notification_title">رویداد نگار kSync</string>
+  <string name="logging_notification_text">اکنون همه‌ی رویدادهای kSync ثبت می‌شوند</string>
   <string name="logging_notification_send_log">ارسال رویدادنگاری</string>
   <!--AccountsActivity-->
   <string name="navigation_drawer_open">باز کردن گزینه ها</string>
@@ -58,7 +57,7 @@
   <string name="navigation_drawer_faq">FAQ</string>
   <string name="navigation_drawer_forums">راهنمای فرم ها</string>
   <string name="navigation_drawer_donate">کمک مالی</string>
-  <string name="account_list_empty">به DAVx⁵ خوش آمدید!  شما اکنون می توانید یک حساب CalDAV / CardDAV اضافه کنید.</string>
+  <string name="account_list_empty">به kSync خوش آمدید!  شما اکنون می توانید یک حساب CalDAV / CardDAV اضافه کنید.</string>
   <string name="accounts_global_sync_disabled">هماهنگ سازی خودکار سیستم در حالت غیر فعال است</string>
   <string name="accounts_global_sync_enable">فعال کردن</string>
   <!--DavService-->
@@ -198,8 +197,8 @@
   </plurals>
   <string name="settings_sync_time_range_past_message">رویدادهایی که بیشتر از این تعداد روزهای گذشته هستند نادیده گرفته می شود (ممکن است 0 باشد). برای همگام سازی تمام رویدادها خالی بگذارید.</string>
   <string name="settings_manage_calendar_colors">مدیریت رنگ های تقویم</string>
-  <string name="settings_manage_calendar_colors_on">رنگ های تقویم توسط DAVx⁵ مدیریت شود</string>
-  <string name="settings_manage_calendar_colors_off">رنگ های تقویم توسط DAVx⁵ مدیریت نشود
+  <string name="settings_manage_calendar_colors_on">رنگ های تقویم توسط kSync مدیریت شود</string>
+  <string name="settings_manage_calendar_colors_off">رنگ های تقویم توسط kSync مدیریت نشود
     </string>
   <string name="settings_event_colors">پشتیبانی رنگرویداد</string>
   <string name="settings_event_colors_on">همگام کردن رنگ رویداد</string>
@@ -242,7 +241,7 @@
   <string name="debug_info_title">Debug اظلاعات</string>
   <string name="debug_info_logs_attached">رویدادها به این پیام پیوست می‌شوند(لازم است برنامک دریافت کننده از پیوست پشتیبانی کند)</string>
   <string name="sync_contacts_read_only_address_book">فقط از کتابچه آدرس ها خوانده شود</string>
-  <string name="sync_error_permissions">DAVx⁵ دسترسی های</string>
+  <string name="sync_error_permissions">kSync دسترسی های</string>
   <string name="sync_error_permissions_text">اجازه برای دسترسی های اضافی</string>
   <string name="sync_error_opentasks_too_old">OpenTasks خیلی قدیمی</string>
   <string name="sync_error_opentasks_required_version">ورژن مورد نیاز: %1$s (ورژن فعلی %2$s)</string>
@@ -257,6 +256,6 @@
   <string name="sync_invalid_task">اطلاعات وظیفه‌ی نامعتبر از کارگزار دریافت شد.</string>
   <string name="sync_invalid_resources_ignoring">یک یا چند منبع نادیده گرفته شد</string>
   <!--cert4android-->
-  <string name="certificate_notification_connection_security">DAVx⁵: اتصال امن</string>
-  <string name="trust_certificate_unknown_certificate_found">DAVx⁵ با یک گواهی ناشناخته مواجه شده است. آیا می خواهید به آن اعتماد کنید؟</string>
+  <string name="certificate_notification_connection_security">kSync: اتصال امن</string>
+  <string name="trust_certificate_unknown_certificate_found">kSync با یک گواهی ناشناخته مواجه شده است. آیا می خواهید به آن اعتماد کنید؟</string>
 </resources>
