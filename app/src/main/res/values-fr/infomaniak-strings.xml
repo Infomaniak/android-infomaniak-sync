@@ -9,4 +9,6 @@
 
 	<string name="an_error_has_occurred">Une erreur est survenue</string>
 
+	<string name="account_welcome_add_first_account">Appuyez sur + pour ajouter un compte WorkSpace.</string>
+
 </resources>

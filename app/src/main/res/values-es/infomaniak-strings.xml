@@ -9,4 +9,6 @@
 
 	<string name="an_error_has_occurred">Se produjo un error</string>
 
+	<string name="account_welcome_add_first_account">Pulsa + para agregar una cuenta de WorkSpace.</string>
+
 </resources>
