@@ -20,7 +20,7 @@ android {
         applicationId "com.infomaniak.sync"
         resValue 'string', 'application_id', applicationId
 
-        versionCode 21
+        versionCode 22
         buildConfigField "long", "buildTime", System.currentTimeMillis() + "L"
         buildConfigField "boolean", "customCerts", "true"
 
@@ -44,7 +44,7 @@ android {
     flavorDimensions "distribution"
     productFlavors {
         standard {
-            versionName "1.2 (2.6-beta3)"
+            versionName "1.2 (2.6 DAVx5)"
         }
     }
 
