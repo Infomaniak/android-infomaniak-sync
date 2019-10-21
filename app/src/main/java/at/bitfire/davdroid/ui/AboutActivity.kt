@@ -12,6 +12,7 @@ import android.app.Application
 import android.os.Build
 import android.os.Bundle
 import android.text.Spanned
+import android.text.method.LinkMovementMethod
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -99,6 +100,10 @@ class AboutActivity: AppCompatActivity() {
             app_name.text = getString(R.string.app_name_title)
             app_version.text = getString(R.string.about_version, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
             build_time.text = getString(R.string.about_build_date, SimpleDateFormat.getDateInstance().format(BuildConfig.buildTime))
+
+            infomaniak_copyright.isClickable = true
+            infomaniak_copyright.movementMethod = LinkMovementMethod.getInstance()
+            infomaniak_copyright.text = HtmlCompat.fromHtml(getString(R.string.about_infomaniak_copyright), HtmlCompat.FROM_HTML_MODE_LEGACY)
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
                 icon.setImageDrawable(resources.getDrawableForDensity(R.mipmap.ic_launcher, DisplayMetrics.DENSITY_XXXHIGH))

@@ -17,4 +17,6 @@
 	<string name="startup_battery_optimization_message">Per sincronizzare automaticamente i tuoi contatti e agende in background, è necessario disattivare l\'opzione \"Ottimizzazione della batteria\" di Android per Infomaniak Sync.</string>
 	<string name="startup_battery_optimization_disable">Autorizzare l\'esecuzione in background</string>
 
+	<string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync consente di sincronizzare i contatti e i calendari del WorkSpace, la webmail dell\'host Infomaniak.<br>Questa applicazione è un fork della soluzione OpenSource <a href=\'https://www.davx5.com/\'>DAVx⁵</a>.]]></string>
+
 </resources>

@@ -17,4 +17,6 @@
 	<string name="startup_battery_optimization_message">For automatic background synchronisation of your contacts and calendars, it is necessary to disable the Android \"Battery optimisation\" option for Infomaniak Sync.</string>
 	<string name="startup_battery_optimization_disable">Authorise background execution</string>
 
+	<string name="about_infomaniak_copyright"><![CDATA[Infomaniak Sync enables you to sync the contacts and calendars in WorkSpace, Infomaniak\'s webmail service. <br>This application is a fork of the OpenSource <a href=\'https://www.davx5.com/\'>DAVx⁵</a> solution.]]></string>
+
 </resources>
